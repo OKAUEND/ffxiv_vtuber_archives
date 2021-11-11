@@ -872,6 +872,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/axios@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "@types/axios@npm:0.14.0"
+  dependencies:
+    axios: "*"
+  checksum: 12a230b9404055d81804cb57fe4739b2317111b28a39e2477b2513250e8b85725e6f6ce509fc2a9494a6da60facb8d80df875fcd747f62f6c3abebc7db60ae66
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14":
   version: 7.1.16
   resolution: "@types/babel__core@npm:7.1.16"
@@ -910,6 +919,22 @@ __metadata:
   dependencies:
     "@babel/types": ^7.3.0
   checksum: a797ea09c72307569e3ee08aa3900ca744ce3091114084f2dc59b67a45ee7d01df7865252790dbfa787a7915ce892cdc820c9b920f3683292765fc656b08dc63
+  languageName: node
+  linkType: hard
+
+"@types/gapi.youtube@npm:^3.0.35":
+  version: 3.0.35
+  resolution: "@types/gapi.youtube@npm:3.0.35"
+  dependencies:
+    "@types/gapi": "*"
+  checksum: 0f61bed4573a52ee2e4ab67305dfc7bf52978e0ecb8380ea91dc8475d684e0c9118850f724f241ca439a80466ca928077d2b2891f02f5d411616ba4c45079068
+  languageName: node
+  linkType: hard
+
+"@types/gapi@npm:*":
+  version: 0.0.41
+  resolution: "@types/gapi@npm:0.0.41"
+  checksum: 1fcb42de9ffcdc736de6c986c987c8d18471371fb876a9f3c4df29fbb51ac7a1e1c4daca4c852eae832f59072b190f1639fc75bd307d33c6db9f9fad85f7eaff
   languageName: node
   linkType: hard
 
@@ -1468,6 +1493,15 @@ __metadata:
   bin:
     autoprefixer: bin/autoprefixer
   checksum: 7d511c64daeaa13c7888b40b0394cd891fab1852a1f60165330c9e49ab70ac29ad1e3386665d86361661cf2bbe90cea42b78ea73cb77b373ffe30a8f4973a955
+  languageName: node
+  linkType: hard
+
+"axios@npm:*, axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
+  dependencies:
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -2849,6 +2883,8 @@ __metadata:
     "@testing-library/jest-dom": ^5.15.0
     "@testing-library/react": ^12.1.2
     "@testing-library/react-hooks": ^7.0.2
+    "@types/axios": ^0.14.0
+    "@types/gapi.youtube": ^3.0.35
     "@types/jest": ^27.0.2
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
@@ -2857,6 +2893,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.2.0
     "@vitejs/plugin-react-refresh": ^1.3.1
     autoprefixer: ^10.4.0
+    axios: ^0.24.0
     babel-jest: ^27.3.1
     eslint: ^8.1.0
     eslint-config-prettier: ^8.3.0
@@ -2870,7 +2907,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-router-dom: ^6.0.0
-    recoil: ^0.5.0
+    recoil: ^0.5.2
     tailwindcss: ^2.2.19
     ts-jest: ^27.0.7
     typescript: ^4.4.4
@@ -2920,6 +2957,16 @@ __metadata:
   version: 3.2.2
   resolution: "flatted@npm:3.2.2"
   checksum: 9d5e03fd9309b9103f345cf6d0cef4fa46201baa053b0ca3d57fa489449b0bee687b7355407898f630afbb1a1286d2a6658e7e77dea3b85c3cd6c6ce2894a5c3
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.14.4":
+  version: 1.14.5
+  resolution: "follow-redirects@npm:1.14.5"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: f004a76b2ee3a849772c2816e30928253bf47537b0f00184d89f4966413add96a228a4d96ca8c702bc045a683c52c2ba41545c915cc1a5e33bf8fd9d07b59aee
   languageName: node
   linkType: hard
 
@@ -5392,7 +5439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recoil@npm:^0.5.0":
+"recoil@npm:^0.5.2":
   version: 0.5.2
   resolution: "recoil@npm:0.5.2"
   dependencies:
