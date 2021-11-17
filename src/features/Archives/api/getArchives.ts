@@ -62,3 +62,19 @@ export const useYoutubeAxios = selector({
         return response.data.items;
     },
 });
+
+export const useArchives = selector({
+    key: 'Archives',
+    get: async ({ get }) => {
+        const youtubeData = await get(useYoutubeAxios);
+        const channelState = get(currentChannelIDState);
+
+        const archives = channelArchives.filter((channelArchive) => {
+            channelArchive.channelId === channelState;
+        });
+
+        if (archives.length === 0) return youtubeData;
+
+        return [...youtubeData, ...archives];
+    },
+});
