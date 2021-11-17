@@ -51,3 +51,14 @@ export const timeRangeState = atom<timeRangeState>({
         BeginTime: HalfMonth.toISOString(),
     },
 });
+
+export const useYoutubeAxios = selector({
+    key: 'YoutubeAxios',
+    get: async ({ get }) => {
+        const channelState = get(currentChannelIDState);
+        const timeState = get(timeRangeState);
+
+        const response = await getArchives(channelState, timeState);
+        return response.data.items;
+    },
+});
