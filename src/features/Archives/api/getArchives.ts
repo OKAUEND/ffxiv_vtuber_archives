@@ -69,12 +69,6 @@ export const useArchives = selector({
         const youtubeData = await get(useYoutubeAxios);
         const channelState = get(currentChannelIDState);
 
-        const archives = channelArchives.filter((channelArchive) => {
-            channelArchive.channelId === channelState;
-        });
-
-        if (archives.length === 0) return youtubeData;
-
-        return [...youtubeData, ...archives];
+        return youtubeData;
     },
 });
