@@ -1,11 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import {
-    atom,
-    DefaultValue,
-    selector,
-    useRecoilValue,
-    useSetRecoilState,
-} from 'recoil';
+import { atom, selector } from 'recoil';
 
 import { Archives } from '../types';
 
@@ -16,7 +10,11 @@ type timeRangeState = {
 
 type cacheArchives = {
     channelId: string;
-} & Pick<GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>, 'items'>;
+    archives?: Pick<
+        GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>,
+        'items'
+    >;
+};
 
 export const getArchives = <
     T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
@@ -26,7 +24,7 @@ export const getArchives = <
 ): Promise<AxiosResponse<T, T>> => {
     const api_base = 'https://www.googleapis.com/youtube/v3/search';
     const part = 'snippet';
-    const APIKey = 'AIzaSyDuzP-dEg-vqWkY1t4QvOySU7ExxRXJQjk';
+    const APIKey = '';
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
@@ -54,15 +52,6 @@ export const timeRangeState = atom<timeRangeState>({
     },
 });
 
-export const ArchivesList = new Map<string, GoogleApiYouTubeSearchResource[]>();
-
-export const setArchivesList = (
-    key: string,
-    newList: GoogleApiYouTubeSearchResource[]
-) => {
-    ArchivesList.set(key, newList);
-};
-
 export const useYoutubeAxios = selector({
     key: 'YoutubeAxios',
     get: async ({ get }) => {
@@ -74,12 +63,18 @@ export const useYoutubeAxios = selector({
     },
 });
 
-export const useArchives = selector<GoogleApiYouTubeSearchResource[]>({
+export const useArchives = selector({
     key: 'Archives',
     get: async ({ get }) => {
         const youtubeData = await get(useYoutubeAxios);
         const channelState = get(currentChannelIDState);
 
-        return youtubeData;
+        const archives = channelArchives.filter((channelArchive) => {
+            channelArchive.channelId === channelState;
+        });
+
+        if (archives.length === 0) return youtubeData;
+
+        return [...youtubeData, ...archives];
     },
 });
