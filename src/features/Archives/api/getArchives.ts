@@ -14,10 +14,6 @@ type timeRangeState = {
     BeginTime: string;
 };
 
-type cacheArchives = {
-    channelId: string;
-} & Pick<GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>, 'items'>;
-
 export const getArchives = <
     T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
 >(
