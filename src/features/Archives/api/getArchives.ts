@@ -35,6 +35,15 @@ export const getArchives = <
     );
 };
 
+const ArchivesList = new Map<string, GoogleApiYouTubeSearchResource[]>();
+
+export const setArchives = (
+    key: string,
+    newArchives: GoogleApiYouTubeSearchResource[]
+) => {
+    ArchivesList.set(key, newArchives);
+};
+
 export const currentChannelIDState = atom({
     key: 'CurrentChannelID',
     default: 'UC6oDys1BGgBsIC3WhG1BovQ',
