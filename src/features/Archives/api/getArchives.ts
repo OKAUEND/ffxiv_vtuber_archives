@@ -82,7 +82,7 @@ export const useArchives = selector({
     },
 });
 
-const isPeriod = <T extends Date>(
+export const isPeriod = <T extends Date>(
     lastArchiveDayTime: T,
     BeginTime: T
 ): boolean => {
