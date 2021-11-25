@@ -81,3 +81,10 @@ export const useArchives = selector({
         return youtubeData;
     },
 });
+
+const isPeriod = <T extends Date>(
+    lastArchiveDayTime: T,
+    BeginTime: T
+): boolean => {
+    return lastArchiveDayTime <= BeginTime;
+};
