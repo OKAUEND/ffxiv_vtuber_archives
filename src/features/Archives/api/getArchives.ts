@@ -16,7 +16,7 @@ type cacheArchives = {
     >;
 };
 
-export const getArchives = <
+export const fetchYoutube = <
     T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
 >(
     channelState: string,
@@ -67,7 +67,7 @@ export const useYoutubeAxios = selector({
         const channelState = get(currentChannelIDState);
         const timeState = get(timeRangeState);
 
-        const response = await getArchives(channelState, timeState);
+        const response = await fetchYoutube(channelState, timeState);
         return response.data.items;
     },
 });
