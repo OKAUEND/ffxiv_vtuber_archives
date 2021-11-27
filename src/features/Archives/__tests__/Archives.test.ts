@@ -46,4 +46,20 @@ describe('Archives TEST', () => {
         const result = isPeriod(targetTime, BeginTime);
         expect(result).toEqual(true);
     });
+    test('一時キャッシュを目的としたMapオブジェクトに、値をSetできるか', () => {
+        const testData = YoutubeResourcesFactory('test');
+        setArchives('test', [testData]);
+        const result = getArchives('test');
+        expect(result).toEqual([testData]);
+    });
+
+    test('キャッシュを上書きできるか', () => {
+        const testData = YoutubeResourcesFactory('test');
+        setArchives('test', [testData]);
+        const newData = YoutubeResourcesFactory('test2');
+        setArchives('test', [newData]);
+        const result = getArchives('test');
+
+        expect(result).toEqual([newData]);
+    });
 });
