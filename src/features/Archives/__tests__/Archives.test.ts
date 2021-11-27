@@ -1,4 +1,4 @@
-import { isPeriod } from '../api/getArchives';
+import { getArchives, setArchives, isPeriod } from '../api/getArchives';
 
 describe('Archives TEST', () => {
     test('対象の時間が基準の時間より大きい場合は真を返す', () => {
