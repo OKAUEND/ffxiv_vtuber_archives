@@ -63,3 +63,9 @@ describe('Archives TEST', () => {
         expect(result).toEqual([newData]);
     });
 });
+
+describe('Archives Recoil TEST', () => {
+    test('', () => {
+        expect(1).toBe(1);
+    });
+});
