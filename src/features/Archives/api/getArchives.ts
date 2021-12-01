@@ -67,16 +67,7 @@ export const timeRangeState = atom<timeRangeState>({
     },
 });
 
-export const useYoutubeAxios = selector({
-    key: 'YoutubeAxios',
-    get: async ({ get }) => {
-        const channelState = get(currentChannelIDState);
-        const timeState = get(timeRangeState);
 
-        const response = await fetchYoutube(channelState, timeState);
-        return response.data.items;
-    },
-});
 
 export const useArchives = selector({
     key: 'Archives',
