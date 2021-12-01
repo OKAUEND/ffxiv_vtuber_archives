@@ -103,7 +103,10 @@ describe('Archives TEST', () => {
 });
 
 describe('Archives Recoil TEST', () => {
-    test('', () => {
-        expect(1).toBe(1);
+    test('Atom - ChannelIdを取得できるか', () => {
+        const initRecoilSnapShot = snapshot_UNSTABLE();
+        expect(
+            initRecoilSnapShot.getLoadable(currentChannelIDState).valueOrThrow()
+        ).toBe('UC6oDys1BGgBsIC3WhG1BovQ');
     });
 });
