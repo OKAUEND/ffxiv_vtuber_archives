@@ -8,6 +8,13 @@ export type timeRangetype = {
     BeginTime: string;
 };
 
+export const axiosYoutubeInstance = axios.create({
+    baseURL: 'https://www.googleapis.com/youtube/v3/search',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    timeout: 2000,
+});
 
 export const fetchYoutube = <
     T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
