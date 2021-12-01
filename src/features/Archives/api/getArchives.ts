@@ -3,7 +3,7 @@ import { atom, selector } from 'recoil';
 
 import { Archives } from '../types';
 
-type timeRangeState = {
+export type timeRangetype = {
     EndTime: string;
     BeginTime: string;
 };
@@ -59,7 +59,7 @@ const DefaultDate = new Date();
 const HalfMonth = new Date();
 HalfMonth.setMonth(HalfMonth.getMonth() - 6);
 
-export const timeRangeState = atom<timeRangeState>({
+export const timeRangeState = atom<timeRangetype>({
     key: 'TimeRange',
     default: {
         EndTime: DefaultDate.toISOString(),
