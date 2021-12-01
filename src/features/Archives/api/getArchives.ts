@@ -8,13 +8,6 @@ export type timeRangetype = {
     BeginTime: string;
 };
 
-type cacheArchives = {
-    channelId: string;
-    archives?: Pick<
-        GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>,
-        'items'
-    >;
-};
 
 export const fetchYoutube = <
     T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
