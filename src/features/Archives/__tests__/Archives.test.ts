@@ -86,6 +86,20 @@ describe('Archives TEST', () => {
 
         expect(result).toEqual([newData]);
     });
+
+    test('モック化できている？', async () => {
+        getSpy.mockImplementationOnce(() =>
+            Promise.resolve([YoutubeResourcesFactory('mock2')])
+        );
+        const targetTime = new Date(2021, 12, 3);
+        const BeginTime = new Date(2021, 12, 7);
+        const time: timeRangetype = {
+            EndTime: targetTime.toISOString(),
+            BeginTime: BeginTime.toISOString(),
+        };
+        const test = await ArchivesAPIModule.fetchYoutube('mock', time);
+        expect(test).toStrictEqual([YoutubeResourcesFactory('mock2')]);
+    });
 });
 
 describe('Archives Recoil TEST', () => {
