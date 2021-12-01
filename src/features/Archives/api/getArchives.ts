@@ -28,6 +28,16 @@ export const createYoutubeQuery = (
 
     return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRangeState.EndTime}&publishedAfter=${timeRangeState.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
+
+export const fetchYoutube = async (
+    channelId: string,
+    TimeRange: timeRangetype
+) => {
+    const query = createYoutubeQuery(channelId, TimeRange);
+    const response = await axiosYoutubeInstance.get<
+        GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
+    >(query);
+    return response.data.items;
 };
 
 const ArchivesList = new Map<string, GoogleApiYouTubeSearchResource[]>();
