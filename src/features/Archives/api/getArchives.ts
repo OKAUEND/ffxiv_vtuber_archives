@@ -67,7 +67,12 @@ export const timeRangeState = atom<timeRangeState>({
     },
 });
 
-
+export const isPeriod = <T extends Date>(
+    lastArchiveDayTime: T,
+    BeginTime: T
+): boolean => {
+    return lastArchiveDayTime <= BeginTime;
+};
 
 export const useArchives = selector({
     key: 'Archives',
@@ -78,10 +83,3 @@ export const useArchives = selector({
         return youtubeData;
     },
 });
-
-export const isPeriod = <T extends Date>(
-    lastArchiveDayTime: T,
-    BeginTime: T
-): boolean => {
-    return lastArchiveDayTime <= BeginTime;
-};
