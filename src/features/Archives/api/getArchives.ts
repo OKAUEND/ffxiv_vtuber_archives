@@ -16,23 +16,18 @@ export const axiosYoutubeInstance = axios.create({
     timeout: 2000,
 });
 
-export const fetchYoutube = <
-    T extends GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
->(
+export const createYoutubeQuery = (
     channelState: string,
-    timeRangeState: timeRangeState
-): Promise<AxiosResponse<T, T>> => {
-    const api_base = 'https://www.googleapis.com/youtube/v3/search';
+    timeRangeState: timeRangetype
+): string => {
     const part = 'snippet';
     const APIKey = '';
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
 
-    // &publishedBefore=${endTime}&publishedAfter=${beginTime}
-    return axios.get(
-        `${api_base}?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRangeState.EndTime}&publishedAfter=${timeRangeState.BeginTime}&maxResults=${maxResult}&key=${APIKey}`
-    );
+    return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRangeState.EndTime}&publishedAfter=${timeRangeState.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+};
 };
 
 const ArchivesList = new Map<string, GoogleApiYouTubeSearchResource[]>();
