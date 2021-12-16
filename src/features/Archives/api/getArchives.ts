@@ -1,8 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
-import { atom, selector } from 'recoil';
-
-import { Archives } from '../types';
-
+import axios, { AxiosResponse, AxiosAdapter } from 'axios';
+import { atom, selector } from 'recoil'
 export type timeRangetype = {
     EndTime: string;
     BeginTime: string;
