@@ -22,3 +22,13 @@ const isBeforeFirstLiveDayTime = selector({
     },
 });
 
+export const useLiveTime = () => {
+    const [firstLiveDayTimeState, setFirstLiveTime] =
+        useRecoilState(firstLiveDayTime);
+    const isNextLoad = useRecoilValue(isBeforeFirstLiveDayTime);
+    return {
+        state: firstLiveDayTimeState,
+        set: setFirstLiveTime,
+        isNextLoad,
+    };
+};
