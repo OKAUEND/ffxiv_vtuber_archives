@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosAdapter } from 'axios';
-import { atom, selector } from 'recoil'
+import { atom, selector, useRecoilValue } from 'recoil';
+
 export type timeRangetype = {
     EndTime: string;
     BeginTime: string;
@@ -37,22 +38,7 @@ export const fetchYoutube = async (
     return response.data.items;
 };
 
-const ArchivesList = new Map<string, GoogleApiYouTubeSearchResource[]>();
-
-export const setArchives = (
-    key: string,
-    newArchives: GoogleApiYouTubeSearchResource[]
-) => {
-    ArchivesList.set(key, newArchives);
-};
-
-export const getArchives = (key: string): GoogleApiYouTubeSearchResource[] => {
-    const result = ArchivesList.get(key);
-    if (result === undefined) return [];
-    return result;
-};
-
-export const currentChannelIDState = atom({
+export const currentChannelId = atom({
     key: 'CurrentChannelID',
     default: 'UC6oDys1BGgBsIC3WhG1BovQ',
 });
@@ -76,12 +62,12 @@ export const isPeriod = <T extends Date>(
     return lastArchiveDayTime <= BeginTime;
 };
 
-export const useArchives = selector({
-    key: 'Archives',
+export const youtubeSelector = selector({
+    key: 'youtubeAPI',
     get: async ({ get }) => {
-        const youtubeData = await get(useYoutubeAxios);
-        const channelState = get(currentChannelIDState);
+        const channelState = get(currentChannelId);
+        const timaRangeState = get(timeRangeState);
 
-        return youtubeData;
+        return await fetchYoutube(channelState, timaRangeState);
     },
 });
