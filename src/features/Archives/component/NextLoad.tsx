@@ -12,6 +12,7 @@ import {
     useRecoilState,
 } from 'recoil';
 export const NextLoad = () => {
+    const [currentChannelIdState] = useRecoilState(currentChannelId);
     const setNextLoadTimeRange = () => {
     };
     return (
