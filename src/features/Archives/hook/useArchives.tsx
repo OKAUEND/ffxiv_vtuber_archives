@@ -27,3 +27,7 @@ const archivesSelector = selectorFamily<
             return get(archivesAtom(channelId));
         },
 });
+
+const useArchives = (channelId: string): GoogleApiYouTubeSearchResource[] => {
+    return useRecoilValue(archivesSelector(channelId));
+};
