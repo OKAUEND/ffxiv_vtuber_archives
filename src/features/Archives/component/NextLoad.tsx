@@ -18,8 +18,14 @@ import {
 export const NextLoad = () => {
     const [currentChannelIdState] = useRecoilState(currentChannelId);
     const archives = useArchives(currentChannelIdState);
+    const setArchives = useSetRecoilState(archivesAtom(currentChannelIdState));
     const youtubeResult = useYoutube();
     const setTimeRange = useSetRecoilState(timeRangeState);
+
+    useEffect(() => {
+        setArchives(youtubeResult);
+    }, [youtubeResult]);
+
     const setNextLoadTimeRange = () => {
         const lastArchiveTime = new Date(
             archives.slice(-1)[0].snippet.publishedAt
