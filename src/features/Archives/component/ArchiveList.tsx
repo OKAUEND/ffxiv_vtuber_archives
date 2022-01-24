@@ -1,15 +1,11 @@
 import React from 'react';
-import { useRecoilStateLoadable } from 'recoil';
-import { Archives as ArchivesType } from '../types';
+import { useArchives } from '../hook/useArchives';
 
-type props = {
-    archives: GoogleApiYouTubeSearchResource[];
-};
-
-export const Archives = ({ archives }: props) => {
+export const ArchiveList = () => {
+    const archivesList = useArchives('UC6oDys1BGgBsIC3WhG1BovQ');
     return (
         <ul className="list-none w-screen">
-            {archives.map((archive) => (
+            {archivesList.map((archive) => (
                 <li
                     key={archive.id.videoId}
                     className="flex flex-row box-border mr-3">
