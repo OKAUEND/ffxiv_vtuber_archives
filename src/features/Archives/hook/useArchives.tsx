@@ -8,3 +8,10 @@ import {
     useRecoilValue,
     useSetRecoilState,
 } from 'recoil';
+export const archivesAtom = atomFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
+    key: 'archives',
+    default: [],
+});
