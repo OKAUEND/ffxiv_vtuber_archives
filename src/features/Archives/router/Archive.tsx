@@ -6,6 +6,14 @@ import { NextLoad } from '../component/NextLoad';
 export const Archive = () => {
     return (
         <div>
+            <div>
+                <ArchiveList />
+            </div>
+            <div>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <NextLoad />
+                </Suspense>
+            </div>
         </div>
     );
 };
