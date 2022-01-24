@@ -4,6 +4,7 @@ import {
     currentChannelId,
     youtubeSelector,
     timeRangeState,
+    useYoutube,
 } from '../api/getYoutube';
 import {
     useRecoilValue,
@@ -13,6 +14,7 @@ import {
 } from 'recoil';
 export const NextLoad = () => {
     const [currentChannelIdState] = useRecoilState(currentChannelId);
+    const youtubeResult = useYoutube();
     const setNextLoadTimeRange = () => {
     };
     return (

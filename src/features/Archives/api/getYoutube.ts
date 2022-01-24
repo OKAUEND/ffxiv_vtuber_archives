@@ -71,3 +71,7 @@ export const youtubeSelector = selector({
         return await fetchYoutube(channelState, timaRangeState);
     },
 });
+
+export const useYoutube = () => {
+    return useRecoilValue(youtubeSelector);
+};
