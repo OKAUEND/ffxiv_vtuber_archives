@@ -6,6 +6,9 @@ import {
     timeRangeState,
     useYoutube,
 } from '../api/getYoutube';
+
+import { useArchives, archivesAtom } from '../hook/useArchives';
+
 import {
     useRecoilValue,
     RecoilRoot,
@@ -14,6 +17,7 @@ import {
 } from 'recoil';
 export const NextLoad = () => {
     const [currentChannelIdState] = useRecoilState(currentChannelId);
+    const archives = useArchives(currentChannelIdState);
     const youtubeResult = useYoutube();
     const setNextLoadTimeRange = () => {
     };
