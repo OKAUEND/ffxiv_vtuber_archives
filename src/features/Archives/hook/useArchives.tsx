@@ -15,3 +15,15 @@ export const archivesAtom = atomFamily<
     key: 'archives',
     default: [],
 });
+
+const archivesSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
+    key: 'archivesSelector',
+    get:
+        (channelId: string) =>
+        ({ get }) => {
+            return get(archivesAtom(channelId));
+        },
+});
