@@ -15,6 +15,7 @@ import {
     useSetRecoilState,
     useRecoilState,
 } from 'recoil';
+
 export const NextLoad = () => {
     const [currentChannelIdState] = useRecoilState(currentChannelId);
     const archives = useArchives(currentChannelIdState);
@@ -39,6 +40,7 @@ export const NextLoad = () => {
             BeginTime: beginTime,
         });
     };
+
     return (
         <div>
             <button onClick={setNextLoadTimeRange}>次をロード</button>
