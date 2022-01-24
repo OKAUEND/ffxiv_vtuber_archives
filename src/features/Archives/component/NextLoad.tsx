@@ -24,7 +24,7 @@ export const NextLoad = () => {
     const setTimeRange = useSetRecoilState(timeRangeState);
 
     useEffect(() => {
-        setArchives(youtubeResult);
+        setArchives([...archives, ...youtubeResult]);
     }, [youtubeResult]);
 
     const setNextLoadTimeRange = () => {
