@@ -9,7 +9,7 @@ import {
     timeRangetype,
 } from '../api/getArchives';
 
-import * as ArchivesAPIModule from '../api/getArchives';
+import { archivesAtom } from '../hook/useArchives';
 
 const YoutubeResourcesFactory = (
     name: string
@@ -50,63 +50,23 @@ const YoutubeResourcesFactory = (
     };
 };
 
-describe('Archives TEST', () => {
-    let getSpy: jest.SpyInstance<
-        Promise<GoogleApiYouTubeSearchResource[]>,
-        [channelId: string, TimeRange: { EndTime: string; BeginTime: string }]
-    >;
-
-    beforeEach(async () => {
-        getSpy = jest.spyOn(ArchivesAPIModule, 'fetchYoutube');
-    });
-
-    afterEach(() => {
-        getSpy.mockRestore();
-    });
-
-    test('対象の時間が基準の時間より大きい場合は真を返す', () => {
-        const targetTime = new Date(2021, 12, 3);
-        const BeginTime = new Date(2021, 12, 7);
-        const result = isPeriod(targetTime, BeginTime);
-        expect(result).toEqual(true);
-    });
-    test('一時キャッシュを目的としたMapオブジェクトに、値をSetできるか', () => {
-        const testData = YoutubeResourcesFactory('test');
-        setArchives('test', [testData]);
-        const result = getArchives('test');
-        expect(result).toEqual([testData]);
-    });
-
-    test('キャッシュを上書きできるか', () => {
-        const testData = YoutubeResourcesFactory('test');
-        setArchives('test', [testData]);
-        const newData = YoutubeResourcesFactory('test2');
-        setArchives('test', [newData]);
-        const result = getArchives('test');
-
-        expect(result).toEqual([newData]);
-    });
-
-    test('モック化できている？', async () => {
-        getSpy.mockImplementationOnce(() =>
-            Promise.resolve([YoutubeResourcesFactory('mock2')])
-        );
-        const targetTime = new Date(2021, 12, 3);
-        const BeginTime = new Date(2021, 12, 7);
-        const time: timeRangetype = {
-            EndTime: targetTime.toISOString(),
-            BeginTime: BeginTime.toISOString(),
-        };
-        const test = await ArchivesAPIModule.fetchYoutube('mock', time);
-        expect(test).toStrictEqual([YoutubeResourcesFactory('mock2')]);
-    });
-});
+// describe('Archives TEST', () => {});
 
 describe('Archives Recoil TEST', () => {
-    test('Atom - ChannelIdを取得できるか', () => {
-        const initRecoilSnapShot = snapshot_UNSTABLE();
+    test('Atom - ArchivesAtomFamilyに対してID毎に配列を追加できるか', () => {
+        const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
+            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+        });
         expect(
-            initRecoilSnapShot.getLoadable(currentChannelIDState).valueOrThrow()
-        ).toBe('UC6oDys1BGgBsIC3WhG1BovQ');
+            initRecoilSnapShot.getLoadable(archivesAtom('test')).valueOrThrow()
+        ).toEqual([YoutubeResourcesFactory('test')]);
+    });
+    test('Atom - 別IDを指定した時、追加した内容が出ていないこと', () => {
+        const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
+            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+        });
+        expect(
+            initRecoilSnapShot.getLoadable(archivesAtom('test2')).valueOrThrow()
+        ).not.toEqual([YoutubeResourcesFactory('test')]);
     });
 });
