@@ -1,4 +1,4 @@
-import { useRecoilValue, snapshot_UNSTABLE } from 'recoil';
+import { snapshot_UNSTABLE } from 'recoil';
 import { archivesAtom } from '../hook/useArchives';
 
 const YoutubeResourcesFactory = (
