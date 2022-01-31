@@ -51,6 +51,13 @@ describe('Component TEST - NextLoad', () => {
         spy.mockRestore();
     });
     test('ボタンが表示されているか', async () => {
+        const renderComponent = render(
+            <RecoilRoot>
+                <React.Suspense fallback={<p>Loading...</p>}>
+                    <NextLoad />
+                </React.Suspense>
+            </RecoilRoot>
+        );
     });
     test('ボタンをクリックしたらイベントが発火するか', () => {});
     test('次の取得期間が初放送日以前の時間になった場合、下限が初放送日になっているか', () => {});
