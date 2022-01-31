@@ -1,4 +1,4 @@
-import { snapshot_UNSTABLE } from 'recoil';
+import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 describe('Component TEST - NextLoad', () => {
     test('ボタンが表示されているか', async () => {
     });
