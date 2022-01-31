@@ -1,4 +1,7 @@
 import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
+import * as React from 'react';
+import { act, render, screen, waitFor } from '@testing-library/react';
+import NextLoad from '../component/NextLoad';
 describe('Component TEST - NextLoad', () => {
     test('ボタンが表示されているか', async () => {
     });
