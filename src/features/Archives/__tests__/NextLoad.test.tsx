@@ -2,6 +2,7 @@ import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import * as React from 'react';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import NextLoad from '../component/NextLoad';
+
 import * as getYoutubeModule from '../api/getYoutube';
 describe('Component TEST - NextLoad', () => {
     const spy = jest
