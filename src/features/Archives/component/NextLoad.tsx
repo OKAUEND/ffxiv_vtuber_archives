@@ -16,7 +16,11 @@ import {
     useRecoilState,
 } from 'recoil';
 
-export const NextLoad = () => {
+interface Props {
+    onNextLoad: () => void;
+}
+
+const NextLoad = ({ onNextLoad }: Props) => {
     const [currentChannelIdState] = useRecoilState(currentChannelId);
     const archives = useArchives(currentChannelIdState);
     const setArchives = useSetRecoilState(archivesAtom(currentChannelIdState));
@@ -39,6 +43,7 @@ export const NextLoad = () => {
             EndTime: endTime,
             BeginTime: beginTime,
         });
+        onNextLoad();
     };
 
     return (
@@ -47,3 +52,5 @@ export const NextLoad = () => {
         </div>
     );
 };
+
+export default NextLoad;

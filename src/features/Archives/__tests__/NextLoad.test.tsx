@@ -63,4 +63,18 @@ describe('Component TEST - NextLoad', () => {
             expect(screen.getByRole('button')).toBeInTheDocument();
         });
     });
+    test('ボタンをクリックしたらイベントが発火するか', async () => {
+        const onNextLoad = jest.fn();
+        const { getByRole, getByText } = render(
+            <RecoilRoot>
+                <React.Suspense fallback={<p>Loading...</p>}>
+                    <NextLoad onNextLoad={onNextLoad} />
+                </React.Suspense>
+            </RecoilRoot>
+        );
+        await waitFor(() => {
+            fireEvent.click(getByRole('button'));
+            expect(onNextLoad).toHaveBeenCalled();
+        });
+    });
 });
