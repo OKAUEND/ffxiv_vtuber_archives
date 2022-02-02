@@ -57,10 +57,11 @@ describe('Component TEST - NextLoad', () => {
         spy.mockRestore();
     });
     test('ボタンが表示されているか', async () => {
+        const onNextLoad = jest.fn();
         render(
             <RecoilRoot>
                 <React.Suspense fallback={<p>Loading...</p>}>
-                    <NextLoad />
+                    <NextLoad onNextLoad={onNextLoad} />
                 </React.Suspense>
             </RecoilRoot>
         );
