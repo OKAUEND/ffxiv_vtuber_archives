@@ -37,4 +37,8 @@ type useArchivesTuple = [
 export const useArchives = (channelId: string): useArchivesTuple => {
     const Archives = useRecoilValue(archivesSelector(channelId));
     const setArchives = useSetRecoilState(archivesAtom(channelId));
+
+    const addArchives = (newArchives: GoogleApiYouTubeSearchResource[]) => {
+        setArchives(newArchives);
+    };
 };
