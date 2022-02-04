@@ -41,4 +41,8 @@ export const useArchives = (channelId: string): useArchivesTuple => {
     const addArchives = (newArchives: GoogleApiYouTubeSearchResource[]) => {
         setArchives(newArchives);
     };
+
+    const hasArchives = () => {
+        return Archives.length > 0;
+    };
 };
