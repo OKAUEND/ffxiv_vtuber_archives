@@ -45,4 +45,6 @@ export const useArchives = (channelId: string): useArchivesTuple => {
     const hasArchives = () => {
         return Archives.length > 0;
     };
+
+    return [Archives, addArchives, hasArchives];
 };
