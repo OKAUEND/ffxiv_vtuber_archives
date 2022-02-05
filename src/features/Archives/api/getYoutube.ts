@@ -13,7 +13,8 @@ export const axiosYoutubeInstance = axios.create({
 
 export const createYoutubeQuery = (
     channelState: string,
-    timeRangeState: timeRangetype
+    beginTime: string,
+    endTime: string
 ): string => {
     const part = 'snippet';
     const APIKey = '';
@@ -21,14 +22,15 @@ export const createYoutubeQuery = (
     const order = 'date';
     const query = 'FF14';
 
-    return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRangeState.EndTime}&publishedAfter=${timeRangeState.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+    return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
 export const fetchYoutube = async (
     channelId: string,
-    TimeRange: timeRangetype
+    beginTime: string,
+    endTime: string
 ) => {
-    const query = createYoutubeQuery(channelId, TimeRange);
+    const query = createYoutubeQuery(channelId, beginTime, endTime);
     const response = await axiosYoutubeInstance.get<
         GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
     >(query);
