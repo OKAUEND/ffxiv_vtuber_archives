@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 
 import {
     currentChannelId,
     youtubeSelector,
-    timeRangeState,
     useYoutube,
 } from '../api/getYoutube';
 
-import { useArchives, archivesAtom } from '../hook/useArchives';
+import { useArchives } from '../hook/useArchives';
 
 import {
     useRecoilValue,
