@@ -54,14 +54,24 @@ export const youtubeSelector = selectorFamily<
     boolean
 >({
     key: 'youtubeAPI',
-    get: async ({ get }) => {
-        const channelState = get(currentChannelId);
-        const timaRangeState = get(timeRangeState);
+    get:
+        (existsArchives: boolean) =>
+        async ({ get }) => {
+            const channelState = get(currentChannelId);
+            const timaRangeState = get(timeRangeAtom);
 
-        return await fetchYoutube(channelState, timaRangeState);
-    },
+            if (!existsArchives) {
+                return [];
+            }
+
+            return await fetchYoutube(
+                channelState,
+                timaRangeState.BeginTime,
+                timaRangeState.EndTime
+            );
+        },
 });
 
-export const useYoutube = () => {
-    return useRecoilValue(youtubeSelector);
+export const useYoutube = (existsArchives = false) => {
+    return useRecoilValue(youtubeSelector(existsArchives));
 };
