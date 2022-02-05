@@ -22,15 +22,13 @@ interface Props {
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
-const NextLoad = ({ onNextLoad }: Props) => {
-    const [currentChannelIdState] = useRecoilState(currentChannelId);
-    const archives = useArchives(currentChannelIdState);
-    const setArchives = useSetRecoilState(archivesAtom(currentChannelIdState));
-    const youtubeResult = useYoutube();
-    const setTimeRange = useSetRecoilState(timeRangeState);
+const NextLoad = ({ channelId, onClick, store }: Props) => {
+    const [, , existsArchives] = useArchives(channelId);
+    const youtubeResult = useYoutube(existsArchives());
 
     useEffect(() => {
-        setArchives([...archives, ...youtubeResult]);
+        // setArchives([...archives, ...youtubeResult]);
+        store(youtubeResult);
     }, [youtubeResult]);
 
     const handlerClick = () => {
