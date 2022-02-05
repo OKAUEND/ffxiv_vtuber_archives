@@ -1,10 +1,7 @@
 import axios, { AxiosResponse, AxiosAdapter } from 'axios';
-import { atom, selector, useRecoilValue } from 'recoil';
-
-export type timeRangetype = {
-    EndTime: string;
-    BeginTime: string;
-};
+import { atom, selector, selectorFamily, useRecoilValue } from 'recoil';
+import { timeRangeAtom } from '../hook/useTimeRange';
+import { useArchives } from '../hook/useArchives';
 
 export const axiosYoutubeInstance = axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/search',
