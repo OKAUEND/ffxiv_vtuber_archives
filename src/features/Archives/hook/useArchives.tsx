@@ -42,9 +42,9 @@ export const useArchives = (channelId: string): useArchivesTuple => {
         setArchives(newArchives);
     };
 
-    const hasArchives = () => {
+    const exists = () => {
         return Archives.length > 0;
     };
 
-    return [Archives, addArchives, hasArchives];
+    return [Archives, addArchives, exists];
 };
