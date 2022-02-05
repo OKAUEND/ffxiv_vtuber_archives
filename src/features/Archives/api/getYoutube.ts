@@ -49,7 +49,10 @@ export const isPeriod = <T extends Date>(
     return lastArchiveDayTime <= BeginTime;
 };
 
-export const youtubeSelector = selector({
+export const youtubeSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    boolean
+>({
     key: 'youtubeAPI',
     get: async ({ get }) => {
         const channelState = get(currentChannelId);
