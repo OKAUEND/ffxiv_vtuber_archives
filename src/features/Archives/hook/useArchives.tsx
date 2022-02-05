@@ -31,7 +31,7 @@ const archivesSelector = selectorFamily<
 type useArchivesTuple = [
     GoogleApiYouTubeSearchResource[],
     (newArchives: GoogleApiYouTubeSearchResource[]) => void,
-    () => void
+    () => boolean
 ];
 
 export const useArchives = (channelId: string): useArchivesTuple => {
