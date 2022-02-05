@@ -39,20 +39,8 @@ export const fetchYoutube = async (
 };
 
 export const currentChannelId = atom({
-    key: 'CurrentChannelID',
+    key: 'channelId',
     default: 'UC6oDys1BGgBsIC3WhG1BovQ',
-});
-
-const DefaultDate = new Date();
-const HalfMonth = new Date();
-HalfMonth.setMonth(HalfMonth.getMonth() - 6);
-
-export const timeRangeState = atom<timeRangetype>({
-    key: 'TimeRange',
-    default: {
-        EndTime: DefaultDate.toISOString(),
-        BeginTime: HalfMonth.toISOString(),
-    },
 });
 
 export const isPeriod = <T extends Date>(
