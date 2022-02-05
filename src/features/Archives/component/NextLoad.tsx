@@ -17,7 +17,9 @@ import {
 } from 'recoil';
 
 interface Props {
-    onNextLoad: () => void;
+    channelId: string;
+    onClick: () => void;
+    store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
 const NextLoad = ({ onNextLoad }: Props) => {
