@@ -86,7 +86,6 @@ describe('Component TEST - NextLoad', () => {
     test('ボタンが表示されているか', async () => {
         renderNextLoad();
         await waitFor(() => {
-            screen.debug();
             expect(screen.getByRole('button')).toBeInTheDocument();
         });
     });
