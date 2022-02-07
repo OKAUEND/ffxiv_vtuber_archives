@@ -84,31 +84,18 @@ describe('Component TEST - NextLoad', () => {
         spy.mockRestore();
     });
     test('ボタンが表示されているか', async () => {
-        const onNextLoad = jest.fn();
-        render(
-            <RecoilRoot>
-                <React.Suspense fallback={<p>Loading...</p>}>
-                    <NextLoad onNextLoad={onNextLoad} />
-                </React.Suspense>
-            </RecoilRoot>
-        );
+        renderNextLoad();
         await waitFor(() => {
             screen.debug();
             expect(screen.getByRole('button')).toBeInTheDocument();
         });
     });
     test('ボタンをクリックしたらイベントが発火するか', async () => {
-        const onNextLoad = jest.fn();
-        const { getByRole, getByText } = render(
-            <RecoilRoot>
-                <React.Suspense fallback={<p>Loading...</p>}>
-                    <NextLoad onNextLoad={onNextLoad} />
-                </React.Suspense>
-            </RecoilRoot>
-        );
+        const onClick = jest.fn();
+        const { getByRole, getByText } = renderNextLoad({ onClick });
         await waitFor(() => {
             fireEvent.click(getByRole('button'));
-            expect(onNextLoad).toHaveBeenCalled();
+            expect(onClick).toHaveBeenCalled();
         });
     });
 });
