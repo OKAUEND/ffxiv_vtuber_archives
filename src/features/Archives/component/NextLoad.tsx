@@ -1,19 +1,8 @@
 import React, { ReactNode, useEffect } from 'react';
 
-import {
-    currentChannelId,
-    youtubeSelector,
-    useYoutube,
-} from '../api/getYoutube';
+import { useYoutube } from '../api/getYoutube';
 
 import { useArchives } from '../hook/useArchives';
-
-import {
-    useRecoilValue,
-    RecoilRoot,
-    useSetRecoilState,
-    useRecoilState,
-} from 'recoil';
 
 interface Props {
     channelId: string;
