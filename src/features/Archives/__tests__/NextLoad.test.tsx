@@ -48,6 +48,33 @@ const YoutubeResourcesFactory = (
         },
     };
 };
+
+interface Props {
+    channelId: string;
+    onClick: () => void;
+    store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
+}
+
+const renderNextLoad = (props: Partial<Props> = {}) => {
+    const defultProps: Props = {
+        channelId: '',
+        onClick() {
+            return;
+        },
+        store() {
+            return;
+        },
+    };
+
+    return render(
+        <RecoilRoot>
+            <React.Suspense fallback={<p>Loading...</p>}>
+                <NextLoad {...defultProps} {...props} />
+            </React.Suspense>
+        </RecoilRoot>
+    );
+};
+
 describe('Component TEST - NextLoad', () => {
     const spy = jest
         .spyOn(getYoutubeModule, 'useYoutube')
