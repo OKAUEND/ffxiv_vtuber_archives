@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
 
 import { ArchiveList } from '../component/ArchiveList';
-import { NextLoad } from '../component/NextLoad';
+import NextLoad from '../component/NextLoad';
+import { useArchives } from '../hook/useArchives';
+import { useTimeRange } from '../hook/useTimeRange';
 
 export const Archive = () => {
     return (
