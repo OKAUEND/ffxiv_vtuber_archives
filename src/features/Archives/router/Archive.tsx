@@ -5,7 +5,11 @@ import NextLoad from '../component/NextLoad';
 import { useArchives } from '../hook/useArchives';
 import { useTimeRange } from '../hook/useTimeRange';
 
-export const Archive = () => {
+type Props = {
+    channelId: string;
+};
+
+export const Archive = (props: Props) => {
     return (
         <div>
             <div>
