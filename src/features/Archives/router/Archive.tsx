@@ -10,6 +10,8 @@ type Props = {
 };
 
 export const Archive = (props: Props) => {
+    const [, saveTimeRange] = useTimeRange();
+    const [Archives] = useArchives(props.channelId);
     return (
         <div>
             <div>
