@@ -34,17 +34,17 @@ type useArchivesTuple = [
     () => boolean
 ];
 
-export const useArchives = (channelId: string): useArchivesTuple => {
+export const useArchives = (channelId: string) => {
     const Archives = useRecoilValue(archivesSelector(channelId));
     const setArchives = useSetRecoilState(archivesAtom(channelId));
 
     const addArchives = (newArchives: GoogleApiYouTubeSearchResource[]) => {
-        setArchives(newArchives);
+        setArchives([...Archives, ...newArchives]);
     };
 
     const exists = () => {
         return Archives.length > 0;
     };
 
-    return [Archives, addArchives, exists];
+    return [Archives, addArchives, exists] as const;
 };
