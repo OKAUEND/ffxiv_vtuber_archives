@@ -11,7 +11,7 @@ type Props = {
 
 export const Archive = (props: Props) => {
     const [, saveTimeRange] = useTimeRange();
-    const [Archives] = useArchives(props.channelId);
+    const [Archives, addArchives] = useArchives(props.channelId);
     const saveLiveTimeRange = () => {
         console.log('');
     };
@@ -19,7 +19,7 @@ export const Archive = (props: Props) => {
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
     ) => {
-        console.log('');
+        addArchives(youtubeArchives);
     };
     return (
         <div>
