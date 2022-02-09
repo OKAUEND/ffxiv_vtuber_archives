@@ -28,12 +28,6 @@ const archivesSelector = selectorFamily<
         },
 });
 
-type useArchivesTuple = [
-    GoogleApiYouTubeSearchResource[],
-    (newArchives: GoogleApiYouTubeSearchResource[]) => void,
-    () => boolean
-];
-
 export const useArchives = (channelId: string) => {
     const Archives = useRecoilValue(archivesSelector(channelId));
     const setArchives = useSetRecoilState(archivesAtom(channelId));
