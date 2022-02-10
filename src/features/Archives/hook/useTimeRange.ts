@@ -20,6 +20,8 @@ export const timeRangeAtom = atom<timeRangetype>({
     },
 });
 
+type useTimeRangeTuple = [timeRangetype, (targetTime: string) => void];
+
 export const useTimeRange = () => {
     const [timeRange, setTimeRange] = useRecoilState(timeRangeAtom);
 
@@ -41,5 +43,5 @@ export const useTimeRange = () => {
         });
     };
 
-    return [timeRange, { saveTimeRange }];
+    return [timeRange, saveTimeRange] as const;
 };
