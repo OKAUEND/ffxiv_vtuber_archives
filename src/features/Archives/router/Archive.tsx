@@ -10,10 +10,10 @@ type Props = {
 };
 
 export const Archive = (props: Props) => {
-    const [, saveTimeRange] = useTimeRange();
+    const [, createTimeRange] = useTimeRange();
     const [Archives, addArchives] = useArchives(props.channelId);
-    const saveLiveTimeRange = () => {
-        console.log('');
+    const onClick = () => {
+        createTimeRange(Archives.splice(-1)[0].snippet.publishedAt);
     };
 
     const storeArchives = (

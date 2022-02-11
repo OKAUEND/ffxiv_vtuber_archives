@@ -27,10 +27,10 @@ export const useTimeRange = () => {
 
     useEffect(() => {
         const realTime = new Date().toISOString();
-        saveTimeRange(realTime);
+        createTimeRange(realTime);
     }, []);
 
-    const saveTimeRange = (targetTime: string) => {
+    const createTimeRange = (targetTime: string) => {
         const lastArchiveTime = new Date(targetTime);
         lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
         const endTime = lastArchiveTime.toISOString();
@@ -43,5 +43,5 @@ export const useTimeRange = () => {
         });
     };
 
-    return [timeRange, saveTimeRange] as const;
+    return [timeRange, createTimeRange] as const;
 };
