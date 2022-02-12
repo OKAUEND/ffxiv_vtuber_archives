@@ -24,13 +24,13 @@ export const Archive = (props: Props) => {
     return (
         <div>
             <div>
-                <ArchiveList />
+                <ArchiveList Archives={Archives} />
             </div>
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
-                        channelId=""
-                        onClick={saveLiveTimeRange}
+                        channelId={props.channelId}
+                        onClick={onClick}
                         store={storeArchives}
                     />
                 </Suspense>
