@@ -1,11 +1,13 @@
 import React from 'react';
-import { useArchives } from '../hook/useArchives';
 
-export const ArchiveList = () => {
-    const archivesList = useArchives('UC6oDys1BGgBsIC3WhG1BovQ');
+interface IProps {
+    Archives: GoogleApiYouTubeSearchResource[];
+}
+
+export const ArchiveList = ({ Archives }: IProps) => {
     return (
         <ul className="list-none w-screen">
-            {archivesList.map((archive) => (
+            {Archives.map((archive) => (
                 <li
                     key={archive.id.videoId}
                     className="flex flex-row box-border mr-3">
