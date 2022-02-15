@@ -46,4 +46,32 @@ describe('useArchives TEST', () => {
         const [target] = result.current;
         expect(target).toEqual([]);
     });
+    test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
+        const { result } = renderHook(() => useArchives('testChannel'));
+        const [target, addArchives] = result.current;
+        expect(target).toEqual([]);
+
+        const testData = YoutubeResourcesFactory('test');
+
+        act(() => {
+            addArchives([testData]);
+        });
+
+        expect(target).toEqual([testData]);
+    });
+
+    test('existsでは、値の有無で真偽値が返ってくるか', () => {
+        const { result } = renderHook(() => useArchives('testChannel'));
+        const [target, addArchives, exists] = result.current;
+        expect(target).toEqual([]);
+        expect(exists).toEqual(false);
+
+        const testData = YoutubeResourcesFactory('test');
+
+        act(() => {
+            addArchives([testData]);
+        });
+
+        expect(exists).toEqual(true);
+    });
 });
