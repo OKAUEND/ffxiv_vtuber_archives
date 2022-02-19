@@ -32,6 +32,9 @@ export const Archive = (props: Props) => {
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
                         channelId={props.channelId}
+                        isEnabled={isBeforeFirstDayTime(
+                            Archives.splice(-1)[0].snippet.publishedAt
+                        )}
                         onClick={onClick}
                         store={storeArchives}
                     />
