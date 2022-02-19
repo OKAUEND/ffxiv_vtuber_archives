@@ -4,6 +4,7 @@ import { ArchiveList } from '../component/ArchiveList';
 import NextLoad from '../component/NextLoad';
 import { useArchives } from '../hook/useArchives';
 import { useTimeRange } from '../hook/useTimeRange';
+import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
 
 type Props = {
     channelId: string;
@@ -15,6 +16,7 @@ export const Archive = (props: Props) => {
     const onClick = () => {
         createTimeRange(Archives.splice(-1)[0].snippet.publishedAt);
     };
+    const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
 
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
