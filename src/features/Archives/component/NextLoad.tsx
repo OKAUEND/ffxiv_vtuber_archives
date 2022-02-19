@@ -6,11 +6,12 @@ import { useArchives } from '../hook/useArchives';
 
 interface Props {
     channelId: string;
+    isEnabled: boolean;
     onClick: () => void;
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
-const NextLoad = ({ channelId, onClick, store }: Props) => {
+const NextLoad = ({ channelId, isEnabled, onClick, store }: Props) => {
     const [, , existsArchives] = useArchives(channelId);
     const youtubeResult = useYoutube(existsArchives());
 
@@ -25,7 +26,7 @@ const NextLoad = ({ channelId, onClick, store }: Props) => {
 
     return (
         <div>
-            <button onClick={setNextLoadTimeRange}>次をロード</button>
+            {isEnabled && <button onClick={handlerClick}>次をロード</button>}
         </div>
     );
 };
