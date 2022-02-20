@@ -100,4 +100,10 @@ describe('Component TEST - NextLoad', () => {
             expect(onClick).toHaveBeenCalled();
         });
     });
+    test('isEnableがfalseのとき、ボタンは非表示になっているか', async () => {
+        renderNextLoad({ isEnabled: false });
+        await waitFor(() => {
+            expect(screen.getByRole('button')).not.toBeInTheDocument();
+        });
+    });
 });
