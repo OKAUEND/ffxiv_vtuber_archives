@@ -10,6 +10,7 @@ import {
 import NextLoad from '../component/NextLoad';
 
 import * as getYoutubeModule from '../api/getYoutube';
+
 const YoutubeResourcesFactory = (
     name: string
 ): GoogleApiYouTubeSearchResource => {
@@ -23,7 +24,7 @@ const YoutubeResourcesFactory = (
             playlistId: name,
         },
         snippet: {
-            publishedAt: name,
+            publishedAt: '20200101',
             channelId: name,
             title: name,
             description: name,
@@ -51,6 +52,7 @@ const YoutubeResourcesFactory = (
 
 interface Props {
     channelId: string;
+    isEnabled: boolean;
     onClick: () => void;
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
@@ -58,6 +60,7 @@ interface Props {
 const renderNextLoad = (props: Partial<Props> = {}) => {
     const defultProps: Props = {
         channelId: '',
+        isEnabled: true,
         onClick() {
             return;
         },
