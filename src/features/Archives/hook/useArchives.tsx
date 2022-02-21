@@ -32,6 +32,12 @@ export const useArchives = (channelId: string) => {
     const Archives = useRecoilValue(archivesSelector(channelId));
     const setArchives = useSetRecoilState(archivesAtom(channelId));
 
+    const lastArchivesDayTime = () => {
+        return Archives.length === 0
+            ? new Date().toISOString()
+            : Archives.slice(-1)[0].snippet.publishedAt;
+    };
+
     const addArchives = (newArchives: GoogleApiYouTubeSearchResource[]) => {
         setArchives([...Archives, ...newArchives]);
     };
@@ -40,5 +46,7 @@ export const useArchives = (channelId: string) => {
         return Archives.length > 0;
     };
 
-    return [Archives, addArchives, exists] as const;
+    console.log(Archives);
+
+    return [Archives, lastArchivesDayTime, addArchives, exists] as const;
 };
