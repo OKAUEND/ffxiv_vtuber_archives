@@ -46,7 +46,5 @@ export const useArchives = (channelId: string) => {
         return Archives.length > 0;
     };
 
-    console.log(Archives);
-
     return [Archives, lastArchivesDayTime, addArchives, exists] as const;
 };
