@@ -72,6 +72,12 @@ export const youtubeSelector = selectorFamily<
         },
 });
 
+const useYoutubeApi = (
+    channelId: string,
+    beginTime: string,
+    endTime: string
+) => {};
+
 export const useYoutube = (existsArchives = false) => {
     return useRecoilValue(youtubeSelector(existsArchives));
 };
