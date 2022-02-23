@@ -49,6 +49,11 @@ export const isPeriod = <T extends Date>(
     return lastArchiveDayTime <= BeginTime;
 };
 
+const requestQueryAtom = atom<string>({
+    key: 'requestQuery',
+    default: '',
+});
+
 export const youtubeSelector = selectorFamily<
     GoogleApiYouTubeSearchResource[],
     boolean
