@@ -1,7 +1,5 @@
-import axios, { AxiosResponse, AxiosAdapter } from 'axios';
-import { atom, selector, selectorFamily, useRecoilValue } from 'recoil';
-import { timeRangeAtom } from '../hook/useTimeRange';
-import { useArchives } from '../hook/useArchives';
+import axios from 'axios';
+import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 export const axiosYoutubeInstance = axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/search',
