@@ -65,12 +65,20 @@ export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
     },
 });
 
-const useYoutubeApi = (
-    channelId: string,
-    beginTime: string,
-    endTime: string
-) => {};
+export const useYoutube = () => {
+    const result = useRecoilValue(youtubeSelector);
+    const [, setYoutubeQuery] = useRecoilState(requestQueryAtom);
 
-export const useYoutube = (existsArchives = false) => {
-    return useRecoilValue(youtubeSelector(existsArchives));
+    const setQuery = (
+        channelId: string,
+        beginTime: string,
+        endTime: string,
+        isload: boolean
+    ) => {
+        if (!isload) return;
+        const query = createYoutubeQuery(channelId, beginTime, endTime);
+        setYoutubeQuery(query);
+    };
+
+    return [result, setQuery];
 };
