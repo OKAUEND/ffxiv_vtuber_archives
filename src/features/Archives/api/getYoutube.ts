@@ -25,12 +25,7 @@ export const createYoutubeQuery = (
     return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
-export const fetchYoutube = async (
-    channelId: string,
-    beginTime: string,
-    endTime: string
-) => {
-    const query = createYoutubeQuery(channelId, beginTime, endTime);
+export const fetchYoutube = async (query: string) => {
     const response = await axiosYoutubeInstance.get<
         GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
     >(query);
