@@ -30,11 +30,6 @@ export const fetchYoutube = async (query: string) => {
     return response.data.items;
 };
 
-export const currentChannelId = atom({
-    key: 'channelId',
-    default: 'UC6oDys1BGgBsIC3WhG1BovQ',
-});
-
 export const isPeriod = <T extends Date>(
     lastArchiveDayTime: T,
     BeginTime: T
