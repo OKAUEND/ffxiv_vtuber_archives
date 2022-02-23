@@ -54,27 +54,15 @@ const requestQueryAtom = atom<string>({
     default: '',
 });
 
-export const youtubeSelector = selectorFamily<
-    GoogleApiYouTubeSearchResource[],
-    boolean
->({
+export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
     key: 'youtubeAPI',
-    get:
-        (existsArchives: boolean) =>
-        async ({ get }) => {
-            const channelState = get(currentChannelId);
-            const timaRangeState = get(timeRangeAtom);
+    get: async ({ get }) => {
+        const requestQuery = get(requestQueryAtom);
 
-            if (!existsArchives) {
-                return [];
-            }
+        if (requestQuery === '') return [];
 
-            return await fetchYoutube(
-                channelState,
-                timaRangeState.BeginTime,
-                timaRangeState.EndTime
-            );
-        },
+        return await fetchYoutube(requestQuery);
+    },
 });
 
 const useYoutubeApi = (
