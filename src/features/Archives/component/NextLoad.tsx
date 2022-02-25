@@ -4,21 +4,42 @@ import { useYoutube } from '../api/getYoutube';
 
 import { useArchives } from '../hook/useArchives';
 
+type timeRangetype = {
+    EndTime: string;
+    BeginTime: string;
+};
+
 interface Props {
     channelId: string;
+    timeRange: timeRangetype;
     isEnabled: boolean;
+    isLoad: boolean;
     onClick: () => void;
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
-const NextLoad = ({ channelId, isEnabled, onClick, store }: Props) => {
-    const [, , existsArchives] = useArchives(channelId);
-    const youtubeResult = useYoutube(existsArchives());
+const NextLoad = ({
+    channelId,
+    timeRange,
+    isEnabled,
+    isLoad,
+    onClick,
+    store,
+}: Props) => {
+    const [youtubeResult, setQuery] = useYoutube(
+        channelId,
+        timeRange.BeginTime,
+        timeRange.EndTime
+    );
 
     useEffect(() => {
         // setArchives([...archives, ...youtubeResult]);
         store(youtubeResult);
     }, [youtubeResult]);
+
+    useEffect(() => {
+        setQuery(channelId, timeRange.BeginTime, timeRange.EndTime, true);
+    }, [timeRange.BeginTime]);
 
     const handlerClick = () => {
         onClick();

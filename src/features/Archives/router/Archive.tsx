@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const Archive = (props: Props) => {
-    const [, createTimeRange] = useTimeRange();
+    const [timeRange, createTimeRange] = useTimeRange();
     const [Archives, lastArchivesDayTime, addArchives] = useArchives(
         props.channelId
     );
@@ -34,7 +34,9 @@ export const Archive = (props: Props) => {
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
                         channelId={props.channelId}
-                        isEnabled={isBeforeFirstDayTime(lastArchivesDayTime())}
+                        timeRange={timeRange}
+                        isEnabled={true}
+                        isLoad={true}
                         onClick={onClick}
                         store={storeArchives}
                     />
