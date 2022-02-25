@@ -53,9 +53,18 @@ export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
     },
 });
 
-export const useYoutube = () => {
+export const useYoutube = (
+    channelId: string,
+    beginTime: string,
+    endTime: string
+) => {
     const result = useRecoilValue(youtubeSelector);
     const [, setYoutubeQuery] = useRecoilState(requestQueryAtom);
+
+    useEffect(() => {
+        const query = createYoutubeQuery(channelId, beginTime, endTime);
+        setYoutubeQuery(query);
+    }, []);
 
     const setQuery = (
         channelId: string,
