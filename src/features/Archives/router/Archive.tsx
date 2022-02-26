@@ -15,10 +15,13 @@ export const Archive = (props: Props) => {
     const [Archives, lastArchivesDayTime, addArchives] = useArchives(
         props.channelId
     );
-    const onClick = () => {
-        createTimeRange(lastArchivesDayTime());
-    };
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
+
+    const onClick = () => {
+        const lastDayTime = lastArchivesDayTime();
+        if (isBeforeFirstDayTime(lastDayTime)) return;
+        createTimeRange(lastDayTime);
+    };
 
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
