@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export const axiosYoutubeInstance = axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/search',
@@ -15,7 +16,7 @@ export const createYoutubeQuery = (
     endTime: string
 ): string => {
     const part = 'snippet';
-    const APIKey = '';
+    const APIKey = 'AIzaSyC0-oYyGcaa0UV4fOHVUhWvXM2KXcf_V5A';
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
@@ -28,13 +29,6 @@ export const fetchYoutube = async (query: string) => {
         GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
     >(query);
     return response.data.items;
-};
-
-export const isPeriod = <T extends Date>(
-    lastArchiveDayTime: T,
-    BeginTime: T
-): boolean => {
-    return lastArchiveDayTime <= BeginTime;
 };
 
 const requestQueryAtom = atom<string>({
@@ -53,29 +47,18 @@ export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
     },
 });
 
-export const useYoutube = (
-    channelId: string,
-    beginTime: string,
-    endTime: string
-) => {
+export const useYoutube = () => {
     const result = useRecoilValue(youtubeSelector);
-    const [, setYoutubeQuery] = useRecoilState(requestQueryAtom);
-
-    useEffect(() => {
-        const query = createYoutubeQuery(channelId, beginTime, endTime);
-        setYoutubeQuery(query);
-    }, []);
+    const setYoutubeQuery = useSetRecoilState(requestQueryAtom);
 
     const setQuery = (
         channelId: string,
         beginTime: string,
-        endTime: string,
-        isload: boolean
+        endTime: string
     ) => {
-        if (!isload) return;
         const query = createYoutubeQuery(channelId, beginTime, endTime);
         setYoutubeQuery(query);
     };
 
-    return [result, setQuery];
+    return [result, setQuery] as const;
 };

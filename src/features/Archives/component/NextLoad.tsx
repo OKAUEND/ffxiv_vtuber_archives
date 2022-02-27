@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 import { useYoutube } from '../api/getYoutube';
 
@@ -13,7 +13,6 @@ interface Props {
     channelId: string;
     timeRange: timeRangetype;
     isEnabled: boolean;
-    isLoad: boolean;
     onClick: () => void;
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
@@ -22,15 +21,10 @@ const NextLoad = ({
     channelId,
     timeRange,
     isEnabled,
-    isLoad,
     onClick,
     store,
 }: Props) => {
-    const [youtubeResult, setQuery] = useYoutube(
-        channelId,
-        timeRange.BeginTime,
-        timeRange.EndTime
-    );
+    const [youtubeResult, setQuery] = useYoutube();
 
     useEffect(() => {
         // setArchives([...archives, ...youtubeResult]);
@@ -38,7 +32,7 @@ const NextLoad = ({
     }, [youtubeResult]);
 
     useEffect(() => {
-        setQuery(channelId, timeRange.BeginTime, timeRange.EndTime, true);
+        setQuery(channelId, timeRange.BeginTime, timeRange.EndTime);
     }, [timeRange.BeginTime]);
 
     const handlerClick = () => {
