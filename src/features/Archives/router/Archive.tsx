@@ -11,10 +11,11 @@ type Props = {
 };
 
 export const Archive = (props: Props) => {
-    const [timeRange, createTimeRange] = useTimeRange();
-    const [Archives, lastArchivesDayTime, addArchives] = useArchives(
+    const [Archives, lastArchivesDayTime, addArchives, exists] = useArchives(
         props.channelId
     );
+    const [timeRange, createTimeRange] = useTimeRange(exists());
+
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
 
     const onClick = () => {
@@ -39,7 +40,6 @@ export const Archive = (props: Props) => {
                         channelId={props.channelId}
                         timeRange={timeRange}
                         isEnabled={true}
-                        isLoad={true}
                         onClick={onClick}
                         store={storeArchives}
                     />
