@@ -20,10 +20,11 @@ export const timeRangeAtom = atom<timeRangetype>({
     },
 });
 
-export const useTimeRange = () => {
+export const useTimeRange = (extsisArchives = false) => {
     const [timeRange, setTimeRange] = useRecoilState(timeRangeAtom);
 
     useEffect(() => {
+        if (extsisArchives) return;
         const realTime = new Date().toISOString();
         createTimeRange(realTime);
     }, []);
