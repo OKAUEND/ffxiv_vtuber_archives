@@ -11,9 +11,9 @@ type Props = {
 };
 
 export const Archive = (props: Props) => {
-    const [Archives, lastArchivesDayTime, addArchives, exists] = useArchives(
-        props.channelId
-    );
+    const [channelId, setChannelId] = useState('');
+    const [Archives, lastArchivesDayTime, addArchives, exists] =
+        useArchives(channelId);
     const [timeRange, createTimeRange] = useTimeRange(exists());
 
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
@@ -24,6 +24,11 @@ export const Archive = (props: Props) => {
         createTimeRange(lastDayTime);
     };
 
+    useEffect(() => {
+        if (exists()) return;
+        const realTime = new Date().toISOString();
+        createTimeRange(realTime);
+    }, [channelId]);
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
     ) => {
@@ -37,7 +42,7 @@ export const Archive = (props: Props) => {
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
-                        channelId={props.channelId}
+                        channelId={channelId}
                         timeRange={timeRange}
                         isEnabled={true}
                         onClick={onClick}
