@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 import { ArchiveList } from '../component/ArchiveList';
 import NextLoad from '../component/NextLoad';
@@ -29,6 +29,7 @@ export const Archive = (props: Props) => {
         const realTime = new Date().toISOString();
         createTimeRange(realTime);
     }, [channelId]);
+
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
     ) => {
