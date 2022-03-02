@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 
-export const Channels = () => {
+export const ChannelPanel = () => {
     return (
         <div>
             <img src="" />
