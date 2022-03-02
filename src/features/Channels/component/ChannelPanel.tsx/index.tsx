@@ -1,16 +1,24 @@
 import React, { Suspense, useEffect, useState } from 'react';
 
-export const ChannelPanel = () => {
+interface IProps {
+    Channels: string[];
+}
+
+export const ChannelPanel = ({ Channels }: IProps) => {
     return (
         <ul>
-            <li>
-                <div>
-                    <img src="" />
-                    {
-                        //チャンネル名
-                    }
-                </div>
-            </li>
+            {Channels.map((channel) => (
+                //まだ受け渡すオブジェクトの構造ができあがっていないので、
+                //仮コード
+                <li key={channel}>
+                    <div>
+                        <img src="" />
+                        {
+                            //チャンネル名
+                        }
+                    </div>
+                </li>
+            ))}
         </ul>
     );
 };
