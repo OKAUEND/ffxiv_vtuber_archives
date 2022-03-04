@@ -1,11 +1,12 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, useParams } from 'react-router-dom';
 
 // interface IProps {
 //     Channels: string[];
 // }
 
 export const ChannelPanel = () => {
+    const { channelId } = useParams();
     return (
         // <ul>
         //     {Channels.map((channel) => (
@@ -21,6 +22,6 @@ export const ChannelPanel = () => {
         //         </li>
         //     ))}
         // </ul>
-        <h2>TEST</h2>
+        <h2>TEST {channelId}</h2>
     );
 };
