@@ -4,10 +4,10 @@ export type HikasenVtuber = {
     channelIconID: string;
     twitter: string;
     twitch: string;
-    FFXIV: FFXIV;
+    ffxiv: FFXIV;
 };
 
 type FFXIV = {
-    DataCenter: string;
-    Server: string;
+    dataCenter: string;
+    server: string;
 };
