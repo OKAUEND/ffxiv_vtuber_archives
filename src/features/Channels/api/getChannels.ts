@@ -11,6 +11,12 @@ const axiosGASInstance = axios.create({
     timeout: 2000,
 });
 
+axiosGASInstance.interceptors.request.use((response) => {
+    if (response.data.error) {
+        return Promise.reject(response.data.error);
+    }
+});
+
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'ChannelsAtom',
     default: [],
