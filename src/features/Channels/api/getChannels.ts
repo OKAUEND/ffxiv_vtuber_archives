@@ -11,11 +11,15 @@ const axiosGASInstance = axios.create({
     timeout: 2000,
 });
 
-axiosGASInstance.interceptors.request.use((response) => {
-    if (response.data.error) {
-        return Promise.reject(response.data.error);
-    }
-});
+const onSuccessful = (response: AxiosResponse) => {
+    return response;
+};
+
+const onRejected = (error: AxiosError) => {
+    return Promise.reject(error);
+};
+
+axiosGASInstance.interceptors.response.use(onSuccessful, onRejected);
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'ChannelsAtom',
