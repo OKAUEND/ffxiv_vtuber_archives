@@ -1,8 +1,8 @@
 import axios, { AxiosAdapter } from 'axios';
 import { fetchChannels } from '../../api/getChannels';
-const mock = undefined as unknown as AxiosAdapter;
 
-jest.mock('mock', () => jest.fn());
+jest.mock('axios');
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const axiosMockAdapter = mock as unknown as jest.Mock<
     ReturnType<AxiosAdapter>,
