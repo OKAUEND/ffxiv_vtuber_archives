@@ -4,28 +4,27 @@ import { fetchChannels } from '../../api/getChannels';
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-const axiosMockAdapter = mock as unknown as jest.Mock<
-    ReturnType<AxiosAdapter>,
-    Parameters<AxiosAdapter>
->;
-
-describe('Channel Get API TEST', () => {
-    beforeEach(() => {
-        axiosMockAdapter.mockClear();
-    });
-    test('Axios interceptors resolve時の反応をみる', () => {
-        const response = {
-            status: 401,
+describe('Channel Get API TEST', async () => {
+    test('Axios interceptors resolve時の反応をみる', async () => {
+        const successResponse = {
+            status: 200,
+            statusText: 'OK',
+            headers: {},
+            config: {},
+            data: {
+                id: 1,
+                name: 'hogefuga',
+            },
         };
 
         const request = {
             name: 'hogehoge',
         };
 
-        axiosMockAdapter.mockResolvedValueOnce(response);
+        mockAxios.post.mockResolvedValue(successResponse);
 
-        const rejectedResponse =
-            axios.interceptors.response.handlers[0].rejected(response);
-        expect(axiosGASInstance.interceptors.response.handlers[0]);
+        const result = await fetchChannels();
+
+        expect(result).toStrictEqual(successResponse.data);
     });
 });
