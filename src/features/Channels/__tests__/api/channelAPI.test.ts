@@ -1,21 +1,7 @@
 import axios, { AxiosAdapter } from 'axios';
 import { fetchChannels } from '../../api/getChannels';
 
-const mockAPI = jest.fn().mockName('mock-api');
-jest.mock('axios', () => ({
-    __esModule: true,
-    default: {
-        create: jest.fn(() => {
-            return {
-                interceptors: {
-                    request: { use: jest.fn() },
-                    response: { use: jest.fn() },
-                },
-                post: mockAPI,
-            };
-        }),
-    },
-}));
+jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Channel Get API TEST', () => {

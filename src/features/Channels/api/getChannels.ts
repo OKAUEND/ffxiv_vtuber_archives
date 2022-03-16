@@ -46,10 +46,8 @@ const requestData: IPostRequest = {
 const fetchChannels = async () => {
     try {
         const url = '';
-        const response = await axiosGASInstance.get<IResponse>(url);
-
-        if (response.data.id) return [];
-        return response.data;
+        const response = await axios.post<IResponse>('');
+        return response;
     } catch (err) {
         if (err instanceof Error) {
             console.error(err.message);
