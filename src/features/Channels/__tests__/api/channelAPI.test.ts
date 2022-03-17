@@ -1,4 +1,4 @@
-import axios, { AxiosAdapter } from 'axios';
+import mockAdapter from 'axios-mock-adapter';
 import { fetchChannels } from '../../api/getChannels';
 
 jest.mock('axios');
