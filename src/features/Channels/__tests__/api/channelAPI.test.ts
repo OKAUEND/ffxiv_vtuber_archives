@@ -8,25 +8,20 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Channel Get API TEST', () => {
     test('Axios interceptors resolve時の反応をみる', async () => {
+        const mock = new mockAdapter(axiosGASInstance);
+
         const successResponse = {
-            status: 200,
-            statusText: 'OK',
-            headers: {},
-            config: {},
-            data: {
-                id: 1,
-                name: 'hogefuga',
-            },
+            id: 1,
+            name: 'hogefuga',
         };
 
         const request = {
             name: 'hogehoge',
         };
 
-        mockAxios.post.mockResolvedValue(successResponse);
-
+        mock.onPost('/channel').replyOnce(200, successResponse);
         const result = await fetchChannels();
 
-        expect(result).toStrictEqual(successResponse.data);
+        expect(result).toStrictEqual(successResponse);
     });
 });
