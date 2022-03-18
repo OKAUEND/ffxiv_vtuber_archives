@@ -21,4 +21,13 @@ describe('Channel Get API TEST', () => {
 
         expect(result).toStrictEqual(successResponse);
     });
+
+    test('Axios interceptors reject時の反応をみる', async () => {
+        const mock = new mockAdapter(axiosGASInstance);
+
+        mock.onPost('/channel').replyOnce(400, 'error');
+        const result = await fetchChannels();
+
+        expect(result).toStrictEqual('error');
+    });
 });
