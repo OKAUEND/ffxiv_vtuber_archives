@@ -43,7 +43,7 @@ const requestData: IPostRequest = {
     state: 'Active',
 };
 
-const fetchChannels = async () => {
+export const fetchChannels = async () => {
     try {
         const url = '';
         const response = await axiosGASInstance.post<IResponse>('/channel');
