@@ -24,4 +24,11 @@ export const ChannelPanel = () => {
         // </ul>
         <h2>TEST {channelId}</h2>
     );
+
+    {
+        /* 
+        Timeoutした場合はこの下のTimeout処理をかく 
+        理由：サイドリロードさせたいので
+        */
+    }
 };
