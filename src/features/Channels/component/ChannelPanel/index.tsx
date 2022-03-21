@@ -7,6 +7,14 @@ import { BrowserRouter, Route, useParams } from 'react-router-dom';
 
 export const ChannelPanel = () => {
     const { channelId } = useParams();
+    const timeOutError = () => {
+        return (
+            <div>
+                <h3>タイムアウトエラー</h3>
+                <button onClick={loadData}>再度読み込む</button>
+            </div>
+        );
+    };
     return (
         // <ul>
         //     {Channels.map((channel) => (
