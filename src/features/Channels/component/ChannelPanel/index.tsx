@@ -1,12 +1,13 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, useParams } from 'react-router-dom';
-
+import { useChannels } from '../../api/getChannels';
 // interface IProps {
 //     Channels: string[];
 // }
 
 export const ChannelPanel = () => {
     const { channelId } = useParams();
+    const [channels] = useChannels();
     const timeOutError = () => {
         return (
             <div>
