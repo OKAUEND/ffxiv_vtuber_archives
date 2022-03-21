@@ -8,6 +8,13 @@ import { useChannels } from '../../api/getChannels';
 export const ChannelPanel = () => {
     const { channelId } = useParams();
     const [channels] = useChannels();
+
+    {
+        /* 
+        Timeoutした場合はこの下のTimeout処理をかく 
+        理由：サイドリロードさせたいので
+        */
+    }
     const timeOutError = () => {
         return (
             <div>
