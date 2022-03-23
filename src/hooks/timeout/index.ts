@@ -7,6 +7,12 @@ export type AxiosResut = {
     error: boolean;
     payload: object;
 };
+
+const timeOutErrorAtom = atom<boolean>({
+    key: 'timeouterror',
+    default: false,
+});
+
 export const useTimeOutError = () => {
     return [];
 };
