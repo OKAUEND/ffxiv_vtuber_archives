@@ -13,6 +13,10 @@ const timeOutErrorAtom = atom<boolean>({
     default: false,
 });
 
-export const useTimeOutError = () => {
-    return [];
+export const useTimeOutError = (target: AxiosResut) => {
+    const [isTimeOut, setState] = useRecoilState(timeOutErrorAtom);
+    useEffect(() => {
+        setState(target.error);
+    }, [target.status, target.error]);
+    return [isTimeOut];
 };
