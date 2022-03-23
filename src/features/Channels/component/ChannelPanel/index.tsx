@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, useParams } from 'react-router-dom';
 import { useChannels } from '../../api/getChannels';
+import { useTimeOutError } from '../../../../hooks/timeout/index';
 // interface IProps {
 //     Channels: string[];
 // }
@@ -8,6 +9,7 @@ import { useChannels } from '../../api/getChannels';
 export const ChannelPanel = () => {
     const { channelId } = useParams();
     const [channels] = useChannels();
+    const [isTimeOut] = useTimeOutError(channels);
 
     {
         /* 
