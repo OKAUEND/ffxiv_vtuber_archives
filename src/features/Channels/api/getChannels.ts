@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { HikasenVtuber } from '../types/index';
+import { AxiosResut } from '../../../types/api/index';
 
 const axiosGASInstance = axios.create({
     baseURL: '',
