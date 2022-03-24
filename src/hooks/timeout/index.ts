@@ -1,12 +1,6 @@
 import { useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
-
-export type AxiosResut = {
-    status: number;
-    errorCode: string;
-    error: boolean;
-    payload: object;
-};
+import { AxiosResut } from '../../types/api';
 
 const timeOutErrorAtom = atom<boolean>({
     key: 'timeouterror',
