@@ -51,20 +51,21 @@ const requestData: IPostRequest = {
 };
 
 export const fetchChannels = async () => {
-    try {
-        const url = '';
-        const response = await axiosGASInstance.post<IResponse>('/channel');
-        return response;
-    } catch (err) {
-        if (err instanceof Error) {
-            console.error(err.message);
-        }
-    }
+    const url = '';
+    const response = await axiosGASInstance.post<
+        string,
+        AxiosResut<HikasenVtuber[]>
+    >('/channel');
+    return response.payload;
 };
 
-export const useChannels = () => {
+export const useChannels = async () => {
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
     useEffect(() => {
-        setChannels(fetchChannels());
+        loadData();
     }, []);
+
+    const loadData = async () => {
+        setChannels(await fetchChannels());
+    };
 };
