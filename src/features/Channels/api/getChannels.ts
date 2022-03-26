@@ -59,7 +59,7 @@ export const fetchChannels = async () => {
     return response.payload;
 };
 
-export const useChannels = async () => {
+export const useChannels = () => {
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
     useEffect(() => {
         loadData();
@@ -68,4 +68,6 @@ export const useChannels = async () => {
     const loadData = async () => {
         setChannels(await fetchChannels());
     };
+
+    return [channels, loadData] as const;
 };
