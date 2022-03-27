@@ -31,23 +31,6 @@ const ChannelsAtom = atom<HikasenVtuber[]>({
     default: [],
 });
 
-interface IPostRequest {
-    state: string;
-}
-
-interface IResponse {
-    id: string;
-    name: string;
-}
-
-interface IErrorResponse {
-    error: string;
-}
-
-const requestData: IPostRequest = {
-    state: 'Active',
-};
-
 export const fetchChannels = async () => {
     const url = '';
     const response = await axiosGASInstance.post<
