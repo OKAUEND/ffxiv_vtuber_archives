@@ -12,11 +12,9 @@ const axiosGASInstance = axios.create({
     timeout: 2000,
 });
 
-const onSuccessful = (response: AxiosResponse): AxiosResut<HikasenVtuber> => {
-    const result: AxiosResut<HikasenVtuber> = {
+const onSuccessful = (response: AxiosResponse): AxiosResut<HikasenVtuber[]> => {
+    const result: AxiosResut<HikasenVtuber[]> = {
         status: response.status,
-        error: false,
-        errorCode: '',
         payload: response.data,
     };
     return result;
