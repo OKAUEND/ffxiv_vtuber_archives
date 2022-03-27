@@ -21,7 +21,17 @@ const onSuccessful = (response: AxiosResponse): AxiosResut<HikasenVtuber[]> => {
 };
 
 const onRejected = (error: AxiosError) => {
-    return Promise.reject(error);
+    if (error.code === 'ECONNABORTED') {
+        const result: AxiosResut<HikasenVtuber[]> = {
+            status: 408,
+            error: true,
+            errorCode: 'TIMEOUT',
+            payload: [],
+        };
+        return result;
+    }
+
+    return Promise.reject('error');
 };
 
 axiosGASInstance.interceptors.response.use(onSuccessful, onRejected);
