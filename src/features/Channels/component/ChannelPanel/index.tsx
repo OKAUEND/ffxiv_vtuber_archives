@@ -8,8 +8,8 @@ import { useTimeOutError } from '../../../../hooks/timeout/index';
 
 export const ChannelPanel = () => {
     const { channelId } = useParams();
-    const [channels, loadData] = useChannels();
-    const [isTimeOut] = useTimeOutError(channels);
+    const [channels, resultStatus, loadData] = useChannels();
+    const [isTimeOut] = useTimeOutError(resultStatus);
 
     {
         /* 
