@@ -41,6 +41,11 @@ const ChannelsAtom = atom<HikasenVtuber[]>({
     default: [],
 });
 
+const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
+    key: 'AxiosResutAtom',
+    default: { status: 200 },
+});
+
 export const fetchChannels = async () => {
     const url = '';
     const response = await axiosGASInstance.post<
