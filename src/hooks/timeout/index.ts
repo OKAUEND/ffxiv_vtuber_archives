@@ -7,7 +7,9 @@ const timeOutErrorAtom = atom<boolean>({
     default: false,
 });
 
-export const useTimeOutError = (target: AxiosResut<[]>) => {
+export const useTimeOutError = <T extends Omit<AxiosResut<[]>, 'payload'>>(
+    target: T
+) => {
     const [isTimeOut, setState] = useRecoilState(timeOutErrorAtom);
     useEffect(() => {
         if (target.errorCode == 'ECONNABORTED' && target.error) {
