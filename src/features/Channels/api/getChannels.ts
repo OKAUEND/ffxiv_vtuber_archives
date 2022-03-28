@@ -52,18 +52,21 @@ export const fetchChannels = async () => {
         string,
         AxiosResut<HikasenVtuber[]>
     >('/channel');
-    return response.payload;
+    return response;
 };
 
 export const useChannels = () => {
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
+    const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
     useEffect(() => {
         loadData();
     }, []);
 
     const loadData = async () => {
-        setChannels(await fetchChannels());
+        const result = await fetchChannels();
+        setChannels(result.payload);
+        setresultStatus(result);
     };
 
-    return [channels, loadData] as const;
+    return [channels, resultStatus, loadData] as const;
 };
