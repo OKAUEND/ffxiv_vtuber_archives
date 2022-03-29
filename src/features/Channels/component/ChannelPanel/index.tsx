@@ -43,10 +43,5 @@ export const ChannelPanel = () => {
         );
     };
 
-    {
-        /* 
-        Timeoutした場合はこの下のTimeout処理をかく 
-        理由：サイドリロードさせたいので
-        */
-    }
+    return isTimeOut ? success : timeOutError;
 };
