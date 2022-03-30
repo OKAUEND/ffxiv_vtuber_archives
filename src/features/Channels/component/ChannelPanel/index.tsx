@@ -18,30 +18,26 @@ export const ChannelPanel = () => {
         */
     }
     const timeOutError = () => {
-        return (
-            <div>
-                <h3>タイムアウトエラー</h3>
-                <button onClick={loadData}>再度読み込む</button>
-            </div>
-        );
+        <div>
+            <h3>タイムアウトエラー</h3>
+            <button onClick={loadData}>再度読み込む</button>
+        </div>;
     };
 
     const success = () => {
-        return (
-            <ul>
-                {channels.map((channel) => (
-                    //まだ受け渡すオブジェクトの構造ができあがっていないので、
-                    //仮コード
-                    <li key={channel.channelID}>
-                        <div>
-                            <img src={channel.channelIconID} />
-                            {channel.name}
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        );
+        <ul>
+            {channels.map((channel) => (
+                //まだ受け渡すオブジェクトの構造ができあがっていないので、
+                //仮コード
+                <li key={channel.channelID}>
+                    <div>
+                        <img src={channel.channelIconID} />
+                        {channel.name}
+                    </div>
+                </li>
+            ))}
+        </ul>;
     };
 
-    return isTimeOut ? success : timeOutError;
+    return <div>{isTimeOut ? timeOutError : success}</div>;
 };
