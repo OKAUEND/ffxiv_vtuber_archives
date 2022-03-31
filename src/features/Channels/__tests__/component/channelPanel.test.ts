@@ -6,3 +6,4 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
+import { ChannelPanel } from '../../component/ChannelPanel';
