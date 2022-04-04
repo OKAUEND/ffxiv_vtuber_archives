@@ -39,9 +39,16 @@ const AxiosStatusFactory = (
     isSuccess: boolean,
     HikasenVtuber: HikasenVtuber[]
 ): AxiosResut<HikasenVtuber[]> => {
+    const errorCode = () => {
+        if (status === 408) {
+            return 'ECONNABORTED';
+        }
+        return 'TEST';
+    };
+
     return {
         status: status,
-        errorCode: '',
+        errorCode: errorCode(),
         error: isSuccess,
         payload: HikasenVtuber,
     };
