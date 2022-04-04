@@ -20,6 +20,32 @@ jest.mock('useChannels', () => ({
     },
 }));
 
+const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
+    return {
+        channelID: name,
+        channelIconID: name,
+        name: name,
+        twitter: '',
+        twitch: '',
+        ffxiv: {
+            dataCenter: 'test',
+            server: 'test',
+        },
+    };
+};
+
+const AxiosStatusFactory = (
+    status: number,
+    isSuccess: boolean,
+    HikasenVtuber: HikasenVtuber[]
+): AxiosResut<HikasenVtuber[]> => {
+    return {
+        status: status,
+        errorCode: '',
+        error: isSuccess,
+        payload: HikasenVtuber,
+    };
+};
 
 describe('channel Panel - コンポーネントテスト', () => {
     test('', () => {});
