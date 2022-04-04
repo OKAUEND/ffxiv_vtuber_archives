@@ -48,5 +48,15 @@ const AxiosStatusFactory = (
 };
 
 describe('channel Panel - コンポーネントテスト', () => {
-    test('', () => {});
+    const HikasenVtuber = HikasenVtuberResourceFactory('test');
+
+    test('', () => {
+        const useChannelsSpy = jest
+            .spyOn(getChannelsModule, 'useChannels')
+            .mockImplementation(() => [
+                [HikasenVtuber],
+                AxiosStatusFactory(200, true, [HikasenVtuber]),
+                jest.fn(),
+            ]);
+    });
 });
