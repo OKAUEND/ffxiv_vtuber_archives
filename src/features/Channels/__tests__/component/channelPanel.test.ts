@@ -8,10 +8,10 @@ import {
 } from '@testing-library/react';
 import { ChannelPanel } from '../../component/ChannelPanel';
 import { useChannels } from '../../api/getChannels';
-import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Channels } from 'features/Channels/router';
 
 import * as getChannelsModule from '../../api/getChannels';
+import * as useTimeOutModule from '../../../../hooks/timeout/index';
 import { HikasenVtuber } from '../..//types/index';
 import { AxiosResut } from '../../../../types/api/index';
 jest.mock('useChannels', () => ({
@@ -65,5 +65,9 @@ describe('channel Panel - コンポーネントテスト', () => {
                 AxiosStatusFactory(200, true, [HikasenVtuber]),
                 jest.fn(),
             ]);
+
+        const useTimeOutErrorSpy = jest
+            .spyOn(useTimeOutModule, 'useTimeOutError')
+            .mockImplementation(() => false);
     });
 });
