@@ -51,6 +51,22 @@ describe('channel Panel - コンポーネントテスト', () => {
     const HikasenVtuber = HikasenVtuberResourceFactory('test');
 
     test('', () => {
+        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+            [HikasenVtuber],
+            AxiosStatusFactory(200, true, [HikasenVtuber]),
+            jest.fn(),
+        ]);
 
+        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
+            () => [true]
+        );
+
+        const { getByText, getByRole } = render(
+            <RecoilRoot>
+                <ChannelPanel />
+            </RecoilRoot>
+        );
+        // expect(screen.getByRole('img')).not.toBeInTheDocument();
+        expect(screen.getByText('タイムアウトエラー')).toBeInTheDocument();
     });
 });
