@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import {
     act,
     fireEvent,
@@ -6,19 +7,12 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
-import { ChannelPanel } from '../../component/ChannelPanel';
-import { useChannels } from '../../api/getChannels';
-import { Channels } from 'features/Channels/router';
 
 import * as getChannelsModule from '../../api/getChannels';
 import * as useTimeOutModule from '../../../../hooks/timeout/index';
-import { HikasenVtuber } from '../..//types/index';
+import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
-jest.mock('useChannels', () => ({
-    useChannels() {
-        return {};
-    },
-}));
+import ChannelPanel from '../../component/ChannelPanel';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
@@ -53,21 +47,10 @@ const AxiosStatusFactory = (
         payload: HikasenVtuber,
     };
 };
-
 describe('channel Panel - コンポーネントテスト', () => {
     const HikasenVtuber = HikasenVtuberResourceFactory('test');
 
     test('', () => {
-        const useChannelsSpy = jest
-            .spyOn(getChannelsModule, 'useChannels')
-            .mockImplementation(() => [
-                [HikasenVtuber],
-                AxiosStatusFactory(200, true, [HikasenVtuber]),
-                jest.fn(),
-            ]);
 
-        const useTimeOutErrorSpy = jest
-            .spyOn(useTimeOutModule, 'useTimeOutError')
-            .mockImplementation(() => false);
     });
 });
