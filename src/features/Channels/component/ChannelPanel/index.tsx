@@ -5,7 +5,7 @@ import { useTimeOutError } from '../../../../hooks/timeout/index';
 //     Channels: string[];
 // }
 
-export const ChannelPanel = () => {
+const ChannelPanel = () => {
     const [channels, resultStatus, loadData] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
 
@@ -39,3 +39,5 @@ export const ChannelPanel = () => {
 
     return <div>{isTimeOut ? timeOutError : success}</div>;
 };
+
+export default ChannelPanel;
