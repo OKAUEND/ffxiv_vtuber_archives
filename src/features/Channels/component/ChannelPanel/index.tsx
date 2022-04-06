@@ -41,7 +41,7 @@ const ChannelPanel = () => {
         );
     };
 
-    return <div>{isTimeOut ? timeOutError : success}</div>;
+    return <div>{isTimeOut ? timeOutError() : success()}</div>;
 };
 
 export default ChannelPanel;
