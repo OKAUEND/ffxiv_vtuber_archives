@@ -66,7 +66,10 @@ describe('channel Panel - コンポーネントテスト', () => {
                 <ChannelPanel />
             </RecoilRoot>
         );
-        // expect(screen.getByRole('img')).not.toBeInTheDocument();
-        expect(screen.getByText('タイムアウトエラー')).toBeInTheDocument();
+
+        expect(screen.getByRole('img')).toBeInTheDocument();
+        expect(
+            screen.queryByText('タイムアウトエラー')
+        ).not.toBeInTheDocument();
     });
 });
