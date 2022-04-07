@@ -72,4 +72,25 @@ describe('channel Panel - コンポーネントテスト', () => {
             screen.queryByText('タイムアウトエラー')
         ).not.toBeInTheDocument();
     });
+
+    test('タイムアウトエラーの場合、タイムアウトエラー画面が表示されるか', () => {
+        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+            [HikasenVtuber],
+            AxiosStatusFactory(408, false, [HikasenVtuber]),
+            jest.fn(),
+        ]);
+
+        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
+            () => [true]
+        );
+
+        render(
+            <RecoilRoot>
+                <ChannelPanel />
+            </RecoilRoot>
+        );
+
+        expect(screen.queryByRole('img')).not.toBeInTheDocument();
+        expect(screen.getByText('タイムアウトエラー')).toBeInTheDocument();
+    });
 });
