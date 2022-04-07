@@ -50,7 +50,7 @@ const AxiosStatusFactory = (
 describe('channel Panel - コンポーネントテスト', () => {
     const HikasenVtuber = HikasenVtuberResourceFactory('test');
 
-    test('', () => {
+    test('通信が正常値を返した場合、成功した場合の画面を出力できているか', () => {
         jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
             [HikasenVtuber],
             AxiosStatusFactory(200, true, [HikasenVtuber]),
@@ -58,10 +58,10 @@ describe('channel Panel - コンポーネントテスト', () => {
         ]);
 
         jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
-            () => [true]
+            () => [false]
         );
 
-        const { getByText, getByRole } = render(
+        render(
             <RecoilRoot>
                 <ChannelPanel />
             </RecoilRoot>
