@@ -3,6 +3,7 @@ import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import {
     act,
     fireEvent,
+    getByRole,
     render,
     screen,
     waitFor,
@@ -91,6 +92,30 @@ describe('channel Panel - コンポーネントテスト', () => {
         );
 
         expect(screen.queryByRole('img')).not.toBeInTheDocument();
+        expect(screen.getByRole('button')).toBeInTheDocument();
         expect(screen.getByText('タイムアウトエラー')).toBeInTheDocument();
+    });
+
+    test('タイムアウトエラーの場合、ボタンのイベントを発火する事ができるか', () => {
+        const mockFunction = jest.fn();
+
+        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+            [HikasenVtuber],
+            AxiosStatusFactory(408, false, [HikasenVtuber]),
+            mockFunction,
+        ]);
+
+        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
+            () => [true]
+        );
+
+        render(
+            <RecoilRoot>
+                <ChannelPanel />
+            </RecoilRoot>
+        );
+
+        fireEvent.click(screen.getByRole('button'));
+        expect(mockFunction).toHaveBeenCalled();
     });
 });
