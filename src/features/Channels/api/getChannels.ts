@@ -25,7 +25,7 @@ const onRejected = (error: AxiosError) => {
         const result: AxiosResut<HikasenVtuber[]> = {
             status: 408,
             error: true,
-            errorCode: 'TIMEOUT',
+            errorCode: error.code,
             payload: [],
         };
         return result;
