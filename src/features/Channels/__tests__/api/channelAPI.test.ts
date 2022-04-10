@@ -34,4 +34,16 @@ describe('Channel Get API TEST', () => {
 
         expect(result).toStrictEqual('error');
     });
+
+    test('リロードの関数を使用したら、取得関数がコールされるか', () => {
+        const mock = new mockAdapter(axiosGASInstance);
+        const { result } = renderHook(() => useChannels());
+        const [channels, resultStatus, loadData] = result.current;
+
+        mock.onPost('/channel').replyOnce(200, 'success');
+        act(async () => {
+            loadData();
+            await expect(fetchChannels()).toHaveBeenCalled();
+        });
+    });
 });
