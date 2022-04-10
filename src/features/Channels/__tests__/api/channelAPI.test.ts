@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
 import { axiosGASInstance } from '../../api/getChannels';
 import mockAdapter from 'axios-mock-adapter';
-import { fetchChannels } from '../../api/getChannels';
+import { useChannels, fetchChannels } from '../../api/getChannels';
+
+import { HikasenVtuber } from '../../types/index';
+import { AxiosResut } from '../../../../types/api/index';
 
 describe('Channel Get API TEST', () => {
     test('Axios interceptors resolve時の反応をみる', async () => {
