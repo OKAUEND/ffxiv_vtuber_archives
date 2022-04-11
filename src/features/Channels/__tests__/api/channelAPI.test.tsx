@@ -65,4 +65,31 @@ describe('Channel Get API TEST', () => {
         const result = await fetchChannels();
         expect(result).toStrictEqual('error');
     });
+
+    test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
+        // const mock = new mockAdapter(axiosGASInstance);
+        // mock.onPost('/channel').replyOnce(200, 'success');
+
+        const mock = jest
+            .spyOn(fetchChannelModule, 'fetchChannels')
+            .mockImplementationOnce(() =>
+                Promise.resolve(
+                    AxiosStatusFactory(200, true, [
+                        HikasenVtuberResourceFactory('mockTEST'),
+                    ])
+                )
+            );
+
+        const { result } = renderHook(() => useChannels(), {
+            wrapper: RecoilRoot,
+        });
+
+        await waitFor(async () => {
+            const [channels, resultStatus, loadData] = result.current;
+
+            loadData();
+
+            expect(mock).toHaveBeenCalledTimes(1);
+        });
+    });
 });
