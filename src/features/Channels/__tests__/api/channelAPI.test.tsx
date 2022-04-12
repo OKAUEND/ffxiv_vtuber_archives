@@ -70,15 +70,14 @@ describe('Channel Get API TEST', () => {
         // const mock = new mockAdapter(axiosGASInstance);
         // mock.onPost('/channel').replyOnce(200, 'success');
 
-        const mock = jest
-            .spyOn(fetchChannelModule, 'fetchChannels')
-            .mockImplementationOnce(() =>
+        jest.spyOn(fetchChannelModule, 'fetchChannels').mockImplementationOnce(
+            () =>
                 Promise.resolve(
                     AxiosStatusFactory(200, true, [
                         HikasenVtuberResourceFactory('mockTEST'),
                     ])
                 )
-            );
+        );
 
         const { result } = renderHook(() => useChannels(), {
             wrapper: RecoilRoot,
