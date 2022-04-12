@@ -21,7 +21,7 @@ const onSuccessful = (response: AxiosResponse): AxiosResut<HikasenVtuber[]> => {
 };
 
 const onRejected = (error: AxiosError) => {
-    if (error.code === 'ECONNABORTED') {
+    if (error.response?.data === 'ECONNABORTED') {
         const result: AxiosResut<HikasenVtuber[]> = {
             status: 408,
             error: true,

@@ -61,9 +61,9 @@ describe('Channel Get API TEST', () => {
     });
     test('Axios interceptors reject時の反応をみる', async () => {
         const mock = new mockAdapter(axiosGASInstance);
-        mock.onPost('/channel').replyOnce(408, 'error');
+        mock.onPost('/channel').replyOnce(408, 'ECONNABORTED');
         const result = await fetchChannels();
-        expect(result).toStrictEqual('error');
+        expect(result.status).toStrictEqual(408);
     });
 
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
