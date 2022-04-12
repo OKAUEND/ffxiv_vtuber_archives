@@ -67,17 +67,16 @@ describe('Channel Get API TEST', () => {
     });
 
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
-        // const mock = new mockAdapter(axiosGASInstance);
-        // mock.onPost('/channel').replyOnce(200, 'success');
 
-        jest.spyOn(fetchChannelModule, 'fetchChannels').mockImplementationOnce(
-            () =>
+        const mock = jest
+            .spyOn(getChannelsModule, 'fetchChannels')
+            .mockImplementationOnce(() =>
                 Promise.resolve(
                     AxiosStatusFactory(200, true, [
                         HikasenVtuberResourceFactory('mockTEST'),
                     ])
                 )
-        );
+            );
 
         const { result } = renderHook(() => useChannels(), {
             wrapper: RecoilRoot,
