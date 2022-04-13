@@ -4,7 +4,7 @@ import { atom, useRecoilState } from 'recoil';
 import { HikasenVtuber } from '../types/index';
 import { AxiosResut } from '../../../types/api/index';
 
-const axiosGASInstance = axios.create({
+export const axiosGASInstance = axios.create({
     baseURL: '',
     headers: {
         'Content-Type': 'application/json',
