@@ -1,8 +1,8 @@
 import axios, { AxiosAdapter, AxiosError, AxiosResponse } from 'axios';
 import { AxiosResut } from '../../types/api/index';
 
-const axiosInstance = <T, P>() => {
-    const axiosGASInstance = axios.create({
+export const AxiosInstance = <T>() => {
+    const axiosInstance = axios.create({
         baseURL: '',
         headers: {
             'Content-Type': 'application/json',
@@ -31,5 +31,12 @@ const axiosInstance = <T, P>() => {
         return Promise.reject('error');
     };
 
-    return axiosGASInstance.interceptors.response.use(onSuccessful, onRejected);
+    axiosInstance.interceptors.response.use(onSuccessful, onRejected);
+
+    const fetchPost = async (url: string) => {
+        const response = await axiosInstance.post<string, AxiosResut<T[]>>(url);
+        return response;
+    };
+
+    return fetchPost;
 };
