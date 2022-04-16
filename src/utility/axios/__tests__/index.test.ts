@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
+import mockAdapter from 'axios-mock-adapter';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
+import { axiosInstance, fetchPost } from '../index';
 
 describe('AxiosInstance TEST', () => {
     test('Axios interceptors resolve時の反応をみる', async () => {
