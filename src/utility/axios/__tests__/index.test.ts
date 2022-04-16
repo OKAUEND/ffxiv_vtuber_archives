@@ -6,8 +6,7 @@ import { axiosInstance, fetchPost } from '../index';
 
 describe('AxiosInstance TEST', () => {
     test('Axios interceptors resolve時の反応をみる', async () => {
-        const mock = new mockAdapter(axiosGASInstance);
-        const successResponse = {
+        const mock = new mockAdapter(axiosInstance);
             id: 1,
             name: 'hogefuga',
         };
@@ -19,7 +18,7 @@ describe('AxiosInstance TEST', () => {
         expect(result).toStrictEqual(successResponse);
     });
     test('Axios interceptors reject時の反応をみる', async () => {
-        const mock = new mockAdapter(axiosGASInstance);
+        const mock = new mockAdapter(axiosInstance);
         mock.onPost('/channel').replyOnce(408, 'ECONNABORTED');
         const result = await fetchChannels();
         expect(result.status).toStrictEqual(408);
