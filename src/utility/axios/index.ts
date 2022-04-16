@@ -1,7 +1,7 @@
 import axios, { AxiosAdapter, AxiosError, AxiosResponse } from 'axios';
 import { AxiosResut } from '../../types/api/index';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: '',
     headers: {
         'Content-Type': 'application/json',
