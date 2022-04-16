@@ -12,6 +12,7 @@ type TESTObject = {
 describe('AxiosInstance TEST', () => {
     test('Axios interceptors resolve時の反応をみる', async () => {
         const mock = new mockAdapter(axiosInstance);
+        const successResponse: TESTObject = {
             id: 1,
             name: 'hogefuga',
         };
@@ -19,13 +20,13 @@ describe('AxiosInstance TEST', () => {
             name: 'hogehoge',
         };
         mock.onPost('/channel').replyOnce(200, successResponse);
-        const result = await fetchChannels();
-        expect(result).toStrictEqual(successResponse);
+        const result = await fetchPost<TESTObject>('/test');
+        expect(result.payload).toStrictEqual(successResponse);
     });
     test('Axios interceptors reject時の反応をみる', async () => {
         const mock = new mockAdapter(axiosInstance);
         mock.onPost('/channel').replyOnce(408, 'ECONNABORTED');
-        const result = await fetchChannels();
+        const result = await fetchPost<TESTObject>('/test');
         expect(result.status).toStrictEqual(408);
     });
 });
