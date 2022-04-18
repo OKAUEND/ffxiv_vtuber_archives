@@ -47,7 +47,7 @@ const AxiosStatusFactory = (
 describe('Channel Get API TEST', () => {
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
         const mock = jest
-            .spyOn(getChannelsModule, 'fetchChannels')
+            .spyOn(axiosInstanceModule, 'fetchPost')
             .mockImplementationOnce(() =>
                 Promise.resolve(
                     AxiosStatusFactory(200, true, [
