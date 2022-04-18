@@ -2,10 +2,9 @@ import axios from 'axios';
 import React from 'react';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
 import { RecoilRoot } from 'recoil';
-import { axiosGASInstance } from '../../api/getChannels';
 import mockAdapter from 'axios-mock-adapter';
-import { useChannels, fetchChannels } from '../../api/getChannels';
-import * as fetchChannelModule from '../../api/getChannels';
+import { useChannels } from '../../api/getChannels';
+import * as axiosInstanceModule from '../../../../utility/axios/index';
 
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
