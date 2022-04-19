@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import mockAdapter from 'axios-mock-adapter';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
@@ -19,13 +18,13 @@ describe('AxiosInstance TEST', () => {
         const request = {
             name: 'hogehoge',
         };
-        mock.onPost('/channel').replyOnce(200, successResponse);
+        mock.onPost('/test').replyOnce(200, successResponse);
         const result = await fetchPost<TESTObject>('/test');
         expect(result.payload).toStrictEqual(successResponse);
     });
     test('Axios interceptors reject時の反応をみる', async () => {
         const mock = new mockAdapter(axiosInstance);
-        mock.onPost('/channel').replyOnce(408, 'ECONNABORTED');
+        mock.onPost('/test').replyOnce(408, 'ECONNABORTED');
         const result = await fetchPost<TESTObject>('/test');
         expect(result.status).toStrictEqual(408);
     });
