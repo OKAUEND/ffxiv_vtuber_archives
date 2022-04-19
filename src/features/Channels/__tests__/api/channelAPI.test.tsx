@@ -65,7 +65,7 @@ describe('Channel Get API TEST', () => {
 
             loadData();
 
-            expect(mock).toHaveBeenCalledTimes(1);
+            expect(mock).toHaveBeenCalledTimes(2);
         });
     });
 });
