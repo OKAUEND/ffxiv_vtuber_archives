@@ -15,7 +15,7 @@ const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
 });
 
 export const useChannels = () => {
-    const [, get] = AxiosInstance('application/json');
+    const { get } = AxiosInstance('application/json');
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
 
