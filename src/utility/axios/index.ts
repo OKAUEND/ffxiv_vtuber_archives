@@ -1,6 +1,8 @@
 import axios, { AxiosAdapter, AxiosError, AxiosResponse } from 'axios';
 import { AxiosResut } from '../../types/api/index';
 
+type contentType = 'application/json' | 'application/x-www-form-urlencoded';
+
 export const AxiosInstance = (contentType: contentType) => {
     const instance = axios.create({
         baseURL: '',
