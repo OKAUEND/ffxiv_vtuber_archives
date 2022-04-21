@@ -4,8 +4,7 @@ import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
 import { RecoilRoot } from 'recoil';
 import mockAdapter from 'axios-mock-adapter';
 import { useChannels } from '../../api/getChannels';
-import * as axiosInstanceModule from '../../../../utility/axios/index';
-
+import { AxiosInstance } from '../../../../utility/axios/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { waitFor } from '@testing-library/react';
@@ -47,14 +46,14 @@ const AxiosStatusFactory = (
 describe('Channel Get API TEST', () => {
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
         const mock = jest
-            .spyOn(axiosInstanceModule, 'fetchPost')
-            .mockImplementationOnce(() =>
-                Promise.resolve(
+            .spyOn(AxiosInstance('application/json'), 'get')
+            .mockImplementationOnce(() => {
+                return Promise.resolve(
                     AxiosStatusFactory(200, true, [
                         HikasenVtuberResourceFactory('mockTEST'),
                     ])
-                )
-            );
+                );
+            });
 
         const { result } = renderHook(() => useChannels(), {
             wrapper: RecoilRoot,
