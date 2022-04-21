@@ -1,7 +1,7 @@
 import React from 'react';
 import mockAdapter from 'axios-mock-adapter';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
-import { axiosInstance, fetchPost } from '../index';
+import { AxiosInstance } from '../index';
 
 type TESTObject = {
     id: number;
@@ -9,8 +9,8 @@ type TESTObject = {
 };
 
 describe('AxiosInstance TEST', () => {
-    test('Axios interceptors resolve時の反応をみる', async () => {
-        const mock = new mockAdapter(axiosInstance);
+        const { instance, fetchPost } = AxiosInstance('application/json');
+        const mock = new mockAdapter(instance);
         const successResponse: TESTObject = {
             id: 1,
             name: 'hogefuga',
@@ -22,8 +22,8 @@ describe('AxiosInstance TEST', () => {
         const result = await fetchPost<TESTObject>('/test');
         expect(result.payload).toStrictEqual(successResponse);
     });
-    test('Axios interceptors reject時の反応をみる', async () => {
-        const mock = new mockAdapter(axiosInstance);
+        const { instance, fetchPost } = AxiosInstance('application/json');
+        const mock = new mockAdapter(instance);
         mock.onPost('/test').replyOnce(408, 'ECONNABORTED');
         const result = await fetchPost<TESTObject>('/test');
         expect(result.status).toStrictEqual(408);
