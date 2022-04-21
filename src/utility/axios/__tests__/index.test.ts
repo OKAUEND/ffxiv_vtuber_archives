@@ -9,6 +9,7 @@ type TESTObject = {
 };
 
 describe('AxiosInstance TEST', () => {
+    test('Axios interceptors resolve時に、正しく成功を返せているか', async () => {
         const { instance, fetchPost } = AxiosInstance('application/json');
         const mock = new mockAdapter(instance);
         const successResponse: TESTObject = {
@@ -22,6 +23,7 @@ describe('AxiosInstance TEST', () => {
         const result = await fetchPost<TESTObject>('/test');
         expect(result.payload).toStrictEqual(successResponse);
     });
+    test('タイムアウトエラー時に、正しくタイムアウトエラーの構成になっているか', async () => {
         const { instance, fetchPost } = AxiosInstance('application/json');
         const mock = new mockAdapter(instance);
         mock.onPost('/test').replyOnce(408, 'ECONNABORTED');
