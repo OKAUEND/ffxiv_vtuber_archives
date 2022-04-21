@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { HikasenVtuber } from '../types/index';
-import { fetchPost } from '../../../utility/axios';
+import { AxiosInstance } from '../../../utility/axios';
 import { AxiosResut } from '../../../types/api/index';
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
@@ -15,6 +15,7 @@ const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
 });
 
 export const useChannels = () => {
+    const [, get] = AxiosInstance('application/json');
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
 
@@ -23,7 +24,9 @@ export const useChannels = () => {
     }, []);
 
     const loadData = async () => {
-        const result = await fetchPost<HikasenVtuber>('/channel');
+        const result = await get<HikasenVtuber>(
+            'https://script.google.com/macros/s/AKfycbzafCzaTYaPbHBS5x3MQsJ5ykBspxb481rRgMQvSpULsPFgqbyAr1wXcRXd_Gvg0WUbRg/exec'
+        );
         setChannels(result.payload);
         setresultStatus(result);
     };
