@@ -2,9 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
 import { RecoilRoot } from 'recoil';
-import mockAdapter from 'axios-mock-adapter';
 import { useChannels } from '../../api/getChannels';
-import { AxiosInstance } from '../../../../utility/axios/index';
+import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { waitFor } from '@testing-library/react';
@@ -46,7 +45,7 @@ const AxiosStatusFactory = (
 describe('Channel Get API TEST', () => {
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
         const mock = jest
-            .spyOn(AxiosInstance('application/json'), 'get')
+            .spyOn(AxiosInstanceModule, 'get')
             .mockImplementationOnce(() => {
                 return Promise.resolve(
                     AxiosStatusFactory(200, true, [
