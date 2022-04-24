@@ -1,11 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
-// interface IProps {
-//     Channels: string[];
-// }
-
-const ChannelPanel = () => {
+export const ChannelPanel = () => {
     const [channels, resultStatus, loadData] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
 
@@ -43,5 +39,3 @@ const ChannelPanel = () => {
 
     return <div>{isTimeOut ? timeOutError() : success()}</div>;
 };
-
-export default ChannelPanel;
