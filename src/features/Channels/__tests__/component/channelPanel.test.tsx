@@ -13,7 +13,7 @@ import * as getChannelsModule from '../../api/getChannels';
 import * as useTimeOutModule from '../../../../hooks/timeout/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
-import ChannelPanel from '../../component/ChannelPanel';
+import { ChannelPanel } from '../../component/ChannelPanel';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
