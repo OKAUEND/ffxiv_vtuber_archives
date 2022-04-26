@@ -2,13 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
 
-export const axiosYoutubeInstance = axios.create({
-    baseURL: 'https://www.googleapis.com/youtube/v3/search',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    timeout: 2000,
-});
+import { get } from '../../../utility/axios';
 
 export const createYoutubeQuery = (
     channelState: string,
@@ -21,14 +15,14 @@ export const createYoutubeQuery = (
     const order = 'date';
     const query = 'FF14';
 
-    return `?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
+    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
 export const fetchYoutube = async (query: string) => {
-    const response = await axiosYoutubeInstance.get<
+    const response = await get<
         GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
     >(query);
-    return response.data.items;
+    return response.payload.items;
 };
 
 const requestQueryAtom = atom<string>({
