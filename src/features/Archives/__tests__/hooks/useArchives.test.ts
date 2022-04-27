@@ -48,7 +48,7 @@ describe('useArchives TEST', () => {
     });
     test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
         const { result } = renderHook(() => useArchives('testChannel'));
-        const [target, addArchives] = result.current;
+        const [target, , addArchives] = result.current;
         expect(target).toEqual([]);
 
         const testData = YoutubeResourcesFactory('test');
@@ -62,7 +62,7 @@ describe('useArchives TEST', () => {
 
     test('existsでは、値の有無で真偽値が返ってくるか', () => {
         const { result } = renderHook(() => useArchives('testChannel'));
-        const [target, addArchives, exists] = result.current;
+        const [target, , addArchives, exists] = result.current;
         expect(target).toEqual([]);
         expect(exists).toEqual(false);
 
