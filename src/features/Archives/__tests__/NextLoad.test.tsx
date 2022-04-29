@@ -8,6 +8,7 @@ import {
     waitFor,
 } from '@testing-library/react';
 import NextLoad from '../component/NextLoad';
+import { timeRangetype } from '../types/index';
 
 import * as getYoutubeModule from '../api/getYoutube';
 
@@ -52,6 +53,7 @@ const YoutubeResourcesFactory = (
 
 interface Props {
     channelId: string;
+    timeRange: timeRangetype;
     isEnabled: boolean;
     onClick: () => void;
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
@@ -60,6 +62,7 @@ interface Props {
 const renderNextLoad = (props: Partial<Props> = {}) => {
     const defultProps: Props = {
         channelId: '',
+        timeRange: { BeginTime: '', EndTime: '' },
         isEnabled: true,
         onClick() {
             return;
