@@ -84,7 +84,9 @@ const renderNextLoad = (props: Partial<Props> = {}) => {
 describe('Component TEST - NextLoad', () => {
     const spy = jest
         .spyOn(getYoutubeModule, 'useYoutube')
-        .mockImplementation(() => [YoutubeResourcesFactory('Mock')]);
+        .mockImplementation(() => {
+            return [[YoutubeResourcesFactory('Mock')], jest.fn()];
+        });
 
     afterEach(() => {
         spy.mockRestore();
