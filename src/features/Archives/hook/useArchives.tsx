@@ -3,25 +3,12 @@ export const archivesAtom = atomFamily<
     GoogleApiYouTubeSearchResource[],
     string
 >({
-    key: 'archives',
+    key: 'ArchivesAtom',
     default: [],
 });
 
-const archivesSelector = selectorFamily<
-    GoogleApiYouTubeSearchResource[],
-    string
->({
-    key: 'archivesSelector',
-    get:
-        (channelId: string) =>
-        ({ get }) => {
-            return get(archivesAtom(channelId));
-        },
-});
-
 export const useArchives = (channelId: string) => {
-    const Archives = useRecoilValue(archivesSelector(channelId));
-    const setArchives = useSetRecoilState(archivesAtom(channelId));
+    const [Archives] = useRecoilState(archivesAtom(channelId));
 
     const lastArchivesDayTime = () => {
         return Archives.length === 0
