@@ -42,6 +42,11 @@ const YoutubeResourcesFactory = (
     };
 };
 
+const useMock = () => {
+    const [, , addArchives, exists] = useArchives('testchannel');
+    const ArchiveAtom = useRecoilValue(archivesAtom('testchannel'));
+    return { addArchives, exists, ArchiveAtom };
+};
 describe('useArchives TEST', () => {
     test('初期値の何も格納がされていない配列であること', () => {
         const { result } = renderHook(() => useArchives('testChannel'));
