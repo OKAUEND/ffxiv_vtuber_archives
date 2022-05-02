@@ -5,6 +5,7 @@ import {
     useRecoilState,
     useRecoilValue,
     RecoilState,
+    useRecoilCallback,
 } from 'recoil';
 
 export type timeRangetype = {
@@ -29,18 +30,19 @@ export const useTimeRange = (extsisArchives = false) => {
         createTimeRange(realTime);
     }, []);
 
-    const createTimeRange = (targetTime: string) => {
-        const lastArchiveTime = new Date(targetTime);
-        lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-        const endTime = lastArchiveTime.toISOString();
-        lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-        const beginTime = lastArchiveTime.toISOString();
+    const createTimeRange = useRecoilCallback(
+        ({ set }) =>
+            (targetTime: string) => {
+                const lastArchiveTime = new Date(targetTime);
+                lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+                const endTime = lastArchiveTime.toISOString();
+                lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+                const beginTime = lastArchiveTime.toISOString();
 
-        setTimeRange({
-            EndTime: endTime,
-            BeginTime: beginTime,
-        });
-    };
+                set(timeRangeAtom, { EndTime: endTime, BeginTime: beginTime });
+            },
+        []
+    );
 
     return [timeRange, createTimeRange] as const;
 };
