@@ -1,6 +1,8 @@
-import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
-import { RecoilRoot } from 'recoil';
-import { useTimeRange } from '../../hook/useTimeRange';
+import { act } from '@testing-library/react-hooks';
+import { useRecoilValue } from 'recoil';
+import { useTimeRange, timeRangeAtom } from '../../hook/useTimeRange';
+import { renderRecoilHook } from '../../../../utility/test/renderRecoilHookd';
+
 
 describe('useArchives TEST', () => {
     test('初期値として時刻が現在日時セットされている', () => {
