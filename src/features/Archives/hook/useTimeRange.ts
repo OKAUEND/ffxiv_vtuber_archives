@@ -1,12 +1,5 @@
 import { useEffect } from 'react';
-import {
-    selector,
-    atom,
-    useRecoilState,
-    useRecoilValue,
-    RecoilState,
-    useRecoilCallback,
-} from 'recoil';
+import { atom, useRecoilState, useRecoilCallback } from 'recoil';
 
 export type timeRangetype = {
     EndTime: string;
