@@ -15,7 +15,7 @@ export const timeRangeAtom = atom<timeRangetype>({
 });
 
 export const useTimeRange = (extsisArchives = false) => {
-    const [timeRange, setTimeRange] = useRecoilState(timeRangeAtom);
+    const [timeRange] = useRecoilState(timeRangeAtom);
 
     useEffect(() => {
         if (extsisArchives) return;
