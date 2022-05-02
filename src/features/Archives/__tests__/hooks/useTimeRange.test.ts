@@ -3,6 +3,11 @@ import { useRecoilValue } from 'recoil';
 import { useTimeRange, timeRangeAtom } from '../../hook/useTimeRange';
 import { renderRecoilHook } from '../../../../utility/test/renderRecoilHookd';
 
+const useMock = () => {
+    const [, createTimeRange] = useTimeRange();
+    const state = useRecoilValue(timeRangeAtom);
+    return { state, createTimeRange };
+};
 
 describe('useArchives TEST', () => {
     test('初期値として時刻が現在日時セットされている', () => {
