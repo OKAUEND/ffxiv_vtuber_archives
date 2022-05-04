@@ -21,7 +21,7 @@ export const Archive = () => {
     const targetChannelID = typeGuard(channelID);
 
     const [Archives, lastArchivesDayTime, addArchives, exists] =
-        useArchives(channelId);
+        useArchives(targetChannelID);
     const [timeRange, createTimeRange] = useTimeRange(exists());
 
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
@@ -36,7 +36,7 @@ export const Archive = () => {
         if (exists()) return;
         const realTime = new Date().toISOString();
         createTimeRange(realTime);
-    }, [channelId]);
+    }, [targetChannelID]);
 
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
@@ -51,7 +51,7 @@ export const Archive = () => {
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
-                        channelId={channelId}
+                        channelId={targetChannelID}
                         timeRange={timeRange}
                         isEnabled={true}
                         onClick={onClick}
