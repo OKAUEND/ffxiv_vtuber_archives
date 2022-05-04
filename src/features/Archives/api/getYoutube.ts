@@ -10,7 +10,7 @@ export const createYoutubeQuery = (
     endTime: string
 ): string => {
     const part = 'snippet';
-    const APIKey = 'AIzaSyC0-oYyGcaa0UV4fOHVUhWvXM2KXcf_V5A';
+    const APIKey = '';
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
