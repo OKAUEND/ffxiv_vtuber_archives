@@ -10,6 +10,8 @@ const useMock = () => {
     return { state, createTimeRange };
 };
 
+const testDayTime = '2020-01-01';
+
 describe('useArchives TEST', () => {
     test('初期値として時刻が現在日時セットされている', () => {
         const { result } = renderRecoilHook(useMock);
