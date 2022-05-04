@@ -5,6 +5,12 @@ import {
     firstLiveDayTimeAtom,
 } from '../../hook/useFirstLiveDayTime';
 
+const useMock = () => {
+    const [isBeforeFirstDayTime] = useFirstLiveDayTime('2020-01');
+    const [state] = useRecoilState(firstLiveDayTimeAtom);
+    return { isBeforeFirstDayTime, state };
+};
+
 describe('useFirstLiveDayTime TEST', () => {
     test('初回生成時に、初回放送日の値を保持していること');
     test(
