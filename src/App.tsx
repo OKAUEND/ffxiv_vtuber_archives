@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { Archive } from './features/Archives';
+import { Channels } from './features/Channels';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +38,14 @@ function App() {
           </a>
         </p>
       </header>
+            <Routes>
+                <Route path="/">
+                    <Route index element={<Channels />}></Route>
+                    <Route
+                        path="Channel/:channelID"
+                        element={<Archive />}></Route>
+                </Route>
+            </Routes>
     </div>
   )
 }
