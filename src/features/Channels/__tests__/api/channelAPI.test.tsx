@@ -5,7 +5,7 @@ import { RecoilRoot } from 'recoil';
 import { useChannels } from '../../api/getChannels';
 import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { HikasenVtuber } from '../../types/index';
-import { AxiosResut } from '../../../../types/api/index';
+import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
 import { waitFor } from '@testing-library/react';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
@@ -19,26 +19,6 @@ const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
             dataCenter: 'test',
             server: 'test',
         },
-    };
-};
-
-const AxiosStatusFactory = (
-    status: number,
-    isSuccess: boolean,
-    HikasenVtuber: HikasenVtuber[]
-): AxiosResut<HikasenVtuber[]> => {
-    const errorCode = () => {
-        if (status === 408) {
-            return 'ECONNABORTED';
-        }
-        return 'TEST';
-    };
-
-    return {
-        status: status,
-        errorCode: errorCode(),
-        error: isSuccess,
-        payload: HikasenVtuber,
     };
 };
 
