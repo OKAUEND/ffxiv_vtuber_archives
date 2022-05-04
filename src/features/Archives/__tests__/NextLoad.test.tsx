@@ -82,11 +82,12 @@ const renderNextLoad = (props: Partial<Props> = {}) => {
 };
 
 describe('Component TEST - NextLoad', () => {
-    const spy = jest
-        .spyOn(getYoutubeModule, 'useYoutube')
-        .mockImplementation(() => {
-            return [[YoutubeResourcesFactory('Mock')], jest.fn()];
-        });
+    test('ボタンが表示されているか', async () => {
+        const spy = jest
+            .spyOn(getYoutubeModule, 'useYoutube')
+            .mockImplementation(() => {
+                return [[YoutubeResourcesFactory('Mock')], jest.fn()];
+            });
 
     afterEach(() => {
         spy.mockRestore();
@@ -95,17 +96,31 @@ describe('Component TEST - NextLoad', () => {
         renderNextLoad();
         await waitFor(() => {
             expect(screen.getByRole('button')).toBeInTheDocument();
+            spy.mockRestore();
         });
     });
     test('ボタンをクリックしたらイベントが発火するか', async () => {
+        const spy = jest
+            .spyOn(getYoutubeModule, 'useYoutube')
+            .mockImplementation(() => {
+                return [[YoutubeResourcesFactory('Mock')], jest.fn()];
+            });
+
         const onClick = jest.fn();
         const { getByRole, getByText } = renderNextLoad({ onClick });
         await waitFor(() => {
             fireEvent.click(getByRole('button'));
             expect(onClick).toHaveBeenCalled();
+            spy.mockRestore();
         });
     });
     test('isEnableがfalseのとき、ボタンは非表示になっているか', async () => {
+        const spy = jest
+            .spyOn(getYoutubeModule, 'useYoutube')
+            .mockImplementation(() => {
+                return [[YoutubeResourcesFactory('Mock')], jest.fn()];
+            });
+
         renderNextLoad({ isEnabled: false });
         await waitFor(() => {
             expect(screen.getByRole('button')).not.toBeInTheDocument();
