@@ -6,9 +6,50 @@ import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { waitFor } from '@testing-library/react';
 
-const GoogleYoutubeType = (
+const GoogleYoutubeFactory = (
     name: string
-): GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource> => {};
+): GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource> => {
+    return {
+        kind: name,
+        etag: name,
+        items: [
+            {
+                kind: name,
+                etag: name,
+                id: {
+                    kind: name,
+                    videoId: name,
+                    channelId: name,
+                    playlistId: name,
+                },
+                snippet: {
+                    publishedAt: name,
+                    channelId: name,
+                    title: name,
+                    description: name,
+                    thumbnails: {
+                        default: {
+                            url: name,
+                            width: 99,
+                            height: 99,
+                        },
+                        high: {
+                            url: name,
+                            width: 99,
+                            height: 99,
+                        },
+                        medium: {
+                            url: name,
+                            width: 99,
+                            height: 99,
+                        },
+                    },
+                    channelTitle: name,
+                },
+            },
+        ],
+    };
+};
 
 describe('getYoutube Custom Hook TEST', () => {
     test('初回作成時に、APIをコールし値を取得できているか', () => {});
