@@ -5,8 +5,10 @@ import {
     firstLiveDayTimeAtom,
 } from '../../hook/useFirstLiveDayTime';
 
+const testDayTime = '2020-01';
+
 const useMock = () => {
-    const [isBeforeFirstDayTime] = useFirstLiveDayTime('2020-01');
+    const [isBeforeFirstDayTime] = useFirstLiveDayTime(testDayTime);
     const [state] = useRecoilState(firstLiveDayTimeAtom);
     return { isBeforeFirstDayTime, state };
 };
