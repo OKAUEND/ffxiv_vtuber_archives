@@ -4,7 +4,7 @@ import { atom, useRecoilState } from 'recoil';
 /**
  *初放送日時
  */
-const firstLiveDayTimeAtom = atom<string>({
+export const firstLiveDayTimeAtom = atom<string>({
     key: 'firstLiveDayTimeAtom',
     default: '',
 });

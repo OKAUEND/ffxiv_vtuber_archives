@@ -3386,7 +3386,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-router-dom: ^6.0.0
-    recoil: ^0.5.2
+    recoil: ^0.7.2
     tailwindcss: ^2.2.19
     ts-jest: ^27.1.3
     typescript: ^4.4.4
@@ -6033,9 +6033,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recoil@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "recoil@npm:0.5.2"
+"recoil@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "recoil@npm:0.7.2"
   dependencies:
     hamt_plus: 1.0.2
   peerDependencies:
@@ -6045,7 +6045,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 1daf09f969c2ffc0ac628dc4ac1306aef4e162506b0ed1700cc4aa1e68e921fad450d047843d49ba39510f24b87224e9d4ac74b1c6f111e1abeb5ba9cd2a3f78
+  checksum: 2ad0c2052fd33ee358e3b448fd36ea6d4b37e69ace65ff44124605171c4794e4f167215209731aac3d45d42ea9f4c67e9c5a0704ff04ab94b64bcca96d5f59a3
   languageName: node
   linkType: hard
 

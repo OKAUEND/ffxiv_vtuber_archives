@@ -6,8 +6,8 @@ export const axiosInstance = axios.create({
     timeout: 2000,
 });
 
-const onSuccessful = <T>(response: AxiosResponse<T[]>): AxiosResut<T[]> => {
-    const result: AxiosResut<T[]> = {
+const onSuccessful = <T>(response: AxiosResponse<T>): AxiosResut<T> => {
+    const result: AxiosResut<T> = {
         status: response.status,
         payload: response.data,
     };
@@ -31,11 +31,11 @@ const onRejected = <T>(error: AxiosError) => {
 axiosInstance.interceptors.response.use(onSuccessful, onRejected);
 
 export const fetchPost = async <T>(url: string) => {
-    const response = await axiosInstance.post<string, AxiosResut<T[]>>(url);
+    const response = await axiosInstance.post<string, AxiosResut<T>>(url);
     return response;
 };
 
 export const get = async <T>(url: string) => {
-    const response = await axiosInstance.get<string, AxiosResut<T[]>>(url);
+    const response = await axiosInstance.get<string, AxiosResut<T>>(url);
     return response;
 };

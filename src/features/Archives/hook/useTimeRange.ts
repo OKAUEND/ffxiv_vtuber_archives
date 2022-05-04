@@ -1,11 +1,5 @@
 import { useEffect } from 'react';
-import {
-    selector,
-    atom,
-    useRecoilState,
-    useRecoilValue,
-    RecoilState,
-} from 'recoil';
+import { atom, useRecoilState, useRecoilCallback } from 'recoil';
 
 export type timeRangetype = {
     EndTime: string;
@@ -21,7 +15,7 @@ export const timeRangeAtom = atom<timeRangetype>({
 });
 
 export const useTimeRange = (extsisArchives = false) => {
-    const [timeRange, setTimeRange] = useRecoilState(timeRangeAtom);
+    const [timeRange] = useRecoilState(timeRangeAtom);
 
     useEffect(() => {
         if (extsisArchives) return;
@@ -29,18 +23,19 @@ export const useTimeRange = (extsisArchives = false) => {
         createTimeRange(realTime);
     }, []);
 
-    const createTimeRange = (targetTime: string) => {
-        const lastArchiveTime = new Date(targetTime);
-        lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-        const endTime = lastArchiveTime.toISOString();
-        lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-        const beginTime = lastArchiveTime.toISOString();
+    const createTimeRange = useRecoilCallback(
+        ({ set }) =>
+            (targetTime: string) => {
+                const lastArchiveTime = new Date(targetTime);
+                lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+                const endTime = lastArchiveTime.toISOString();
+                lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+                const beginTime = lastArchiveTime.toISOString();
 
-        setTimeRange({
-            EndTime: endTime,
-            BeginTime: beginTime,
-        });
-    };
+                set(timeRangeAtom, { EndTime: endTime, BeginTime: beginTime });
+            },
+        []
+    );
 
     return [timeRange, createTimeRange] as const;
 };

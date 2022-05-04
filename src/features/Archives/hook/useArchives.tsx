@@ -1,36 +1,14 @@
-import { useEffect } from 'react';
-import {
-    atom,
-    atomFamily,
-    selector,
-    selectorFamily,
-    useRecoilState,
-    useRecoilValue,
-    useSetRecoilState,
-} from 'recoil';
+import { atomFamily, useRecoilState, useRecoilCallback } from 'recoil';
 export const archivesAtom = atomFamily<
     GoogleApiYouTubeSearchResource[],
     string
 >({
-    key: 'archives',
+    key: 'ArchivesAtom',
     default: [],
 });
 
-const archivesSelector = selectorFamily<
-    GoogleApiYouTubeSearchResource[],
-    string
->({
-    key: 'archivesSelector',
-    get:
-        (channelId: string) =>
-        ({ get }) => {
-            return get(archivesAtom(channelId));
-        },
-});
-
 export const useArchives = (channelId: string) => {
-    const Archives = useRecoilValue(archivesSelector(channelId));
-    const setArchives = useSetRecoilState(archivesAtom(channelId));
+    const [Archives] = useRecoilState(archivesAtom(channelId));
 
     const lastArchivesDayTime = () => {
         return Archives.length === 0
@@ -38,9 +16,14 @@ export const useArchives = (channelId: string) => {
             : Archives.slice(-1)[0].snippet.publishedAt;
     };
 
-    const addArchives = (newArchives: GoogleApiYouTubeSearchResource[]) => {
-        setArchives([...Archives, ...newArchives]);
-    };
+    const addArchives = useRecoilCallback(
+        ({ set }) =>
+            (newArchives: GoogleApiYouTubeSearchResource[]) => {
+                const merges = [...Archives, ...newArchives];
+                set(archivesAtom(channelId), merges);
+            },
+        [Archives]
+    );
 
     const exists = () => {
         return Archives.length > 0;
