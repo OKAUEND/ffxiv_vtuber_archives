@@ -119,7 +119,8 @@ describe('Component TEST - NextLoad', () => {
 
         renderNextLoad({ isEnabled: false });
         await waitFor(() => {
-            expect(screen.getByRole('button')).not.toBeInTheDocument();
+            expect(screen.queryByText('button')).not.toBeInTheDocument();
+            spy.mockRestore();
         });
     });
 });
