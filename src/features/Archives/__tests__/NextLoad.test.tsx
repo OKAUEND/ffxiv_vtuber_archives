@@ -97,7 +97,7 @@ describe('Component TEST - NextLoad', () => {
             });
 
         const onClick = jest.fn();
-        const { getByRole, getByText } = renderNextLoad({ onClick });
+        const { getByRole } = renderNextLoad({ onClick });
         await waitFor(() => {
             fireEvent.click(getByRole('button'));
             expect(onClick).toHaveBeenCalled();
