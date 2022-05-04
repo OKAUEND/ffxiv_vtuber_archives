@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
+import { Link } from 'react-router-dom';
 export const ChannelPanel = () => {
     const [channels, resultStatus, loadData] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
@@ -28,8 +29,10 @@ export const ChannelPanel = () => {
                     //仮コード
                     <li key={channel.channelID}>
                         <div>
-                            <img src={channel.channelIconID} />
-                            {channel.name}
+                            <Link to={`/Channel/${channel.channelID}`}>
+                                <img src={channel.channelIconID} />
+                                {channel.name}
+                            </Link>
                         </div>
                     </li>
                 ))}
