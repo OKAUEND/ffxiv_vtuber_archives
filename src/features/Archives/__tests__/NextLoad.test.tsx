@@ -89,10 +89,6 @@ describe('Component TEST - NextLoad', () => {
                 return [[YoutubeResourcesFactory('Mock')], jest.fn()];
             });
 
-    afterEach(() => {
-        spy.mockRestore();
-    });
-    test('ボタンが表示されているか', async () => {
         renderNextLoad();
         await waitFor(() => {
             expect(screen.getByRole('button')).toBeInTheDocument();
