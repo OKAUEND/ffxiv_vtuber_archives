@@ -53,6 +53,27 @@ const GoogleYoutubeFactory = (
 };
 
 describe('getYoutube Custom Hook TEST', () => {
-    test('初回作成時に、APIをコールし値を取得できているか', () => {});
-    test('クエリ作成関数をコールしたら、APIをコールし値を取得できるか', () => {});
+    test('クエリ作成関数をコールしたら、APIをコールし値を取得できるか', async () => {
+        const mock = jest
+            .spyOn(AxiosInstanceModule, 'get')
+            .mockImplementationOnce(() => {
+                return Promise.resolve(
+                    AxiosStatusFactory(200, true, GoogleYoutubeFactory('test'))
+                );
+            });
+
+        expect(mock).toHaveBeenCalledTimes(0);
+
+        const { result } = renderHook(() => useYoutube(), {
+            wrapper: RecoilRoot,
+        });
+
+        await waitFor(() => {
+            const [, setQuery] = result.current;
+
+            setQuery('testchannel', '202001', '202002');
+
+            expect(mock).toHaveBeenCalledTimes(1);
+        });
+    });
 });
