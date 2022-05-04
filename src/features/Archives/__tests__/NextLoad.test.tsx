@@ -1,12 +1,6 @@
-import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
+import { RecoilRoot } from 'recoil';
 import * as React from 'react';
-import {
-    act,
-    fireEvent,
-    render,
-    screen,
-    waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import NextLoad from '../component/NextLoad';
 import { timeRangetype } from '../types/index';
 
