@@ -1,5 +1,7 @@
-import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
-import { useArchives } from '../../hook/useArchives';
+import { act } from '@testing-library/react-hooks';
+import { useRecoilValue } from 'recoil';
+import { useArchives, archivesAtom } from '../../hook/useArchives';
+import { renderRecoilHook } from '../../../../utility/test/renderRecoilHookd';
 
 const YoutubeResourcesFactory = (
     name: string
@@ -40,38 +42,42 @@ const YoutubeResourcesFactory = (
     };
 };
 
+const useMock = () => {
+    const [, , addArchives, exists] = useArchives('testchannel');
+    const ArchiveAtom = useRecoilValue(archivesAtom('testchannel'));
+    return { addArchives, exists, ArchiveAtom };
+};
+
 describe('useArchives TEST', () => {
     test('初期値の何も格納がされていない配列であること', () => {
-        const { result } = renderHook(() => useArchives('testChannel'));
-        const [target] = result.current;
-        expect(target).toEqual([]);
+        const { result } = renderRecoilHook(useMock);
+        expect(result.current.ArchiveAtom).toEqual([]);
     });
     test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
-        const { result } = renderHook(() => useArchives('testChannel'));
-        const [target, addArchives] = result.current;
-        expect(target).toEqual([]);
+        const { result } = renderRecoilHook(useMock);
+        expect(result.current.ArchiveAtom).toEqual([]);
 
         const testData = YoutubeResourcesFactory('test');
 
         act(() => {
-            addArchives([testData]);
+            result.current.addArchives([testData]);
         });
 
-        expect(target).toEqual([testData]);
+        expect(result.current.ArchiveAtom).toEqual([testData]);
     });
 
     test('existsでは、値の有無で真偽値が返ってくるか', () => {
-        const { result } = renderHook(() => useArchives('testChannel'));
-        const [target, addArchives, exists] = result.current;
-        expect(target).toEqual([]);
-        expect(exists).toEqual(false);
+        const { result } = renderRecoilHook(useMock);
+        expect(result.current.ArchiveAtom).toEqual([]);
+        expect(result.current.exists()).toEqual(false);
 
         const testData = YoutubeResourcesFactory('test');
 
         act(() => {
-            addArchives([testData]);
+            result.current.addArchives([testData]);
         });
 
-        expect(exists).toEqual(true);
+        expect(result.current.ArchiveAtom).toEqual([testData]);
+        expect(result.current.exists()).toEqual(true);
     });
 });

@@ -23,7 +23,7 @@ export const useChannels = () => {
     }, []);
 
     const loadData = async () => {
-        const result = await get<HikasenVtuber>(
+        const result = await get<HikasenVtuber[]>(
             'https://script.google.com/macros/s/AKfycbzafCzaTYaPbHBS5x3MQsJ5ykBspxb481rRgMQvSpULsPFgqbyAr1wXcRXd_Gvg0WUbRg/exec'
         );
         setChannels(result.payload);

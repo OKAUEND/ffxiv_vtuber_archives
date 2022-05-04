@@ -1,42 +1,54 @@
-import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
-import { useTimeRange } from '../../hook/useTimeRange';
+import { act } from '@testing-library/react-hooks';
+import { useRecoilValue } from 'recoil';
+import { useTimeRange, timeRangeAtom } from '../../hook/useTimeRange';
+import { renderRecoilHook } from '../../../../utility/test/renderRecoilHookd';
+import { waitFor } from '@testing-library/react';
+
+const useMock = () => {
+    const [, createTimeRange] = useTimeRange();
+    const state = useRecoilValue(timeRangeAtom);
+    return { state, createTimeRange };
+};
+
+const testDayTime = '2020-01-01';
 
 describe('useArchives TEST', () => {
     test('初期値として時刻が現在日時セットされている', () => {
-        const { result } = renderHook(() => useTimeRange());
-        const [timeRange] = result.current;
+        const { result } = renderRecoilHook(useMock);
+        const { state } = result.current;
 
-        expect(timeRange).toBe(true);
+        expect(state).not.toBe({});
     });
 
-    test('新しい時間を渡すと、重複取得防止として、1分前の時間がセットされている', () => {
-        const { result } = renderHook(() => useTimeRange());
-        const [timeRange, createTimeRange] = result.current;
+    test('新しい時間を渡すと、重複取得防止として、1分前の時間がセットされている', async () => {
+        const { result } = renderRecoilHook(useMock);
 
-        const testDayTime = '20200101';
+        await waitFor(() => {
+            const { state, createTimeRange } = result.current;
+            act(() => {
+                createTimeRange(testDayTime);
 
-        act(() => {
-            createTimeRange(testDayTime);
+                const testDate = new Date(testDayTime);
+                testDate.setMinutes(testDate.getMinutes() - 1);
+
+                expect(state.EndTime).toBe(testDate.toISOString());
+            });
         });
-
-        const testDate = new Date(testDayTime);
-        testDate.setMinutes(testDate.getMinutes() - 1);
-
-        expect(timeRange.EndTime).toBe(testDate.toISOString());
     });
-    test('新しい時間を渡すと、6ヶ月前の日時がセットされている', () => {
-        const { result } = renderHook(() => useTimeRange());
-        const [timeRange, createTimeRange] = result.current;
+    test('新しい時間を渡すと、6ヶ月と1分前の日時がセットされている', async () => {
+        const { result } = renderRecoilHook(useMock);
 
-        const testDayTime = '20200101';
+        await waitFor(() => {
+            const { state, createTimeRange } = result.current;
+            act(() => {
+                createTimeRange(testDayTime);
 
-        act(() => {
-            createTimeRange(testDayTime);
+                const testDate = new Date(testDayTime);
+                testDate.setMinutes(testDate.getMinutes() - 1);
+                testDate.setMonth(testDate.getMonth() - 6);
+
+                expect(state.BeginTime).toBe(testDate.toISOString());
+            });
         });
-
-        const testDate = new Date(testDayTime);
-        testDate.setMinutes(testDate.getMonth() - 6);
-
-        expect(timeRange.EndTime).toBe(testDate.toISOString());
     });
 });
