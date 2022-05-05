@@ -19,6 +19,7 @@ export const useChannels = () => {
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
 
     useEffect(() => {
+        if (channels.length > 0) return;
         loadData();
     }, []);
 
