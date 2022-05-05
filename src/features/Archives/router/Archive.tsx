@@ -6,14 +6,22 @@ import { useArchives } from '../hook/useArchives';
 import { useTimeRange } from '../hook/useTimeRange';
 import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
 
-type Props = {
-    channelId: string;
-};
+import { useParams } from 'react-router-dom';
 
-export const Archive = (props: Props) => {
-    const [channelId, setChannelId] = useState('');
+const typeGuard = (target: string | undefined) => {
+    if (target === undefined) {
+        return 'error';
+    }
+    return target;
+};
+export const Archive = () => {
+    const { channelID } = useParams<'channelID'>();
+
+    //TypeGuardでundefinedを除外する
+    const targetChannelID = typeGuard(channelID);
+
     const [Archives, lastArchivesDayTime, addArchives, exists] =
-        useArchives(channelId);
+        useArchives(targetChannelID);
     const [timeRange, createTimeRange] = useTimeRange(exists());
 
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
@@ -28,7 +36,7 @@ export const Archive = (props: Props) => {
         if (exists()) return;
         const realTime = new Date().toISOString();
         createTimeRange(realTime);
-    }, [channelId]);
+    }, [targetChannelID]);
 
     const storeArchives = (
         youtubeArchives: GoogleApiYouTubeSearchResource[]
@@ -43,7 +51,7 @@ export const Archive = (props: Props) => {
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad
-                        channelId={channelId}
+                        channelId={targetChannelID}
                         timeRange={timeRange}
                         isEnabled={true}
                         onClick={onClick}
