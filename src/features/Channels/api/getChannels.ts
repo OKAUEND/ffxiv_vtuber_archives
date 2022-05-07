@@ -38,12 +38,11 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
 });
 
 export const useChannels = () => {
-    const [channels, setChannels] = useRecoilState(ChannelsAtom);
+    const [channels, store] = useRecoilState(ChannelsSelector);
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
 
     useEffect(() => {
-        if (channels.length > 0) return;
-        loadData();
+        store(channels);
     }, []);
 
     const loadData = async () => {
