@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { atom, useRecoilState } from 'recoil';
+import { atom, DefaultValue, selector, useRecoilState } from 'recoil';
 import { HikasenVtuber } from '../types/index';
-import { get } from '../../../utility/axios';
+import { get as axiosGet } from '../../../utility/axios';
 import { AxiosResut } from '../../../types/api/index';
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
