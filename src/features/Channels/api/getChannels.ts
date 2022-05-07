@@ -5,12 +5,12 @@ import { get } from '../../../utility/axios';
 import { AxiosResut } from '../../../types/api/index';
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
-    key: 'ChannelsAtom',
+    key: 'Channels-atom',
     default: [],
 });
 
 const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
-    key: 'AxiosResutAtom',
+    key: 'AxiosResut-atom',
     default: { status: 200 },
 });
 
