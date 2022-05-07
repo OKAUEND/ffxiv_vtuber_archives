@@ -14,6 +14,29 @@ const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
     default: { status: 200 },
 });
 
+const ChannelsSelector = selector<HikasenVtuber[]>({
+    key: 'Channels-selector',
+    get: async ({ get }) => {
+        const channels = get(ChannelsAtom);
+        if (channels.length > 0) {
+            return channels;
+        } else {
+            const request = await axiosGet<HikasenVtuber[]>(
+                'https://script.google.com/macros/s/AKfycbzafCzaTYaPbHBS5x3MQsJ5ykBspxb481rRgMQvSpULsPFgqbyAr1wXcRXd_Gvg0WUbRg/exec'
+            );
+
+            return request.payload;
+        }
+    },
+    set: ({ set }, newChannels) => {
+        if (newChannels instanceof DefaultValue) {
+            return newChannels;
+        } else {
+            set(ChannelsAtom, newChannels);
+        }
+    },
+});
+
 export const useChannels = () => {
     const [channels, setChannels] = useRecoilState(ChannelsAtom);
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
