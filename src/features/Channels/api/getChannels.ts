@@ -9,7 +9,7 @@ const ChannelsAtom = atom<HikasenVtuber[]>({
     default: [],
 });
 
-const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
+const ResultStatusAtom = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
     key: 'AxiosResut-atom',
     default: { status: 200 },
 });
@@ -37,6 +37,21 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
     },
 });
 
+const ResponseResultSelector = selector<
+    Omit<AxiosResut<HikasenVtuber[]>, 'payload'>
+>({
+    key: 'GAS-Response-selector',
+    get: async ({ get }) => {
+        return get(ResultStatusAtom);
+    },
+    set: ({ set }, newStatus) => {
+        if (newStatus instanceof DefaultValue) {
+            return newStatus;
+        } else {
+            set(ResultStatusAtom, newStatus);
+        }
+    },
+});
 export const useChannels = () => {
     const [channels, store] = useRecoilState(ChannelsSelector);
     const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
