@@ -45,13 +45,9 @@ export const useChannels = () => {
         store(channels);
     }, []);
 
-    const loadData = async () => {
-        const result = await get<HikasenVtuber[]>(
-            'https://script.google.com/macros/s/AKfycbzafCzaTYaPbHBS5x3MQsJ5ykBspxb481rRgMQvSpULsPFgqbyAr1wXcRXd_Gvg0WUbRg/exec'
-        );
-        setChannels(result.payload);
-        setresultStatus(result);
+    const reload = async (): Promise<void> => {
+        store([]);
     };
 
-    return [channels, resultStatus, loadData] as const;
+    return [channels, resultStatus, reload] as const;
 };

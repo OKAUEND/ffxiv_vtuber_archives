@@ -3,7 +3,7 @@ import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
 export const ChannelPanel = () => {
-    const [channels, resultStatus, loadData] = useChannels();
+    const [channels, resultStatus, reload] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
 
     {
@@ -16,7 +16,7 @@ export const ChannelPanel = () => {
         return (
             <div>
                 <h3>タイムアウトエラー</h3>
-                <button onClick={loadData}>再度読み込む</button>
+                <button onClick={reload}>再度読み込む</button>
             </div>
         );
     };
