@@ -52,9 +52,12 @@ const ResponseResultSelector = selector<
         }
     },
 });
+
 export const useChannels = () => {
     const [channels, store] = useRecoilState(ChannelsSelector);
-    const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
+    const [resultStatus, setresultStatus] = useRecoilState(
+        ResponseResultSelector
+    );
 
     useEffect(() => {
         store(channels);
