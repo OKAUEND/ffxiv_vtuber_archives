@@ -7,6 +7,11 @@ export const archivesAtom = atomFamily<
     default: [],
 });
 
+const archivesSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({ key: 'archives-selector', get: { get }, set({ set }); });
+
 export const useArchives = (channelId: string) => {
     const [Archives] = useRecoilState(archivesAtom(channelId));
 
