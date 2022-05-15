@@ -39,18 +39,13 @@ export const useArchives = (channelId: string) => {
             : Archives.slice(-1)[0].snippet.publishedAt;
     };
 
-    const addArchives = useRecoilCallback(
-        ({ set }) =>
-            (newArchives: GoogleApiYouTubeSearchResource[]) => {
-                const merges = [...Archives, ...newArchives];
-                set(archivesAtom(channelId), merges);
-            },
-        [Archives]
-    );
+    const update = (newArchives: GoogleApiYouTubeSearchResource[]) => {
+        setArchives(newArchives);
+    };
 
     const exists = () => {
         return Archives.length > 0;
     };
 
-    return [Archives, lastArchivesDayTime, addArchives, exists] as const;
+    return [Archives, lastArchivesDayTime, update, exists] as const;
 };
