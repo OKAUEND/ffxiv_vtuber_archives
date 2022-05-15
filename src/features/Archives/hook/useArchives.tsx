@@ -31,7 +31,7 @@ const archivesSelector = selectorFamily<
 });
 
 export const useArchives = (channelId: string) => {
-    const [Archives] = useRecoilState(archivesAtom(channelId));
+    const [Archives, setArchives] = useRecoilState(archivesSelector(channelId));
 
     const lastArchivesDayTime = () => {
         return Archives.length === 0
