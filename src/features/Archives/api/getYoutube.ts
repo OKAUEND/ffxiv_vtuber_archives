@@ -44,6 +44,14 @@ export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
         return request.payload;
     },
 });
+
+const querySelector = selector<string>({
+    key: 'youtube-query-selector',
+    get: ({ get }) => {
+        return get(requestQueryAtom);
+    },
+    set: ({ set }, newQuery) => {
+        set(requestQueryAtom, newQuery);
     },
 });
 
