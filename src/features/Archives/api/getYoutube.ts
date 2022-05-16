@@ -33,11 +33,17 @@ const requestQueryAtom = atom<string>({
 export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
     key: 'youtubeAPI',
     get: async ({ get }) => {
-        const requestQuery = get(requestQueryAtom);
+        const requestQuery = get(querySelector);
 
         if (requestQuery === '') return [];
 
-        return await fetchYoutube(requestQuery);
+        const request = await axiosGet<GoogleApiYouTubeSearchResource[]>(
+            requestQuery
+        );
+
+        return request.payload;
+    },
+});
     },
 });
 
