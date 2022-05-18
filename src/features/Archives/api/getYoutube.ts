@@ -55,18 +55,31 @@ const querySelector = selector<string>({
     },
 });
 
-export const useYoutube = () => {
-    const result = useRecoilValue(youtubeSelector);
-    const setYoutubeQuery = useSetRecoilState(requestQueryAtom);
+export const useYoutube = (channelId: string) => {
+    const [response] = useRecoilValue(youtubeSelector);
+    const [, setQuery] = useRecoilState(querySelector);
 
-    const setQuery = (
-        channelId: string,
-        beginTime: string,
-        endTime: string
-    ) => {
-        const query = createYoutubeQuery(channelId, beginTime, endTime);
-        setYoutubeQuery(query);
+    const updateQuery = (BeginLiveDayTime: string): void => {
+        const timeRange = createTimeRange(BeginLiveDayTime);
+        console.log('初回起動');
+        setQuery(
+            createYoutubeQuery(
+                channelId,
+                timeRange.BeginTime,
+                timeRange.EndTime
+            )
+        );
     };
 
-    return [result, setQuery] as const;
+    const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+        const lastArchiveTime = new Date(BeginLiveDayTime);
+        lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+        const EndTime = lastArchiveTime.toISOString();
+        lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+        const BeginTime = lastArchiveTime.toISOString();
+
+        return { EndTime, BeginTime };
+    };
+
+    return [response, updateQuery] as const;
 };
