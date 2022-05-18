@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useEffect } from 'react';
-import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
-import { get } from '../../../utility/axios';
+import { get as axiosGet } from '../../../utility/axios';
+
 
 export const createYoutubeQuery = (
     channelState: string,
