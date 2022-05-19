@@ -56,7 +56,7 @@ const querySelector = selector<string>({
 });
 
 export const useYoutube = (channelId: string) => {
-    const [response] = useRecoilValue(youtubeSelector);
+    const response = useRecoilValue(youtubeSelector);
     const [, setQuery] = useRecoilState(querySelector);
 
     const updateQuery = (BeginLiveDayTime: string): void => {
