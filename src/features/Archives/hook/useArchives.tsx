@@ -39,9 +39,14 @@ export const useArchives = (channelId: string) => {
             : Archives.slice(-1)[0].snippet.publishedAt;
     };
 
-    const update = (newArchives: GoogleApiYouTubeSearchResource[]) => {
-        setArchives(newArchives);
-    };
+
+    const update = useRecoilCallback(
+        ({ set }) =>
+            (newArchives: GoogleApiYouTubeSearchResource[]) => {
+                console.log({ channelId });
+                set(archivesSelector(channelId), newArchives);
+            }
+    );
 
     const exists = () => {
         return Archives.length > 0;
