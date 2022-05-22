@@ -3,27 +3,14 @@ import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 import { get as axiosGet } from '../../../utility/axios';
 
+//---------------------------------------------------------------------------
 
-export const createYoutubeQuery = (
-    channelState: string,
-    beginTime: string,
-    endTime: string
-): string => {
-    const part = 'snippet';
-    const APIKey = '';
-    const maxResult = 50;
-    const order = 'date';
-    const query = 'FF14';
-
-    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
+type timeRangetype = {
+    EndTime: string;
+    BeginTime: string;
 };
 
-export const fetchYoutube = async (query: string) => {
-    const response = await get<
-        GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
-    >(query);
-    return response.payload.items;
-};
+//---------------------------------------------------------------------------
 
 const requestQueryAtom = atom<string>({
     key: 'requestQuery',
@@ -54,6 +41,24 @@ const querySelector = selector<string>({
         set(requestQueryAtom, newQuery);
     },
 });
+
+//---------------------------------------------------------------------------
+
+export const createYoutubeQuery = (
+    channelState: string,
+    beginTime: string,
+    endTime: string
+): string => {
+    const part = 'snippet';
+    const APIKey = 'AIzaSyA1fa9aKhYCs86Mcr-Tpy8BcQ83HAq1QrE';
+    const maxResult = 50;
+    const order = 'date';
+    const query = 'FF14';
+
+    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
+};
+
+//---------------------------------------------------------------------------
 
 export const useYoutube = (channelId: string) => {
     const response = useRecoilValue(youtubeSelector);
