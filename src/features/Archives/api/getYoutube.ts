@@ -1,5 +1,14 @@
 import { useEffect } from 'react';
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import {
+    atom,
+    atomFamily,
+    DefaultValue,
+    selector,
+    selectorFamily,
+    useRecoilState,
+    useRecoilValue,
+    useSetRecoilState,
+} from 'recoil';
 
 import { get as axiosGet } from '../../../utility/axios';
 
@@ -15,6 +24,35 @@ type timeRangetype = {
 const requestQueryAtom = atom<string>({
     key: 'requestQuery',
     default: '',
+});
+
+const archivesAtom = atomFamily<GoogleApiYouTubeSearchResource[], string>({
+    key: 'archivesAtom',
+    default: [],
+});
+
+//---------------------------------------------------------------------------
+
+const archivesSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
+    key: 'archivesSelector',
+    get:
+        (channelId: string) =>
+        ({ get }) => {
+            const Archives = get(archivesAtom(channelId));
+            return Archives;
+        },
+    set:
+        (channelId: string) =>
+        ({ set }, newArchives) => {
+            if (newArchives instanceof DefaultValue) return;
+
+            set(archivesAtom(channelId), (prev) => {
+                return [...prev, ...newArchives];
+            });
+        },
 });
 
 export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
