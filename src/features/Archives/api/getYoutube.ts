@@ -95,6 +95,14 @@ export const createYoutubeQuery = (
     return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
+const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+    const lastArchiveTime = new Date(BeginLiveDayTime);
+    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+    const EndTime = lastArchiveTime.toISOString();
+    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+    const BeginTime = lastArchiveTime.toISOString();
+
+    return { EndTime, BeginTime };
 };
 
 //---------------------------------------------------------------------------
