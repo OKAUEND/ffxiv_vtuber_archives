@@ -84,8 +84,7 @@ const querySelector = selector<string>({
 
 export const createYoutubeQuery = (
     channelState: string,
-    beginTime: string,
-    endTime: string
+    timeRange: timeRangetype
 ): string => {
     const part = 'snippet';
     const APIKey = 'AIzaSyA1fa9aKhYCs86Mcr-Tpy8BcQ83HAq1QrE';
@@ -93,7 +92,9 @@ export const createYoutubeQuery = (
     const order = 'date';
     const query = 'FF14';
 
-    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
+    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+};
+
 };
 
 //---------------------------------------------------------------------------
@@ -104,24 +105,9 @@ export const useYoutube = (channelId: string) => {
 
     const updateQuery = (BeginLiveDayTime: string): void => {
         const timeRange = createTimeRange(BeginLiveDayTime);
-        console.log('初回起動');
-        setQuery(
-            createYoutubeQuery(
-                channelId,
-                timeRange.BeginTime,
-                timeRange.EndTime
-            )
-        );
-    };
+        const query = createYoutubeQuery(channelId, timeRange);
 
-    const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
-        const lastArchiveTime = new Date(BeginLiveDayTime);
-        lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-        const EndTime = lastArchiveTime.toISOString();
-        lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-        const BeginTime = lastArchiveTime.toISOString();
-
-        return { EndTime, BeginTime };
+        setQuery(query);
     };
 
     return [response, updateQuery] as const;
