@@ -120,3 +120,5 @@ export const useYoutube = (channelId: string) => {
 
     return [response, updateQuery] as const;
 };
+
+export const getYoutube = () => {};
