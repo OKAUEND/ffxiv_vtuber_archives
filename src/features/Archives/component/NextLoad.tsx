@@ -17,31 +17,16 @@ interface Props {
     store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
-const NextLoad = ({
-    channelId,
-    timeRange,
-    isEnabled,
-    onClick,
-    store,
-}: Props) => {
-    const [youtubeResult, setQuery] = useYoutube();
-
-    useEffect(() => {
-        // setArchives([...archives, ...youtubeResult]);
-        store(youtubeResult);
-    }, [youtubeResult]);
-
-    useEffect(() => {
-        setQuery(channelId, timeRange.BeginTime, timeRange.EndTime);
-    }, [timeRange.BeginTime]);
+const NextLoad = ({ channelId }: Props) => {
+    const [, updateQuery] = useYoutube(channelId);
 
     const handlerClick = () => {
-        onClick();
+        updateQuery('202002');
     };
 
     return (
         <div>
-            {isEnabled && <button onClick={handlerClick}>次をロード</button>}
+            <button onClick={handlerClick}>次をロード</button>
         </div>
     );
 };
