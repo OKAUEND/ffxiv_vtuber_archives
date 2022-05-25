@@ -2,19 +2,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import { useYoutube } from '../api/getYoutube';
 
-import { useArchives } from '../hook/useArchives';
-
-type timeRangetype = {
-    EndTime: string;
-    BeginTime: string;
-};
-
 interface Props {
     channelId: string;
-    timeRange: timeRangetype;
-    isEnabled: boolean;
-    onClick: () => void;
-    store: (youtubeArchives: GoogleApiYouTubeSearchResource[]) => void;
 }
 
 const NextLoad = ({ channelId }: Props) => {
