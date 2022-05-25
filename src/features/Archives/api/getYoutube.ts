@@ -37,12 +37,21 @@ const archivesSelector = selectorFamily<
     GoogleApiYouTubeSearchResource[],
     string
 >({
-    key: 'archivesSelector',
+    key: 'archives-selector',
     get:
         (channelId: string) =>
-        ({ get }) => {
+        async ({ get }) => {
             const Archives = get(archivesAtom(channelId));
-            return Archives;
+
+            if (Archives.length > 0) return Archives;
+
+            const time = new Date().toISOString();
+            const query = createYoutubeQuery(channelId, createTimeRange(time));
+
+            const response = await axiosGet<
+                GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
+            >(query);
+            return response.payload.items;
         },
     set:
         (channelId: string) =>
@@ -125,4 +134,8 @@ export const useYoutube = (channelId: string) => {
     return [response, updateQuery] as const;
 };
 
-export const getYoutube = () => {};
+export const useArchives = (channelId: string) => {
+    const [response] = useRecoilState(archivesSelector(channelId));
+
+    return [response] as const;
+};
