@@ -42,16 +42,14 @@ function App() {
                     </a>
                 </p>
             </header>
-            <RecoilRoot>
-                <Routes>
-                    <Route path="/">
-                        <Route index element={<Channels />}></Route>
-                        <Route
-                            path="Channel/:channelID"
-                            element={<ArchiveRouter />}></Route>
-                    </Route>
-                </Routes>
-            </RecoilRoot>
+            <Routes>
+                <Route path="/">
+                    <Route index element={<Channels />}></Route>
+                    <Route
+                        path="Channel/:channelID"
+                        element={<ArchiveRouter />}></Route>
+                </Route>
+            </Routes>
         </div>
     );
 }
