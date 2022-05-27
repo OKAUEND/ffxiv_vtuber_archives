@@ -1,11 +1,8 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React from 'react';
 
 import { ArchiveList } from '../component/ArchiveList';
 import { useArchives } from '../api/getYoutube';
-import { useTimeRange } from '../hook/useTimeRange';
 import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
-
-import { useNavigate, useParams } from 'react-router-dom';
 
 interface Props {
     channelId: string;
