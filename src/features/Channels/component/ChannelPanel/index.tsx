@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React from 'react';
 import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
