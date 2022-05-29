@@ -7,10 +7,8 @@ interface IProps {
 export const ArchiveList = ({ Archives }: IProps) => {
     return (
         <ul className="list-none w-screen">
-            {Archives.map((archive) => (
-                <li
-                    key={archive.id.videoId}
-                    className="flex flex-row box-border mr-3">
+            {Archives.map((archive, index) => (
+                <li key={index} className="flex flex-row box-border mr-3">
                     <div className="w-160 h-90 flex-shrink-0">
                         <a
                             href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
