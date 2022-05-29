@@ -89,6 +89,11 @@ const querySelector = selector<string>({
     },
 });
 
+const timeRangeSelector = selector<timeRangetype>({
+    key: 'next-timerange-selector',
+    get: ({ get }) => {},
+});
+
 //---------------------------------------------------------------------------
 
 export const createYoutubeQuery = (
