@@ -89,7 +89,7 @@ const querySelector = selector<string>({
     },
 });
 
-const timeRangeSelector = selector<timeRangetype>({
+const timeRangeSelector = selectorFamily<timeRangetype, string>({
     key: 'next-timerange-selector',
     get: ({ get }) => {},
 });
