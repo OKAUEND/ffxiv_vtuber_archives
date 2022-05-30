@@ -147,7 +147,11 @@ export const useYoutube = (channelId: string) => {
 };
 
 export const useArchives = (channelId: string) => {
-    const [response] = useRecoilState(archivesSelector(channelId));
+    const [response, setArchives] = useRecoilState(archivesSelector(channelId));
+
+    useEffect(() => {
+        setArchives(response);
+    }, []);
 
     return [response] as const;
 };
