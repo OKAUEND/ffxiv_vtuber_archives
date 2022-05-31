@@ -91,7 +91,14 @@ const querySelector = selector<string>({
 
 const timeRangeSelector = selectorFamily<timeRangetype, string>({
     key: 'next-timerange-selector',
-    get: ({ get }) => {},
+    get:
+        (channelId: string) =>
+        ({ get }) => {
+            const archives = get(archivesSelector(channelId));
+            const lastArchivesLiveDayTime =
+                archives.slice(-1)[0].snippet.publishedAt;
+            return createTimeRange(lastArchivesLiveDayTime);
+        },
 });
 
 //---------------------------------------------------------------------------
