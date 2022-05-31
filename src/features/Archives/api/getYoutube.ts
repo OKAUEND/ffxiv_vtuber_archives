@@ -130,6 +130,7 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 
 export const useYoutube = (channelId: string) => {
     const response = useRecoilValue(youtubeSelector);
+    const timeRange = useRecoilValue(timeRangeSelector(channelId));
     const setQuery = useSetRecoilState(querySelector);
     const setArchives = useSetRecoilState(archivesSelector(channelId));
 
@@ -137,8 +138,7 @@ export const useYoutube = (channelId: string) => {
         setArchives(response);
     }, [response]);
 
-    const updateQuery = (BeginLiveDayTime: string): void => {
-        const timeRange = createTimeRange(BeginLiveDayTime);
+    const updateQuery = (): void => {
         const query = createYoutubeQuery(channelId, timeRange);
 
         setQuery(query);
