@@ -64,7 +64,10 @@ const archivesSelector = selectorFamily<
         },
 });
 
-export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
+export const youtubeSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
     key: 'youtubeAPI',
     get: async ({ get }) => {
         const requestQuery = get(requestQueryAtom);
