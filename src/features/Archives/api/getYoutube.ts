@@ -69,10 +69,12 @@ export const youtubeSelector = selectorFamily<
     string
 >({
     key: 'youtubeAPI',
-    get: async ({ get }) => {
-        const requestQuery = get(requestQueryAtom);
+    get:
+        (channelId: string) =>
+        async ({ get }) => {
+            const requestQuery = get(requestQueryAtom);
 
-        if (requestQuery === '') return [];
+            if (requestQuery === '') return [];
 
         const request = await axiosGet<
             GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
@@ -132,7 +134,7 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 //---------------------------------------------------------------------------
 
 export const useYoutube = (channelId: string) => {
-    const response = useRecoilValue(youtubeSelector);
+    const response = useRecoilValue(youtubeSelector(channelId));
     const timeRange = useRecoilValue(timeRangeSelector(channelId));
     const setQuery = useSetRecoilState(querySelector);
     const setArchives = useSetRecoilState(archivesSelector(channelId));
