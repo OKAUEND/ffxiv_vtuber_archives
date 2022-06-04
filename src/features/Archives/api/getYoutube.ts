@@ -120,7 +120,7 @@ export const createYoutubeQuery = (
     const order = 'date';
     const query = 'FF14';
 
-    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+    return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
 const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
