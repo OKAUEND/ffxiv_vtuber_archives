@@ -10,7 +10,7 @@ const NextLoad = ({ channelId }: Props) => {
     const [, updateQuery] = useYoutube(channelId);
 
     const handlerClick = () => {
-        updateQuery('202002');
+        updateQuery();
     };
 
     return (
