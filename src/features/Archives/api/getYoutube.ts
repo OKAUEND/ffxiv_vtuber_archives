@@ -82,8 +82,8 @@ export const youtubeSelector = selectorFamily<
                 GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
             >(requestURL);
 
-        return request.payload.items;
-    },
+            return request.payload.items;
+        },
 });
 
 const querySelector = selector<string>({
