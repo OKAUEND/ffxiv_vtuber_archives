@@ -48,9 +48,11 @@ const archivesSelector = selectorFamily<
             const time = new Date().toISOString();
             const query = createYoutubeQuery(channelId, createTimeRange(time));
 
+            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
+
             const response = await axiosGet<
                 GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
-            >(query);
+            >(requestURL);
             return response.payload.items;
         },
     set:
