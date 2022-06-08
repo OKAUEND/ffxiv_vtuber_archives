@@ -142,9 +142,11 @@ export const useYoutube = (channelId: string) => {
     const timeRange = useRecoilValue(timeRangeSelector(channelId));
     const setQuery = useSetRecoilState(querySelector);
     const setArchives = useSetRecoilState(archivesSelector(channelId));
+    const resetQuery = useResetRecoilState(requestQueryAtom);
 
     useEffect(() => {
         setArchives(response);
+        resetQuery();
     }, [response]);
 
     const updateQuery = (): void => {
