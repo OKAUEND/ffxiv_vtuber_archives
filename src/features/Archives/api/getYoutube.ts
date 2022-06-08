@@ -78,7 +78,7 @@ export const youtubeSelector = selectorFamily<
 
             if (requestQuery === '') return [];
 
-            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${requestQueryState}`;
+            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${requestQuery}`;
 
             const request = await axiosGet<
                 GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
