@@ -67,7 +67,10 @@ describe('getYoutube Custom Hook TEST', () => {
         });
 
         await waitFor(() => {
-            const [, setQuery] = result.current;
+            const [response, setQuery] = result.current;
+
+            //初期はクエリがなにもないので空配列が帰ってくる事
+            expect(response.length).toBe(0);
 
             setQuery();
 
