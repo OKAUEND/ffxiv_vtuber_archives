@@ -62,14 +62,14 @@ describe('getYoutube Custom Hook TEST', () => {
 
         expect(mock).toHaveBeenCalledTimes(0);
 
-        const { result } = renderHook(() => useYoutube(), {
+        const { result } = renderHook(() => useYoutube('testchannel'), {
             wrapper: RecoilRoot,
         });
 
         await waitFor(() => {
             const [, setQuery] = result.current;
 
-            setQuery('testchannel', '202001', '202002');
+            setQuery();
 
             expect(mock).toHaveBeenCalledTimes(1);
         });
