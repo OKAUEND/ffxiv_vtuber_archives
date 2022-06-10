@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
 import { useYoutube } from '../../api/getYoutube';
@@ -51,6 +51,23 @@ const GoogleYoutubeFactory = (
 };
 
 describe('getYoutube Custom Hook TEST', () => {
+    test('Atom - ArchivesAtomFamilyに対してID毎に配列を追加できるか', () => {
+        const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
+            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+        });
+        expect(
+            initRecoilSnapShot.getLoadable(archivesAtom('test')).valueOrThrow()
+        ).toEqual([YoutubeResourcesFactory('test')]);
+    });
+    test('Atom - 別IDを指定した時、追加した内容が出ていないこと', () => {
+        const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
+            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+        });
+        expect(
+            initRecoilSnapShot.getLoadable(archivesAtom('test2')).valueOrThrow()
+        ).not.toEqual([YoutubeResourcesFactory('test')]);
+    });
+
     test('クエリ作成関数をコールしたら、APIをコールし値を取得できるか', async () => {
         const mock = jest
             .spyOn(AxiosInstanceModule, 'get')
