@@ -99,21 +99,21 @@ describe('getYoutube Custom Hook TEST', () => {
 });
 
 const useArchivesMock = () => {
-    const [, , addArchives, exists] = useArchives('testchannel');
+    const [archives] = useArchives('testchannel');
     const ArchiveAtom = useRecoilValue(archivesAtom('testchannel'));
-    return { addArchives, exists, ArchiveAtom };
+    return { archives, ArchiveAtom };
 };
 
 describe('useArchives TEST', () => {
     test('初期値の何も格納がされていない配列であること', () => {
-        const { result } = renderRecoilHook(useMock);
+        const { result } = renderRecoilHook(useArchivesMock);
         expect(result.current.ArchiveAtom).toEqual([]);
     });
     test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
-        const { result } = renderRecoilHook(useMock);
+        const { result } = renderRecoilHook(useArchivesMock);
         expect(result.current.ArchiveAtom).toEqual([]);
 
-        const testData = YoutubeResourcesFactory('test');
+        const testData = GoogleYoutubeFactory('test');
 
         act(() => {
             result.current.addArchives([testData]);
@@ -123,11 +123,11 @@ describe('useArchives TEST', () => {
     });
 
     test('existsでは、値の有無で真偽値が返ってくるか', () => {
-        const { result } = renderRecoilHook(useMock);
+        const { result } = renderRecoilHook(useArchivesMock);
         expect(result.current.ArchiveAtom).toEqual([]);
         expect(result.current.exists()).toEqual(false);
 
-        const testData = YoutubeResourcesFactory('test');
+        const testData = GoogleYoutubeFactory('test');
 
         act(() => {
             result.current.addArchives([testData]);
