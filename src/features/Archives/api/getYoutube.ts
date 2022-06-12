@@ -22,12 +22,15 @@ type timeRangetype = {
 
 //---------------------------------------------------------------------------
 
-const requestQueryAtom = atom<string>({
+export const requestQueryAtom = atom<string>({
     key: 'requestQuery',
     default: '',
 });
 
-const archivesAtom = atomFamily<GoogleApiYouTubeSearchResource[], string>({
+export const archivesAtom = atomFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
     key: 'archivesAtom',
     default: [],
 });
