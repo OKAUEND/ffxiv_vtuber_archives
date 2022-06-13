@@ -94,19 +94,19 @@ const YoutubeResourceFactory = (
 describe('getYoutube Custom Hook TEST', () => {
     test('Atom - ArchivesAtomFamilyに対してID毎に配列を追加できるか', () => {
         const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
-            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+            set(archivesAtom('test'), [YoutubeResourceFactory('test')]);
         });
         expect(
             initRecoilSnapShot.getLoadable(archivesAtom('test')).valueOrThrow()
-        ).toEqual([YoutubeResourcesFactory('test')]);
+        ).toEqual([YoutubeResourceFactory('test')]);
     });
     test('Atom - 別IDを指定した時、追加した内容が出ていないこと', () => {
         const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
-            set(archivesAtom('test'), [YoutubeResourcesFactory('test')]);
+            set(archivesAtom('test'), [YoutubeResourceFactory('test')]);
         });
         expect(
             initRecoilSnapShot.getLoadable(archivesAtom('test2')).valueOrThrow()
-        ).not.toEqual([YoutubeResourcesFactory('test')]);
+        ).not.toEqual([YoutubeResourceFactory('test')]);
     });
 
     test('クエリ作成関数をコールしたら、APIをコールし値を取得できるか', async () => {
