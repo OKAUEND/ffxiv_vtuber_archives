@@ -144,9 +144,25 @@ const useArchivesMock = () => {
 };
 
 describe('useArchives TEST', () => {
-    test('初期値の何も格納がされていない配列であること', () => {
-        const { result } = renderRecoilHook(useArchivesMock);
-        expect(result.current.ArchiveAtom).toEqual([]);
+    test('初期値の何も格納がされていない場合は、APIをコールし初期値を取得すること', async () => {
+        const testData = GoogleYoutubeFactory('test');
+
+        const mock = jest
+            .spyOn(AxiosInstanceModule, 'get')
+            .mockImplementationOnce(() => {
+                return Promise.resolve(AxiosStatusFactory(200, true, testData));
+            });
+
+        const { result } = renderHook(() => useArchives('testchannel'), {
+            wrapper: RecoilRoot,
+        });
+        await waitFor(() => {
+            const [response] = result.current;
+
+            expect(mock).toHaveBeenCalledTimes(1);
+
+            expect(response).toEqual([testData.items]);
+        });
     });
     test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
         const { result } = renderRecoilHook(useArchivesMock);
