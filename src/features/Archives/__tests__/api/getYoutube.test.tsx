@@ -137,12 +137,6 @@ describe('getYoutube Custom Hook TEST', () => {
     });
 });
 
-const useArchivesMock = () => {
-    const [archives] = useArchives('testchannel');
-    const ArchiveAtom = useRecoilValue(archivesAtom('testchannel'));
-    return { archives, ArchiveAtom };
-};
-
 describe('useArchives TEST', () => {
     test('初期値の何も格納がされていない場合は、APIをコールし初期値を取得すること', async () => {
         const testData = GoogleYoutubeFactory('test');
