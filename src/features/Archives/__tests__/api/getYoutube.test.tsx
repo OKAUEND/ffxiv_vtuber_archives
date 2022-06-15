@@ -164,31 +164,34 @@ describe('useArchives TEST', () => {
             expect(response).toEqual([testData.items]);
         });
     });
-    test('addArchivesへ新しい配列を渡すと、その値を保存するか', () => {
-        const { result } = renderRecoilHook(useArchivesMock);
-        expect(result.current.ArchiveAtom).toEqual([]);
+    test('キャッシュしている値があるなら、APIコールをせずにキャッシュされている値を使う', async () => {
+        const testData = YoutubeResourceFactory('test');
 
-        const testData = GoogleYoutubeFactory('test');
-
-        act(() => {
-            result.current.addArchives([testData]);
+        const initRecoilSnapShot = snapshot_UNSTABLE(({ set }) => {
+            set(archivesAtom('testchannel'), [testData]);
         });
 
-        expect(result.current.ArchiveAtom).toEqual([testData]);
-    });
+        expect(
+            initRecoilSnapShot
+                .getLoadable(archivesAtom('testchannel'))
+                .valueOrThrow()
+        ).toEqual([testData]);
 
-    test('existsでは、値の有無で真偽値が返ってくるか', () => {
-        const { result } = renderRecoilHook(useArchivesMock);
-        expect(result.current.ArchiveAtom).toEqual([]);
-        expect(result.current.exists()).toEqual(false);
+        const mock = jest
+            .spyOn(AxiosInstanceModule, 'get')
+            .mockImplementationOnce(() => {
+                return Promise.resolve(AxiosStatusFactory(200, true, testData));
+            });
 
-        const testData = GoogleYoutubeFactory('test');
-
-        act(() => {
-            result.current.addArchives([testData]);
+        const { result } = renderHook(() => useArchives('testchannel'), {
+            wrapper: RecoilRoot,
         });
+        await waitFor(() => {
+            const [response] = result.current;
 
-        expect(result.current.ArchiveAtom).toEqual([testData]);
-        expect(result.current.exists()).toEqual(true);
+            expect(mock).toHaveBeenCalledTimes(0);
+
+            expect(response).toEqual([testData]);
+        });
     });
 });
