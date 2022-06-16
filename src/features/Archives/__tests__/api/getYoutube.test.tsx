@@ -134,6 +134,8 @@ describe('getYoutube Custom Hook TEST', () => {
 
             expect(mock).toHaveBeenCalledTimes(1);
         });
+
+        test('APIをコールし値をキャッシュした後、再発動防止のためにクエリを消去しているか', async () => {});
     });
 });
 
