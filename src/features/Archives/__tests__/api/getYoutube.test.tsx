@@ -135,7 +135,41 @@ describe('getYoutube Custom Hook TEST', () => {
             expect(mock).toHaveBeenCalledTimes(1);
         });
 
-        test('APIをコールし値をキャッシュした後、再発動防止のためにクエリを消去しているか', async () => {});
+        test('APIをコールし値をキャッシュした後、再発動防止のためにクエリを消去しているか', async () => {
+            const initRecoilSnapShot = snapshot_UNSTABLE();
+
+            expect(
+                initRecoilSnapShot.getLoadable(requestQueryAtom).valueOrThrow()
+            ).toEqual('');
+
+            const testData = GoogleYoutubeFactory('test');
+
+            const mock = jest
+                .spyOn(AxiosInstanceModule, 'get')
+                .mockImplementationOnce(() => {
+                    return Promise.resolve(
+                        AxiosStatusFactory(200, true, testData)
+                    );
+                });
+
+            expect(mock).toHaveBeenCalledTimes(0);
+
+            const { result } = renderHook(() => useYoutube('testchannel'), {
+                wrapper: RecoilRoot,
+            });
+
+            await waitFor(() => {
+                const [response, setQuery] = result.current;
+
+                //初期取得で値が取得されている
+                expect(response).toBe([testData.items]);
+
+                setQuery();
+
+                //次に取得したときに、キャッシュされているデータが増えているか
+                expect(response).toBe([...testData.items, ...testData.items]);
+            });
+        });
     });
 });
 
