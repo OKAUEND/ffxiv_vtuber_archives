@@ -1,11 +1,15 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import { RecoilRoot, snapshot_UNSTABLE, useRecoilValue } from 'recoil';
+import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import { waitFor } from '@testing-library/react';
 
 import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
-import { useYoutube, useArchives, archivesAtom } from '../../api/getYoutube';
-import { renderRecoilHook } from '../../../../utility/test/renderRecoilHookd';
+import {
+    useYoutube,
+    useArchives,
+    archivesAtom,
+    requestQueryAtom,
+} from '../../api/getYoutube';
 
 const GoogleYoutubeFactory = (
     name: string
