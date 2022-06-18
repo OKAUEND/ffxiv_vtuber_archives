@@ -25,8 +25,6 @@ export const ChannelPanel = () => {
         return (
             <ul>
                 {channels.map((channel) => (
-                    //まだ受け渡すオブジェクトの構造ができあがっていないので、
-                    //仮コード
                     <li key={channel.channelID}>
                         <div>
                             <Link to={`/Channel/${channel.channelID}`}>
