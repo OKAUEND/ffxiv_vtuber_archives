@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import logo from '..logo.svg';
+import React, { Suspense, useState } from 'react';
+import logo from './logo.svg';
+import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { Archive } from './features/Archives';
+import { ArchiveRouter } from './features/Archives';
 import { Channels } from './features/Channels';
+import { RecoilRoot } from 'recoil';
 
 function App() {
     const [count, setCount] = useState(0);
@@ -45,7 +47,7 @@ function App() {
                     <Route index element={<Channels />}></Route>
                     <Route
                         path="Channel/:channelID"
-                        element={<Archive />}></Route>
+                        element={<ArchiveRouter />}></Route>
                 </Route>
             </Routes>
         </div>

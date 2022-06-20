@@ -1,35 +1,71 @@
 import { useEffect } from 'react';
-import { atom, useRecoilState } from 'recoil';
+import { atom, DefaultValue, selector, useRecoilState } from 'recoil';
 import { HikasenVtuber } from '../types/index';
-import { get } from '../../../utility/axios';
+import { get as axiosGet } from '../../../utility/axios';
 import { AxiosResut } from '../../../types/api/index';
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
-    key: 'ChannelsAtom',
+    key: 'Channels-atom',
     default: [],
 });
 
-const ResultStatus = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
-    key: 'AxiosResutAtom',
+const ResultStatusAtom = atom<Omit<AxiosResut<HikasenVtuber[]>, 'payload'>>({
+    key: 'AxiosResut-atom',
     default: { status: 200 },
 });
 
+const ChannelsSelector = selector<HikasenVtuber[]>({
+    key: 'Channels-selector',
+    get: async ({ get }) => {
+        const channels = get(ChannelsAtom);
+        if (channels.length > 0) {
+            return channels;
+        } else {
+            const request = await axiosGet<HikasenVtuber[]>(
+                import.meta.env.CHANNEL_LIST_SPREADSHEET_URL
+            );
+
+            return request.payload;
+        }
+    },
+    set: ({ set }, newChannels) => {
+        if (newChannels instanceof DefaultValue) {
+            return newChannels;
+        } else {
+            set(ChannelsAtom, newChannels);
+        }
+    },
+});
+
+const ResponseResultSelector = selector<
+    Omit<AxiosResut<HikasenVtuber[]>, 'payload'>
+>({
+    key: 'GAS-Response-selector',
+    get: async ({ get }) => {
+        return get(ResultStatusAtom);
+    },
+    set: ({ set }, newStatus) => {
+        if (newStatus instanceof DefaultValue) {
+            return newStatus;
+        } else {
+            set(ResultStatusAtom, newStatus);
+        }
+    },
+});
+
 export const useChannels = () => {
-    const [channels, setChannels] = useRecoilState(ChannelsAtom);
-    const [resultStatus, setresultStatus] = useRecoilState(ResultStatus);
+    const [channels, store] = useRecoilState(ChannelsSelector);
+    const [resultStatus, setresultStatus] = useRecoilState(
+        ResponseResultSelector
+    );
 
     useEffect(() => {
-        if (channels.length > 0) return;
-        loadData();
+        store(channels);
     }, []);
 
-    const loadData = async () => {
-        const result = await get<HikasenVtuber[]>(
-            'https://script.google.com/macros/s/AKfycbzafCzaTYaPbHBS5x3MQsJ5ykBspxb481rRgMQvSpULsPFgqbyAr1wXcRXd_Gvg0WUbRg/exec'
-        );
-        setChannels(result.payload);
-        setresultStatus(result);
+    const reload = async (): Promise<void> => {
+        store([]);
     };
 
-    return [channels, resultStatus, loadData] as const;
+    return [channels, resultStatus, reload] as const;
 };
