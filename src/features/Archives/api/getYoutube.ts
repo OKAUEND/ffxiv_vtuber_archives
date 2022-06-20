@@ -1,58 +1,172 @@
-import axios from 'axios';
 import { useEffect } from 'react';
-import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+    atom,
+    atomFamily,
+    DefaultValue,
+    selector,
+    selectorFamily,
+    useRecoilState,
+    useRecoilValue,
+    useResetRecoilState,
+    useSetRecoilState,
+} from 'recoil';
 
-import { get } from '../../../utility/axios';
+import { get as axiosGet } from '../../../utility/axios';
 
-export const createYoutubeQuery = (
-    channelState: string,
-    beginTime: string,
-    endTime: string
-): string => {
-    const part = 'snippet';
-    const APIKey = '';
-    const maxResult = 50;
-    const order = 'date';
-    const query = 'FF14';
+//---------------------------------------------------------------------------
 
-    return `https://www.googleapis.com/youtube/v3/search?part=${part}&channelId=${channelState}&order=${order}&q=${query}&publishedBefore=${endTime}&publishedAfter=${beginTime}&maxResults=${maxResult}&key=${APIKey}`;
+type timeRangetype = {
+    EndTime: string;
+    BeginTime: string;
 };
 
-export const fetchYoutube = async (query: string) => {
-    const response = await get<
-        GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
-    >(query);
-    return response.payload.items;
-};
+//---------------------------------------------------------------------------
 
-const requestQueryAtom = atom<string>({
+export const requestQueryAtom = atom<string>({
     key: 'requestQuery',
     default: '',
 });
 
-export const youtubeSelector = selector<GoogleApiYouTubeSearchResource[]>({
+export const archivesAtom = atomFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
+    key: 'archivesAtom',
+    default: [],
+});
+
+//---------------------------------------------------------------------------
+
+const archivesSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
+    key: 'archives-selector',
+    get:
+        (channelId: string) =>
+        async ({ get }) => {
+            const Archives = get(archivesAtom(channelId));
+
+            if (Archives.length > 0) return Archives;
+
+            const time = new Date().toISOString();
+            const query = createYoutubeQuery(channelId, createTimeRange(time));
+
+            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
+
+            const response = await axiosGet<
+                GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
+            >(requestURL);
+            return response.payload.items;
+        },
+    set:
+        (channelId: string) =>
+        ({ set }, newArchives) => {
+            if (newArchives instanceof DefaultValue) return;
+
+            set(archivesAtom(channelId), (prev) => {
+                return [...prev, ...newArchives];
+            });
+        },
+});
+
+export const youtubeSelector = selectorFamily<
+    GoogleApiYouTubeSearchResource[],
+    string
+>({
     key: 'youtubeAPI',
-    get: async ({ get }) => {
-        const requestQuery = get(requestQueryAtom);
+    get:
+        (channelId: string) =>
+        async ({ get }) => {
+            const requestQuery = get(requestQueryAtom);
 
-        if (requestQuery === '') return [];
+            if (requestQuery === '') return [];
 
-        return await fetchYoutube(requestQuery);
+            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${requestQuery}`;
+
+            const request = await axiosGet<
+                GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
+            >(requestURL);
+
+            return request.payload.items;
+        },
+});
+
+const querySelector = selector<string>({
+    key: 'youtube-query-selector',
+    get: ({ get }) => {
+        return get(requestQueryAtom);
+    },
+    set: ({ set }, newQuery) => {
+        set(requestQueryAtom, newQuery);
     },
 });
 
-export const useYoutube = () => {
-    const result = useRecoilValue(youtubeSelector);
-    const setYoutubeQuery = useSetRecoilState(requestQueryAtom);
+const timeRangeSelector = selectorFamily<timeRangetype, string>({
+    key: 'next-timerange-selector',
+    get:
+        (channelId: string) =>
+        ({ get }) => {
+            const archives = get(archivesSelector(channelId));
+            const lastArchivesLiveDayTime =
+                archives.slice(-1)[0].snippet.publishedAt;
+            return createTimeRange(lastArchivesLiveDayTime);
+        },
+});
 
-    const setQuery = (
-        channelId: string,
-        beginTime: string,
-        endTime: string
-    ) => {
-        const query = createYoutubeQuery(channelId, beginTime, endTime);
-        setYoutubeQuery(query);
+//---------------------------------------------------------------------------
+
+export const createYoutubeQuery = (
+    channelState: string,
+    timeRange: timeRangetype
+): string => {
+    const part = 'snippet';
+    const APIKey = import.meta.env.VITE_YOUTUBE_API;
+    const maxResult = 50;
+    const order = 'date';
+    const query = 'FF14';
+
+    return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+};
+
+const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+    const lastArchiveTime = new Date(BeginLiveDayTime);
+    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+    const EndTime = lastArchiveTime.toISOString();
+    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+    const BeginTime = lastArchiveTime.toISOString();
+
+    return { EndTime, BeginTime };
+};
+
+//---------------------------------------------------------------------------
+
+export const useYoutube = (channelId: string) => {
+    const response = useRecoilValue(youtubeSelector(channelId));
+    const timeRange = useRecoilValue(timeRangeSelector(channelId));
+    const setQuery = useSetRecoilState(querySelector);
+    const setArchives = useSetRecoilState(archivesSelector(channelId));
+    const resetQuery = useResetRecoilState(requestQueryAtom);
+
+    useEffect(() => {
+        setArchives(response);
+        resetQuery();
+    }, [response]);
+
+    const updateQuery = (): void => {
+        const query = createYoutubeQuery(channelId, timeRange);
+
+        setQuery(query);
     };
+    return [response, updateQuery] as const;
+};
 
-    return [result, setQuery] as const;
+export const useArchives = (channelId: string) => {
+    const [response, setArchives] = useRecoilState(archivesSelector(channelId));
+
+    useEffect(() => {
+        setArchives(response);
+    }, []);
+
+    return [response] as const;
 };

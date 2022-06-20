@@ -1,1 +1,1 @@
-export * from './router/Archive';
+export * from './router';
