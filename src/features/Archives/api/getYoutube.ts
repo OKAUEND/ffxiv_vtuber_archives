@@ -121,7 +121,7 @@ export const createYoutubeQuery = (
     timeRange: timeRangetype
 ): string => {
     const part = 'snippet';
-    const APIKey = 'AIzaSyA1fa9aKhYCs86Mcr-Tpy8BcQ83HAq1QrE';
+    const APIKey = import.meta.env.VITE_YOUTUBE_API;
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
