@@ -27,7 +27,7 @@ export const IconElement = (props: Props): JSX.Element => {
     };
 
     return (
-        <div>
+        <div className={`${elementRadius()} ${elementSize()}`}>
             <img {...props} />
         </div>
     );
