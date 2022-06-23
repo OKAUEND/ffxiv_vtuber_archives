@@ -11,6 +11,21 @@ type Props = ImageProps & {
 };
 
 export const IconElement = (props: Props): JSX.Element => {
+    const elementSize = () => {
+        switch (props.size) {
+            case 'Large':
+                return '.w-8 .h-8';
+            case 'Medium':
+                return '.w-4 .h-4';
+            case 'Small':
+                return '.w-2 .h-2';
+        }
+    };
+
+    const elementRadius = () => {
+        return props.isRadius ? '.rounded-full' : '.rounded-none';
+    };
+
     return (
         <div>
             <img {...props} />
