@@ -4,10 +4,16 @@ import React from 'react';
 type size = 'Large' | 'Medium' | 'Small';
 
 interface Props {
+    desc: string;
+    path: string;
     size: size;
     isRadius: boolean;
 }
 
 export const IconElement = (props: Props): JSX.Element => {
-    return <div></div>;
+    return (
+        <div>
+            <img src={props.path} alt={} />
+        </div>
+    );
 };
