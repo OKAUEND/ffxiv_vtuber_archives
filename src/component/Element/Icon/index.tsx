@@ -13,7 +13,7 @@ type Props = ImageProps & {
 export const IconElement = (props: Props): JSX.Element => {
     return (
         <div>
-            <img src={props.path} alt={} />
+            <img {...props} />
         </div>
     );
 };
