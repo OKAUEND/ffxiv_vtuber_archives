@@ -27,7 +27,7 @@ export const IconElement = (props: Props): JSX.Element => {
     };
 
     return (
-        <div className={`${elementRadius()} ${elementSize()}`}>
+        <div className={`overflow-hidden ${elementRadius()} ${elementSize()}`}>
             <img {...props} />
         </div>
     );
