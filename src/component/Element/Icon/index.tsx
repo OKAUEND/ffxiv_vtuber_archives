@@ -14,11 +14,11 @@ export const IconElement = (props: Props): JSX.Element => {
     const elementSize = () => {
         switch (props.size) {
             case 'Large':
-                return '.w-8 .h-8';
+                return 'w-40 h-40';
             case 'Medium':
-                return '.w-4 .h-4';
+                return 'w-28 h-28';
             case 'Small':
-                return '.w-2 .h-2';
+                return 'w-16 h-16';
         }
     };
 
