@@ -2,6 +2,9 @@ import React from 'react';
 import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
+
+import { IconElement } from '../../../../component/Element/Icon';
+
 export const ChannelPanel = () => {
     const [channels, resultStatus, reload] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
@@ -28,7 +31,11 @@ export const ChannelPanel = () => {
                     <li key={channel.channelID}>
                         <div>
                             <Link to={`/Channel/${channel.channelID}`}>
-                                <img src={channel.channelIconID} />
+                                <IconElement
+                                    src={`${iconURL}${channel.channelIconID}`}
+                                    size="Medium"
+                                    isradius={true}
+                                />
                                 {channel.name}
                             </Link>
                         </div>
