@@ -9,6 +9,8 @@ export const ChannelPanel = () => {
     const [channels, resultStatus, reload] = useChannels();
     const [isTimeOut] = useTimeOutError(resultStatus);
 
+    const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
+
     {
         /* 
         Timeoutした場合はこの下のTimeout処理をかく 
