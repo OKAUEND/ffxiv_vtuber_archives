@@ -7,7 +7,7 @@ type ImageProps = JSX.IntrinsicElements['img'];
 
 type Props = ImageProps & {
     size: size;
-    isRadius: boolean;
+    isradius: boolean;
 };
 
 export const IconElement = (props: Props): JSX.Element => {
@@ -23,7 +23,7 @@ export const IconElement = (props: Props): JSX.Element => {
     };
 
     const elementRadius = () => {
-        return props.isRadius ? '.rounded-full' : '.rounded-none';
+        return props.isradius ? 'rounded-full' : 'rounded-none';
     };
 
     return (
