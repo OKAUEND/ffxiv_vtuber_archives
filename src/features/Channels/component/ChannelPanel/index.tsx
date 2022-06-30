@@ -28,18 +28,27 @@ export const ChannelPanel = () => {
 
     const success = () => {
         return (
-            <ul>
+            <ul className={'w-80'}>
                 {channels.map((channel) => (
-                    <li key={channel.channelID}>
-                        <div>
-                            <Link to={`/Channel/${channel.channelID}`}>
-                                <IconElement
-                                    src={`${iconURL}${channel.channelIconID}`}
-                                    size="Medium"
-                                    isradius={true}
-                                />
-                                {channel.name}
-                            </Link>
+                    <li key={channel.channelID} className={'flex flex-col'}>
+                        <div className="grid grid-row-3 grid-flow-col gap-4">
+                            <div className="row-span-3">
+                                <Link to={`/Channel/${channel.channelID}`}>
+                                    <IconElement
+                                        src={`${iconURL}${channel.channelIconID}`}
+                                        size="Medium"
+                                        isradius={true}
+                                    />
+                                </Link>
+                            </div>
+                            <div className="row-span-1 col-span-2">
+                                <Link to={`/Channel/${channel.channelID}`}>
+                                    {channel.name}
+                                </Link>
+                            </div>
+                            <div className="row-span-2 col-span-2">
+                                TAGTAGTAGTAGATGA
+                            </div>
                         </div>
                     </li>
                 ))}
