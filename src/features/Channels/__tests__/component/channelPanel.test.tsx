@@ -8,6 +8,7 @@ import * as useTimeOutModule from '../../../../hooks/timeout/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { ChannelPanel } from '../../component/ChannelPanel';
+import { MemoryRouter } from 'react-router-dom';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
@@ -56,9 +57,9 @@ describe('channel Panel - コンポーネントテスト', () => {
             false,
         ]);
         render(
-            <RecoilRoot>
+            <MemoryRouter>
                 <ChannelPanel />
-            </RecoilRoot>
+            </MemoryRouter>
         );
 
         expect(screen.getByRole('img')).toBeInTheDocument();
