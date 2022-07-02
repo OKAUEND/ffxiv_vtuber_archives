@@ -37,7 +37,7 @@ export const ChannelPanel = () => {
                                     <IconElement
                                         src={`${iconURL}${channel.channelIconID}`}
                                         size="Medium"
-                                        isradius={true}
+                                        radius="full"
                                     />
                                 </Link>
                             </div>

@@ -3,11 +3,13 @@ import React from 'react';
 //アイコンのサイズをPropsで指定したいので型の内容を制限する
 type size = 'Large' | 'Medium' | 'Small';
 
+type radius = 'none' | 'full';
+
 type ImageProps = JSX.IntrinsicElements['img'];
 
 type Props = ImageProps & {
     size: size;
-    isradius: boolean;
+    radius: radius;
 };
 
 export const IconElement = (props: Props): JSX.Element => {
@@ -23,7 +25,12 @@ export const IconElement = (props: Props): JSX.Element => {
     };
 
     const elementRadius = () => {
-        return props.isradius ? 'rounded-full' : 'rounded-none';
+        switch (props.radius) {
+            case 'none':
+                return 'rounded-none';
+            case 'full':
+                return 'rounded-full';
+        }
     };
 
     return (
