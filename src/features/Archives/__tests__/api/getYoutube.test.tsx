@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 import { waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import * as AxiosInstanceModule from '../../../../utility/axios/index';
 import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
@@ -114,7 +115,7 @@ describe('getYoutube Custom Hook TEST', () => {
     });
 
     test('クエリ作成関数をコールしたら、APIをコールし値を取得できるか', async () => {
-        const mock = jest
+        const mock = vi
             .spyOn(AxiosInstanceModule, 'get')
             .mockImplementationOnce(() => {
                 return Promise.resolve(
@@ -148,7 +149,7 @@ describe('getYoutube Custom Hook TEST', () => {
 
             const testData = GoogleYoutubeFactory('test');
 
-            const mock = jest
+            const mock = vi
                 .spyOn(AxiosInstanceModule, 'get')
                 .mockImplementationOnce(() => {
                     return Promise.resolve(
@@ -181,7 +182,7 @@ describe('useArchives TEST', () => {
     test('初期値の何も格納がされていない場合は、APIをコールし初期値を取得すること', async () => {
         const testData = GoogleYoutubeFactory('test');
 
-        const mock = jest
+        const mock = vi
             .spyOn(AxiosInstanceModule, 'get')
             .mockImplementationOnce(() => {
                 return Promise.resolve(AxiosStatusFactory(200, true, testData));
@@ -211,7 +212,7 @@ describe('useArchives TEST', () => {
                 .valueOrThrow()
         ).toEqual([testData]);
 
-        const mock = jest
+        const mock = vi
             .spyOn(AxiosInstanceModule, 'get')
             .mockImplementationOnce(() => {
                 return Promise.resolve(AxiosStatusFactory(200, true, testData));
