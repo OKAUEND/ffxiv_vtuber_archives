@@ -30,7 +30,9 @@ export const ChannelPanel = () => {
         return (
             <ul className={'w-80'}>
                 {channels.map((channel) => (
-                    <li key={channel.channelID} className={'flex flex-col'}>
+                    <li
+                        key={channel.channelID}
+                        className={'flex flex-col p-4 m-4'}>
                         <div className="grid grid-row-3 grid-flow-col gap-4">
                             <div className="row-span-3">
                                 <Link to={`/Channel/${channel.channelID}`}>
