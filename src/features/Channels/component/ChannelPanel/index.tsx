@@ -28,7 +28,7 @@ export const ChannelPanel = () => {
 
     const success = () => {
         return (
-            <ul className={'w-80'}>
+            <ul className=" m-10 flex justify-center flex-wrap">
                 {channels.map((channel) => (
                     <li
                         key={channel.channelID}
