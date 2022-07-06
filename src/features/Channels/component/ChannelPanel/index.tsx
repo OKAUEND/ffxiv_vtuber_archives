@@ -43,6 +43,7 @@ export const ChannelPanel = () => {
                                     />
                                 </Link>
                             </div>
+                            <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
                                 <Link to={`/Channel/${channel.channelID}`}>
                                     <div className="flex flex-col">
                                         <span className="text-gray-100 font-sans text-lg">
