@@ -43,13 +43,15 @@ export const ChannelPanel = () => {
                                     />
                                 </Link>
                             </div>
-                            <div className="row-span-1 col-span-2 mt-4 flex inline-block justify-center items-center \">
-                                <Link
-                                    to={`/Channel/${channel.channelID}`}
-                                    className={
-                                        'block max-h-6 text-gray-100 font-sans text-lg'
-                                    }>
-                                    {channel.name}
+                                <Link to={`/Channel/${channel.channelID}`}>
+                                    <div className="flex flex-col">
+                                        <span className="text-gray-100 font-sans text-lg">
+                                            {channel.name}
+                                        </span>
+                                        <span className="text-gray-400 font-sans text-sm">
+                                            Channel Name
+                                        </span>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="row-span-2 col-span-2">
