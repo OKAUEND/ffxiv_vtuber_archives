@@ -50,13 +50,15 @@ const archivesSelector = selectorFamily<
             if (Archives.length > 0) return Archives;
 
             const time = new Date().toISOString();
-            const query = createYoutubeQuery(channelId, createTimeRange(time));
-
-            const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
+            const url = createYoutubeURL(
+                channelId,
+                createYoutubeQuery(createTimeRange(time))
+            );
 
             const response = await axiosGet<
-                GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
-            >(requestURL);
+                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
+            >(url);
+
             return response.payload.items;
         },
     set:
@@ -85,7 +87,7 @@ export const youtubeSelector = selectorFamily<
             const requestURL = `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${requestQuery}`;
 
             const request = await axiosGet<
-                GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>
+                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
             >(requestURL);
 
             return request.payload.items;
@@ -137,6 +139,10 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
     const BeginTime = lastArchiveTime.toISOString();
 
     return { EndTime, BeginTime };
+};
+
+export const createYoutubeURL = (channelId: string, query: string): string => {
+    return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
 };
 
 //---------------------------------------------------------------------------
