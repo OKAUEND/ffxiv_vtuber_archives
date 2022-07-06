@@ -80,7 +80,7 @@ export const youtubeSelector = selectorFamily<
     get:
         (channelId: string) =>
         async ({ get }) => {
-            const requestQuery = get(requestQueryAtom);
+            const requestQuery = get(querySelector);
 
             if (requestQuery === '') return [];
 
