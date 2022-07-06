@@ -118,10 +118,7 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 
 //---------------------------------------------------------------------------
 
-export const createYoutubeQuery = (
-    channelState: string,
-    timeRange: timeRangetype
-): string => {
+export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const part = 'snippet';
     const APIKey = import.meta.env.VITE_YOUTUBE_API;
     const maxResult = 50;
@@ -160,7 +157,7 @@ export const useYoutube = (channelId: string) => {
     }, [response]);
 
     const updateQuery = (): void => {
-        const query = createYoutubeQuery(channelId, timeRange);
+        const query = createYoutubeQuery(timeRange);
 
         setQuery(query);
     };
