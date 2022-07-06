@@ -53,6 +53,9 @@ export const ChannelPanel = () => {
                                         </span>
                                     </div>
                                 </Link>
+                                <span className="text-gray-400 font-sans text-xs">
+                                    Since 2013/8/24
+                                </span>
                             </div>
                             <div className="row-span-2 col-span-2">
                                 TAGTAGTAGTAGATGA
