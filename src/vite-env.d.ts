@@ -2,5 +2,6 @@
 
 interface ImportMetaEnv {
     readonly VITE_YOUTUBE_API: string;
-    readonly CHANNEL_LIST_SPREADSHEET_URL: string;
+    readonly VITE_CHANNELLIST_SPREADSHEET_URL: string;
+    readonly VITE_YOUTUBE_CHANNEL_ICON_URL: string;
 }

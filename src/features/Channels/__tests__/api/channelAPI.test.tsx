@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { vi } from 'vitest';
 import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
 import { RecoilRoot } from 'recoil';
 import { useChannels } from '../../api/getChannels';
@@ -24,7 +25,7 @@ const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
 
 describe('Channel Get API TEST', () => {
     test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
-        const mock = jest
+        const mock = vi
             .spyOn(AxiosInstanceModule, 'get')
             .mockImplementationOnce(() => {
                 return Promise.resolve(
