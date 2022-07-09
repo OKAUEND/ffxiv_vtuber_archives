@@ -28,23 +28,28 @@ export const ChannelPanel = () => {
 
     const success = () => {
         return (
-            <ul className=" m-10 flex justify-center flex-wrap">
+            <ul className="flex justify-center flex-wrap ml-10 mr-10">
                 {channels.map((channel) => (
                     <li
                         key={channel.channelID}
                         className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md">
                         <div className="grid grid-row-3 grid-flow-col gap-4">
                             <div className="row-span-3">
-                                <Link to={`/Channel/${channel.channelID}`}>
+                                <Link
+                                    to={`/Channel/${channel.channelID}`}
+                                    title={`${channel.name}のアーカイブ`}>
                                     <IconElement
                                         src={`${iconURL}${channel.channelIconID}`}
+                                        alt={`${channel.name}のチャンネルアイコン`}
                                         size="Medium"
                                         radius="full"
                                     />
                                 </Link>
                             </div>
                             <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
-                                <Link to={`/Channel/${channel.channelID}`}>
+                                <Link
+                                    to={`/Channel/${channel.channelID}`}
+                                    title={`${channel.name}のアーカイブ`}>
                                     <div className="flex flex-col">
                                         <span className="text-gray-100 font-sans text-lg">
                                             {channel.name}
