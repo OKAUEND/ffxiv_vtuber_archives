@@ -1,19 +1,14 @@
 import * as React from 'react';
-import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
-import {
-    act,
-    fireEvent,
-    getByRole,
-    render,
-    screen,
-    waitFor,
-} from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import * as getChannelsModule from '../../api/getChannels';
 import * as useTimeOutModule from '../../../../hooks/timeout/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { ChannelPanel } from '../../component/ChannelPanel';
+import { MemoryRouter } from 'react-router-dom';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
@@ -52,20 +47,19 @@ describe('channel Panel - コンポーネントテスト', () => {
     const HikasenVtuber = HikasenVtuberResourceFactory('test');
 
     test('通信が正常値を返した場合、成功した場合の画面を出力できているか', () => {
-        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+        vi.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
             [HikasenVtuber],
             AxiosStatusFactory(200, true, [HikasenVtuber]),
-            jest.fn(),
+            vi.fn(),
         ]);
 
-        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
-            () => [false]
-        );
-
+        vi.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(() => [
+            false,
+        ]);
         render(
-            <RecoilRoot>
+            <MemoryRouter>
                 <ChannelPanel />
-            </RecoilRoot>
+            </MemoryRouter>
         );
 
         expect(screen.getByRole('img')).toBeInTheDocument();
@@ -75,15 +69,15 @@ describe('channel Panel - コンポーネントテスト', () => {
     });
 
     test('タイムアウトエラーの場合、タイムアウトエラー画面が表示されるか', () => {
-        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+        vi.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
             [HikasenVtuber],
             AxiosStatusFactory(408, false, [HikasenVtuber]),
-            jest.fn(),
+            vi.fn(),
         ]);
 
-        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
-            () => [true]
-        );
+        vi.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(() => [
+            true,
+        ]);
 
         render(
             <RecoilRoot>
@@ -97,17 +91,17 @@ describe('channel Panel - コンポーネントテスト', () => {
     });
 
     test('タイムアウトエラーの場合、ボタンのイベントを発火する事ができるか', () => {
-        const mockFunction = jest.fn();
+        const mockFunction = vi.fn();
 
-        jest.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
+        vi.spyOn(getChannelsModule, 'useChannels').mockImplementation(() => [
             [HikasenVtuber],
             AxiosStatusFactory(408, false, [HikasenVtuber]),
             mockFunction,
         ]);
 
-        jest.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(
-            () => [true]
-        );
+        vi.spyOn(useTimeOutModule, 'useTimeOutError').mockImplementation(() => [
+            true,
+        ]);
 
         render(
             <RecoilRoot>

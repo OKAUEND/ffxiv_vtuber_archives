@@ -22,7 +22,7 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
             return channels;
         } else {
             const request = await axiosGet<HikasenVtuber[]>(
-                import.meta.env.CHANNEL_LIST_SPREADSHEET_URL
+                import.meta.env.VITE_CHANNELLIST_SPREADSHEET_URL
             );
 
             return request.payload;
