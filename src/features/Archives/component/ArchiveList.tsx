@@ -7,7 +7,7 @@ interface IProps {
 export const ArchiveList = ({ Archives }: IProps) => {
     return (
         <div className="grid grid-cols-3">
-            <ul className="list-none w-screen">
+            <ul className="list-none w-screen col-start-2 col-end-3">
                 {Archives.map((archive, index) => (
                     <li
                         key={index}
