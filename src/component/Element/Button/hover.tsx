@@ -24,9 +24,18 @@ const ElementRadius = (radius: radius): string => {
     }
 };
 
-export const hover = () => {
+interface Props {
+    handler: () => void;
+}
+
+export const hover = (Props: Props) => {
+    const handlerClick = () => {
+        Props.handler();
+    };
+
     return (
         <button
+            onClick={handlerClick}
             className={`${ElementSize('small')} ${ElementRadius(
                 'none'
             )}`}></button>
