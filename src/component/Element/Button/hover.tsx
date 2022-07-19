@@ -25,5 +25,10 @@ const ElementRadius = (radius: radius): string => {
 };
 
 export const hover = () => {
-    return <button></button>;
+    return (
+        <button
+            className={`${ElementSize('small')} ${ElementRadius(
+                'none'
+            )}`}></button>
+    );
 };
