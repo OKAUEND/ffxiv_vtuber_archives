@@ -12,6 +12,18 @@ const ElementSize = (size: size): string => {
             return '';
     }
 };
+
+type radius = 'none' | 'full';
+
+const ElementRadius = (radius: radius): string => {
+    switch (radius) {
+        case 'none':
+            return 'rounded-none';
+        case 'full':
+            return 'rounded-full';
+    }
+};
+
 export const hover = () => {
     return <button></button>;
 };
