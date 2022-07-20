@@ -26,6 +26,8 @@ const ElementRadius = (radius: radius): string => {
 
 interface Props {
     handler: () => void;
+    size: size;
+    radius: radius;
 }
 
 export const Hover = (Props: Props) => {
