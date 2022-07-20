@@ -5,6 +5,11 @@ interface IProps {
 }
 
 export const ArchiveList = ({ Archives }: IProps) => {
+    const converDayTime = (time: string) => {
+        const date = new Date(time);
+        return `${date.getFullYear()}年 ${date.getMonth()}月${date.getDate()}日`;
+    };
+
     return (
         <div>
             <ul className="list-none w-screen col-start-2 col-end-3 max-w-full">
@@ -33,7 +38,9 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                         {archive.snippet.title}
                                     </h2>
                                     <div className="text-sm text-gray-400 text-left mt-2">
-                                        {archive.snippet.publishedAt}
+                                        {converDayTime(
+                                            archive.snippet.publishedAt
+                                        )}
                                     </div>
                                 </div>
                             </div>
