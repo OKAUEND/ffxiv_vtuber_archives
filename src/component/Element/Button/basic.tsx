@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const basic = () => {
+export const Basic = () => {
     return <button></button>;
 };

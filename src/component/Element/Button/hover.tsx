@@ -28,7 +28,7 @@ interface Props {
     handler: () => void;
 }
 
-export const hover = (Props: Props) => {
+export const Hover = (Props: Props) => {
     const handlerClick = () => {
         Props.handler();
     };

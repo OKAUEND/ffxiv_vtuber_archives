@@ -1,4 +1,4 @@
-import { basic } from './basic';
-import { hover } from './hover';
+import { Basic } from './basic';
+import { Hover } from './hover';
 
-export { basic, hover };
+export { Basic, Hover };
