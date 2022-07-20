@@ -41,7 +41,7 @@ export const Hover = (Props: Props) => {
             onClick={handlerClick}
             className={`${ElementSize(Props.size)} ${ElementRadius(
                 Props.radius
-            )} hover:bg-gray-400`}>
+            )} hover:bg-gray-700 transition duration-150`}>
             {Props.children}
         </button>
     );
