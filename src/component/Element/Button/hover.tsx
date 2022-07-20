@@ -39,7 +39,9 @@ export const Hover = (Props: Props) => {
     return (
         <button
             onClick={handlerClick}
-            className={`${ElementSize(Props.size)} ${ElementRadius(
+            className={`flex justify-center items-center ${ElementSize(
+                Props.size
+            )} ${ElementRadius(
                 Props.radius
             )} hover:bg-gray-700 transition duration-150`}>
             {Props.children}
