@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 type size = 'small' | 'medium' | 'large';
 
