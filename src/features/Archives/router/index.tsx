@@ -24,7 +24,7 @@ export const ArchiveRouter = () => {
 
     return (
         <div>
-            <div>
+            <div className="flex justify-start">
                 <Hover handler={() => navigate(-1)} size="small" radius="full">
                     <div className="text-gray-100">
                         <LeftArrow />
