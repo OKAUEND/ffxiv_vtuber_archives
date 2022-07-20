@@ -12,8 +12,8 @@ export const ArchiveList = ({ Archives }: IProps) => {
                     <li
                         key={index}
                         className="flex flex-row box-border bg-gray-700 mt-3 p-6">
-                        <div className="grid grid-row-3 grid-flow-col gap-2">
-                            <div className="row-span-3">
+                        <div className="flex">
+                            <div className="min-w-160 flex-shrink-0">
                                 <a
                                     href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
                                     target="_blank"
@@ -27,7 +27,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                     />
                                 </a>
                             </div>
-                            <div className="row-span-3 col-span-1 flex justify-center items-center">
+                            <div className="flex justify-center items-center flex-shrink ml-2">
                                 <div className="flex flex-col ">
                                     <h2 className="max-h-12 line-clamp-2 text-base text-gray-100 truncate whitespace-pre-wrap">
                                         {archive.snippet.title}
