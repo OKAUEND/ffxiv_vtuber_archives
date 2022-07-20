@@ -5,11 +5,11 @@ type size = 'small' | 'medium' | 'large';
 const ElementSize = (size: size): string => {
     switch (size) {
         case 'small':
-            return '';
+            return 'w-16 h-16';
         case 'medium':
-            return '';
+            return 'w-28 h-28';
         case 'large':
-            return '';
+            return 'w-40 h-40';
     }
 };
 
