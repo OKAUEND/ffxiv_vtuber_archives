@@ -36,8 +36,8 @@ export const Hover = (Props: Props) => {
     return (
         <button
             onClick={handlerClick}
-            className={`${ElementSize('small')} ${ElementRadius(
-                'none'
-            )}`}></button>
+            className={`${ElementSize(Props.size)} ${ElementRadius(
+                Props.radius
+            )} `}></button>
     );
 };
