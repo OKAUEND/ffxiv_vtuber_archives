@@ -3,7 +3,7 @@ import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
 
-import { IconElement } from '../../../../component/Element/Icon';
+import { IconElement } from '../../../../component/Element/Image';
 
 export const ChannelPanel = () => {
     const [channels, resultStatus, reload] = useChannels();
