@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Archive } from './Archive';
 import NextLoad from '../component/NextLoad';
+import { Hover } from '../../../component/Element/Button';
 
 const typeGuard = (target: string | undefined) => {
     if (target === undefined) {
@@ -22,7 +23,9 @@ export const ArchiveRouter = () => {
     return (
         <div>
             <div>
-                <button onClick={() => navigate(-1)}>戻る</button>
+                <Hover handler={() => navigate(-1)} size="medium" radius="full">
+                    戻る
+                </Hover>
             </div>
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
