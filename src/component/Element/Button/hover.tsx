@@ -25,6 +25,7 @@ const ElementRadius = (radius: radius): string => {
 };
 
 interface Props {
+    children: ReactNode;
     handler: () => void;
     size: size;
     radius: radius;
@@ -41,6 +42,7 @@ export const Hover = (Props: Props) => {
             className={`${ElementSize(Props.size)} ${ElementRadius(
                 Props.radius
             )} hover:bg-gray-400`}>
+            {Props.children}
         </button>
     );
 };
