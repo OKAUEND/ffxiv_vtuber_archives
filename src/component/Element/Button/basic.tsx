@@ -12,6 +12,20 @@ const ElementSize = (size: size): string => {
             return 'w-40 h-20';
     }
 };
+type color = 'default' | 'green' | 'red' | 'blue';
+
+const ElementColor = (color: color): string => {
+    switch (color) {
+        case 'green':
+            return 'bg-green-600';
+        case 'red':
+            return 'bg-red-600';
+        case 'blue':
+            return 'bg-blue-600';
+        default:
+            return 'bg-gray-600';
+    }
+};
 
 export const Basic = () => {
     return <button></button>;
