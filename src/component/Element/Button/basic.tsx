@@ -27,6 +27,22 @@ const ElementColor = (color: color): string => {
     }
 };
 
-export const Basic = () => {
-    return <button></button>;
+interface Props {
+    children: ReactNode;
+    handler: () => void;
+    size: size;
+    color: color;
+}
+
+export const Basic = (Props: Props) => {
+    const handlerClick = () => {
+        Props.handler();
+    };
+    return (
+        <button
+            onClick={handlerClick}
+            className={`${ElementSize('medium')} ${ElementColor(
+                'default'
+            )} rounded`}></button>
+    );
 };
