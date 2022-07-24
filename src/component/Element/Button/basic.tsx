@@ -43,6 +43,8 @@ export const Basic = (Props: Props) => {
             onClick={handlerClick}
             className={`${ElementSize('medium')} ${ElementColor(
                 'default'
-            )} rounded`}></button>
+            )} rounded`}>
+            {Props.children}
+        </button>
     );
 };
