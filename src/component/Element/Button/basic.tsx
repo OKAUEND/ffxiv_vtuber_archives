@@ -7,9 +7,9 @@ const ElementSize = (size: size): string => {
         case 'small':
             return 'w-8 h-4 md:w-16 md:h-8';
         case 'medium':
-            return 'w-14 h-7 md:w-28 md:h-14';
+            return 'w-14 h-7 md:w-40 md:h-14';
         case 'large':
-            return 'w-20 h-10 md:w-40 md:h-20';
+            return 'w-20 h-10 md:w-60 md:h-20';
     }
 };
 type color = 'default' | 'green' | 'red' | 'blue';
