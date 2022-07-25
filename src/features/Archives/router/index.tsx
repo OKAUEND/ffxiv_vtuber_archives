@@ -36,7 +36,7 @@ export const ArchiveRouter = () => {
                     <Archive channelId={targetChannelID} />
                 </Suspense>
             </div>
-            <div>
+            <div className="mt-2 mb-2">
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad channelId={targetChannelID} />
                 </Suspense>
