@@ -18,7 +18,7 @@ const NextLoad = ({ channelId }: Props) => {
     return (
         <div>
             <Basic handler={handlerClick} size="medium" color="default">
-                次をロード
+                more...
             </Basic>
         </div>
     );
