@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Archive } from './Archive';
 
 import NextLoad from '../component/NextLoad';
 import { Hover } from '../../../component/Element/Button';
 import { LeftArrow } from '../../../component/Element/Icon';
+import { VtuberDetail } from '../types';
 
 const typeGuard = (target: string | undefined) => {
     if (target === undefined) {
@@ -14,9 +15,14 @@ const typeGuard = (target: string | undefined) => {
     }
     return target;
 };
+interface LocationState {
+    channel: VtuberDetail;
+}
 
 export const ArchiveRouter = () => {
     const { channelID } = useParams<'channelID'>();
+    const location = useLocation();
+    const locationState = location.state as LocationState;
     const navigate = useNavigate();
 
     //TypeGuardでundefinedを除外する
