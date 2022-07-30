@@ -4,6 +4,7 @@ import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
 
 import { IconElement } from '../../../../component/Element/Image';
+import { HikasenVtuber } from 'features/Channels/types';
 
 export const ChannelPanel = () => {
     const [channels, resultStatus, reload] = useChannels();
@@ -28,7 +29,7 @@ export const ChannelPanel = () => {
 
     const omitChannel = (
         channel: HikasenVtuber
-    ): Omit<HikasenVtuber, 'channelID' | 'ffxiv'> => {
+    ): Omit<HikasenVtuber, 'ffxiv'> => {
         return channel;
     };
 
