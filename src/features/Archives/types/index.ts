@@ -9,6 +9,7 @@ export type timeRangetype = {
 };
 
 export type VtuberDetail = {
+    channelID: string;
     name: string;
     channelIconID: string;
     channelName: string;

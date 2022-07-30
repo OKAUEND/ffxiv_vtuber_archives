@@ -13,7 +13,7 @@ export const Channel = (channelDetail: VtuberDetail) => {
                 radius="full"></IconElement>
             <span>{channelDetail.channelName}</span>
             {channelDetail.twitter}
-            {channelDetail.youtube}
+            {channelDetail.channelID}
             {channelDetail.twitch}
         </div>
     );
