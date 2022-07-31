@@ -18,6 +18,10 @@ export const Channel = (channelDetail: VtuberDetail) => {
                     <Twitter />
                 </a>
             )}
+            {/**
+             * Youtubeのチャンネルが存在しないは、対象配信者となりえないので、
+             * Youtubeのリンクは常に表示させる
+             */}
             <a href={channelDetail.channelID}>
                 <Youtube />
             </a>
