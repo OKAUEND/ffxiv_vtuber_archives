@@ -13,15 +13,19 @@ export const Channel = (channelDetail: VtuberDetail) => {
                 size="Medium"
                 radius="full"></IconElement>
             <span>{channelDetail.channelName}</span>
-            <a href={channelDetail.twitter}>
-                <Twitter />
-            </a>
+            {channelDetail.twitter != '' && (
+                <a href={channelDetail.twitter}>
+                    <Twitter />
+                </a>
+            )}
             <a href={channelDetail.channelID}>
                 <Youtube />
             </a>
-            <a href={channelDetail.twitch}>
-                <Twitch />
-            </a>
+            {channelDetail.twitch != '' && (
+                <a href={channelDetail.twitch}>
+                    <Twitch />
+                </a>
+            )}
         </div>
     );
 };
