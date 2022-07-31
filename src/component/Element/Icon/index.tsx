@@ -1,3 +1,5 @@
 import { LeftArrow } from './LeftArrow';
+import { Youtube } from './Youtube';
+import { Twitch } from './Twitch';
 
-export { LeftArrow };
+export { LeftArrow, Youtube, Twitch };
