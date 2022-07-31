@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useYoutube } from '../api/getYoutube';
 
+import { Basic } from '../../../component/Element/Button';
+
 interface Props {
     channelId: string;
 }
@@ -15,7 +17,9 @@ const NextLoad = ({ channelId }: Props) => {
 
     return (
         <div>
-            <button onClick={handlerClick}>次をロード</button>
+            <Basic handler={handlerClick} size="medium" color="default">
+                次をロード
+            </Basic>
         </div>
     );
 };

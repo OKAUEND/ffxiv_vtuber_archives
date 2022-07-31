@@ -42,15 +42,17 @@ function App() {
                     </a>
                 </p>
             </header>
-            <div className="bg-gray-800">
-                <Routes>
-                    <Route path="/">
-                        <Route index element={<Channels />}></Route>
-                        <Route
-                            path="Channel/:channelID"
-                            element={<ArchiveRouter />}></Route>
-                    </Route>
-                </Routes>
+            <div className="bg-gray-800 flex justify-center">
+                <div className="max-w-5xl">
+                    <Routes>
+                        <Route path="/">
+                            <Route index element={<Channels />}></Route>
+                            <Route
+                                path="Channel/:channelID"
+                                element={<ArchiveRouter />}></Route>
+                        </Route>
+                    </Routes>
+                </div>
             </div>
         </div>
     );

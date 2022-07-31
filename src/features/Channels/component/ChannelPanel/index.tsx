@@ -3,7 +3,8 @@ import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
 import { Link } from 'react-router-dom';
 
-import { IconElement } from '../../../../component/Element/Icon';
+import { IconElement } from '../../../../component/Element/Image';
+import { HikasenVtuber } from 'features/Channels/types';
 
 export const ChannelPanel = () => {
     const [channels, resultStatus, reload] = useChannels();
@@ -26,6 +27,12 @@ export const ChannelPanel = () => {
         );
     };
 
+    const omitChannel = (
+        channel: HikasenVtuber
+    ): Omit<HikasenVtuber, 'ffxiv'> => {
+        return channel;
+    };
+
     const success = () => {
         return (
             <ul className="flex justify-center flex-wrap ml-10 mr-10">
@@ -37,7 +44,8 @@ export const ChannelPanel = () => {
                             <div className="row-span-3">
                                 <Link
                                     to={`/Channel/${channel.channelID}`}
-                                    title={`${channel.name}のアーカイブ`}>
+                                    title={`${channel.name}のアーカイブ`}
+                                    state={{ channel: omitChannel(channel) }}>
                                     <IconElement
                                         src={`${iconURL}${channel.channelIconID}`}
                                         alt={`${channel.name}のチャンネルアイコン`}
@@ -49,7 +57,8 @@ export const ChannelPanel = () => {
                             <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
                                 <Link
                                     to={`/Channel/${channel.channelID}`}
-                                    title={`${channel.name}のアーカイブ`}>
+                                    title={`${channel.name}のアーカイブ`}
+                                    state={{ channel: omitChannel(channel) }}>
                                     <div className="flex flex-col">
                                         <span className="text-gray-100 font-sans text-lg">
                                             {channel.name}
