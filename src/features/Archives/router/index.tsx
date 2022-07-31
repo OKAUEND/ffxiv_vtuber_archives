@@ -8,6 +8,7 @@ import NextLoad from '../component/NextLoad';
 import { Hover } from '../../../component/Element/Button';
 import { LeftArrow } from '../../../component/Element/Icon';
 import { VtuberDetail } from '../types';
+import { Channel } from '../component/Channel';
 
 const typeGuard = (target: string | undefined) => {
     if (target === undefined) {
@@ -30,6 +31,7 @@ export const ArchiveRouter = () => {
 
     return (
         <div>
+            <Channel channelDetail={locationState.channel}></Channel>
             <div className="flex justify-start">
                 <Hover handler={() => navigate(-1)} size="small" radius="full">
                     <div className="text-gray-100">
@@ -38,7 +40,7 @@ export const ArchiveRouter = () => {
                 </Hover>
             </div>
             <div>
-                <Suspense fallback={<p>Loading...</p>}>
+                <Suspense fallback={<div></div>}>
                     <Archive channelId={targetChannelID} />
                 </Suspense>
             </div>
