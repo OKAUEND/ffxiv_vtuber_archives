@@ -5,7 +5,11 @@ import { VtuberDetail } from '../types';
 import { Twitter, Youtube, Twitch } from '../../../component/Element/Icon';
 const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
 
-export const Channel = (channelDetail: VtuberDetail) => {
+interface IProps {
+    channelDetail: VtuberDetail;
+}
+
+export const Channel = ({ channelDetail }: IProps) => {
     return (
         <div>
             <IconElement
