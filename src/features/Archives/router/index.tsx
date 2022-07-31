@@ -30,7 +30,7 @@ export const ArchiveRouter = () => {
     const targetChannelID = typeGuard(channelID);
 
     return (
-        <div>
+        <div className="flex">
             <Channel channelDetail={locationState.channel}></Channel>
             <div className="flex justify-start">
                 <Hover handler={() => navigate(-1)} size="small" radius="full">
