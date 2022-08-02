@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconElement } from 'component/Element/Image';
+import { IconElement } from '../../../component/Element/Image';
 import { VtuberDetail } from '../types';
 
 import { Twitter, Youtube, Twitch } from '../../../component/Element/Icon';
