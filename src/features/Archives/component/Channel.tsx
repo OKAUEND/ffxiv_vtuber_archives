@@ -14,7 +14,7 @@ export const Channel = ({ channelDetail }: IProps) => {
         <div>
             <IconElement
                 src={`${iconURL}${channelDetail.channelIconID}`}
-                size="Medium"
+                size="Small"
                 radius="full"></IconElement>
             <span>{channelDetail.channelName}</span>
             {channelDetail.twitter != '' && (
