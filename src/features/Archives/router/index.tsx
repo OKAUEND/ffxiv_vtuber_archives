@@ -31,13 +31,15 @@ export const ArchiveRouter = () => {
 
     return (
         <div className="flex flex-col">
-            <Channel channelDetail={locationState.channel}></Channel>
             <div className="flex justify-start">
                 <Hover handler={() => navigate(-1)} size="small" radius="full">
                     <div className="text-gray-100">
                         <LeftArrow />
                     </div>
                 </Hover>
+            </div>
+            <div className="grid justify-items-center">
+                <Channel channelDetail={locationState.channel}></Channel>
             </div>
             <div>
                 <Suspense fallback={<div></div>}>
