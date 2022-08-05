@@ -18,7 +18,7 @@ export const Channel = ({ channelDetail }: IProps) => {
                     size="Small"
                     radius="full"></IconElement>
             </div>
-            <span className="col-span-2 row-span-1">
+            <span className="col-span-2 row-span-1 text-gray-100 text-lg text-left text-xl pt-4">
                 {channelDetail.channelName}
             </span>
             <div className="col-span-2 row-span-2 flex flex-row gap-2">
