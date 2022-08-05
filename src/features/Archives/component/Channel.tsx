@@ -21,7 +21,7 @@ export const Channel = ({ channelDetail }: IProps) => {
             <span className="col-span-2 row-span-1">
                 {channelDetail.channelName}
             </span>
-            <div className="col-span-2 row-span-2 flex flex-row">
+            <div className="col-span-2 row-span-2 flex flex-row gap-2">
                 {channelDetail.twitter != '' && (
                     <a href={channelDetail.twitter}>
                         <Twitter />
