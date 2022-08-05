@@ -16,8 +16,8 @@ export const ArchiveList = ({ Archives }: IProps) => {
                 {Archives.map((archive, index) => (
                     <li
                         key={index}
-                        className="flex flex-col md:flex-row box-border bg-gray-700 mt-3 p-6 rounded-lg">
-                        <div className="flex">
+                        className="box-border md:bg-gray-700 mt-3 p-6 md:rounded-lg max-w-full">
+                        <div className="flex flex-col md:flex-row">
                             <div className="min-w-160 flex-shrink-0">
                                 <a
                                     href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
