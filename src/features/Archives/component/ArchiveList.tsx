@@ -34,9 +34,9 @@ export const ArchiveList = ({ Archives }: IProps) => {
                             </div>
                             <div className="flex justify-center items-center flex-shrink ml-2">
                                 <div className="flex flex-col ">
-                                    <h2 className="h-12 line-clamp-2 text-base text-gray-100 text-left whitespace-pre-wrap">
+                                    <span className="h-12 text-base text-gray-100 text-left line-clamp-2 mt-2 md:mt-0">
                                         {archive.snippet.title}
-                                    </h2>
+                                    </span>
                                     <div className="text-sm text-gray-400 text-left mt-2">
                                         {converDayTime(
                                             archive.snippet.publishedAt
