@@ -24,7 +24,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                 rel="noreferrer">
                                 <img
                                     src={archive.snippet.thumbnails.medium.url}
-                                    className="object-cover w-160 h-90"
+                                    className="object-cover w-full h-full object-none object-bottom"
                                 />
                             </a>
                         </div>
