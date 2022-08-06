@@ -15,7 +15,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
             {Archives.map((archive, index) => (
                 <li
                     key={index}
-                    className="box-border md:bg-gray-700 mt-3 p-6 md:rounded-lg max-w-full">
+                    className="box-border md:bg-gray-700 md:mt-3 pl-3 pr-3 md:p-6 md:rounded-lg max-w-full">
                     <div className="flex flex-col md:flex-row">
                         <div className="min-w-160 flex-shrink-0">
                             <a
