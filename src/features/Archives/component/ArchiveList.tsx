@@ -4,6 +4,10 @@ interface IProps {
     Archives: GoogleApiYouTubeSearchResource[];
 }
 
+const createHighQuality720URL = (videoId: string): string => {
+    return `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
+};
+
 export const ArchiveList = ({ Archives }: IProps) => {
     const converDayTime = (time: string) => {
         const date = new Date(time);
@@ -23,7 +27,9 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                 target="_blank"
                                 rel="noreferrer">
                                 <img
-                                    src={archive.snippet.thumbnails.medium.url}
+                                    src={createHighQuality720URL(
+                                        archive.id.videoId
+                                    )}
                                     className="object-cover w-full h-full object-none object-bottom"
                                 />
                             </a>
