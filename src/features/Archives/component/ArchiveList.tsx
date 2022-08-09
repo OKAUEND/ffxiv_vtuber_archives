@@ -34,8 +34,8 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                 />
                             </a>
                         </div>
-                        <div className="flex justify-center items-center flex-shrink ml-2">
-                            <div className="flex flex-col ">
+                        <div className="flex justify-center items-center flex-shrink md:ml-2">
+                            <div className="flex flex-col justify-center content-center">
                                 <span className="h-12 text-base text-gray-100 text-left line-clamp-2 mt-2 md:mt-0">
                                     {archive.snippet.title}
                                 </span>
