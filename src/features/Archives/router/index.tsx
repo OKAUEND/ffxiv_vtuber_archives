@@ -41,11 +41,12 @@ export const ArchiveRouter = () => {
             <div className="grid justify-items-center">
                 <Channel channelDetail={locationState.channel}></Channel>
             </div>
-            <div>
-                <Suspense fallback={<div></div>}>
-                    <Archive channelId={targetChannelID} />
-                </Suspense>
-            </div>
+            <Suspense fallback={<div></div>}>
+                <Archive
+                    name={locationState.channel.name}
+                    channelId={targetChannelID}
+                />
+            </Suspense>
             <div className="mt-2 mb-2">
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad channelId={targetChannelID} />

@@ -5,10 +5,11 @@ import { useArchives } from '../api/getYoutube';
 import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
 
 interface Props {
+    name: string;
     channelId: string;
 }
 
-export const Archive = ({ channelId }: Props) => {
+export const Archive = ({ name, channelId }: Props) => {
     const [Archives] = useArchives(channelId);
 
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
