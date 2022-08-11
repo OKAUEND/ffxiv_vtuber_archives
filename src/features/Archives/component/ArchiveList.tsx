@@ -21,7 +21,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
                     key={index}
                     className="box-border md:bg-gray-700 md:mt-3 pl-3 pr-3 md:p-6 md:rounded-lg max-w-full">
                     <div className="flex flex-col md:flex-row">
-                        <div className="min-w-160 flex-shrink-0 text-center">
+                        <div className="min-w-160 md:w-2/4 m-0 flex-shrink-0 text-center">
                             <a
                                 href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
                                 target="_blank"
@@ -30,7 +30,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
                                     src={createHighQuality720URL(
                                         archive.id.videoId
                                     )}
-                                    className="object-cover w-full h-full object-none object-bottom"
+                                    className="object-cover w-full h-auto"
                                 />
                             </a>
                         </div>
