@@ -16,7 +16,7 @@ export const Archive = ({ name, channelId }: Props) => {
 
     return (
         <article>
-            <h1 className="">{`${name}のアーカイブ`}</h1>
+            <h1 className="w-0 h-0">{`${name}のアーカイブ`}</h1>
             <ArchiveList Archives={Archives} />
         </article>
     );
