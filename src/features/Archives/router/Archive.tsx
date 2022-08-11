@@ -15,10 +15,9 @@ export const Archive = ({ name, channelId }: Props) => {
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
 
     return (
-        <div>
-            <div>
-                <ArchiveList Archives={Archives} />
-            </div>
-        </div>
+        <article>
+            <h1 className="">{`${name}のアーカイブ`}</h1>
+            <ArchiveList Archives={Archives} />
+        </article>
     );
 };
