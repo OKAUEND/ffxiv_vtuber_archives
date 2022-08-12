@@ -16,11 +16,9 @@ const NextLoad = ({ channelId }: Props) => {
     };
 
     return (
-        <div>
-            <Basic handler={handlerClick} size="medium" color="default">
-                more...
-            </Basic>
-        </div>
+        <Basic handler={handlerClick} size="medium" color="default">
+            more...
+        </Basic>
     );
 };
 
