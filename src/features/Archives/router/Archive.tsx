@@ -49,9 +49,7 @@ export const Archive = () => {
             </article>
             <article>
                 <h1 className="w-0 h-0">{`${name}のアーカイブ`}</h1>
-                <Suspense fallback={<div></div>}>
-                    <ArchiveList Archives={Archives} />
-                </Suspense>
+                <ArchiveList Archives={Archives} />
             </article>
             <div className="mt-2 mb-2">
                 <Suspense fallback={<p>Loading...</p>}>
