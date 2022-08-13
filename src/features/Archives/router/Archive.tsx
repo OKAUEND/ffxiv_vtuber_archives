@@ -25,14 +25,12 @@ interface LocationState {
 
 export const Archive = () => {
     const { channelID } = useParams<'channelID'>();
+    //TypeGuardでundefinedを除外する
     const targetChannelID = typeGuard(channelID);
     const [Archives] = useArchives(targetChannelID);
     const location = useLocation();
     const locationState = location.state as LocationState;
     const navigate = useNavigate();
-
-    //TypeGuardでundefinedを除外する
-    const targetChannelID = typeGuard(channelID);
 
     const [isBeforeFirstDayTime] = useFirstLiveDayTime('20200101');
 
