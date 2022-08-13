@@ -25,6 +25,8 @@ interface LocationState {
 
 export const Archive = () => {
     const { channelID } = useParams<'channelID'>();
+    const targetChannelID = typeGuard(channelID);
+    const [Archives] = useArchives(targetChannelID);
     const location = useLocation();
     const locationState = location.state as LocationState;
     const navigate = useNavigate();
