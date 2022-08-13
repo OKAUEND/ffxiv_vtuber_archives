@@ -44,11 +44,11 @@ export const Archive = () => {
                 </Hover>
             </div>
             <article className="grid justify-items-center">
-                <h1 className="w-0 h-0">{`${locationState.channel.name}のコミュニティ関連`}</h1>
+                <h1 className="sr-only">{`${locationState.channel.name}のコミュニティリンク`}</h1>
                 <Channel channelDetail={locationState.channel}></Channel>
             </article>
             <article>
-                <h1 className="w-0 h-0">{`${name}のアーカイブ`}</h1>
+                <h1 className="sr-only">{`${locationState.channel.name}のアーカイブ`}</h1>
                 <ArchiveList Archives={Archives} />
             </article>
             <div className="mt-2 mb-2">
