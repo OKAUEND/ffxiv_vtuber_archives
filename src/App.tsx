@@ -2,7 +2,7 @@ import React, { Suspense, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { ArchiveRouter } from './features/Archives';
+import { Archives } from './features/Archives';
 import { Channels } from './features/Channels';
 import { RecoilRoot } from 'recoil';
 
@@ -49,7 +49,7 @@ function App() {
                             <Route index element={<Channels />}></Route>
                             <Route
                                 path="Channel/:channelID"
-                                element={<ArchiveRouter />}></Route>
+                                element={<Archives />}></Route>
                         </Route>
                     </Routes>
                 </div>
