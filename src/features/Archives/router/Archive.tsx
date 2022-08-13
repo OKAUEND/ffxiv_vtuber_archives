@@ -18,17 +18,12 @@ const typeGuard = (target: string | undefined) => {
     }
     return target;
 };
-interface Props {
-    name: string;
-    channelId: string;
-}
+
 interface LocationState {
     channel: VtuberDetail;
 }
 
-export const Archive = ({ name, channelId }: Props) => {
-    const [Archives] = useArchives(channelId);
-
+export const Archive = () => {
     const { channelID } = useParams<'channelID'>();
     const location = useLocation();
     const locationState = location.state as LocationState;
