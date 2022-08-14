@@ -16,7 +16,7 @@ const NextLoad = ({ channelId }: Props) => {
     };
 
     return (
-        <Basic handler={handlerClick} size="medium" color="default">
+        <Basic handler={handlerClick} size="auto" color="default">
             more...
         </Basic>
     );
