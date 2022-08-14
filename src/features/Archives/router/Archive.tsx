@@ -43,7 +43,7 @@ export const Archive = () => {
                     </div>
                 </Hover>
             </div>
-            <article className="grid justify-items-center">
+            <article className="grid place-content-center">
                 <h1 className="sr-only">{`${locationState.channel.name}のコミュニティリンク`}</h1>
                 <Channel channelDetail={locationState.channel}></Channel>
             </article>
