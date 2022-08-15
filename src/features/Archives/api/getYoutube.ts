@@ -142,6 +142,14 @@ export const createYoutubeURL = (channelId: string, query: string): string => {
     return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
 };
 
+/**
+ * アーカイブ動画の中で、FF14以外の動画を除外する
+ * 説明文に「FF14」の単語があるだけで、APIの返値に含まれるのでフロント側でフィルタリングが必要
+ */
+const filterContent = (): GoogleApiYouTubeSearchResource[] => {
+    return [];
+};
+
 //---------------------------------------------------------------------------
 
 export const useYoutube = (channelId: string) => {
