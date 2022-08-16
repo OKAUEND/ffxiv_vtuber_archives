@@ -146,8 +146,13 @@ export const createYoutubeURL = (channelId: string, query: string): string => {
  * アーカイブ動画の中で、FF14以外の動画を除外する
  * 説明文に「FF14」の単語があるだけで、APIの返値に含まれるのでフロント側でフィルタリングが必要
  */
-const filterContent = (): GoogleApiYouTubeSearchResource[] => {
-    return [];
+const filterContent = (
+    archives: GoogleApiYouTubeSearchResource[]
+): GoogleApiYouTubeSearchResource[] => {
+    const FFXIV = '/FFXIV|FF14/';
+    return archives.filter((archive) => {
+        return archive.snippet.title.match(FFXIV);
+    });
 };
 
 //---------------------------------------------------------------------------
