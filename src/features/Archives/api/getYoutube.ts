@@ -151,6 +151,8 @@ const filterContent = (
 ): GoogleApiYouTubeSearchResource[] => {
     const RegFFXIV = /FFXIV|FF14/;
     return archives.filter((archive) => {
+        //削除されたアーカイブも含まれるため、その場合はvideoIdをチェックすることで弾く事ができる
+        if (archive.id.videoId === undefined) return false;
         return archive.snippet.title.match(RegFFXIV);
     });
 };
