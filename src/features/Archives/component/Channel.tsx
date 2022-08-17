@@ -11,7 +11,7 @@ interface IProps {
 
 export const Channel = ({ channelDetail }: IProps) => {
     return (
-        <div className="grid grid-cols-3 grid-rows-2 md:w-6/12">
+        <div className="grid grid-cols-3 grid-rows-2">
             <div className="col-span-1 row-span-3 grid justify-items-end mr-3">
                 <IconElement
                     src={`${iconURL}${channelDetail.channelIconID}`}
