@@ -155,6 +155,13 @@ const filterContent = (
     });
 };
 
+/**
+ * 動画IDがundefinedの物を除外する
+ */
+const filterUndefined = (
+    archives: GoogleApiYouTubeSearchResource[]
+): GoogleApiYouTubeSearchResource[] => {};
+
 //---------------------------------------------------------------------------
 
 export const useYoutube = (channelId: string) => {
