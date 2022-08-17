@@ -47,7 +47,7 @@ const archivesSelector = selectorFamily<
         async ({ get }) => {
             const Archives = get(archivesAtom(channelId));
 
-            if (Archives.length > 0) return Archives;
+            if (Archives.length > 0) return filterContent(Archives);
 
             const time = new Date().toISOString();
             const url = createYoutubeURL(
@@ -59,13 +59,12 @@ const archivesSelector = selectorFamily<
                 GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
             >(url);
 
-            return response.payload.items;
+            return filterContent(response.payload.items);
         },
     set:
         (channelId: string) =>
         ({ set }, newArchives) => {
             if (newArchives instanceof DefaultValue) return;
-
             set(archivesAtom(channelId), (prev) => {
                 return [...prev, ...newArchives];
             });
@@ -90,7 +89,7 @@ export const youtubeSelector = selectorFamily<
                 GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
             >(requestURL);
 
-            return request.payload.items;
+            return filterContent(request.payload.items);
         },
 });
 
