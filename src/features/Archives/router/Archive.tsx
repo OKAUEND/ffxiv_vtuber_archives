@@ -51,7 +51,7 @@ export const Archive = () => {
                 <h1 className="sr-only">{`${locationState.channel.name}のアーカイブ`}</h1>
                 <ArchiveList Archives={Archives} />
             </article>
-            <div className="mt-2 mb-2 h-10 md:h-20">
+            <div className="mt-2 md:mb-2 h-10 md:h-20">
                 <Suspense fallback={<p>Loading...</p>}>
                     <NextLoad channelId={targetChannelID} />
                 </Suspense>
