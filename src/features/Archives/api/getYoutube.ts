@@ -149,9 +149,9 @@ export const createYoutubeURL = (channelId: string, query: string): string => {
 const filterContent = (
     archives: GoogleApiYouTubeSearchResource[]
 ): GoogleApiYouTubeSearchResource[] => {
-    const FFXIV = '/FFXIV|FF14/';
+    const RegFFXIV = /FFXIV|FF14/;
     return archives.filter((archive) => {
-        return archive.snippet.title.match(FFXIV);
+        return archive.snippet.title.match(RegFFXIV);
     });
 };
 
