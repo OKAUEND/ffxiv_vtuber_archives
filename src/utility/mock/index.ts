@@ -48,7 +48,15 @@ const GoogleYoutubeFactory = (
 
 const run = (client: AxiosInstance, url: string) => {
     const mock = new MockAdapter(client);
-    mock.onGet(url).reply(200, [GoogleYoutubeFactory('')]);
+    const item = () => {
+        switch (url) {
+            case import.meta.env.VITE_CHANNELLIST_SPREADSHEET_URL:
+                return [];
+            default:
+                return GoogleYoutubeFactory('a4Ae-BCAvGI');
+        }
+    };
+    mock.onGet(url).reply(200, [item]);
 };
 
 export { run };
