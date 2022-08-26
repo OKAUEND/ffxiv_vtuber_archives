@@ -28,7 +28,9 @@ export const Archive = () => {
     //TypeGuardでundefinedを除外する
     const targetChannelID = typeGuard(channelID);
     const [Archives] = useArchives(targetChannelID);
+    //useLocationよりlocationを取得する
     const location = useLocation();
+    //Stateの型を指定するのURLよりIDを取得する
     const locationState = location.state as LocationState;
     const navigate = useNavigate();
 
