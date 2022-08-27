@@ -117,6 +117,18 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 
 //---------------------------------------------------------------------------
 
+const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+    const lastArchiveTime = new Date(BeginLiveDayTime);
+    //現在最後尾にある動画の日付をそのまま使うと、再び同じ動画の情報が取得されるので、1分だけ巻き戻す事で回避する。
+    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+    const EndTime = lastArchiveTime.toISOString();
+    //とりあえず半年前の日付に指定する。
+    //半年前でも3ヶ月までも、APIのコール数はそれほど変わらない。
+    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+    const BeginTime = lastArchiveTime.toISOString();
+
+    return { EndTime, BeginTime };
+};
 export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const part = 'snippet';
     const APIKey = import.meta.env.VITE_YOUTUBE_API;
@@ -125,16 +137,6 @@ export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const query = 'FF14';
 
     return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
-};
-
-const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
-    const lastArchiveTime = new Date(BeginLiveDayTime);
-    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-    const EndTime = lastArchiveTime.toISOString();
-    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-    const BeginTime = lastArchiveTime.toISOString();
-
-    return { EndTime, BeginTime };
 };
 
 export const createYoutubeURL = (channelId: string, query: string): string => {
