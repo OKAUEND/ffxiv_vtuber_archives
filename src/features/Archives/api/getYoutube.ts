@@ -129,6 +129,12 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 
     return { EndTime, BeginTime };
 };
+
+/**
+ * Youtube Data API へのクエリを作成する
+ * @param timeRange
+ * @returns Query
+ */
 export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const part = 'snippet';
     const APIKey = import.meta.env.VITE_YOUTUBE_API;
@@ -139,6 +145,12 @@ export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
+/**
+ * Youtube Data APIへのAPIコールを行うURLを作成する
+ * @param channelId
+ * @param query
+ * @returns Youtube Data API URL
+ */
 export const createYoutubeURL = (channelId: string, query: string): string => {
     return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
 };
