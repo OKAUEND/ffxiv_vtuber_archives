@@ -109,8 +109,10 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
         (channelId: string) =>
         ({ get }) => {
             const archives = get(archivesSelector(channelId));
+            //配列最後から次の期間までの動画を取りたいので、最後の動画の日付を取得する
             const lastArchivesLiveDayTime =
                 archives.slice(-1)[0].snippet.publishedAt;
+            //期間開始日付と終わり日付の2つの日付を作成してオブジェクトで返す
             return createTimeRange(lastArchivesLiveDayTime);
         },
 });
