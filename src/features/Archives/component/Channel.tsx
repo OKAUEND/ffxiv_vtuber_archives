@@ -22,11 +22,16 @@ export const Channel = ({ channelDetail }: IProps) => {
                 {channelDetail.channelName}
             </span>
             <nav className="col-span-2 row-span-2 flex flex-row gap-2 justify-start">
-                {channelDetail.twitter != '' && (
-                    <a href={channelDetail.twitter}>
-                        <Twitter />
-                    </a>
-                )}
+                {
+                    /**
+                     * TwitterIDが存在していなかったら、表示させない
+                     * */
+                    channelDetail.twitter != '' && (
+                        <a href={channelDetail.twitter}>
+                            <Twitter />
+                        </a>
+                    )
+                }
                 {/**
                  * Youtubeのチャンネルが存在しないは、対象配信者となりえないので、
                  * Youtubeのリンクは常に表示させる
@@ -34,11 +39,16 @@ export const Channel = ({ channelDetail }: IProps) => {
                 <a href={channelDetail.channelID}>
                     <Youtube />
                 </a>
-                {channelDetail.twitch != '' && (
-                    <a href={channelDetail.twitch}>
-                        <Twitch />
-                    </a>
-                )}
+                {
+                    /**
+                     * TwitchIDが存在していなかったら、表示させない
+                     * */
+                    channelDetail.twitch != '' && (
+                        <a href={channelDetail.twitch}>
+                            <Twitch />
+                        </a>
+                    )
+                }
             </nav>
         </div>
     );

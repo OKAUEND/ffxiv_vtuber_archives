@@ -109,14 +109,34 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
         (channelId: string) =>
         ({ get }) => {
             const archives = get(archivesSelector(channelId));
+            //配列最後から次の期間までの動画を取りたいので、最後の動画の日付を取得する
             const lastArchivesLiveDayTime =
                 archives.slice(-1)[0].snippet.publishedAt;
+            //期間開始日付と終わり日付の2つの日付を作成してオブジェクトで返す
             return createTimeRange(lastArchivesLiveDayTime);
         },
 });
 
 //---------------------------------------------------------------------------
 
+const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+    const lastArchiveTime = new Date(BeginLiveDayTime);
+    //現在最後尾にある動画の日付をそのまま使うと、再び同じ動画の情報が取得されるので、1分だけ巻き戻す事で回避する。
+    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+    const EndTime = lastArchiveTime.toISOString();
+    //とりあえず半年前の日付に指定する。
+    //半年前でも3ヶ月までも、APIのコール数はそれほど変わらない。
+    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+    const BeginTime = lastArchiveTime.toISOString();
+
+    return { EndTime, BeginTime };
+};
+
+/**
+ * Youtube Data API へのクエリを作成する
+ * @param timeRange
+ * @returns Query
+ */
 export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const part = 'snippet';
     const APIKey = import.meta.env.VITE_YOUTUBE_API;
@@ -127,16 +147,12 @@ export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
 };
 
-const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
-    const lastArchiveTime = new Date(BeginLiveDayTime);
-    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-    const EndTime = lastArchiveTime.toISOString();
-    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-    const BeginTime = lastArchiveTime.toISOString();
-
-    return { EndTime, BeginTime };
-};
-
+/**
+ * Youtube Data APIへのAPIコールを行うURLを作成する
+ * @param channelId
+ * @param query
+ * @returns Youtube Data API URL
+ */
 export const createYoutubeURL = (channelId: string, query: string): string => {
     return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
 };
