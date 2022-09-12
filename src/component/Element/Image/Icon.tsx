@@ -20,7 +20,7 @@ export const IconElement = (props: Props): JSX.Element => {
             case 'Medium':
                 return 'w-28 h-28';
             case 'Small':
-                return 'w-16 h-16';
+                return 'w-20 h-20';
         }
     };
 

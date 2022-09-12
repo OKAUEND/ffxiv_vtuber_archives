@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-type size = 'small' | 'medium' | 'large';
+type size = 'small' | 'medium' | 'large' | 'auto';
 
 const ElementSize = (size: size): string => {
     switch (size) {
@@ -10,6 +10,8 @@ const ElementSize = (size: size): string => {
             return 'w-14 h-7 md:w-40 md:h-14';
         case 'large':
             return 'w-20 h-10 md:w-60 md:h-20';
+        case 'auto':
+            return 'w-full h-full';
     }
 };
 type color = 'default' | 'green' | 'red' | 'blue';
@@ -41,9 +43,9 @@ export const Basic = (Props: Props) => {
     return (
         <button
             onClick={handlerClick}
-            className={`${ElementSize('medium')} ${ElementColor(
+            className={`${ElementSize(Props.size)} ${ElementColor(
                 'default'
-            )} rounded`}>
+            )} md:rounded`}>
             {Props.children}
         </button>
     );

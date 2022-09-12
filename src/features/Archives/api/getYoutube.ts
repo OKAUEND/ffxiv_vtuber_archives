@@ -47,7 +47,7 @@ const archivesSelector = selectorFamily<
         async ({ get }) => {
             const Archives = get(archivesAtom(channelId));
 
-            if (Archives.length > 0) return Archives;
+            if (Archives.length > 0) return filterContent(Archives);
 
             const time = new Date().toISOString();
             const url = createYoutubeURL(
@@ -59,13 +59,12 @@ const archivesSelector = selectorFamily<
                 GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
             >(url);
 
-            return response.payload.items;
+            return filterContent(response.payload.items);
         },
     set:
         (channelId: string) =>
         ({ set }, newArchives) => {
             if (newArchives instanceof DefaultValue) return;
-
             set(archivesAtom(channelId), (prev) => {
                 return [...prev, ...newArchives];
             });
@@ -90,7 +89,7 @@ export const youtubeSelector = selectorFamily<
                 GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
             >(requestURL);
 
-            return request.payload.items;
+            return filterContent(request.payload.items);
         },
 });
 
@@ -140,6 +139,22 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 
 export const createYoutubeURL = (channelId: string, query: string): string => {
     return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
+};
+
+/**
+ * アーカイブ動画の中で、FF14以外の動画を除外する
+ * 説明文に「FF14」の単語があるだけで、APIの返値に含まれるのでフロント側でフィルタリングが必要
+ */
+const filterContent = (
+    archives: GoogleApiYouTubeSearchResource[]
+): GoogleApiYouTubeSearchResource[] => {
+    const RegFFXIV = /FFXIV|FF14/;
+    return archives.filter((archive) => {
+        //削除されたアーカイブも含まれるため、その場合はvideoIdをチェックすることで弾く事ができる
+        if (archive.id.videoId === undefined) return false;
+        //タイトル名にFF14が含まれていない物は、別ゲームか他の配信なので除外する
+        return archive.snippet.title.match(RegFFXIV);
+    });
 };
 
 //---------------------------------------------------------------------------

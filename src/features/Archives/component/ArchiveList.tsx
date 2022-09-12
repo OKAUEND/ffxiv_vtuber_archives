@@ -4,6 +4,10 @@ interface IProps {
     Archives: GoogleApiYouTubeSearchResource[];
 }
 
+const createHighQuality720URL = (videoId: string): string => {
+    return `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
+};
+
 export const ArchiveList = ({ Archives }: IProps) => {
     const converDayTime = (time: string) => {
         const date = new Date(time);
@@ -11,43 +15,38 @@ export const ArchiveList = ({ Archives }: IProps) => {
     };
 
     return (
-        <div>
-            <ul className="list-none w-screen col-start-2 col-end-3 max-w-full">
-                {Archives.map((archive, index) => (
-                    <li
-                        key={index}
-                        className="flex flex-col md:flex-row box-border bg-gray-700 mt-3 p-6 rounded-lg">
-                        <div className="flex">
-                            <div className="min-w-160 flex-shrink-0">
-                                <a
-                                    href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
-                                    target="_blank"
-                                    rel="noreferrer">
-                                    <img
-                                        src={
-                                            archive.snippet.thumbnails.medium
-                                                .url
-                                        }
-                                        className="object-cover w-160 h-90"
-                                    />
-                                </a>
-                            </div>
-                            <div className="flex justify-center items-center flex-shrink ml-2">
-                                <div className="flex flex-col ">
-                                    <h2 className="h-12 line-clamp-2 text-base text-gray-100 text-left whitespace-pre-wrap">
-                                        {archive.snippet.title}
-                                    </h2>
-                                    <div className="text-sm text-gray-400 text-left mt-2">
-                                        {converDayTime(
-                                            archive.snippet.publishedAt
-                                        )}
-                                    </div>
+        <ul className="list-none w-screen col-start-2 col-end-3 max-w-full">
+            {Archives.map((archive, index) => (
+                <li
+                    key={index}
+                    className="box-border md:bg-gray-700 mt-3 pl-3 pr-3 md:p-6 md:rounded-lg max-w-full">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="min-w-160 md:w-2/4 m-0 flex-shrink-0 text-center">
+                            <a
+                                href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
+                                target="_blank"
+                                rel="noreferrer">
+                                <img
+                                    src={createHighQuality720URL(
+                                        archive.id.videoId
+                                    )}
+                                    className="object-cover w-full h-auto"
+                                />
+                            </a>
+                        </div>
+                        <div className="flex justify-center items-center flex-shrink md:ml-2">
+                            <div className="flex flex-col justify-center content-center">
+                                <span className="h-12 text-base text-gray-100 text-left line-clamp-2 mt-2 md:mt-0">
+                                    {archive.snippet.title}
+                                </span>
+                                <div className="text-sm text-gray-400 text-left mt-2">
+                                    {converDayTime(archive.snippet.publishedAt)}
                                 </div>
                             </div>
                         </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+                    </div>
+                </li>
+            ))}
+        </ul>
     );
 };
