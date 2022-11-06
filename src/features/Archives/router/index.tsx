@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import link from 'next/link';
 
 import { Archive } from './Archive';
 import NextLoad from '../component/NextLoad';

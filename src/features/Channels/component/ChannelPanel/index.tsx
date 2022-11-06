@@ -1,7 +1,7 @@
 import React from 'react';
 import { useChannels } from '../../api/getChannels';
 import { useTimeOutError } from '../../../../hooks/timeout/index';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { IconElement } from '../../../../component/Element/Icon';
 

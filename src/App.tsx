@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import Link from 'next/link';
 import { ArchiveRouter } from './features/Archives';
 import { Channels } from './features/Channels';
 import { RecoilRoot } from 'recoil';

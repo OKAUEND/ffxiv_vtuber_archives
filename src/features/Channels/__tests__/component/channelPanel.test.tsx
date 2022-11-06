@@ -8,7 +8,7 @@ import * as useTimeOutModule from '../../../../hooks/timeout/index';
 import { HikasenVtuber } from '../../types/index';
 import { AxiosResut } from '../../../../types/api/index';
 import { ChannelPanel } from '../../component/ChannelPanel';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'next/router';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
