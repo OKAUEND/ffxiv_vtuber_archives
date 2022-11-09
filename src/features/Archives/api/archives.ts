@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
