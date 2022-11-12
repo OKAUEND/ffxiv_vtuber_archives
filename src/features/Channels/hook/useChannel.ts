@@ -21,11 +21,10 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
         if (channels.length > 0) {
             return channels;
         } else {
-            const request = await axiosGet<HikasenVtuber[]>(
-                import.meta.env.VITE_CHANNELLIST_SPREADSHEET_URL
-            );
+            const response = await fetch('../api/channel');
+            const channel = await response.json();
 
-            return request.payload;
+            return channel.payload;
         }
     },
     set: ({ set }, newChannels) => {
