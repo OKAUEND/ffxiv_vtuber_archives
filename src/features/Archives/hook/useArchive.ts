@@ -55,11 +55,10 @@ const archivesSelector = selectorFamily<
                 createYoutubeQuery(createTimeRange(time))
             );
 
-            const response = await axiosGet<
-                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-            >(url);
+            const response = await fetch('../api/archives');
+            const archive = await response.json();
 
-            return response.payload.items;
+            return archive.payload.items;
         },
     set:
         (channelId: string) =>
