@@ -85,11 +85,10 @@ export const youtubeSelector = selectorFamily<
 
             const requestURL = createYoutubeURL(channelId, requestQuery);
 
-            const request = await axiosGet<
-                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-            >(requestURL);
+            const response = await fetch('../api/archives');
+            const archive = await response.json();
 
-            return request.payload.items;
+            return archive.payload.items;
         },
 });
 
