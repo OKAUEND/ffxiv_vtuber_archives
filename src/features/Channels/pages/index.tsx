@@ -5,11 +5,12 @@ import { ChannelPanel } from '../component/ChannelPanel';
 import { useChannels } from '../hook/useChannel';
 
 export const Channels = () => {
-    const [channels, resultStatus, reload] = useChannels();
+    // const [channels, resultStatus, reload] = useChannels();
     return (
         <div>
             <Suspense fallback={<p>Loading...</p>}>
-                <ChannelPanel />
+                {/* <ChannelPanel /> */}
+                <p>Loading...</p>
             </Suspense>
         </div>
     );
