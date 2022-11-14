@@ -5,7 +5,7 @@ import link from 'next/link';
 import NextLoad from '../component/NextLoad';
 
 import { ArchiveList } from '../component/ArchiveList';
-import { useArchives } from '../api/getYoutube';
+import { useArchives } from '../hook/useArchive';
 import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
 
 const typeGuard = (target: string | undefined) => {

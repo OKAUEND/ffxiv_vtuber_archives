@@ -1,14 +1,10 @@
 import React from 'react';
-import { useChannels } from '../../api/getChannels';
-import { useTimeOutError } from '../../../../hooks/timeout/index';
+
 import Link from 'next/link';
 
 import { IconElement } from '../../../../component/Element/Icon';
 
 export const ChannelPanel = () => {
-    const [channels, resultStatus, reload] = useChannels();
-    const [isTimeOut] = useTimeOutError(resultStatus);
-
     const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
 
     {
