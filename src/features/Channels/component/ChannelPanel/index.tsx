@@ -3,10 +3,13 @@ import React from 'react';
 import Link from 'next/link';
 
 import { IconElement } from '@/src/component/Element/Icon';
+import { HikasenVtuber } from '@/src/features/Channels/types';
 
-type Props = {};
+type Props = {
+    channels: HikasenVtuber[];
+};
 
-export const ChannelPanel = () => {
+export const ChannelPanel = ({ channels }: Props) => {
     const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
 
     {
