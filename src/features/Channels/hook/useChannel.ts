@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { atom, DefaultValue, selector, useRecoilState } from 'recoil';
-import { HikasenVtuber } from '../types/index';
-import { get as axiosGet } from '../../../utility/axios';
-import { AxiosResut } from '../../../types/api/index';
+import { HikasenVtuber } from '@/src/features/Channels/types';
+import { AxiosResut } from '@/src/types/api/index';
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'Channels-atom',

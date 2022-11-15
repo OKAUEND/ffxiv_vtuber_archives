@@ -2,7 +2,9 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { IconElement } from '../../../../component/Element/Icon';
+import { IconElement } from '@/src/component/Element/Icon';
+
+type Props = {};
 
 export const ChannelPanel = () => {
     const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
