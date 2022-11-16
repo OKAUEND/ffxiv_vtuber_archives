@@ -1,21 +1,15 @@
 import React from 'react';
 
-import { useYoutube } from '../api/getYoutube';
+type handler = () => void;
 
 interface Props {
-    channelId: string;
+    handler: handler;
 }
 
-const NextLoad = ({ channelId }: Props) => {
-    const [, updateQuery] = useYoutube(channelId);
-
-    const handlerClick = () => {
-        updateQuery();
-    };
-
+const NextLoad = ({ handler }: Props) => {
     return (
         <div>
-            <button onClick={handlerClick}>次をロード</button>
+            <button onClick={() => handler()}>次をロード</button>
         </div>
     );
 };
