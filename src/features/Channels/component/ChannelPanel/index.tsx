@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { IconElement } from '@/src/component/Element/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
@@ -11,6 +12,8 @@ type Props = {
 
 export const ChannelPanel = ({ channels }: Props) => {
     const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
+
+    const router = useRouter();
 
     {
         /* 
