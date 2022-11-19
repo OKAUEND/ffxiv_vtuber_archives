@@ -2,11 +2,11 @@ import React from 'react';
 
 type handler = () => void;
 
-interface Props {
+interface IProps {
     handler: handler;
 }
 
-const NextLoad = ({ handler }: Props) => {
+const NextLoad = ({ handler }: IProps) => {
     return (
         <div>
             <button onClick={() => handler()}>次をロード</button>
