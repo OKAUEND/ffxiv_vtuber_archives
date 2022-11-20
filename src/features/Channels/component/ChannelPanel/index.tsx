@@ -31,7 +31,9 @@ export const ChannelPanel = ({ channels }: Props) => {
     // };
 
     const onClick = () => {
-        router.push('/Archives');
+        router.push({
+            pathname: '/Archives/hogehoge',
+        });
     };
 
     return (
