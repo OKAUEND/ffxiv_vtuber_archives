@@ -15,21 +15,6 @@ export const ChannelPanel = ({ channels }: Props) => {
 
     const router = useRouter();
 
-    {
-        /* 
-        Timeoutした場合はこの下のTimeout処理をかく 
-        理由：サイドリロードさせたいので
-        */
-    }
-    // const timeOutError = () => {
-    //     return (
-    //         <div>
-    //             <h3>タイムアウトエラー</h3>
-    //             <button onClick={reload}>再度読み込む</button>
-    //         </div>
-    //     );
-    // };
-
     const onClick = () => {
         router.push({
             pathname: '/Archives/hogehoge',
