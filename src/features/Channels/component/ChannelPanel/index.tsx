@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ChannelPanel = ({ channels }: Props) => {
-    const iconURL = import.meta.env.VITE_YOUTUBE_CHANNEL_ICON_URL;
+    const iconURL = process.env.CHANNEL_ICON_URL;
 
     const router = useRouter();
 
@@ -30,12 +30,12 @@ export const ChannelPanel = ({ channels }: Props) => {
                     <div className="grid grid-row-3 grid-flow-col gap-4">
                         <div className="row-span-3">
                             <button onClick={onClick}>
-                                <IconElement
+                                {/* <IconElement
                                     src={`${iconURL}${channel.channelIconID}`}
                                     alt={`${channel.name}のチャンネルアイコン`}
                                     size="Medium"
                                     radius="full"
-                                />
+                                /> */}
                             </button>
                         </div>
                         <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
