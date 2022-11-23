@@ -3,14 +3,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
 
-const handler: Handler = async (request, response) => {
+export const handler: Handler = async (request, response) => {
     const { method } = request;
     switch (method) {
         case 'GET':
             try {
-                const res = await axios.get(
-                    import.meta.env.VITE_CHANNELLIST_URL
-                );
+                // const res = await axios.get(process.env.CHANNELLIST_URL);
+                response.status(200).json({ name: 'John Doe' });
             } catch (e) {
                 console.error('Request error', e);
                 response.status(500).json({ error: 'Error fetchng posts' });
@@ -23,5 +22,3 @@ const handler: Handler = async (request, response) => {
             break;
     }
 };
-
-export default handler;

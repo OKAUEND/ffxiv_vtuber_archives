@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
 
-const handler: Handler = async (request, response) => {
+export const handler: Handler = async (request, response) => {
     const { method } = request;
     switch (method) {
         case 'GET':
@@ -23,5 +23,3 @@ const handler: Handler = async (request, response) => {
             break;
     }
 };
-
-export default handler;
