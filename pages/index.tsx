@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 import { Channels } from '@/src/features/Channels';
+import { Suspense, useEffect } from 'react';
 
 export default function Home() {
     return (
@@ -65,7 +66,9 @@ export default function Home() {
                         </p>
                     </a>
                 </div>
-                <Channels />
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Channels />
+                </Suspense>
             </main>
 
             <footer className={styles.footer}>
