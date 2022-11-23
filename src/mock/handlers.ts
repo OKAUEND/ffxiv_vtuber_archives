@@ -51,10 +51,10 @@ const Archives: GoogleApiYouTubeSearchResource[] = [
 ];
 
 export const handlers = [
-    rest.post('../api/channel', (req, res, ctx) => {
+    rest.post('/api/channel', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json([channnel]));
     }),
-    rest.post('../api/archives', (req, res, ctx) => {
+    rest.post('/api/archives', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json([Archives]));
     }),
 ];
