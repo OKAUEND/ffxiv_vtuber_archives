@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { atom, DefaultValue, selector, useRecoilStateLoadable } from 'recoil';
 import { HikasenVtuber } from '@/src/features/Channels/types';
-import { AxiosResut } from '@/src/types/api/index';
 
 //--------------------------------------------//
 
