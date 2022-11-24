@@ -20,6 +20,21 @@ type timeRangetype = {
     BeginTime: string;
 };
 
+type FetchArchives = (
+    channelId: string
+) => Promise<GoogleApiYouTubeSearchResource[]>;
+
+//---------------------------------------------------------------------------
+
+const fetchArchives: FetchArchives = async (channelId) => {
+    return await fetch(`/api/archives&channelId=${channelId}`).then(
+        async (response) => {
+            const test = await response.json();
+            return test;
+        }
+    );
+};
+
 //---------------------------------------------------------------------------
 
 export const requestQueryAtom = atom<string>({
