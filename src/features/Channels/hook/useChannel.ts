@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { atom, DefaultValue, selector, useRecoilState } from 'recoil';
+import { atom, DefaultValue, selector, useRecoilStateLoadable } from 'recoil';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 import { AxiosResut } from '@/src/types/api/index';
 
@@ -33,18 +33,19 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
 //--------------------------------------------//
 
 export const useChannels = () => {
-    const [channels, store] = useRecoilState(ChannelsSelector);
-    const [resultStatus, setresultStatus] = useRecoilState(
-        ResponseResultSelector
-    );
+    const [channels] =
+        useRecoilStateLoadable<HikasenVtuber[]>(ChannelsSelector);
+    // const [resultStatus, setresultStatus] = useRecoilState(
+    //     ResponseResultSelector
+    // );
 
-    useEffect(() => {
-        store(channels);
-    }, []);
+    // useEffect(() => {
+    //     store(channels);
+    // }, []);
 
-    const reload = async (): Promise<void> => {
-        store([]);
-    };
+    // const reload = async (): Promise<void> => {
+    //     store([]);
+    // };
 
-    return [channels, resultStatus, reload] as const;
+    return [channels.getValue()] as const;
 };
