@@ -3,23 +3,26 @@ import { atom, DefaultValue, selector, useRecoilStateLoadable } from 'recoil';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 import { AxiosResut } from '@/src/types/api/index';
 
+//--------------------------------------------//
+
+const fetchChannels = async (): Promise<HikasenVtuber[]> => {
+    return await fetch('/api/hello').then(async (response) => {
+        const test = (await response.json()) as HikasenVtuber[];
+        return test;
+    });
+};
+
+//--------------------------------------------//
+
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'Channels-atom',
     default: [],
 });
 
 const ChannelsSelector = selector<HikasenVtuber[]>({
-    key: 'Channels-selector',
+    key: 'channels.selector',
     get: async ({ get }) => {
-        const channels = get(ChannelsAtom);
-        if (channels.length > 0) {
-            return channels;
-        } else {
-            const response = await fetch('../api/channel');
-            const channel = await response.json();
-
-            return channel.payload;
-        }
+        return get(ChannelsAtom) || (await fetchChannels());
     },
     set: ({ set }, newChannels) => {
         if (newChannels instanceof DefaultValue) {
