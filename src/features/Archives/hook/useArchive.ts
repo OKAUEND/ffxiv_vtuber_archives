@@ -11,8 +11,6 @@ import {
     useSetRecoilState,
 } from 'recoil';
 
-import { get as axiosGet } from '../../../utility/axios';
-
 //---------------------------------------------------------------------------
 
 type timeRangetype = {
