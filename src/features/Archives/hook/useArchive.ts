@@ -105,5 +105,10 @@ export const useArchives = (channelId: string) => {
         setArchives(response.getValue());
     }, []);
 
-    return [response] as const;
+    const fetch = async () => {
+        const archive = await fetchArchives(channelId);
+        setArchives(archive);
+    };
+
+    return [response.getValue(), fetch] as const;
 };
