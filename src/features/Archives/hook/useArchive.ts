@@ -24,6 +24,30 @@ type FetchArchives = (
 
 //---------------------------------------------------------------------------
 
+export const createYoutubeQuery = (timeRange: timeRangetype): string => {
+    const part = 'snippet';
+    const APIKey = process.env.YOUTUBE_API;
+    const maxResult = 50;
+    const order = 'date';
+    const query = 'FF14';
+
+    return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+};
+
+const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
+    const lastArchiveTime = new Date(BeginLiveDayTime);
+    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
+    const EndTime = lastArchiveTime.toISOString();
+    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
+    const BeginTime = lastArchiveTime.toISOString();
+
+    return { EndTime, BeginTime };
+};
+
+export const createYoutubeURL = (channelId: string, query: string): string => {
+    return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
+};
+
 const fetchArchives: FetchArchives = async (channelId) => {
     return await fetch(`/api/archives&channelId=${channelId}`).then(
         async (response) => {
@@ -128,30 +152,6 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 });
 
 //---------------------------------------------------------------------------
-
-export const createYoutubeQuery = (timeRange: timeRangetype): string => {
-    const part = 'snippet';
-    const APIKey = import.meta.env.VITE_YOUTUBE_API;
-    const maxResult = 50;
-    const order = 'date';
-    const query = 'FF14';
-
-    return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
-};
-
-const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
-    const lastArchiveTime = new Date(BeginLiveDayTime);
-    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-    const EndTime = lastArchiveTime.toISOString();
-    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-    const BeginTime = lastArchiveTime.toISOString();
-
-    return { EndTime, BeginTime };
-};
-
-export const createYoutubeURL = (channelId: string, query: string): string => {
-    return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
-};
 
 //---------------------------------------------------------------------------
 
