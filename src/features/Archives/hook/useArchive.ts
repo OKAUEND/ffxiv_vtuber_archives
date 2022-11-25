@@ -72,20 +72,9 @@ const archivesSelector = selectorFamily<
     get:
         (channelId: string) =>
         async ({ get }) => {
-            const Archives = get(archivesAtom(channelId));
-
-            if (Archives.length > 0) return Archives;
-
-            const time = new Date().toISOString();
-            const url = createYoutubeURL(
-                channelId,
-                createYoutubeQuery(createTimeRange(time))
+            return (
+                get(archivesAtom(channelId)) || (await fetchArchives(channelId))
             );
-
-            const response = await fetch('../api/archives');
-            const archive = await response.json();
-
-            return archive.payload.items;
         },
     set:
         (channelId: string) =>
