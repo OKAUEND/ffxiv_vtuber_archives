@@ -54,11 +54,6 @@ const fetchArchives: FetchArchives = async (channelId) => {
 
 //---------------------------------------------------------------------------
 
-export const requestQueryAtom = atom<string>({
-    key: 'requestQuery',
-    default: '',
-});
-
 export const archivesAtom = atomFamily<
     GoogleApiYouTubeSearchResource[],
     string
@@ -103,37 +98,6 @@ const archivesSelector = selectorFamily<
         },
 });
 
-export const youtubeSelector = selectorFamily<
-    GoogleApiYouTubeSearchResource[],
-    string
->({
-    key: 'youtubeAPI',
-    get:
-        (channelId: string) =>
-        async ({ get }) => {
-            const requestQuery = get(querySelector);
-
-            if (requestQuery === '') return [];
-
-            const requestURL = createYoutubeURL(channelId, requestQuery);
-
-            const response = await fetch('../api/archives');
-            const archive = await response.json();
-
-            return archive.payload.items;
-        },
-});
-
-const querySelector = selector<string>({
-    key: 'youtube-query-selector',
-    get: ({ get }) => {
-        return get(requestQueryAtom);
-    },
-    set: ({ set }, newQuery) => {
-        set(requestQueryAtom, newQuery);
-    },
-});
-
 const timeRangeSelector = selectorFamily<timeRangetype, string>({
     key: 'next-timerange-selector',
     get:
@@ -149,26 +113,6 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-
-export const useYoutube = (channelId: string) => {
-    const response = useRecoilValue(youtubeSelector(channelId));
-    const timeRange = useRecoilValue(timeRangeSelector(channelId));
-    const setQuery = useSetRecoilState(querySelector);
-    const setArchives = useSetRecoilState(archivesSelector(channelId));
-    const resetQuery = useResetRecoilState(requestQueryAtom);
-
-    useEffect(() => {
-        setArchives(response);
-        resetQuery();
-    }, [response]);
-
-    const updateQuery = (): void => {
-        const query = createYoutubeQuery(timeRange);
-
-        setQuery(query);
-    };
-    return [response, updateQuery] as const;
-};
 
 export const useArchives = (channelId: string) => {
     const [response, setArchives] = useRecoilState(archivesSelector(channelId));
