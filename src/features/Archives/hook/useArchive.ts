@@ -43,10 +43,6 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
     return { EndTime, BeginTime };
 };
 
-export const createYoutubeURL = (channelId: string, query: string): string => {
-    return `https://www.googleapis.com/youtube/v3/search?channelId=${channelId}${query}`;
-};
-
 const fetchArchives: FetchArchives = async (channelId) => {
     return await fetch(`/api/archives&channelId=${channelId}`).then(
         async (response) => {

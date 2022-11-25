@@ -7,6 +7,10 @@ export const handler: Handler = async (request, response) => {
     const { method } = request;
     const APIKey = process.env.YOUTUBE_API;
 
+    const createYoutubeURL = (channelId: string, query: string): string => {
+        return `${process.env.YOUTUBE_API_URL}=${channelId}${query}`;
+    };
+
     switch (method) {
         case 'GET':
             try {
