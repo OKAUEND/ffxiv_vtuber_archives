@@ -104,10 +104,12 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 //---------------------------------------------------------------------------
 
 export const useArchives = (channelId: string) => {
-    const [response, setArchives] = useRecoilState(archivesSelector(channelId));
+    const [response, setArchives] = useRecoilStateLoadable(
+        archivesSelector(channelId)
+    );
 
     useEffect(() => {
-        setArchives(response);
+        setArchives(response.getValue());
     }, []);
 
     return [response] as const;
