@@ -26,7 +26,6 @@ type FetchArchives = (
 
 export const createYoutubeQuery = (timeRange: timeRangetype): string => {
     const part = 'snippet';
-    const APIKey = process.env.YOUTUBE_API;
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';

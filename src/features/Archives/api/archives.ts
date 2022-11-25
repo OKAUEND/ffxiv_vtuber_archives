@@ -5,6 +5,8 @@ type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
 
 export const handler: Handler = async (request, response) => {
     const { method } = request;
+    const APIKey = process.env.YOUTUBE_API;
+
     switch (method) {
         case 'GET':
             try {
