@@ -46,8 +46,7 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 const fetchArchives: FetchArchives = async (channelId) => {
     return await fetch(`/api/archives&channelId=${channelId}`).then(
         async (response) => {
-            const test = await response.json();
-            return test;
+            return await response.json();
         }
     );
 };
