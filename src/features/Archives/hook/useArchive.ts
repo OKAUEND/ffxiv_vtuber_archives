@@ -24,13 +24,13 @@ type FetchArchives = (
 
 //---------------------------------------------------------------------------
 
-export const createYoutubeQuery = (timeRange: timeRangetype): string => {
+export const createQuery = (channelId: string): string => {
     const part = 'snippet';
     const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
 
-    return `&part=${part}&order=${order}&q=${query}&publishedBefore=${timeRange.EndTime}&publishedAfter=${timeRange.BeginTime}&maxResults=${maxResult}&key=${APIKey}`;
+    return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${maxResult}`;
 };
 
 const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
@@ -44,6 +44,7 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 };
 
 const fetchArchives: FetchArchives = async (channelId) => {
+    const query = createQuery(channelId);
     return await fetch(`/api/archives&channelId=${channelId}`).then(
         async (response) => {
             return await response.json();
