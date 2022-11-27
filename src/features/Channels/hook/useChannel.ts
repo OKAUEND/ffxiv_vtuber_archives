@@ -15,7 +15,7 @@ const fetchChannels = async (): Promise<HikasenVtuber[]> => {
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'Channels-atom',
-    default: [],
+    default: null,
 });
 
 const ChannelsSelector = selector<HikasenVtuber[]>({
