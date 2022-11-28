@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ChannelPanel = ({ channels }: Props) => {
-    const iconURL = process.env.CHANNEL_ICON_URL;
+    const iconURL = process.env.NEXT_PUBLIC_CHANNEL_ICON_URL;
 
     const router = useRouter();
 
