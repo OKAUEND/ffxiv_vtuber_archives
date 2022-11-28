@@ -4,9 +4,14 @@ import { HikasenVtuber } from '@/src/features/Channels/types';
 
 //--------------------------------------------//
 
+const HOST = process.env.NEXT_PUBLIC_HOST;
+
+//--------------------------------------------//
+
 const fetchChannels = async (): Promise<HikasenVtuber[]> => {
-    return await fetch('/api/hello').then(async (response) => {
+    return await fetch(`${HOST}/api/channel`).then(async (response) => {
         const test = (await response.json()) as HikasenVtuber[];
+        console.log(test);
         return test;
     });
 };
