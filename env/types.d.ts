@@ -2,6 +2,7 @@ type Env = Partial<Readonly<typeof import('./env.local.json')>>;
 
 declare namespace NodeJS {
     interface ProcessEnv extends Env {
+        readonly NEXT_PUBLIC_HOST?: string;
         readonly NEXT_PUBLIC_YOUTUBE_API?: string;
         readonly NEXT_PUBLIC_YOUTUBE_API_URL?: string;
         readonly NEXT_PUBLIC_CHANNELLIST_URL?: string;
