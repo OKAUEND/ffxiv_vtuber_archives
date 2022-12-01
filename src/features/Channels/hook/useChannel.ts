@@ -39,7 +39,7 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
 
 //--------------------------------------------//
 
-export const useChannels = () => {
+export const useChannels = (firstPage: HikasenVtuber[]) => {
     const [channels] =
         useRecoilStateLoadable<HikasenVtuber[]>(ChannelsSelector);
     // const [resultStatus, setresultStatus] = useRecoilState(

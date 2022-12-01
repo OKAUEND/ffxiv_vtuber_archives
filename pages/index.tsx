@@ -5,7 +5,11 @@ import styles from '../styles/Home.module.css';
 import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 
-export default function Home() {
+type Props = {
+    channels: HikasenVtuber[];
+};
+
+export default function Home({ channels }: Props) {
     return (
         <div className={styles.container}>
             <Head>
@@ -67,7 +71,7 @@ export default function Home() {
                     </a>
                 </div>
                 <Suspense fallback={<p>Loading...</p>}>
-                    <Channels />
+                    <Channels ChannelsFirstPagenation={channels} />
                 </Suspense>
             </main>
 
