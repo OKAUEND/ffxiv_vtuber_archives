@@ -20,13 +20,13 @@ const fetchChannels = async (): Promise<HikasenVtuber[]> => {
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
     key: 'Channels-atom',
-    default: null,
+    default: [],
 });
 
 const ChannelsSelector = selector<HikasenVtuber[]>({
     key: 'channels.selector',
     get: async ({ get }) => {
-        return get(ChannelsAtom) || (await fetchChannels());
+        return get(ChannelsAtom);
     },
     set: ({ set }, newChannels) => {
         if (newChannels instanceof DefaultValue) {
