@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-import { Channels } from '@/src/features/Channels';
+import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 
 export default function Home() {
@@ -92,7 +92,15 @@ export default function Home() {
 }
 
 export const getServerSideProps = async () => {
+    const HOST = process.env.NEXT_PUBLIC_HOST;
+    const channels = await fetch(`${HOST}/api/channel`).then(
+        async (response) => {
+            return (await response.json()) as HikasenVtuber[];
+        }
+    );
     return {
-        props: {},
+        props: {
+            channels,
+        },
     };
 };
