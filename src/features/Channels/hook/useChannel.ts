@@ -40,15 +40,15 @@ const ChannelsSelector = selector<HikasenVtuber[]>({
 //--------------------------------------------//
 
 export const useChannels = (firstPage: HikasenVtuber[]) => {
-    const [channels] =
+    const [channels, setChannels] =
         useRecoilStateLoadable<HikasenVtuber[]>(ChannelsSelector);
     // const [resultStatus, setresultStatus] = useRecoilState(
     //     ResponseResultSelector
     // );
 
-    // useEffect(() => {
-    //     store(channels);
-    // }, []);
+    useEffect(() => {
+        setChannels(firstPage);
+    }, []);
 
     // const reload = async (): Promise<void> => {
     //     store([]);
