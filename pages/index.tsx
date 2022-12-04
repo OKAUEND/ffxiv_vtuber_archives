@@ -97,11 +97,16 @@ export default function Home({ channels }: Props) {
 
 export const getServerSideProps = async () => {
     const HOST = process.env.NEXT_PUBLIC_HOST;
-    const channels = await fetch(`${HOST}/api/channel`).then(
-        async (response) => {
+    const channels = await fetch(`${HOST}/api/channel`)
+        .then(async (response) => {
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
             return (await response.json()) as HikasenVtuber[];
-        }
-    );
+        })
+        .catch((error) => {
+            console.error('NetWork Error', error);
+        });
     return {
         props: {
             channels,
