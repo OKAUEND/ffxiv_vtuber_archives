@@ -10,6 +10,9 @@ type Error = {
     message: string;
     status: number;
 };
+
+const path = () => 'http://exsample.com';
+
 export const channelPostHandler = (status: 200 | 400 = 200) => {
-    rest.get();
+    rest.get<Data, { id: string }, Data | Error>(path(), (req, res, ctx) => {});
 };
