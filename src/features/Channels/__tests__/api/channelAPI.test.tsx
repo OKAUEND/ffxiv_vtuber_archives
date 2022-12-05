@@ -1,3 +1,6 @@
+import http from 'http';
+import { apiResolver } from 'next/dist/server/api-utils/node';
+
 import { HikasenVtuber } from '../../types/index';
 
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
