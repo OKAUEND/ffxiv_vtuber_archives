@@ -18,5 +18,21 @@ const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
 };
 
 describe('Channel Get API TEST', () => {
-    test('APIをコールされた時にAPIRouterが値を返すか', async () => {});
+    const HOST = process.env.NEXT_PUBLIC_HOST;
+    const params = {
+        handler,
+        url: `${HOST}/api/channel`,
+    };
+    describe('getServerSideProps', () => {
+        test('200', async () => {});
+    });
+
+    describe('GET', () => {
+        test('200', async () => {
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {},
+            });
+        });
+    });
 });
