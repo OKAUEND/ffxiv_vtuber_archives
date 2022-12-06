@@ -1,17 +1,6 @@
 import { rest } from 'msw';
 
-import { HikasenVtuber } from '@/src/features/Channels/types';
-const channnel: HikasenVtuber = {
-    channelID: 'test',
-    channelIconID: 'test',
-    name: 'test',
-    twitter: 'test',
-    twitch: 'test',
-    ffxiv: {
-        dataCenter: 'test',
-        server: 'test',
-    },
-};
+import { channelPostHandler } from '@/src/features/Channels/mock';
 
 const Archives: GoogleApiYouTubeSearchResource[] = [
     {
@@ -53,9 +42,7 @@ const Archives: GoogleApiYouTubeSearchResource[] = [
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const handlers = [
-    rest.get(`${HOST}/api/channel`, (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json<HikasenVtuber[]>([channnel]));
-    }),
+    channelPostHandler(),
     rest.get(`${HOST}/api/archives`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json([Archives]));
     }),
