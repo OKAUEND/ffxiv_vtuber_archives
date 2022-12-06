@@ -26,5 +26,14 @@ const channnel: HikasenVtuber = {
 };
 
 export const channelPostHandler = (status: 200 | 400 = 200) => {
-    rest.get<Data, { id: string }, Data | Error>(path(), (req, res, ctx) => {});
+    rest.get<Data, { id: string }, Data | Error>(path(), (_req, res, ctx) => {
+        if (status === 400) {
+            return res(
+                ctx.status(status),
+                ctx.json({ message: 'Bad Request', status: 400 })
+            );
+        }
+
+        return res(ctx.status(status), ctx.json({ data: [channnel] }));
+    });
 };
