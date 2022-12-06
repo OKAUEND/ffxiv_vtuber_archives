@@ -1,5 +1,6 @@
 import http from 'http';
 import { apiResolver } from 'next/dist/server/api-utils/node';
+import { testApiHandler } from 'next-test-api-route-handler';
 
 import { HikasenVtuber } from '../../types/index';
 
