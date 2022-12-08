@@ -6,25 +6,25 @@ import { describe, expect, test } from 'vitest';
 
 import { HikasenVtuber } from '../../types/index';
 
-const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
-    return {
-        channelID: name,
-        channelIconID: name,
-        name: name,
-        twitter: '',
-        twitch: '',
-        ffxiv: {
-            dataCenter: 'test',
-            server: 'test',
-        },
-    };
-};
-
 describe('Channel Get API TEST', () => {
     const HOST = process.env.NEXT_PUBLIC_HOST;
     const params = {
         handler,
         url: `${HOST}/api/channel`,
+    };
+
+    const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
+        return {
+            channelID: name,
+            channelIconID: name,
+            name: name,
+            twitter: '',
+            twitch: '',
+            ffxiv: {
+                dataCenter: 'test',
+                server: 'test',
+            },
+        };
     };
 
     const requestInit = {
