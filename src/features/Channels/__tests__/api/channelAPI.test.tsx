@@ -26,6 +26,12 @@ describe('Channel Get API TEST', () => {
         handler,
         url: `${HOST}/api/channel`,
     };
+
+    const requestInit = {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(HikasenVtuberResourceFactory('Mock')),
+    };
     describe('getServerSideProps', () => {
         test('200', async () => {});
     });
