@@ -41,7 +41,12 @@ describe('Channel Get API TEST', () => {
         test('200', async () => {
             await testApiHandler({
                 ...params,
-                test: async ({ fetch }) => {},
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual(
+                        HikasenVtuberResourceFactory('Mock')
+                    );
+                },
             });
         });
     });
