@@ -1,4 +1,5 @@
 import { afterAll, afterEach, beforeAll } from 'vitest';
+import { loadEnvConfig } from '@next/env';
 import { server } from '../server';
 import 'whatwg-fetch';
 
@@ -7,3 +8,5 @@ beforeAll(() => {
 });
 afterAll(() => server.close());
 afterEach(() => server.resetHandlers());
+
+loadEnvConfig(process.cwd());
