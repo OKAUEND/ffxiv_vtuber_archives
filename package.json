@@ -34,7 +34,8 @@
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.2.1",
-    "vitest": "^0.24.5"
+    "vitest": "^0.24.5",
+    "whatwg-fetch": "^3.6.2"
   },
   "packageManager": "yarn@3.2.4",
   "msw": {
