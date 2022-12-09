@@ -9,4 +9,12 @@ export default defineConfig({
             '@': path.join(__dirname, '/'),
         },
     },
+    define: {
+        'import.meta.vitest': false,
+    },
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        // includeSource: ['src/**/*.{js,ts,tsx}'],
+    },
 });
