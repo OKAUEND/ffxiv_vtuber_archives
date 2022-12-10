@@ -28,7 +28,7 @@ describe('Channel Get API TEST', () => {
     };
 
     const requestInit = {
-        method: 'GET',
+        method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(HikasenVtuberResourceFactory('Mock')),
     };
