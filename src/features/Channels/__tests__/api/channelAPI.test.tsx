@@ -8,10 +8,9 @@ import { handler } from '@/src/features/Channels/api/channel';
 import { HikasenVtuber } from '../../types/index';
 
 describe('Channel Get API TEST', () => {
-    const HOST = process.env.NEXT_PUBLIC_HOST;
     const params = {
         handler,
-        url: `${HOST}/api/channel`,
+        url: '/api/channel',
     };
 
     const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
