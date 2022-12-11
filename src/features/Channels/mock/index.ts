@@ -9,9 +9,8 @@ type Error = {
     message: string;
     status: number;
 };
-const HOST = process.env.NEXT_PUBLIC_HOST;
 
-const path = () => `${HOST}/api/channel`;
+const path = () => `vitest.api.com`;
 
 const channnel: HikasenVtuber = {
     channelID: 'test',
