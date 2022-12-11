@@ -2,6 +2,9 @@ import http from 'http';
 import { apiResolver } from 'next/dist/server/api-utils/node';
 import { testApiHandler } from 'next-test-api-route-handler';
 import { describe, expect, test } from 'vitest';
+import { setupServer } from 'msw/node';
+
+import { channelPostHandler } from '@/src/features/Channels/mock';
 
 import { handler } from '@/src/features/Channels/api/channel';
 
