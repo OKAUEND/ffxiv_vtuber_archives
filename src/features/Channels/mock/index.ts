@@ -26,7 +26,7 @@ const channnel: HikasenVtuber = {
 };
 
 export const channelPostHandler = (status: 200 | 400 = 200) => {
-    rest.post<Data, { id: string }, Data | Error>(
+    return rest.post<Data, { id: string }, Data | Error>(
         path(),
         async (req, res, ctx) => {
             if (status === 400) {
