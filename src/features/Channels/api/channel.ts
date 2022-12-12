@@ -4,7 +4,7 @@ import { NextApiHandler } from 'next';
 export const handler: NextApiHandler = async (request, response) => {
     const { method } = request;
     switch (method) {
-        case 'GET':
+        case 'POST':
             try {
                 const path = process.env.CHANNELLIST_URL;
                 const res = await fetch(path, { method: 'POST' });
