@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { HikasenVtuber } from '../types';
 
 type Data = {
-    data: HikasenVtuber[];
+    data: string;
 };
 
 type Error = {
@@ -35,9 +35,7 @@ export const channelPostHandler = (status: 200 | 400 = 200) => {
                 );
             }
 
-            const body = (await req.json()) as Data;
-
-            return res(ctx.status(status), ctx.json(body));
+            return res(ctx.status(status), ctx.json({ data: 'Success!' }));
         }
     );
 };
