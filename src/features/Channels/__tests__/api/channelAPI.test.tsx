@@ -7,8 +7,10 @@ import { setupServer } from 'msw/node';
 import { channelPostHandler } from '@/src/features/Channels/mock';
 
 import { handler } from '@/src/features/Channels/api/channel';
-
+import { handlers } from '@/src/mock/handlers';
 import { HikasenVtuber } from '../../types/index';
+
+const server = setupServer(...handlers);
 
 describe('Channel Get API TEST', () => {
     const params = {
