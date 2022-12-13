@@ -53,5 +53,6 @@ describe('Channel Get API TEST', () => {
                 },
             });
         });
+        test('400', async () => {});
     });
 });
