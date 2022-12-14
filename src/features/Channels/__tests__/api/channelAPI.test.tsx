@@ -53,6 +53,17 @@ describe('Channel Get API TEST', () => {
                 },
             });
         });
-        test('400', async () => {});
+        test('400', async () => {
+            server.use(channelPostHandler(400));
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        message: 'Bad Request',
+                    });
+                },
+            });
+        });
     });
 });
