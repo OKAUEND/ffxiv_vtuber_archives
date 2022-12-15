@@ -32,7 +32,7 @@ export const channelPostHandler = (status: 200 | 400 = 200) => {
         async (req, res, ctx) => {
             if (status === 400) {
                 return res(
-                    ctx.status(status),
+                    ctx.status(400),
                     ctx.json({ message: 'Bad Request', status: 400 })
                 );
             }
