@@ -8,7 +8,8 @@ export const handler: NextApiHandler = async (request, response) => {
             try {
                 const path = process.env.CHANNELLIST_URL;
                 const res = await fetch(path, { method: 'POST' });
-                return response.status(200).json({ name: 'John Doe' });
+                const date = await res.json();
+                return response.status(200).json(date.data);
             } catch (e) {
                 console.error('Request error', e);
                 response.status(500).json({ error: 'Error fetchng posts' });
