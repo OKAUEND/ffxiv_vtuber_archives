@@ -61,6 +61,7 @@ describe('Channel Get API TEST', () => {
                     const response = await fetch(requestInit);
                     await expect(response.json()).resolves.toStrictEqual({
                         message: 'Bad Request',
+                        status: 400,
                     });
                 },
             });
