@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { HikasenVtuber } from '../types';
 
 type Data = {
-    data: string;
+    data: HikasenVtuber[];
 };
 
 type Error = {
@@ -12,16 +12,18 @@ type Error = {
 
 const path = () => `vitest.api.com`;
 
-const channnel: HikasenVtuber = {
-    channelID: 'test',
-    channelIconID: 'test',
-    name: 'test',
-    twitter: 'test',
-    twitch: 'test',
-    ffxiv: {
-        dataCenter: 'test',
-        server: 'test',
-    },
+const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
+    return {
+        channelID: name,
+        channelIconID: name,
+        name: name,
+        twitter: '',
+        twitch: '',
+        ffxiv: {
+            dataCenter: 'test',
+            server: 'test',
+        },
+    };
 };
 
 export const channelPostHandler = (status: 200 | 400 = 200) => {
@@ -35,7 +37,10 @@ export const channelPostHandler = (status: 200 | 400 = 200) => {
                 );
             }
 
-            return res(ctx.status(status), ctx.json({ data: 'Success!' }));
+            return res(
+                ctx.status(status),
+                ctx.json({ data: [HikasenVtuberResourceFactory('Mock')] })
+            );
         }
     );
 };
