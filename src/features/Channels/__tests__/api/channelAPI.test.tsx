@@ -35,7 +35,6 @@ describe('Channel Get API TEST', () => {
     const requestInit = {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(HikasenVtuberResourceFactory('Mock')),
     };
     describe('getServerSideProps', () => {
         test('200', async () => {});
