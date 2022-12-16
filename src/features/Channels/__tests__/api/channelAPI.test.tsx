@@ -1,5 +1,3 @@
-import http from 'http';
-import { apiResolver } from 'next/dist/server/api-utils/node';
 import { testApiHandler } from 'next-test-api-route-handler';
 import { describe, expect, test } from 'vitest';
 
