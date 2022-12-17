@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 
 import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
 
 type Props = {
     channels: HikasenVtuber[];
