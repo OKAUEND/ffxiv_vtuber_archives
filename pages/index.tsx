@@ -97,8 +97,11 @@ export default function Home({ channels }: Props) {
 }
 
 export const getServerSideProps = async () => {
-    const HOST = process.env.NEXT_PUBLIC_HOST;
-    const channels = await fetch(`${HOST}/api/channel`)
+    const HOST = process.env.CHANNELLIST_URL;
+
+    const channels = await fetch(HOST, {
+        method: 'POST',
+    })
         .then(async (response) => {
             if (!response.ok) {
                 throw new Error(response.statusText);
