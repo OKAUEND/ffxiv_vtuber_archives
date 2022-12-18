@@ -96,7 +96,7 @@ export default function Home({ channels }: Props) {
     );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps:GetServerSideProps<Props> = async () => {
     const HOST = process.env.CHANNELLIST_URL;
 
     const channels = await fetch(HOST, {
