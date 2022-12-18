@@ -110,6 +110,7 @@ export const getServerSideProps = async () => {
         })
         .catch((error) => {
             console.error('NetWork Error', error);
+            return [] as HikasenVtuber[];
         });
     return {
         props: {
