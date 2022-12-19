@@ -34,9 +34,6 @@ describe('Channel Get API TEST', () => {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
     };
-    describe('getServerSideProps', () => {
-        test('200', async () => {});
-    });
 
     describe('GET', () => {
         test('200', async () => {
