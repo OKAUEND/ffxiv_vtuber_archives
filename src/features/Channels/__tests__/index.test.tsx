@@ -36,6 +36,12 @@ describe('Channel - getServerSideProps', () => {
         const channel = res.props['channels']['data'];
         expect(channel).toStrictEqual([HikasenVtuberResourceFactory('Mock')]);
     });
-    test('400 - 失敗時', () => {});
+    test('400 - 失敗時', async () => {
+        server.use(channelPostHandler(400));
+        const res = await getServerSideProps(mockCtx());
+        assertHasProps(res);
+        const channel = res.props['channels'];
+        expect(channel).toStrictEqual([]);
+    });
     test('500 - 失敗時', () => {});
 });
