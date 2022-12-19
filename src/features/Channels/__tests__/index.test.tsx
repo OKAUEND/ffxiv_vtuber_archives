@@ -18,6 +18,15 @@ describe('Channel - getServerSideProps', () => {
         resolvedUrl: '',
     });
 
+    function assertHasProps<T>(item): asserts item is { props: T } {
+        const err = (): void => {
+            throw new Error('no props');
+        };
+        if (typeof item != 'object') err();
+        if (!(item as any)['props']) err();
+        if (typeof (item as any).props != 'object') err();
+    }
+
     test('200 - 成功時', async () => {});
     test('400 - 失敗時', () => {});
     test('500 - 失敗時', () => {});
