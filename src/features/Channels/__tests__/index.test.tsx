@@ -42,8 +42,11 @@ describe('Channel - getServerSideProps', () => {
         server.use(channelPostHandler(400));
         const res = await getServerSideProps(mockCtx());
         assertHasProps(res);
-        const channel = res.props['channels'];
-        expect(channel).toStrictEqual([]);
+        const channel = res.props;
+        expect(channel).toStrictEqual<Data<HikasenVtuber[]>>({
+            message: 'Bad Request',
+            status: 400,
+        });
     });
-    test('500 - 失敗時', () => {});
+    test('500 - 失敗時', async () => {});
 });
