@@ -9,6 +9,8 @@ import { setupMockServer } from '@/src/mock/test/setup';
 
 import { getServerSideProps } from '../../../../pages/';
 import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
+import { Data } from '@/src/types/api';
+import { HikasenVtuber } from '../types';
 
 const server = setupMockServer(handlers);
 
