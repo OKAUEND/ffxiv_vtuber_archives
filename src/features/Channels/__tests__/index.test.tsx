@@ -3,7 +3,6 @@ import { channelPostHandler } from '@/src/features/Channels/mock';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { GetServerSidePropsContext } from 'next';
 
-import { handler } from '@/src/features/Channels/api/channel';
 import { handlers } from '@/src/mock/handlers';
 import { setupMockServer } from '@/src/mock/test/setup';
 
