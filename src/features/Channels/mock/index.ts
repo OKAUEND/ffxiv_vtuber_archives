@@ -26,7 +26,7 @@ export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     };
 };
 
-export const channelPostHandler = (status: 200 | 400 = 200) => {
+export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.post<Data, { id: string }, Data | Error>(
         path(),
         async (req, res, ctx) => {
@@ -34,6 +34,13 @@ export const channelPostHandler = (status: 200 | 400 = 200) => {
                 return res(
                     ctx.status(400),
                     ctx.json({ message: 'Bad Request', status: 400 })
+                );
+            }
+
+            if (status === 500) {
+                return res(
+                    ctx.status(status),
+                    ctx.json({ message: 'Internal Server Error', status: 500 })
                 );
             }
 

@@ -48,5 +48,14 @@ describe('Channel - getServerSideProps', () => {
             status: 400,
         });
     });
-    test('500 - 失敗時', async () => {});
+    test('500 - 失敗時', async () => {
+        server.use(channelPostHandler(500));
+        const res = await getServerSideProps(mockCtx());
+        assertHasProps(res);
+        const channel = res.props;
+        expect(channel).toStrictEqual<Data<HikasenVtuber[]>>({
+            message: 'Internal Server Error',
+            status: 500,
+        });
+    });
 });
