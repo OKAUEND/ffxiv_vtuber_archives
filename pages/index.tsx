@@ -5,10 +5,9 @@ import styles from '../styles/Home.module.css';
 import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
+import { Data } from '@/src/types/api';
 
-type Props = {
-    channels: HikasenVtuber[];
-};
+type Props = Data<HikasenVtuber[]>;
 
 export default function Home({ channels }: Props) {
     return (
