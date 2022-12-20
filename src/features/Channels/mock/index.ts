@@ -12,7 +12,7 @@ type Error = {
 
 const path = () => `vitest.api.com`;
 
-const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
+export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
         channelID: name,
         channelIconID: name,

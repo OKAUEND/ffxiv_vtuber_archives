@@ -7,6 +7,7 @@ import { handler } from '@/src/features/Channels/api/channel';
 import { handlers } from '@/src/mock/handlers';
 import { HikasenVtuber } from '../../types/index';
 import { setupMockServer } from '@/src/mock/test/setup';
+import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
 
 const server = setupMockServer(handlers);
 
@@ -14,20 +15,6 @@ describe('Channel Get API TEST', () => {
     const params = {
         handler,
         url: '/api/channel',
-    };
-
-    const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
-        return {
-            channelID: name,
-            channelIconID: name,
-            name: name,
-            twitter: '',
-            twitch: '',
-            ffxiv: {
-                dataCenter: 'test',
-                server: 'test',
-            },
-        };
     };
 
     const requestInit = {
