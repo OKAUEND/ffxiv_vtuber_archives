@@ -1,6 +1,5 @@
-export type AxiosResut<T> = {
+export type Data<T> = {
     status: number;
-    errorCode?: string;
-    error?: boolean;
-    payload: T;
+    message?: string;
+    channels?: T;
 };
