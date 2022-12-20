@@ -12,7 +12,7 @@ export const handler: NextApiHandler = async (request, response) => {
                 if (!res.ok) {
                     return response.status(400).json(date);
                 }
-                return response.status(200).json(date.data);
+                return response.status(200).json(date);
             } catch (e) {
                 console.error('Request error', e);
                 response.status(500).json({ error: 'Error fetchng posts' });

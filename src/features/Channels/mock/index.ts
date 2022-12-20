@@ -1,9 +1,7 @@
 import { rest } from 'msw';
 import { HikasenVtuber } from '../types';
 
-type Data = {
-    data: HikasenVtuber[];
-};
+type Data = HikasenVtuber[];
 
 type Error = {
     message: string;
@@ -46,7 +44,7 @@ export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
 
             return res(
                 ctx.status(status),
-                ctx.json({ data: [HikasenVtuberResourceFactory('Mock')] })
+                ctx.json([HikasenVtuberResourceFactory('Mock')])
             );
         }
     );
