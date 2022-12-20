@@ -98,22 +98,25 @@ export default function Home({ channels }: Props) {
 export const getServerSideProps:GetServerSideProps<Props> = async () => {
     const HOST = process.env.CHANNELLIST_URL;
 
-    const channels = await fetch(HOST, {
+    const response = await fetch(HOST, {
         method: 'POST',
-    })
-        .then(async (response) => {
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-            return (await response.json()) as HikasenVtuber[];
-        })
-        .catch((error) => {
-            console.error('NetWork Error', error);
-            return [] as HikasenVtuber[];
-        });
+    }).then(async (response) => {
+        const data = await response.json();
+        if (!response.ok) {
+            const err: Props = {
+                message: data.message,
+                status: response.status,
+            };
+            return err;
+        }
+
+        const success: Props = {
+            channels: data,
+            status: response.status,
+        };
+        return success;
+    });
     return {
-        props: {
-            channels,
-        },
+        props: response,
     };
 };
