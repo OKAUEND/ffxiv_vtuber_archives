@@ -81,3 +81,5 @@ export const YoutubeResourceFactory = (
         },
     };
 };
+
+export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {};
