@@ -1,16 +1,11 @@
-import { act, renderHook } from '@testing-library/react-hooks';
-import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
-import { waitFor } from '@testing-library/react';
-import { vi } from 'vitest';
+import { testApiHandler } from 'next-test-api-route-handler';
+import { describe, expect, test } from 'vitest';
 
-import * as AxiosInstanceModule from '../../../../utility/axios/index';
-import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
-import {
-    useYoutube,
-    useArchives,
-    archivesAtom,
-    requestQueryAtom,
-} from '../../api/getYoutube';
+import { channelPostHandler } from '@/src/features/Channels/mock';
+
+import { handler } from '@/src/features/Channels/api/channel';
+import { handlers } from '@/src/mock/handlers';
+import { setupMockServer } from '@/src/mock/test/setup';
 
 const GoogleYoutubeFactory = (
     name: string
