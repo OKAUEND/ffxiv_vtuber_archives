@@ -9,7 +9,7 @@ import { Data } from '@/src/types/api';
 
 type Props = Data<HikasenVtuber[]>;
 
-export default function Home({ channels }: Props) {
+export default function Home({ item }: Props) {
     return (
         <div className={styles.container}>
             <Head>
@@ -111,7 +111,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
         }
 
         const success: Props = {
-            channels: data,
+            item: data,
             status: response.status,
         };
         return success;
