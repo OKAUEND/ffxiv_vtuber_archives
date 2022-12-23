@@ -9,15 +9,19 @@ export const handler: Handler = async (request, response) => {
 
     type QueryParams = typeof query;
 
-    const createYoutubeURL = (channelId: string, query: string): string => {
-        return `${process.env.NEXT_PUBLIC_YOUTUBE_API_URL}=${channelId}${query}`;
+    const createYoutubeURL = (query: QueryParams): string => {
+        const channelId =
+            typeof query.channelId === 'string'
+                ? `?channelId=${query.channelId}`
+                : ``;
+
+        return `${process.env.YOUTUBE_API_URL}${channelId}`;
     };
 
     switch (method) {
         case 'GET':
             try {
-                const path = process.env.YOUTUBE_API_URL;
-                const res = await axios.get(path);
+                const res = await axios.get(createYoutubeURL(query));
                 return response.status(200).json(res.data);
             } catch (e) {
                 console.error('Request error', e);
