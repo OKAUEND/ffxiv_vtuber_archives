@@ -31,6 +31,22 @@ describe('Youtube Live GET API TEST', () => {
                 },
             });
         });
+        test('Queryを付与してAPIコールをできるか', async () => {
+            const testname = 'MockChannel';
+            const params = {
+                handler,
+                url: `/api/archives?channelId=${testname}`,
+            };
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual([
+                        GoogleYoutubeFactory(testname),
+                    ]);
+                },
+            });
+        });
         test('400', async () => {});
     });
 });
