@@ -4,8 +4,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
 
 export const handler: Handler = async (request, response) => {
-    const { method } = request;
+    const { method, query } = request;
     const APIKey = process.env.YOUTUBE_API;
+
+    type QueryParams = typeof query;
 
     const createYoutubeURL = (channelId: string, query: string): string => {
         return `${process.env.NEXT_PUBLIC_YOUTUBE_API_URL}=${channelId}${query}`;
