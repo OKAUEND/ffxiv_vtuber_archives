@@ -14,9 +14,9 @@ export const handler: Handler = async (request, response) => {
     switch (method) {
         case 'GET':
             try {
-                const res = await axios.get(
-                    `https://www.googleapis.com/youtube/v3/search?channelId=${'channelId'}${'query'}`
-                );
+                const path = process.env.YOUTUBE_API_URL;
+                const res = await axios.get(path);
+                return response.status(200).json(res.data);
             } catch (e) {
                 console.error('Request error', e);
                 response.status(500).json({ error: 'Error fetchng posts' });
