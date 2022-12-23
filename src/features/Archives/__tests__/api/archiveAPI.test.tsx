@@ -12,15 +12,15 @@ const server = setupMockServer(handlers);
 
 describe('Youtube Live GET API TEST', () => {
     describe('GET', () => {
-        const params = {
-            handler,
-            url: '/api/archives',
-        };
         const requestInit = {
             method: 'GET',
             headers: { 'content-type': 'application/json' },
         };
         test('200', async () => {
+            const params = {
+                handler,
+                url: '/api/archives',
+            };
             await testApiHandler({
                 ...params,
                 test: async ({ fetch }) => {
