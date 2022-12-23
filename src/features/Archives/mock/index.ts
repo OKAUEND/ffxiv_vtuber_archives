@@ -97,8 +97,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.get<Data, { id: string }, Data | Error>(
         path(),
         async (req, res, ctx) => {
-            const query = req.url.searchParams.get('channelId');
-            console.log({ query });
+            const channelId = req.url.searchParams.get('channelId');
             if (status === 400) {
                 return res(
                     ctx.status(400),
@@ -110,6 +109,13 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
                 return res(
                     ctx.status(status),
                     ctx.json({ message: 'Internal Server Error', status: 500 })
+                );
+            }
+
+            if (channelId) {
+                return res(
+                    ctx.status(status),
+                    ctx.json([GoogleYoutubeFactory(channelId)])
                 );
             }
 
