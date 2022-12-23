@@ -16,9 +16,8 @@ describe('Youtube Live GET API TEST', () => {
             handler,
             url: '/api/archives',
         };
-
         const requestInit = {
-            method: 'POST',
+            method: 'GET',
             headers: { 'content-type': 'application/json' },
         };
         test('200', async () => {
