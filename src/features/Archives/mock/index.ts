@@ -1,3 +1,5 @@
+import { rest } from 'msw';
+
 export const GoogleYoutubeFactory = (
     name: string
 ): GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource> => {
@@ -82,4 +84,39 @@ export const YoutubeResourceFactory = (
     };
 };
 
-export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {};
+const path = () => 'vitest.live.com';
+
+type Data = GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>[];
+
+type Error = {
+    message: string;
+    status: number;
+};
+
+export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
+    return rest.get<Data, { id: string }, Data | Error>(
+        path(),
+        async (req, res, ctx) => {
+            const query = req.url.searchParams.get('channelId');
+            console.log({ query });
+            if (status === 400) {
+                return res(
+                    ctx.status(400),
+                    ctx.json({ message: 'Bad Request', status: 400 })
+                );
+            }
+
+            if (status === 500) {
+                return res(
+                    ctx.status(status),
+                    ctx.json({ message: 'Internal Server Error', status: 500 })
+                );
+            }
+
+            return res(
+                ctx.status(status),
+                ctx.json([GoogleYoutubeFactory('Mock')])
+            );
+        }
+    );
+};
