@@ -1,11 +1,19 @@
 import { rest } from 'msw';
 
 export const GoogleYoutubeFactory = (
-    name: string
-): GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource> => {
+    name: string,
+    token: string
+): GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource> => {
     return {
         kind: name,
         etag: name,
+        nextPageToken: token,
+        prevPageToken: 'prev',
+
+        pageInfo: {
+            totalResults: 0,
+            resultsPerPage: 0,
+        },
         items: [
             {
                 kind: name,
@@ -86,7 +94,7 @@ export const YoutubeResourceFactory = (
 
 const path = () => 'vitest.live.com';
 
-type Data = GoogleApiYouTubePageInfo<GoogleApiYouTubeSearchResource>[];
+type Data = GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>[];
 
 type Error = {
     message: string;
@@ -98,6 +106,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
         path(),
         async (req, res, ctx) => {
             const channelId = req.url.searchParams.get('channelId');
+            const nextPageToken = req.url.searchParams.get('nextPageToken');
             if (status === 400) {
                 return res(
                     ctx.status(400),
@@ -112,16 +121,16 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
                 );
             }
 
-            if (channelId) {
+            if (channelId && nextPageToken) {
                 return res(
                     ctx.status(status),
-                    ctx.json([GoogleYoutubeFactory(channelId)])
+                    ctx.json([GoogleYoutubeFactory(channelId, nextPageToken)])
                 );
             }
 
             return res(
                 ctx.status(status),
-                ctx.json([GoogleYoutubeFactory('Mock')])
+                ctx.json([GoogleYoutubeFactory('Mock', '')])
             );
         }
     );
