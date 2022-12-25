@@ -11,6 +11,7 @@ import { GoogleYoutubeFactory } from '../../mock';
 const server = setupMockServer(handlers);
 
 describe('Youtube Live GET API TEST', () => {
+    const testname = 'MockChannel';
     describe('GET', () => {
         const requestInit = {
             method: 'GET',
@@ -19,7 +20,7 @@ describe('Youtube Live GET API TEST', () => {
         test('200', async () => {
             const params = {
                 handler,
-                url: '/api/archives',
+                url: `/api/archives?channelId=${testname}`,
             };
             await testApiHandler({
                 ...params,
@@ -32,7 +33,6 @@ describe('Youtube Live GET API TEST', () => {
             });
         });
         test('Queryを付与してAPIコールをできるか', async () => {
-            const testname = 'MockChannel';
             const params = {
                 handler,
                 url: `/api/archives?channelId=${testname}`,
