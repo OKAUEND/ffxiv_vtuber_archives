@@ -106,7 +106,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
         path(),
         async (req, res, ctx) => {
             const channelId = req.url.searchParams.get('channelId');
-            const nextPageToken = req.url.searchParams.get('nextPageToken');
+            const nextPageToken = req.url.searchParams.get('nextPagetoken');
             if (status === 400) {
                 return res(
                     ctx.status(400),

@@ -33,9 +33,10 @@ describe('Youtube Live GET API TEST', () => {
             });
         });
         test('Queryを付与してAPIコールをできるか', async () => {
+            const token = 'MockToken';
             const params = {
                 handler,
-                url: `/api/archives?channelId=${testname}`,
+                url: `/api/archives?channelId=${testname}&nextPagetoken=${token}`,
             };
             await testApiHandler({
                 ...params,

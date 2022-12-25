@@ -15,7 +15,12 @@ export const handler: Handler = async (request, response) => {
                 ? `?channelId=${query.channelId}`
                 : ``;
 
-        return `${process.env.YOUTUBE_API_URL}${channelId}`;
+        const nextPagetoken =
+            typeof query.nextPagetoken === 'string'
+                ? `&nextPagetoken=${query.nextPagetoken}`
+                : ``;
+
+        return `${process.env.YOUTUBE_API_URL}${channelId}${nextPagetoken}`;
     };
 
     switch (method) {
