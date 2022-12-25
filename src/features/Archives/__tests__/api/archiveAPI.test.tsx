@@ -26,7 +26,7 @@ describe('Youtube Live GET API TEST', () => {
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
                     await expect(response.json()).resolves.toStrictEqual([
-                        GoogleYoutubeFactory('Mock', ''),
+                        GoogleYoutubeFactory('Mock'),
                     ]);
                 },
             });
@@ -42,7 +42,7 @@ describe('Youtube Live GET API TEST', () => {
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
                     await expect(response.json()).resolves.toStrictEqual([
-                        GoogleYoutubeFactory(testname, ''),
+                        GoogleYoutubeFactory(testname, token),
                     ]);
                 },
             });

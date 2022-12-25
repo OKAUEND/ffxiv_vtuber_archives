@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 export const GoogleYoutubeFactory = (
     name: string,
-    token: string
+    token: string = 'FirstToken'
 ): GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource> => {
     return {
         kind: name,
@@ -130,7 +130,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
 
             return res(
                 ctx.status(status),
-                ctx.json([GoogleYoutubeFactory('Mock', '')])
+                ctx.json([GoogleYoutubeFactory('Mock')])
             );
         }
     );
