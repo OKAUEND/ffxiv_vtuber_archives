@@ -49,5 +49,6 @@ describe('Youtube Live GET API TEST', () => {
             });
         });
         test('400', async () => {});
+        test('405 - ChannelIDの指定がない場合は、エラーを返す', async () => {});
     });
 });
