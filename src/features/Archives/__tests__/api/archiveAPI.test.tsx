@@ -49,6 +49,21 @@ describe('Youtube Live GET API TEST', () => {
             });
         });
         test('400', async () => {});
-        test('405 - ChannelIDの指定がない場合は、エラーを返す', async () => {});
+        test('405 - ChannelIDの指定がない場合は、エラーを返す', async () => {
+            const params = {
+                handler,
+                url: `/api/archives?`,
+            };
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        message: 'Method ChannelID Not Allowed',
+                        status: 400,
+                    });
+                },
+            });
+        });
     });
 });

@@ -26,6 +26,13 @@ export const handler: Handler = async (request, response) => {
     switch (method) {
         case 'GET':
             try {
+                if (!query.channelId) {
+                    return response.status(400).json({
+                        message: 'Method ChannelID Not Allowed',
+                        status: 400,
+                    });
+                }
+
                 const res = await axios.get(createYoutubeURL(query));
                 return response.status(200).json(res.data);
             } catch (e) {
