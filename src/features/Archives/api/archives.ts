@@ -34,7 +34,9 @@ export const handler: Handler = async (request, response) => {
                 }
 
                 const res = await axios.get(createYoutubeURL(query));
-                return response.status(200).json(res.data);
+                return response
+                    .status(200)
+                    .json({ item: res.data, status: 200 });
             } catch (err) {
                 if (axios.isAxiosError(err)) {
                     return response

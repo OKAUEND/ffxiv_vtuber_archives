@@ -1,11 +1,15 @@
 import { rest } from 'msw';
 import { HikasenVtuber } from '../types';
 
-type Data = HikasenVtuber[];
+type Item = HikasenVtuber[];
 
 type Error = {
-    message: string;
+    message?: string;
     status: number;
+};
+
+type Data = Error & {
+    item?: HikasenVtuber[];
 };
 
 const path = () => `vitest.api.com`;
@@ -25,7 +29,7 @@ export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
 };
 
 export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
-    return rest.post<Data, { id: string }, Data | Error>(
+    return rest.post<Data, { id: string }, Data>(
         path(),
         async (req, res, ctx) => {
             if (status === 400) {
@@ -44,7 +48,10 @@ export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
 
             return res(
                 ctx.status(status),
-                ctx.json([HikasenVtuberResourceFactory('Mock')])
+                ctx.json({
+                    item: [HikasenVtuberResourceFactory('Mock')],
+                    status: 200,
+                })
             );
         }
     );

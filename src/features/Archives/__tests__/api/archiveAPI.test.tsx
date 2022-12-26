@@ -17,6 +17,7 @@ describe('Youtube Live GET API TEST', () => {
             method: 'GET',
             headers: { 'content-type': 'application/json' },
         };
+        const Result = () => {};
         test('200', async () => {
             const params = {
                 handler,
@@ -26,9 +27,10 @@ describe('Youtube Live GET API TEST', () => {
                 ...params,
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
-                    await expect(response.json()).resolves.toStrictEqual([
-                        GoogleYoutubeFactory('Mock'),
-                    ]);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        item: [GoogleYoutubeFactory('Mock')],
+                        status: 200,
+                    });
                 },
             });
         });
@@ -42,9 +44,10 @@ describe('Youtube Live GET API TEST', () => {
                 ...params,
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
-                    await expect(response.json()).resolves.toStrictEqual([
-                        GoogleYoutubeFactory(testname, token),
-                    ]);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        item: [GoogleYoutubeFactory(testname, token)],
+                        status: 200,
+                    });
                 },
             });
         });

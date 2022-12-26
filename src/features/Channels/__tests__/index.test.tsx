@@ -35,7 +35,10 @@ describe('Channel - getServerSideProps', () => {
         const res = await getServerSideProps(mockCtx());
         assertHasProps(res);
         const channel = res.props['item'];
-        expect(channel).toStrictEqual([HikasenVtuberResourceFactory('Mock')]);
+        expect(channel).toStrictEqual({
+            item: [HikasenVtuberResourceFactory('Mock')],
+            status: 200,
+        });
     });
     test('400 - 失敗時', async () => {
         server.use(channelPostHandler(400));
