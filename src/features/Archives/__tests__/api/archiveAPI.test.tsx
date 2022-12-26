@@ -1,7 +1,7 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import { describe, expect, test } from 'vitest';
 
-import { channelPostHandler } from '@/src/features/Channels/mock';
+import { archivePostHandler } from '@/src/features/Archives/mock';
 
 import { handler } from '@/src/features/Archives/api/archives';
 import { handlers } from '@/src/mock/handlers';
@@ -48,8 +48,24 @@ describe('Youtube Live GET API TEST', () => {
                 },
             });
         });
-        test('400', async () => {});
-        test('405 - ChannelIDの指定がない場合は、エラーを返す', async () => {
+        test('400', async () => {
+            const params = {
+                handler,
+                url: `/api/archives?channelId=${testname}`,
+            };
+            server.use(archivePostHandler(400));
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        message: 'Bad Request',
+                        status: 400,
+                    });
+                },
+            });
+        });
+        test('400 - ChannelIDの指定がない場合は、エラーを返す', async () => {
             const params = {
                 handler,
                 url: `/api/archives?`,

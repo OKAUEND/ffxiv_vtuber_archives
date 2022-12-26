@@ -35,11 +35,14 @@ export const handler: Handler = async (request, response) => {
 
                 const res = await axios.get(createYoutubeURL(query));
                 return response.status(200).json(res.data);
-            } catch (e) {
-                console.error('Request error', e);
-                response.status(500).json({ error: 'Error fetchng posts' });
+            } catch (err) {
+                if (axios.isAxiosError(err)) {
+                    return response
+                        .status(err.response.status)
+                        .json(err.response.data);
+                }
+                return response.status(500).json({});
             }
-            break;
 
         default:
             response.setHeader('Allow', ['GET']);
