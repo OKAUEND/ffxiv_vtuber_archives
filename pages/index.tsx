@@ -7,7 +7,7 @@ import { Suspense, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Data } from '@/src/types/api';
 
-type Props = Data<HikasenVtuber[]>;
+type Props = Data<HikasenVtuber>;
 
 export default function Home({ item }: Props) {
     return (
