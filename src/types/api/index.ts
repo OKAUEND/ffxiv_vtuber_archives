@@ -1,5 +1,6 @@
 export type Data<T> = {
     status: number;
     message?: string;
-    item?: T;
+    item?: T[];
+    error?: boolean;
 };
