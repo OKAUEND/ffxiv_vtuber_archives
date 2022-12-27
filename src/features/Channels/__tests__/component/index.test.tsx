@@ -1,7 +1,7 @@
-import { vi, describe, test } from 'vitest';
-import {} from '@testing-library/react';
+import { vi, describe, test, expect } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import {} from '@testing-library/jest-dom';
-import {} from 'recoil';
+import { RecoilRoot } from 'recoil';
 
 import Home from '../../../../../pages/index';
 import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
@@ -17,7 +17,15 @@ describe('Channel Component TEST', () => {
         message: 'Success!',
         item: [List],
     };
-    test('Propsが渡され、正しくその内容が表示されているか', async () => {});
-
+    test('Propsが渡され、正しくその内容が表示されているか', async () => {
+        render(
+            <RecoilRoot>
+                <Home {...Data} />
+            </RecoilRoot>
+        );
+        await waitFor(() => {
+            expect(screen.getByText('ComponentTEST')).toBeInTheDocument();
+        });
+    });
     test('Propsでエラーが渡された場合、エラー画面が表示されるか', async () => {});
 });
