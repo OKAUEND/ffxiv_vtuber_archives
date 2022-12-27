@@ -4,6 +4,7 @@ import { server } from '../server';
 import 'whatwg-fetch';
 import { RequestHandler } from 'msw';
 import { setupServer } from 'msw/node';
+import '@testing-library/jest-dom';
 
 export const setupMockServer = (handler: RequestHandler[]) => {
     const server = setupServer(...handler);
