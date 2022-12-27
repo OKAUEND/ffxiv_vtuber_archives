@@ -17,6 +17,11 @@ describe('Channel Component TEST', () => {
         message: 'Success!',
         item: [List],
     };
+    const Error: Props = {
+        status: 400,
+        message: 'Bad Request',
+        error: true,
+    };
     test('Propsが渡され、正しくその内容が表示されているか', async () => {
         render(
             <RecoilRoot>
@@ -27,5 +32,14 @@ describe('Channel Component TEST', () => {
             expect(screen.getByText('ComponentTEST')).toBeInTheDocument();
         });
     });
-    test('Propsでエラーが渡された場合、エラー画面が表示されるか', async () => {});
+    test('Propsでエラーが渡された場合、エラー画面が表示されるか', async () => {
+        render(
+            <RecoilRoot>
+                <Home {...Error} />
+            </RecoilRoot>
+        );
+        await waitFor(() => {
+            expect(screen.getByText('400')).toBeInTheDocument();
+        });
+    });
 });
