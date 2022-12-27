@@ -12,9 +12,5 @@ type Props = {
 export const Channels = ({ ChannelsFirstPagenation }: Props) => {
     // const [channels, resultStatus, reload] = useChannels();
     const [channels] = useChannels(ChannelsFirstPagenation);
-    return (
-        <div>
-            <ChannelPanel channels={channels} />
-        </div>
-    );
+    return <ChannelPanel channels={ChannelsFirstPagenation} />;
 };
