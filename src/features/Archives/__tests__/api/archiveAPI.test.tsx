@@ -64,6 +64,7 @@ describe('Youtube Live GET API TEST', () => {
                     await expect(response.json()).resolves.toStrictEqual({
                         message: 'Bad Request',
                         status: 400,
+                        error: true,
                     });
                 },
             });
@@ -80,6 +81,7 @@ describe('Youtube Live GET API TEST', () => {
                     await expect(response.json()).resolves.toStrictEqual({
                         message: 'Method ChannelID Not Allowed',
                         status: 400,
+                        error: true,
                     });
                 },
             });

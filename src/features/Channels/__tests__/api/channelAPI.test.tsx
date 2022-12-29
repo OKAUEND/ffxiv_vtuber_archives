@@ -44,6 +44,7 @@ describe('Channel Get API TEST', () => {
                     await expect(response.json()).resolves.toStrictEqual({
                         message: 'Bad Request',
                         status: 400,
+                        error: true,
                     });
                 },
             });

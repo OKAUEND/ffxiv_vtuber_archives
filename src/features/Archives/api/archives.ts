@@ -30,6 +30,7 @@ export const handler: Handler = async (request, response) => {
                     return response.status(400).json({
                         message: 'Method ChannelID Not Allowed',
                         status: 400,
+                        error: true,
                     });
                 }
 
@@ -41,7 +42,7 @@ export const handler: Handler = async (request, response) => {
                 if (axios.isAxiosError(err)) {
                     return response
                         .status(err.response.status)
-                        .json(err.response.data);
+                        .json({ ...err.response.data, error: true });
                 }
                 return response.status(500).json({});
             }

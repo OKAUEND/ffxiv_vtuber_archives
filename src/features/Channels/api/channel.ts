@@ -10,7 +10,7 @@ export const handler: NextApiHandler = async (request, response) => {
                 const res = await fetch(path, { method: 'POST' });
                 const date = await res.json();
                 if (!res.ok) {
-                    return response.status(400).json(date);
+                    return response.status(400).json({ ...date, error: true });
                 }
                 return response.status(200).json(date);
             } catch (e) {
