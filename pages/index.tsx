@@ -6,10 +6,12 @@ import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Data } from '@/src/types/api';
+import { Error } from '@/src/component/Error';
 
 type Props = Data<HikasenVtuber>;
 
-export default function Home({ item }: Props) {
+export default function Home({ status, message, item, error }: Props) {
+    if (error) return <Error status={status} message={message} />;
     return (
         <div className={styles.container}>
             <Head>

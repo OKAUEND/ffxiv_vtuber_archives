@@ -39,7 +39,10 @@ describe('Channel Component TEST', () => {
             </RecoilRoot>
         );
         await waitFor(() => {
-            expect(screen.getByText('400')).toBeInTheDocument();
+            expect(
+                screen.getByText(Error.status.toString())
+            ).toBeInTheDocument();
+            expect(screen.getByText(Error.message)).toBeInTheDocument();
         });
     });
 });
