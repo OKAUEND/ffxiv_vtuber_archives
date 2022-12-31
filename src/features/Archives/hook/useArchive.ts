@@ -6,6 +6,7 @@ import {
     useRecoilStateLoadable,
 } from 'recoil';
 import { Data } from '@/src/types/api';
+import { useError } from '@/src/hooks/error';
 
 //---------------------------------------------------------------------------
 
@@ -99,15 +100,21 @@ export const useArchives = (channelId: string) => {
     const [response, setArchives] = useRecoilStateLoadable(
         archivesSelector(channelId)
     );
+    const [error, setError, resetError] = useError();
 
     useEffect(() => {
         setArchives(response.getValue());
     }, []);
 
     const fetch = async () => {
+        resetError;
+
         const archive = await fetchArchives(channelId);
-        setArchives(archive);
+
+        if (archive.error) return setError(archive);
+
+        setArchives(archive.item);
     };
 
-    return [response.getValue(), fetch] as const;
+    return [response.getValue(), fetch, error] as const;
 };
