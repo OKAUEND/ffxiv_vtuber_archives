@@ -1,5 +1,5 @@
 import { Data } from '@/src/types/api';
-import { atom } from 'recoil';
+import { atom, useRecoilState, useResetRecoilState } from 'recoil';
 
 type Error = Omit<Data<[]>, 'item'>;
 
@@ -8,4 +8,9 @@ const errorAtom = atom<Error>({
     default: undefined,
 });
 
-export const useError = () => {};
+export const useError = () => {
+    const [error, setError] = useRecoilState(errorAtom);
+    const reset = useResetRecoilState(errorAtom);
+
+    return [error, setError, reset];
+};
