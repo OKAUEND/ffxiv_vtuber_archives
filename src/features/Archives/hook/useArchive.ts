@@ -5,6 +5,7 @@ import {
     selectorFamily,
     useRecoilStateLoadable,
 } from 'recoil';
+import { Data } from '@/src/types/api';
 
 //---------------------------------------------------------------------------
 
@@ -12,10 +13,6 @@ type timeRangetype = {
     EndTime: string;
     BeginTime: string;
 };
-
-type FetchArchives = (
-    channelId: string
-) => Promise<GoogleApiYouTubeSearchResource[]>;
 
 //---------------------------------------------------------------------------
 
@@ -38,7 +35,9 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
     return { EndTime, BeginTime };
 };
 
-const fetchArchives: FetchArchives = async (channelId) => {
+const fetchArchives = async (
+    channelId: string
+): Promise<Data<GoogleApiYouTubeSearchResource>> => {
     const query = createQuery(channelId);
     return await fetch(`/api/archives&${query}`).then(async (response) => {
         return await response.json();
