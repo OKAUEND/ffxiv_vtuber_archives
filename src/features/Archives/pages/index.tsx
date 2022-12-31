@@ -8,6 +8,8 @@ import { ArchiveList } from '../component/ArchiveList';
 import { useArchives } from '../hook/useArchive';
 import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
 
+import { Error } from '@/src/component/Error';
+
 const typeGuard = (target: string | undefined) => {
     if (target === undefined) {
         return 'error';
@@ -22,8 +24,8 @@ export const ArchiveRouter = () => {
     //TypeGuardでundefinedを除外する
     // const targetChannelID = typeGuard(channelID);
 
-    const [Archives] = useArchives('channelId');
-
+    const [Archives, fetchArchives, error] = useArchives('channelId');
+    if (error) return <Error status={error.status} message={error.message} />;
     return (
         <div>
             <div>
