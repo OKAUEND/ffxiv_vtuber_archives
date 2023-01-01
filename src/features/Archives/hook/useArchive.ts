@@ -97,7 +97,7 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 //---------------------------------------------------------------------------
 
 export const useArchives = (channelId: string) => {
-    const [response, setArchives] = useRecoilStateLoadable(
+    const [archives, setArchives] = useRecoilStateLoadable(
         archivesSelector(channelId)
     );
     const [error, setError, resetError] = useError();
@@ -116,5 +116,5 @@ export const useArchives = (channelId: string) => {
         setArchives(archive.item);
     };
 
-    return [response.getValue(), fetch, error] as const;
+    return [archives.getValue(), fetch, error] as const;
 };
