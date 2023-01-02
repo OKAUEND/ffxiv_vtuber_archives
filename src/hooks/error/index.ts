@@ -12,5 +12,5 @@ export const useError = () => {
     const [error, setError] = useRecoilState(errorAtom);
     const reset = useResetRecoilState(errorAtom);
 
-    return [error, setError, reset];
+    return [error, setError, reset] as const;
 };
