@@ -4,6 +4,7 @@ import {
     DefaultValue,
     selectorFamily,
     useRecoilStateLoadable,
+    useRecoilValue,
 } from 'recoil';
 import { Data } from '@/src/types/api';
 import { useError } from '@/src/hooks/error';
@@ -65,9 +66,7 @@ const archivesSelector = selectorFamily<
     get:
         (channelId: string) =>
         async ({ get }) => {
-            return (
-                get(archivesAtom(channelId)) || (await fetchArchives(channelId))
-            );
+            return get(archivesAtom(channelId));
         },
     set:
         (channelId: string) =>
@@ -77,6 +76,21 @@ const archivesSelector = selectorFamily<
             set(archivesAtom(channelId), (prev) => {
                 return [...prev, ...newArchives];
             });
+        },
+});
+
+const youtubeSelector = selectorFamily<
+    Promise<Data<GoogleApiYouTubeSearchResource>>,
+    string
+>({
+    key: 'youtube-selector',
+    get:
+        (channelId: string) =>
+        async ({ get }) => {
+            const cache = get(archivesSelector(channelId));
+            return cache
+                ? { status: 200, message: 'has chache' }
+                : await fetchArchives(channelId);
         },
 });
 
@@ -101,9 +115,17 @@ export const useArchives = (channelId: string) => {
         archivesSelector(channelId)
     );
     const [error, setError, resetError] = useError();
+    const youtube = useRecoilValue(youtubeSelector(channelId));
 
     useEffect(() => {
-        setArchives(response.getValue());
+        if (archives) return;
+        youtube.then((response) => {
+            if (response.error) {
+                setError(response);
+            } else {
+                setArchives(response.item);
+            }
+        });
     }, []);
 
     const fetch = async () => {
