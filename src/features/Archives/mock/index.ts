@@ -102,36 +102,45 @@ type Error = {
 };
 
 export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
-    return rest.get<Data, { id: string }, Data | Error>(
-        path(),
-        async (req, res, ctx) => {
-            const channelId = req.url.searchParams.get('channelId');
-            const nextPageToken = req.url.searchParams.get('nextPagetoken');
-            if (status === 400) {
-                return res(
-                    ctx.status(400),
-                    ctx.json({ message: 'Bad Request', status: 400 })
-                );
-            }
+    return (
+        rest.get<Data, { id: string }, Data | Error>(
+            path(),
+            async (req, res, ctx) => {
+                const channelId = req.url.searchParams.get('channelId');
+                const nextPageToken = req.url.searchParams.get('nextPagetoken');
 
-            if (status === 500) {
+                if (status === 400) {
+                    return res(
+                        ctx.status(400),
+                        ctx.json({ message: 'Bad Request', status: 400 })
+                    );
+                }
+
+                if (status === 500) {
+                    return res(
+                        ctx.status(status),
+                        ctx.json({
+                            message: 'Internal Server Error',
+                            status: 500,
+                        })
+                    );
+                }
+
+                if (channelId && nextPageToken) {
+                    return res(
+                        ctx.status(status),
+                        ctx.json([
+                            GoogleYoutubeFactory(channelId, nextPageToken),
+                        ])
+                    );
+                }
+
                 return res(
                     ctx.status(status),
-                    ctx.json({ message: 'Internal Server Error', status: 500 })
+                    ctx.json([GoogleYoutubeFactory('Mock')])
                 );
             }
-
-            if (channelId && nextPageToken) {
-                return res(
-                    ctx.status(status),
-                    ctx.json([GoogleYoutubeFactory(channelId, nextPageToken)])
-                );
-            }
-
-            return res(
-                ctx.status(status),
-                ctx.json([GoogleYoutubeFactory('Mock')])
-            );
-        }
+        ),
+        rest.post('/api/archives', async () => {})
     );
 };
