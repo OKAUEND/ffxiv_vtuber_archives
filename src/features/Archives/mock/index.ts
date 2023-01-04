@@ -102,45 +102,69 @@ type Error = {
 };
 
 export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
-    return (
-        rest.get<Data, { id: string }, Data | Error>(
-            path(),
-            async (req, res, ctx) => {
-                const channelId = req.url.searchParams.get('channelId');
-                const nextPageToken = req.url.searchParams.get('nextPagetoken');
+    return rest.get<Data, { id: string }, Data | Error>(
+        path(),
+        async (req, res, ctx) => {
+            const channelId = req.url.searchParams.get('channelId');
+            const nextPageToken = req.url.searchParams.get('nextPagetoken');
 
-                if (status === 400) {
-                    return res(
-                        ctx.status(400),
-                        ctx.json({ message: 'Bad Request', status: 400 })
-                    );
-                }
-
-                if (status === 500) {
-                    return res(
-                        ctx.status(status),
-                        ctx.json({
-                            message: 'Internal Server Error',
-                            status: 500,
-                        })
-                    );
-                }
-
-                if (channelId && nextPageToken) {
-                    return res(
-                        ctx.status(status),
-                        ctx.json([
-                            GoogleYoutubeFactory(channelId, nextPageToken),
-                        ])
-                    );
-                }
-
+            if (status === 400) {
                 return res(
-                    ctx.status(status),
-                    ctx.json([GoogleYoutubeFactory('Mock')])
+                    ctx.status(400),
+                    ctx.json({ message: 'Bad Request', status: 400 })
                 );
             }
-        ),
-        rest.post('/api/archives', async () => {})
+
+            if (status === 500) {
+                return res(
+                    ctx.status(status),
+                    ctx.json({
+                        message: 'Internal Server Error',
+                        status: 500,
+                    })
+                );
+            }
+
+            if (channelId && nextPageToken) {
+                return res(
+                    ctx.status(status),
+                    ctx.json([GoogleYoutubeFactory(channelId, nextPageToken)])
+                );
+            }
+
+            return res(
+                ctx.status(status),
+                ctx.json([GoogleYoutubeFactory('Mock')])
+            );
+        }
+    );
+};
+
+export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
+    return rest.post<Data, { id: string }, Data | Error>(
+        '/api/archives',
+        async (req, res, ctx) => {
+            if (status === 400) {
+                return res(
+                    ctx.status(400),
+                    ctx.json({ message: 'Bad Request', status: 400 })
+                );
+            }
+
+            if (status === 500) {
+                return res(
+                    ctx.status(status),
+                    ctx.json({
+                        message: 'Internal Server Error',
+                        status: 500,
+                    })
+                );
+            }
+
+            return res(
+                ctx.status(status),
+                ctx.json([GoogleYoutubeFactory('Mock')])
+            );
+        }
     );
 };
