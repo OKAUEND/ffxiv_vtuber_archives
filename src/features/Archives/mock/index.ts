@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const GoogleYoutubeFactory = (
-    name: string,
+    name: string = 'Mock',
     token: string = 'FirstToken'
 ): GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource> => {
     return {
@@ -141,7 +141,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
 };
 
 export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
-    return rest.post<Data, { id: string }, Data | Error>(
+    return rest.get<Data, { id: string }, Data | Error>(
         '/api/archives',
         async (req, res, ctx) => {
             if (status === 400) {
@@ -163,7 +163,11 @@ export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
 
             return res(
                 ctx.status(status),
-                ctx.json([GoogleYoutubeFactory('Mock')])
+                ctx.json({
+                    item: [GoogleYoutubeFactory('Mock')],
+                    status: 200,
+                    message: 'Success',
+                })
             );
         }
     );

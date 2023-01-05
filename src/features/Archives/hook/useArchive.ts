@@ -95,21 +95,15 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 //---------------------------------------------------------------------------
 
 export const useArchives = (channelId: string) => {
-    const [archives, setArchives] = useRecoilStateLoadable(
-        archivesSelector(channelId)
-    );
-    const [error, setError, resetError] = useError();
-    const youtube = useRecoilValue(youtubeSelector(channelId));
+    const [archives, setArchives] = useRecoilState(archivesSelector(channelId));
+    const [_, setError, resetError] = useError();
 
     useEffect(() => {
-        if (archives) return;
-        youtube.then((response) => {
-            if (response.error) {
-                setError(response);
-            } else {
-                setArchives(response.item);
-            }
-        });
+        const initFetch = async () => {
+            await fetch();
+        };
+        if (archives.length > 0) return;
+        initFetch();
     }, []);
 
     const fetch = async () => {
@@ -122,5 +116,5 @@ export const useArchives = (channelId: string) => {
         setArchives(archive.item);
     };
 
-    return [archives.getValue(), fetch, error] as const;
+    return [archives, fetch] as const;
 };
