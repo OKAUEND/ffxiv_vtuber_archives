@@ -3,8 +3,7 @@ import {
     atomFamily,
     DefaultValue,
     selectorFamily,
-    useRecoilStateLoadable,
-    useRecoilValue,
+    useRecoilState,
 } from 'recoil';
 import { Data } from '@/src/types/api';
 import { useError } from '@/src/hooks/error';
@@ -76,21 +75,6 @@ const archivesSelector = selectorFamily<
             set(archivesAtom(channelId), (prev) => {
                 return [...prev, ...newArchives];
             });
-        },
-});
-
-const youtubeSelector = selectorFamily<
-    Promise<Data<GoogleApiYouTubeSearchResource>>,
-    string
->({
-    key: 'youtube-selector',
-    get:
-        (channelId: string) =>
-        async ({ get }) => {
-            const cache = get(archivesSelector(channelId));
-            return cache
-                ? { status: 200, message: 'has chache' }
-                : await fetchArchives(channelId);
         },
 });
 
