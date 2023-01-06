@@ -96,7 +96,7 @@ const timeRangeSelector = selectorFamily<timeRangetype, string>({
 
 export const useArchives = (channelId: string) => {
     const [archives, setArchives] = useRecoilState(archivesSelector(channelId));
-    const [_, setError, resetError] = useError();
+    const [error, setError, resetError] = useError();
 
     useEffect(() => {
         const initFetch = async () => {
@@ -111,10 +111,10 @@ export const useArchives = (channelId: string) => {
 
         const archive = await fetchArchives(channelId);
 
-        if (archive.error) return setError(archive);
+        if (archive.error || !archive.item) return setError(archive);
 
         setArchives(archive.item);
     };
 
-    return [archives, fetch] as const;
+    return [archives, fetch, error] as const;
 };

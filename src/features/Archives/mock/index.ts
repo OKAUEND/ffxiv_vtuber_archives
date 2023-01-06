@@ -111,7 +111,11 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
             if (status === 400) {
                 return res(
                     ctx.status(400),
-                    ctx.json({ message: 'Bad Request', status: 400 })
+                    ctx.json({
+                        message: 'Bad Request',
+                        status: 400,
+                        error: true,
+                    })
                 );
             }
 
@@ -121,6 +125,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
                     ctx.json({
                         message: 'Internal Server Error',
                         status: 500,
+                        error: true,
                     })
                 );
             }
