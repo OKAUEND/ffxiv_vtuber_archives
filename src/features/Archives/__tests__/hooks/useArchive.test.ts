@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import {} from 'msw';
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 
 import { useArchives } from '@/src/features/Archives/hook/useArchive';
@@ -36,6 +36,19 @@ describe('useArchive TEST', () => {
             expect(result.current[0]).toStrictEqual([]);
         });
     });
-    test('次の値を取得する更新関数を呼び出した場合、通信エラー発生した場合に、Errorの値があるか', () => {});
-    test('次の値を取得する更新関数を呼び出した場合、通信エラー発生した場合で、キャッシュがある場合でもErrorの値があるか', () => {});
+    test('次の値を取得する更新関数を呼び出した場合、値を取得し、Stateへセットできるか', async () => {
+        const { result } = renderHook(() => useArchives('mock'), {
+            wrapper: RecoilRoot,
+        });
+
+        act(() => {
+            result.current[1]();
+        });
+        await waitFor(() => {
+            expect(result.current[0]).toStrictEqual([
+                mockYoutubeData,
+                mockYoutubeData,
+            ]);
+        });
+    });
 });
