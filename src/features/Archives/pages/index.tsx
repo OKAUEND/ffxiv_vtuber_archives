@@ -25,7 +25,8 @@ export const ArchiveRouter = () => {
     // const targetChannelID = typeGuard(channelID);
 
     const [Archives, fetchArchives, error] = useArchives('channelId');
-    if (error) return <Error status={error.status} message={error.message} />;
+    if (Archives.length === 0 && error)
+        return <Error status={error.status} message={error.message} />;
     return (
         <div>
             <div>
