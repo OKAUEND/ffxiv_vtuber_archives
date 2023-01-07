@@ -33,7 +33,6 @@ export const ArchiveRouter = () => {
             <div>
                 {/* <button onClick={() => navigate(-1)}>戻る</button> */}
             </div>
-            {Archives.length > 0 && error.error && <div>Error</div>}
             <div>
                 <Suspense fallback={<p>Loading...</p>}>
                     <ArchiveList Archives={Archives} />
