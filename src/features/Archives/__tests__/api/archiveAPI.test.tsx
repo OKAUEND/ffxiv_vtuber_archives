@@ -1,7 +1,7 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import { describe, expect, test } from 'vitest';
 
-import { archivePostHandler } from '@/src/features/Archives/mock';
+import { youtubePostHandler } from '@/src/features/Archives/mock';
 
 import { handler } from '@/src/features/Archives/api/archives';
 import { handlers } from '@/src/mock/handlers';
@@ -56,7 +56,7 @@ describe('Youtube Live GET API TEST', () => {
                 handler,
                 url: `/api/archives?channelId=${testname}`,
             };
-            server.use(archivePostHandler(400));
+            server.use(youtubePostHandler(400));
             await testApiHandler({
                 ...params,
                 test: async ({ fetch }) => {

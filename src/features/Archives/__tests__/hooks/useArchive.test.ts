@@ -8,8 +8,8 @@ import { setupMockServer } from '@/src/mock/test/setup';
 import { handlers } from '@/src/mock/handlers';
 
 import {
+    archiveAPIRouterHandler,
     GoogleYoutubeFactory,
-    youtubePostHandler,
 } from '@/src/features/Archives/mock';
 
 const server = setupMockServer(handlers);
@@ -26,7 +26,7 @@ describe('useArchive TEST', () => {
         });
     });
     test('CustomHooksを生成した時に通信エラー発生した場合に、Errorの値があるか', async () => {
-        server.use(youtubePostHandler(400));
+        server.use(archiveAPIRouterHandler(400));
         const { result } = renderHook(() => useArchives('mock'), {
             wrapper: RecoilRoot,
         });

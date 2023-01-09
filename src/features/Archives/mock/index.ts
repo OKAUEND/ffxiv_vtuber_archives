@@ -101,7 +101,7 @@ type Error = {
     status: number;
 };
 
-export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
+export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.get<Data, { id: string }, Data | Error>(
         path(),
         async (req, res, ctx) => {
@@ -145,7 +145,7 @@ export const archivePostHandler = (status: 200 | 400 | 500 = 200) => {
     );
 };
 
-export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
+export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.get<Data, { id: string }, Data | Error>(
         '/api/archives',
         async (req, res, ctx) => {
