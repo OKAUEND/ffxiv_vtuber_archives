@@ -33,6 +33,9 @@ export const handler: Handler = async (request, response) => {
                         error: true,
                     });
                 }
+                const res = await axios.get<
+                    GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
+                >(createYoutubeURL(query));
 
                 const res = await axios.get(createYoutubeURL(query));
                 return response

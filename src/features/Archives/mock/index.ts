@@ -94,7 +94,7 @@ export const YoutubeResourceFactory = (
 
 const path = () => 'vitest.live.com';
 
-type Data = GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>[];
+type Data = GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
 
 type Error = {
     message: string;

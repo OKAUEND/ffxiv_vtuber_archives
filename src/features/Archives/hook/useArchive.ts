@@ -38,11 +38,17 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
 
 const fetchArchives = async (
     channelId: string
-): Promise<Data<GoogleApiYouTubeSearchResource>> => {
+): Promise<
+    Data<GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>>
+> => {
     const query = createQuery(channelId);
-    return await fetch(`/api/archives&${query}`).then(async (response) => {
-        return await response.json();
+
+    const response = await fetch(`/api/archives`).then(async (response) => {
+        return (await response.json()) as Data<
+            GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
+        >;
     });
+    return response;
 };
 
 //---------------------------------------------------------------------------
