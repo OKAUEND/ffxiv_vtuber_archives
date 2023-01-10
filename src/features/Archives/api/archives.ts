@@ -37,10 +37,9 @@ export const handler: Handler = async (request, response) => {
                     GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
                 >(createYoutubeURL(query));
 
-                const res = await axios.get(createYoutubeURL(query));
                 return response
-                    .status(200)
-                    .json({ item: res.data, status: 200 });
+                    .status(res.status)
+                    .json({ item: res.data, status: res.status });
             } catch (err) {
                 if (axios.isAxiosError(err)) {
                     return response
