@@ -133,13 +133,13 @@ export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
             if (channelId && nextPageToken) {
                 return res(
                     ctx.status(status),
-                    ctx.json([GoogleYoutubeFactory(channelId, nextPageToken)])
+                    ctx.json(GoogleYoutubeFactory(channelId, nextPageToken))
                 );
             }
 
             return res(
                 ctx.status(status),
-                ctx.json([GoogleYoutubeFactory('Mock')])
+                ctx.json(GoogleYoutubeFactory(channelId))
             );
         }
     );
@@ -169,7 +169,7 @@ export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
             return res(
                 ctx.status(status),
                 ctx.json({
-                    item: [GoogleYoutubeFactory('Mock')],
+                    item: GoogleYoutubeFactory(),
                     status: 200,
                     message: 'Success',
                 })

@@ -119,7 +119,7 @@ export const useArchives = (channelId: string) => {
 
         if (archive.error || !archive.item) return setError(archive);
 
-        setArchives(archive.item);
+        setArchives(archive.item.items);
     };
 
     return [archives, fetch, error] as const;

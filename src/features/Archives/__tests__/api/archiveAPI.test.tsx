@@ -28,7 +28,7 @@ describe('Youtube Live GET API TEST', () => {
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
                     await expect(response.json()).resolves.toStrictEqual({
-                        item: [GoogleYoutubeFactory('Mock')],
+                        item: GoogleYoutubeFactory(testname),
                         status: 200,
                     });
                 },
@@ -45,7 +45,7 @@ describe('Youtube Live GET API TEST', () => {
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
                     await expect(response.json()).resolves.toStrictEqual({
-                        item: [GoogleYoutubeFactory(testname, token)],
+                        item: GoogleYoutubeFactory(testname, token),
                         status: 200,
                     });
                 },

@@ -22,7 +22,7 @@ describe('useArchive TEST', () => {
         });
 
         await waitFor(() => {
-            expect(result.current[0]).toStrictEqual([mockYoutubeData]);
+            expect(result.current[0]).toStrictEqual(mockYoutubeData.items);
         });
     });
     test('CustomHooksを生成した時に通信エラー発生した場合に、Errorの値があるか', async () => {
@@ -46,8 +46,8 @@ describe('useArchive TEST', () => {
         });
         await waitFor(() => {
             expect(result.current[0]).toStrictEqual([
-                mockYoutubeData,
-                mockYoutubeData,
+                ...mockYoutubeData.items,
+                ...mockYoutubeData.items,
             ]);
         });
     });
