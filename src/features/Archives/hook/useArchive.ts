@@ -43,11 +43,15 @@ const fetchArchives = async (
 > => {
     const query = createQuery(channelId);
 
-    const response = await fetch(`/api/archives`).then(async (response) => {
-        return (await response.json()) as Data<
-            GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-        >;
-    });
+    const DOMAIN = process.env.TEST_DOMAIN;
+
+    const response = await fetch(`${DOMAIN}api/archives`).then(
+        async (response) => {
+            return (await response.json()) as Data<
+                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
+            >;
+        }
+    );
     return response;
 };
 

@@ -7,5 +7,6 @@ declare namespace NodeJS {
         readonly NEXT_PUBLIC_YOUTUBE_API_URL?: string;
         readonly NEXT_PUBLIC_CHANNELLIST_URL?: string;
         readonly NEXT_PUBLIC_CHANNEL_ICON_URL?: string;
+        readonly NEXT_PUBLIC_TEST_DOMAIN?: string;
     }
 }

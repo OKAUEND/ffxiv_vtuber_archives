@@ -147,7 +147,7 @@ export const youtubePostHandler = (status: 200 | 400 | 500 = 200) => {
 
 export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.get<Data, { id: string }, Data | Error>(
-        '/api/archives',
+        'https://www.api/archives',
         async (req, res, ctx) => {
             if (status === 400) {
                 return res(
