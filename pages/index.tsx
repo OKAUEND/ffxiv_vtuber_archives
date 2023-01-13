@@ -8,7 +8,7 @@ import { GetServerSideProps } from 'next';
 import { Data } from '@/src/types/api';
 import { Error } from '@/src/component/Error';
 
-type Props = Data<HikasenVtuber>;
+type Props = Data<HikasenVtuber[]>;
 
 export default function Home({ status, message, item, error }: Props) {
     if (error) return <Error status={status} message={message} />;
@@ -72,9 +72,11 @@ export default function Home({ status, message, item, error }: Props) {
                         </p>
                     </a>
                 </div>
-                <Suspense fallback={<p>Loading...</p>}>
-                    <Channels ChannelsFirstPagenation={channels} />
-                </Suspense>
+                <div className="bg-gray-800">
+                    <Suspense fallback={<p>Loading...</p>}>
+                        <Channels ChannelsFirstPagenation={item} />
+                    </Suspense>
+                </div>
             </main>
 
             <footer className={styles.footer}>

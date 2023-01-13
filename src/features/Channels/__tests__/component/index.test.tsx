@@ -10,7 +10,7 @@ import { HikasenVtuber } from '../../types';
 
 describe('Channel Component TEST', () => {
     const List = HikasenVtuberResourceFactory('ComponentTEST');
-    type Props = Data<HikasenVtuber>;
+    type Props = Data<HikasenVtuber[]>;
 
     const Data: Props = {
         status: 200,
