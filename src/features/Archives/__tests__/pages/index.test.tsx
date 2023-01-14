@@ -3,6 +3,12 @@ import { render, screen, waitFor } from '@testing-library/react';
 import {} from '@testing-library/jest-dom';
 import { RecoilRoot } from 'recoil';
 
+import { setupMockServer } from '@/src/mock/test/setup';
+import { handlers } from '@/src/mock/handlers';
+import _fetch from 'node-fetch';
+
+import { ArchiveRouter } from '@/src/features/Archives/pages';
+import { Suspense } from 'react';
 describe('Archives Component TEST', () => {
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか');
     test(
