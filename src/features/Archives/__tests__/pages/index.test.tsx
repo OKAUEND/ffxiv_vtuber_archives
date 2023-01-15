@@ -20,6 +20,9 @@ function flushPromisesAndTimers(): Promise<void> {
             })
     );
 }
+
+const server = setupMockServer(handlers);
+
 describe('Archives Component TEST', () => {
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか');
     test(
