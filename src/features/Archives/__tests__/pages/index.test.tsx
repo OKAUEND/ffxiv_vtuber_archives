@@ -9,6 +9,17 @@ import _fetch from 'node-fetch';
 
 import { ArchiveRouter } from '@/src/features/Archives/pages';
 import { Suspense } from 'react';
+
+function flushPromisesAndTimers(): Promise<void> {
+    return act(
+        () =>
+            new Promise((resolve) => {
+                setTimeout(resolve, 500);
+                vi.useFakeTimers();
+                vi.runAllTimers();
+            })
+    );
+}
 describe('Archives Component TEST', () => {
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか');
     test(
