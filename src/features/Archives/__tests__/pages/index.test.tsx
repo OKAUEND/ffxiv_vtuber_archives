@@ -24,7 +24,9 @@ function flushPromisesAndTimers(): Promise<void> {
 const server = setupMockServer(handlers);
 
 describe('Archives Component TEST', () => {
-    test('Hookから値から渡されたデータを子に渡し、要素が表示できているか');
+    // @ts-ignore
+    global.fetch = _fetch;
+
     test(
         '初期インスタンス生成時に通信エラーが発生した時、子の要素は表示されずエラーコンポーネントが表示されるか'
     );
