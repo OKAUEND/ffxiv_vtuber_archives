@@ -9,6 +9,7 @@ import _fetch from 'node-fetch';
 
 import { ArchiveRouter } from '@/src/features/Archives/pages';
 import { Suspense } from 'react';
+import { archiveAPIRouterHandler } from '../../mock';
 
 function flushPromisesAndTimers(): Promise<void> {
     return act(
@@ -39,9 +40,19 @@ describe('Archives Component TEST', () => {
         const element = screen.getAllByText('Mock');
         expect(element[0]).toBeInTheDocument();
     });
-    test(
-        '初期インスタンス生成時に通信エラーが発生した時、子の要素は表示されずエラーコンポーネントが表示されるか'
-    );
+    test('初期インスタンス生成時に通信エラーが発生した時、子の要素は表示されずエラーコンポーネントが表示されるか', async () => {
+        server.use(archiveAPIRouterHandler(400));
+        render(
+            <RecoilRoot>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <ArchiveRouter />
+                </Suspense>
+            </RecoilRoot>
+        );
+        await flushPromisesAndTimers();
+        const error = screen.getByText('400');
+        expect(error).toBeInTheDocument();
+    });
     test(
         '次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか'
     );
