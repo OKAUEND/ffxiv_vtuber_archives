@@ -53,9 +53,10 @@ describe('Archives Component TEST', () => {
         const error = screen.getByText('400');
         expect(error).toBeInTheDocument();
     });
-    test(
-        '次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか'
-    );
+});
+
+describe('Archives Component Event TEST', () => {
+    test('次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか', async () => {});
     test(
         '次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか'
     );
