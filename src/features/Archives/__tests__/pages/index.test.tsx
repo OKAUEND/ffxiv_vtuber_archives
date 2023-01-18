@@ -28,6 +28,11 @@ describe('Archives Component TEST', () => {
     // @ts-ignore
     global.fetch = _fetch;
 
+    afterAll(() => {
+        vi.runOnlyPendingTimers();
+        vi.useRealTimers();
+    });
+
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか', async () => {
         render(
             <RecoilRoot>
