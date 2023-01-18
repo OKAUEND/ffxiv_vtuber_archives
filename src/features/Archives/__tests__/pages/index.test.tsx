@@ -11,20 +11,20 @@ import { ArchiveRouter } from '@/src/features/Archives/pages';
 import { Suspense } from 'react';
 import { archiveAPIRouterHandler } from '../../mock';
 
-function flushPromisesAndTimers(): Promise<void> {
-    return act(
-        () =>
-            new Promise((resolve) => {
-                setTimeout(resolve, 500);
-                vi.useFakeTimers();
-                vi.runAllTimers();
-            })
-    );
-}
-
 const server = setupMockServer(handlers);
 
 describe('Archives Component TEST', () => {
+    function flushPromisesAndTimers(): Promise<void> {
+        return act(
+            () =>
+                new Promise((resolve) => {
+                    setTimeout(resolve, 100);
+                    vi.useFakeTimers();
+                    vi.runAllTimers();
+                })
+        );
+    }
+
     // @ts-ignore
     global.fetch = _fetch;
 
