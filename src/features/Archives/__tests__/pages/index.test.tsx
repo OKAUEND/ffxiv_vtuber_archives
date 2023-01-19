@@ -1,6 +1,7 @@
-import { vi, describe, test, expect } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { vi, describe, test, expect, vitest, Vitest } from 'vitest';
+import { act, render, screen } from '@testing-library/react';
 import {} from '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import { RecoilRoot } from 'recoil';
 
 import { setupMockServer } from '@/src/mock/test/setup';
@@ -8,8 +9,10 @@ import { handlers } from '@/src/mock/handlers';
 import _fetch from 'node-fetch';
 
 import { ArchiveRouter } from '@/src/features/Archives/pages';
+import * as useArchiveMock from '@/src/features/Archives/hook/useArchive';
 import { Suspense } from 'react';
-import { archiveAPIRouterHandler } from '../../mock';
+import { archiveAPIRouterHandler, GoogleYoutubeFactory } from '../../mock';
+import { Data } from '@/src/types/api';
 
 const server = setupMockServer(handlers);
 
