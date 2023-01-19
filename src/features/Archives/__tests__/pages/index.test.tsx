@@ -61,7 +61,31 @@ describe('Archives Component TEST', () => {
 });
 
 describe('Archives Component Event TEST', () => {
-    test('次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか', async () => {});
+    test('次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか', async () => {
+        const mockFn = vi.fn();
+        //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
+        const spy = vi.spyOn(useArchiveMock, 'useArchives');
+        const error: Omit<Data<[]>, 'item'> = { status: 200 };
+        spy.mockImplementation(
+            () =>
+                [GoogleYoutubeFactory('MockSpy').items, mockFn, error] as const
+        );
+        const user = userEvent.setup();
+
+        render(
+            <RecoilRoot>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <ArchiveRouter />
+                </Suspense>
+            </RecoilRoot>
+        );
+
+        expect(mockFn).toHaveBeenCalledTimes(0);
+
+        await user.click(screen.getByRole('button', { name: 'Next' }));
+
+        expect(mockFn).toHaveBeenCalledTimes(1);
+    });
     test(
         '次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか'
     );
