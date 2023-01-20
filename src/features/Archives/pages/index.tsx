@@ -45,9 +45,7 @@ export const ArchiveRouter = () => {
                 </Suspense>
             </div>
             <div>
-                <Suspense fallback={<p>Loading...</p>}>
-                    <NextLoad handler={() => {}} />
-                </Suspense>
+                <button onClick={fetch}>Next</button>
             </div>
         </div>
     );
