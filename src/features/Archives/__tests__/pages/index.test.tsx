@@ -89,7 +89,25 @@ describe('Archives Component Event TEST', () => {
 
         expect(mockFn).toHaveBeenCalledTimes(1);
     });
-    test(
-        '次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか'
-    );
+    test('次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか', async () => {
+        const mockFn = vi.fn();
+        //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
+        const spy = vi.spyOn(useArchiveMock, 'useArchives');
+        const error: Omit<Data<[]>, 'item'> = { status: 400, error: true };
+        spy.mockImplementation(
+            () =>
+                [GoogleYoutubeFactory('MockSpy').items, mockFn, error] as const
+        );
+        const user = userEvent.setup();
+
+        render(
+            <RecoilRoot>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <ArchiveRouter />
+                </Suspense>
+            </RecoilRoot>
+        );
+        const element = screen.getByText('Error');
+        expect(element).toBeInTheDocument();
+    });
 });
