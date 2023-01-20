@@ -24,12 +24,18 @@ export const ArchiveRouter = () => {
     //TypeGuardでundefinedを除外する
     // const targetChannelID = typeGuard(channelID);
 
-    const [Archives, fetchArchives, error] = useArchives('channelId');
+    const [Archives, fetch, error] = useArchives('channelId');
+
+    const isError = () => {
+        if (!error) return false;
+        return Archives.length > 0 && error.error;
+    };
+
     if (Archives.length === 0 && error)
         return <Error status={error.status} message={error.message} />;
     return (
         <div>
-            {Archives.length > 0 && error.error && <div>Error</div>}
+            {isError() && <div>Error</div>}
             <div>
                 {/* <button onClick={() => navigate(-1)}>戻る</button> */}
             </div>
