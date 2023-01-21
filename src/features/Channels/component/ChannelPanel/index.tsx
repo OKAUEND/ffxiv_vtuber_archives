@@ -1,25 +1,17 @@
 import React from 'react';
 
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { IconElement } from '@/src/component/Element/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 type Props = {
     channels: HikasenVtuber[];
+    onhandler: () => void;
 };
 
-export const ChannelPanel = ({ channels }: Props) => {
+export const ChannelPanel = ({ channels, onhandler }: Props) => {
     const iconURL = process.env.NEXT_PUBLIC_CHANNEL_ICON_URL;
-
-    const router = useRouter();
-
-    const onClick = () => {
-        router.push({
-            pathname: '/Archives/hogehoge',
-        });
-    };
 
     return (
         <ul className="flex justify-center flex-wrap ml-10 mr-10">
@@ -29,7 +21,7 @@ export const ChannelPanel = ({ channels }: Props) => {
                     className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md">
                     <div className="grid grid-row-3 grid-flow-col gap-4">
                         <div className="row-span-3">
-                            <button onClick={onClick}>
+                            <button onClick={onhandler}>
                                 {/* <IconElement
                                     src={`${iconURL}${channel.channelIconID}`}
                                     alt={`${channel.name}のチャンネルアイコン`}
@@ -39,7 +31,7 @@ export const ChannelPanel = ({ channels }: Props) => {
                             </button>
                         </div>
                         <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
-                            <button onClick={onClick}>
+                            <button onClick={onhandler}>
                                 <div className="flex flex-col">
                                     <span className="text-gray-100 font-sans text-lg">
                                         {channel.name}
