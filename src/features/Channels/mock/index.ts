@@ -12,7 +12,7 @@ type Data = Error & {
     item?: HikasenVtuber[];
 };
 
-const path = () => `vitest.api.com`;
+const path = () => `http://vitest.api.com`;
 
 export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
