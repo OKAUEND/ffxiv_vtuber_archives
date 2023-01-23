@@ -49,7 +49,13 @@ export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
             return res(
                 ctx.status(status),
                 ctx.json({
-                    item: [HikasenVtuberResourceFactory('Mock')],
+                    item: [
+                        HikasenVtuberResourceFactory('Mock'),
+                        HikasenVtuberResourceFactory('Mock'),
+                        HikasenVtuberResourceFactory('Mock'),
+                        HikasenVtuberResourceFactory('Mock'),
+                        HikasenVtuberResourceFactory('Mock'),
+                    ],
                     status: 200,
                 })
             );
