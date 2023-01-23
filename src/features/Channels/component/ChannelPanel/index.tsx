@@ -14,7 +14,7 @@ export const ChannelPanel = ({ channels, onhandler }: Props) => {
     const iconURL = process.env.NEXT_PUBLIC_CHANNEL_ICON_URL;
 
     return (
-        <ul className="flex justify-center flex-wrap ml-10 mr-10">
+        <ul className="flex justify-center flex-wrap ml-10 mr-10 lg:w-3/4">
             {channels.map((channel) => (
                 <li
                     key={channel.channelID}
