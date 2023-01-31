@@ -13,7 +13,7 @@ type Props = Data<HikasenVtuber[]>;
 export default function Home({ status, message, item, error }: Props) {
     if (error) return <Error status={status} message={message} />;
     return (
-        <div className="min-h-screen grid grid-row-footer">
+        <div className="min-h-screen grid grid-rows-footer">
             <Head>
                 <title>FFXIV - Vtubers</title>
                 <meta name="description" content="ffxiv vtuber list" />
