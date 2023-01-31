@@ -11,10 +11,10 @@ module.exports = {
     ],
 
     theme: {
-        extends: {
-            gridTemplateRows:{
-                footer:"auto 1fr auto"
-            }
+        extend: {
+            gridTemplateRows: {
+                footer: 'auto 1fr auto',
+            },
         },
     },
     plugins: [],
