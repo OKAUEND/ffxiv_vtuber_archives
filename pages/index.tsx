@@ -20,6 +20,8 @@ export default function Home({ status, message, item, error }: Props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
+            <header>Header</header>
+
             <main className="bg-gray-800 h-full">
                 <div>
                     <Suspense fallback={<p>Loading...</p>}>
