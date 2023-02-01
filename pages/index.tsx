@@ -30,13 +30,13 @@ export default function Home({ status, message, item, error }: Props) {
                 </div>
             </main>
 
-            <footer className={styles.footer}>
+            <footer className="p-5">
                 <a
                     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                     target="_blank"
                     rel="noopener noreferrer">
                     Powered by{' '}
-                    <span className={styles.logo}>
+                    <span className="ml-2 h-4">
                         <Image
                             src="/vercel.svg"
                             alt="Vercel Logo"
