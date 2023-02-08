@@ -19,7 +19,7 @@ export default function Home({ status, message, item, error }: Props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <header className="p-5">Header</header>
+            <header className="bg-gray-900 p-5">Header</header>
 
             <main className="bg-gray-800 h-full">
                 <div>
@@ -29,7 +29,7 @@ export default function Home({ status, message, item, error }: Props) {
                 </div>
             </main>
 
-            <footer className="p-5">
+            <footer className="bg-gray-800 p-5">
                 <a
                     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                     target="_blank"
