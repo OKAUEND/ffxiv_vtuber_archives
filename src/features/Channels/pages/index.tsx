@@ -23,9 +23,11 @@ export const Channels = ({ ChannelsFirstPagenation }: Props) => {
     };
 
     return (
-        <ChannelPanel
-            channels={ChannelsFirstPagenation}
-            onhandler={onhandler}
-        />
+        <div className="">
+            <ChannelPanel
+                channels={ChannelsFirstPagenation}
+                onhandler={onhandler}
+            />
+        </div>
     );
 };
