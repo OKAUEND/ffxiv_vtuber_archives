@@ -23,7 +23,7 @@ export const Channels = ({ ChannelsFirstPagenation }: Props) => {
     };
 
     return (
-        <div className="">
+        <div className="grid grid-cols-main">
             <ChannelPanel
                 channels={ChannelsFirstPagenation}
                 onhandler={onhandler}
