@@ -12,6 +12,9 @@ module.exports = {
 
     theme: {
         extend: {
+            gridTemplateColumns: {
+                main: 'auto 80% auto',
+            },
             gridTemplateRows: {
                 footer: 'auto 1fr auto',
             },
