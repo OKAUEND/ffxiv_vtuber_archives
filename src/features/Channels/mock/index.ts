@@ -17,7 +17,7 @@ const path = () => `http://vitest.api.com`;
 export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
         channelID: name,
-        channelIconID: name,
+        channelIconID: '/mock/image/icon.png',
         name: name,
         twitter: '',
         twitch: '',
