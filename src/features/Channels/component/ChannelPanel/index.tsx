@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { IconElement } from '@/src/component/Element/Icon';
+import { Icon } from '@/src/component/Element/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 type Props = {
@@ -23,12 +23,12 @@ export const ChannelPanel = ({ channels, onhandler }: Props) => {
                         <div className="row-span-3">
                             <button
                                 onClick={() => onhandler(channel.channelID)}>
-                                {/* <IconElement
-                                    src={`${iconURL}${channel.channelIconID}`}
+                                <Icon
+                                    src={channel.channelIconID}
                                     alt={`${channel.name}のチャンネルアイコン`}
-                                    size="Medium"
-                                    radius="full"
-                                /> */}
+                                    width={320}
+                                    heidht={160}
+                                />
                             </button>
                         </div>
                         <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
