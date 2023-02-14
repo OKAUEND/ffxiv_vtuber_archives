@@ -10,5 +10,6 @@ describe('ChannelPanel Component TEST', () => {
         render(<ChannelPanel channels={[MockData]} onhandler={mockFn} />);
 
         expect(screen.getByText('Mock')).toBeInTheDocument();
+        expect(screen.getByRole('img')).toBeInTheDocument();
     });
 });
