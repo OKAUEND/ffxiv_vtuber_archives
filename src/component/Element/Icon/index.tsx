@@ -13,5 +13,9 @@ export const Icon = ({
     width = 48,
     height = 48,
 }: Props): JSX.Element => {
-    return <Image src={src} alt={alt} width={width} height={height} />;
+    return (
+        <div className="rounded-full">
+            <Image src={src} alt={alt} width={width} height={height} />
+        </div>
+    );
 };
