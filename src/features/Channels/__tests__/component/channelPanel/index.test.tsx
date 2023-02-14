@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { ChannelPanel } from '@/src/features/Channels/component/ChannelPanel';
 import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('ChannelPanel Component TEST', () => {
     const MockData = HikasenVtuberResourceFactory('Mock');
@@ -15,5 +15,16 @@ describe('ChannelPanel Component TEST', () => {
     test('buttonをクリックした時に、イベントを親へ伝えれているか', () => {
         const mockFn = vi.fn();
         render(<ChannelPanel channels={[MockData]} onhandler={mockFn} />);
+
+        expect(mockFn.mock.calls.length).toBe(0);
+
+        const button = screen.getAllByRole('button');
+        fireEvent.click(button[0]);
+
+        expect(mockFn.mock.calls.length).toBe(1);
+
+        fireEvent.click(button[1]);
+
+        expect(mockFn.mock.calls.length).toBe(2);
     });
 });
