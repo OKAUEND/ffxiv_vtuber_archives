@@ -5,8 +5,10 @@ import { render, screen } from '@testing-library/react';
 
 describe('ChannelPanel Component TEST', () => {
     const MockData = HikasenVtuberResourceFactory('Mock');
-    test('DataがPropsで渡された場合、表示されているか', () => {});
+    test('DataがPropsで渡された場合、表示されているか', () => {
+        const mockFn = vi.fn();
+        render(<ChannelPanel channels={[MockData]} onhandler={mockFn} />);
+
+        expect(screen.getByText('Mock')).toBeInTheDocument();
+    });
 });
-
-
-
