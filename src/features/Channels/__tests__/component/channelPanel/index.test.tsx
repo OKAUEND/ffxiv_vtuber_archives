@@ -4,8 +4,9 @@ import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
 import { render, screen } from '@testing-library/react';
 
 describe('ChannelPanel Component TEST', () => {
+    const MockData = HikasenVtuberResourceFactory('Mock');
     test('DataがPropsで渡された場合、表示されているか', () => {});
 });
 
 
-describe('ChannelPanel Component TEST', () => {});
+
