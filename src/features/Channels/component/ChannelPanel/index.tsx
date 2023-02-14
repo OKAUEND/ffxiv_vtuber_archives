@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import { Icon } from '@/src/component/Element/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
@@ -11,8 +9,6 @@ type Props = {
 };
 
 export const ChannelPanel = ({ channels, onhandler }: Props) => {
-    const iconURL = process.env.NEXT_PUBLIC_CHANNEL_ICON_URL;
-
     return (
         <ul className="flex justify-center flex-wrap ml-10 mr-10 col-start-2 col-end-3 after:w-96 after:p-4 after:m-2">
             {channels.map((channel) => (
