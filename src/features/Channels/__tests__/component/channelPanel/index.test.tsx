@@ -12,4 +12,8 @@ describe('ChannelPanel Component TEST', () => {
         expect(screen.getByText('Mock')).toBeInTheDocument();
         expect(screen.getByRole('img')).toBeInTheDocument();
     });
+    test('buttonをクリックした時に、イベントを親へ伝えれているか', () => {
+        const mockFn = vi.fn();
+        render(<ChannelPanel channels={[MockData]} onhandler={mockFn} />);
+    });
 });
