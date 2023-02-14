@@ -26,8 +26,6 @@ export const ChannelPanel = ({ channels, onhandler }: Props) => {
                                 <Icon
                                     src={channel.channelIconID}
                                     alt={`${channel.name}のチャンネルアイコン`}
-                                    width={320}
-                                    heidht={160}
                                 />
                             </button>
                         </div>

@@ -3,10 +3,15 @@ import Image from 'next/image';
 type Props = {
     src: string;
     alt: string;
-    width: number;
-    heidht: number;
+    width?: number;
+    height?: number;
 };
 
-export const Icon = (props: Props): JSX.Element => {
-    return <Image src={props.src} alt={props.alt} width={48} height={48} />;
+export const Icon = ({
+    src,
+    alt,
+    width = 48,
+    height = 48,
+}: Props): JSX.Element => {
+    return <Image src={src} alt={alt} width={width} height={height} />;
 };
