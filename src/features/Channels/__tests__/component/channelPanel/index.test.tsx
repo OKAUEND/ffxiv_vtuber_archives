@@ -27,4 +27,17 @@ describe('ChannelPanel Component TEST', () => {
 
         expect(mockFn.mock.calls.length).toBe(2);
     });
+    test('引数を正しく受け取れているか', () => {
+        const mockFn = vi.fn((selectedId: string) => selectedId);
+        render(<ChannelPanel channels={[MockData]} onhandler={mockFn} />);
+
+        expect(mockFn.mock.calls.length).toBe(0);
+
+        const button = screen.getAllByRole('button');
+        fireEvent.click(button[0]);
+
+        expect(mockFn.mock.calls.length).toBe(1);
+
+        expect(mockFn.mock.results[0].value).toEqual('Mock');
+    });
 });
