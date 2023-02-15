@@ -17,6 +17,7 @@ export const Channels = ({ ChannelsFirstPagenation }: Props) => {
     const router = useRouter();
 
     const onhandler = (selectedId: string = '') => {
+        if (selectedId === '') return;
         router.push({
             pathname: '/Archives/[channelId]',
             query: { channelId: selectedId },
