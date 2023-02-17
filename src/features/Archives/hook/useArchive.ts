@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
 import {
+    atom,
     atomFamily,
     DefaultValue,
+    noWait,
+    selector,
     selectorFamily,
     useRecoilState,
 } from 'recoil';
 import { Data } from '@/src/types/api';
 import { useError } from '@/src/hooks/error';
+import axios from 'axios';
 
 //---------------------------------------------------------------------------
 
