@@ -19,6 +19,13 @@ type timeRangetype = {
     BeginTime: string;
 };
 
+type Archive = GoogleApiYouTubeSearchResource;
+
+type ArchiveListState = {
+    archives: readonly Archive[];
+    mightHaveMore: boolean;
+};
+
 //---------------------------------------------------------------------------
 
 export const createQuery = (channelId: string): string => {
