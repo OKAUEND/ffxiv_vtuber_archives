@@ -76,6 +76,11 @@ export const archivesAtom = atomFamily<
     default: [],
 });
 
+const totalItems = atom({
+    key: 'data-flow/archiveList/totalItems',
+    default: pageSize,
+});
+
 //---------------------------------------------------------------------------
 
 const archivesSelector = selectorFamily<
