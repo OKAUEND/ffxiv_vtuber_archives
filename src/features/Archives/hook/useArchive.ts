@@ -99,6 +99,23 @@ const archivesSelector = selectorFamily<
         },
 });
 
+const archiveList = selector<ArchiveListState>({
+    key: 'data-flow/archiveList',
+    get: ({ get }) => {
+
+    },
+});
+const archiveListQuery = selectorFamily<
+    Archive,
+    { limit: number; offset: number }
+>({
+    key: 'data-flow/archiveListQuery',
+    get:
+        ({ limit, offset }) =>
+        async () => {
+
+        },
+});
 const timeRangeSelector = selectorFamily<timeRangetype, string>({
     key: 'next-timerange-selector',
     get:
