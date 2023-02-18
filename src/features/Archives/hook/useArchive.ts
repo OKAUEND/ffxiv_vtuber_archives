@@ -68,6 +68,10 @@ const fetchArchives = async (
 
 //---------------------------------------------------------------------------
 
+const pageSize = 25;
+
+//---------------------------------------------------------------------------
+
 export const archivesAtom = atomFamily<
     GoogleApiYouTubeSearchResource[],
     string
