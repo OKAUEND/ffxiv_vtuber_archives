@@ -47,38 +47,11 @@ const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
     return { EndTime, BeginTime };
 };
 
-const fetchArchives = async (
-    channelId: string
-): Promise<
-    Data<GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>>
-> => {
-    const query = createQuery(channelId);
-
-    const DOMAIN = process.env.TEST_DOMAIN;
-
-    const response = await fetch(`${DOMAIN}api/archives`).then(
-        async (response) => {
-            return (await response.json()) as Data<
-                GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-            >;
-        }
-    );
-    return response;
-};
-
 //---------------------------------------------------------------------------
 
 const pageSize = 25;
 
 //---------------------------------------------------------------------------
-
-export const archivesAtom = atomFamily<
-    GoogleApiYouTubeSearchResource[],
-    string
->({
-    key: 'archivesAtom',
-    default: [],
-});
 
 const totalItems = atom({
     key: 'data-flow/archiveList/totalItems',
@@ -87,33 +60,21 @@ const totalItems = atom({
 
 //---------------------------------------------------------------------------
 
-const archivesSelector = selectorFamily<
-    GoogleApiYouTubeSearchResource[],
-    string
->({
-    key: 'archives-selector',
-    get:
-        (channelId: string) =>
-        async ({ get }) => {
-            return get(archivesAtom(channelId));
-        },
-    set:
-        (channelId: string) =>
-        ({ set }, newArchives) => {
-            if (newArchives instanceof DefaultValue) return;
-
-            set(archivesAtom(channelId), (prev) => {
-                return [...prev, ...newArchives];
-            });
-        },
-});
-
 const archiveList = selector<ArchiveListState>({
     key: 'data-flow/archiveList',
     get: ({ get }) => {
-
+        const chunks: (readonly Archive[])[] = [];
+        const requestedItems = get(totalItems);
+        let mightHaveMore = true;
+        mainLoop: for (let offset = 0; offset < requestedItems; ) {
+            const limit = Math.min(requestedItems - offset, pageSize);
+            const youtubeArchive = get(
+                noWait(archiveListQuery({ limit, offset }))
+            );
+        }
     },
 });
+
 const archiveListQuery = selectorFamily<
     Archive,
     { limit: number; offset: number }
@@ -122,46 +83,15 @@ const archiveListQuery = selectorFamily<
     get:
         ({ limit, offset }) =>
         async () => {
-
+            const result = await axios
+                .get<Archive[]>('TEST')
+                .catch((error) => {});
         },
 });
-const timeRangeSelector = selectorFamily<timeRangetype, string>({
-    key: 'next-timerange-selector',
-    get:
-        (channelId: string) =>
-        ({ get }) => {
-            const archives = get(archivesSelector(channelId));
-            const lastArchivesLiveDayTime =
-                archives.slice(-1)[0].snippet.publishedAt;
-            return createTimeRange(lastArchivesLiveDayTime);
-        },
-});
-
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
 
 export const useArchives = (channelId: string) => {
-    const [archives, setArchives] = useRecoilState(archivesSelector(channelId));
-    const [error, setError, resetError] = useError();
-
-    useEffect(() => {
-        const initFetch = async () => {
-            await fetch();
-        };
-        if (archives.length > 0) return;
-        initFetch();
-    }, []);
-
-    const fetch = async () => {
-        resetError;
-
-        const archive = await fetchArchives(channelId);
-
-        if (archive.error || !archive.item) return setError(archive);
-
-        setArchives(archive.item.items);
-    };
-
-    return [archives, fetch, error] as const;
+    return [] as const;
 };
