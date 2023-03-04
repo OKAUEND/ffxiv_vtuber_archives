@@ -71,6 +71,16 @@ const archiveList = selector<ArchiveListState>({
             const youtubeArchive = get(
                 noWait(archiveListQuery({ limit, offset }))
             );
+
+            switch (youtubeArchive.state) {
+                case 'hasError': {
+                    throw youtubeArchive.errorMaybe();
+                }
+                case 'hasValue': {
+                }
+                case 'loading': {
+                }
+            }
         }
     },
 });
