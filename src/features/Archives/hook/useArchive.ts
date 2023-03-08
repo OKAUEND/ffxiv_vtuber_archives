@@ -14,16 +14,21 @@ import axios from 'axios';
 
 //---------------------------------------------------------------------------
 
-type timeRangetype = {
-    EndTime: string;
-    BeginTime: string;
-};
-
 type Archive = GoogleApiYouTubeSearchResource;
+
+type YoutubeResult =
+    GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
 
 type ArchiveListState = {
     archives: readonly Archive[];
     mightHaveMore: boolean;
+};
+
+type QueryInput = {
+    offset: number;
+    limit: number;
+    channelId: string;
+    latetime: string;
 };
 
 //---------------------------------------------------------------------------
@@ -37,14 +42,14 @@ export const createQuery = (channelId: string): string => {
     return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${maxResult}`;
 };
 
-const createTimeRange = (BeginLiveDayTime: string): timeRangetype => {
-    const lastArchiveTime = new Date(BeginLiveDayTime);
-    lastArchiveTime.setMinutes(lastArchiveTime.getMinutes() - 1);
-    const EndTime = lastArchiveTime.toISOString();
-    lastArchiveTime.setMonth(lastArchiveTime.getMonth() - 6);
-    const BeginTime = lastArchiveTime.toISOString();
+const createLastArchiveTime = (Archive: Archive[]): string => {
+    const baseTime = new Date(Archive.slice(-1)[0].snippet.publishedAt);
+    const targetTime = new Date(baseTime.getTime() - 60 * 1000);
+    return targetTime.toISOString();
+};
 
-    return { EndTime, BeginTime };
+const converRawResultToArchives = (response: YoutubeResult): Archive[] => {
+    return response.items;
 };
 
 //---------------------------------------------------------------------------
