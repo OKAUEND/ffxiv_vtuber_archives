@@ -7,10 +7,11 @@ import {
     selector,
     selectorFamily,
     useRecoilState,
+    useRecoilValue,
 } from 'recoil';
 import { Data } from '@/src/types/api';
 import { useError } from '@/src/hooks/error';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 //---------------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ const totalItems = atom({
 
 //---------------------------------------------------------------------------
 
-const archiveList = selector<ArchiveListState>({
+const archiveList = selectorFamily<ArchiveListState, string>({
     key: 'data-flow/archiveList',
     get: ({ get }) => {
         const chunks: (readonly Archive[])[] = [];
@@ -74,17 +75,32 @@ const archiveList = selector<ArchiveListState>({
                 noWait(archiveListQuery({ limit, offset }))
             );
 
-            switch (youtubeArchive.state) {
-                case 'hasError': {
-                    throw youtubeArchive.errorMaybe();
+                switch (youtubeArchive.state) {
+                    case 'hasError': {
+                        throw youtubeArchive.errorMaybe();
+                    }
+                    case 'hasValue': {
+                        chunks.push(youtubeArchive.contents);
+                        offset += youtubeArchive.contents.length;
+                        if (youtubeArchive.contents.length < limit) {
+                            mightHaveMore = false;
+                            break mainLoop;
+                        }
+                        break;
+                    }
+                    case 'loading': {
+                        return {
+                            archives: chunks.flat(1),
+                            mightHaveMore: true,
+                        };
+                    }
                 }
-                case 'hasValue': {
-                }
-                case 'loading': {
-                }
+                return {
+                    archives: chunks.flat(1),
+                    mightHaveMore,
+                };
             }
-        }
-    },
+        },
 });
 
 const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
