@@ -25,21 +25,18 @@ type ArchiveListState = {
 };
 
 type QueryInput = {
-    offset: number;
-    limit: number;
     channelId: string;
     latetime: string;
 };
 
 //---------------------------------------------------------------------------
 
-export const createQuery = (channelId: string): string => {
+export const createQuery = ({ channelId, latetime }: QueryInput): string => {
     const part = 'snippet';
-    const maxResult = 50;
     const order = 'date';
     const query = 'FF14';
 
-    return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${maxResult}`;
+    return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
 };
 
 const createLastArchiveTime = (Archive: Archive[]): string => {
@@ -90,19 +87,32 @@ const archiveList = selector<ArchiveListState>({
     },
 });
 
-const archiveListQuery = selectorFamily<
-    Archive,
-    { limit: number; offset: number }
->({
+const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
     key: 'data-flow/archiveListQuery',
     get:
-        ({ limit, offset }) =>
+        ({ channelId, latetime }) =>
         async () => {
-            const result = await axios
-                .get<Archive[]>('TEST')
-                .catch((error) => {});
+            try {
+                const query = createQuery({ channelId, latetime });
+                const result = await axios.get<YoutubeResult>('TEST');
+                return result.data;
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                }
+            }
         },
 });
+
+//
+const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
+    key: 'data-flow/archiveListQuery',
+    get:
+        (query) =>
+        ({ get }) => {
+            return converRawResultToArchives(get(archiveListQuery(query)));
+        },
+});
+
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
