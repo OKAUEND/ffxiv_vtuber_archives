@@ -14,48 +14,11 @@ export const GoogleYoutubeFactory = (
             totalResults: 0,
             resultsPerPage: 0,
         },
-        items: [
-            {
-                kind: name,
-                etag: name,
-                id: {
-                    kind: name,
-                    videoId: name,
-                    channelId: name,
-                    playlistId: name,
-                },
-                snippet: {
-                    publishedAt: name,
-                    channelId: name,
-                    title: name,
-                    description: name,
-                    thumbnails: {
-                        default: {
-                            url: name,
-                            width: 99,
-                            height: 99,
-                        },
-                        high: {
-                            url: name,
-                            width: 99,
-                            height: 99,
-                        },
-                        medium: {
-                            url: name,
-                            width: 99,
-                            height: 99,
-                        },
-                    },
-                    channelTitle: name,
-                },
-            },
-        ],
+        items: YoutubeResourceFactory(),
     };
 };
 
-export const YoutubeResourceFactory = (
-    name: string
-): GoogleApiYouTubeSearchResource => {
+const generateDate = (name: string = 'Mock') => {
     return {
         kind: name,
         etag: name,
@@ -90,6 +53,13 @@ export const YoutubeResourceFactory = (
             channelTitle: name,
         },
     };
+};
+
+export const YoutubeResourceFactory = (
+    name: string = 'Mock'
+): GoogleApiYouTubeSearchResource[] => {
+    const array = Array.from({ length: 25 }, () => generateDate(name));
+    return array;
 };
 
 const path = () => 'vitest.live.com';
