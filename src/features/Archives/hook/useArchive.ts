@@ -72,15 +72,16 @@ const archiveListRecursion = selectorFamily<
         offset: number;
     }
 >({
-    key: 'data-flow/archiveList',
-    get: ({ get }) => {
-        const chunks: (readonly Archive[])[] = [];
-        const requestedItems = get(totalItems);
-        let mightHaveMore = true;
-        mainLoop: for (let offset = 0; offset < requestedItems; ) {
+    key: 'data-flow/archiveListRecursion',
+    get:
+        ({ channelId, beginTime, requestedItems, offset }) =>
+        ({ get }) => {
             const limit = Math.min(requestedItems - offset, pageSize);
             const youtubeArchive = get(
-                noWait(archiveListQuery({ limit, offset }))
+                formattedVtuberArchiveQuery({
+                    channelId,
+                    beginTime,
+                })
             );
 
                 switch (youtubeArchive.state) {
