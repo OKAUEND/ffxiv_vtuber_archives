@@ -63,7 +63,15 @@ const totalItems = atom({
 
 //---------------------------------------------------------------------------
 
-const archiveList = selectorFamily<ArchiveListState, string>({
+const archiveList = selectorFamily<
+    ArchiveListState,
+    {
+        channelId: string;
+        beginTime: string;
+        requestedItems: number;
+        offset: number;
+    }
+>({
     key: 'data-flow/archiveList',
     get: ({ get }) => {
         const chunks: (readonly Archive[])[] = [];
