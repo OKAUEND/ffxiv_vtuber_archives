@@ -63,7 +63,7 @@ const totalItems = atom({
 
 //---------------------------------------------------------------------------
 
-const archiveList = selectorFamily<
+const archiveListRecursion = selectorFamily<
     ArchiveListState,
     {
         channelId: string;
