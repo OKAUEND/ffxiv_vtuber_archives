@@ -84,29 +84,17 @@ const archiveListRecursion = selectorFamily<
                 })
             );
 
-                switch (youtubeArchive.state) {
-                    case 'hasError': {
-                        throw youtubeArchive.errorMaybe();
-                    }
-                    case 'hasValue': {
-                        chunks.push(youtubeArchive.contents);
-                        offset += youtubeArchive.contents.length;
-                        if (youtubeArchive.contents.length < limit) {
-                            mightHaveMore = false;
-                            break mainLoop;
-                        }
-                        break;
-                    }
-                    case 'loading': {
-                        return {
-                            archives: chunks.flat(1),
-                            mightHaveMore: true,
-                        };
-                    }
-                }
+            if (youtubeArchive.length < limit) {
                 return {
-                    archives: chunks.flat(1),
-                    mightHaveMore,
+                    archives: youtubeArchive,
+                    mightHaveMore: false,
+                };
+            }
+
+            if (requestedItems === offset + limit) {
+                return {
+                    archives: youtubeArchive,
+                    mightHaveMore: true,
                 };
             }
         },
