@@ -97,6 +97,17 @@ const archiveListRecursion = selectorFamily<
                     mightHaveMore: true,
                 };
             }
+
+            const rest = get(
+                noWait(
+                    archiveListRecursion({
+                        channelId,
+                        beginTime,
+                        requestedItems,
+                        offset: offset + limit,
+                    })
+                )
+            );
         },
 });
 
