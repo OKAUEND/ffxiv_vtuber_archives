@@ -63,6 +63,35 @@ const totalItems = atom({
 
 //---------------------------------------------------------------------------
 
+const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
+    key: 'data-flow/archiveListQuery',
+    get:
+        ({ channelId, beginTime }) =>
+        async () => {
+            try {
+                const query = createQuery({ channelId, beginTime });
+                const result = await axios.get<YoutubeResult>(
+                    'vitest.live.com'
+                );
+                console.log({ result });
+                return result.data;
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                }
+            }
+        },
+});
+
+//
+const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
+    key: 'data-flow/archiveListQuery',
+    get:
+        (query) =>
+        ({ get }) => {
+            return converRawResultToArchives(get(archiveListQuery(query)));
+        },
+});
+
 const archiveListRecursion = selectorFamily<
     ArchiveListState,
     {
@@ -108,32 +137,6 @@ const archiveListRecursion = selectorFamily<
                     })
                 )
             );
-        },
-});
-
-const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
-    key: 'data-flow/archiveListQuery',
-    get:
-        ({ channelId, latetime }) =>
-        async () => {
-            try {
-                const query = createQuery({ channelId, latetime });
-                const result = await axios.get<YoutubeResult>('TEST');
-                return result.data;
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                }
-            }
-        },
-});
-
-//
-const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
-    key: 'data-flow/archiveListQuery',
-    get:
-        (query) =>
-        ({ get }) => {
-            return converRawResultToArchives(get(archiveListQuery(query)));
         },
 });
 
