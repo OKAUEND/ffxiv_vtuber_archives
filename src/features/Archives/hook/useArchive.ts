@@ -56,7 +56,7 @@ const pageSize = 25;
 
 //---------------------------------------------------------------------------
 
-const totalItems = atom({
+const totalItems = atomFamily({
     key: 'data-flow/archiveList/totalItems',
     default: pageSize,
 });
