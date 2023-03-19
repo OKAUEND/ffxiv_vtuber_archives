@@ -140,6 +140,23 @@ const archiveListRecursion = selectorFamily<
         },
 });
 
+const archiveList = selectorFamily<ArchiveListState, string>({
+    key: 'data-flow/archiveList',
+    get:
+        (channelId) =>
+        ({ get }) => {
+            const beginTime = new Date().toISOString();
+            return get(
+                archiveListRecursion({
+                    channelId,
+                    beginTime,
+                    requestedItems: get(totalItems(channelId)),
+                    offset: 0,
+                })
+            );
+        },
+});
+
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
