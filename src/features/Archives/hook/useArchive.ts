@@ -40,7 +40,10 @@ export const createQuery = ({ channelId, latetime }: QueryInput): string => {
     return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
 };
 
-const createLastArchiveTime = (Archive: Archive[]): string => {
+const createLastArchiveTime = (Archive?: Archive[]): string => {
+    //引数が存在しないか、存在しても長さが0だった場合、現在時刻を基準にする
+    if (!Archive || Archive.length === 0) {
+        return new Date().toISOString();
     const baseTime = new Date(Archive.slice(-1)[0].snippet.publishedAt);
     const targetTime = new Date(baseTime.getTime() - 60 * 1000);
     return targetTime.toISOString();
