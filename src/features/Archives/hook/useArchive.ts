@@ -44,6 +44,9 @@ const createLastArchiveTime = (Archive?: Archive[]): string => {
     //引数が存在しないか、存在しても長さが0だった場合、現在時刻を基準にする
     if (!Archive || Archive.length === 0) {
         return new Date().toISOString();
+    }
+    //配列最後列の動画の日時より1分前を設定する
+    //1分前にしないと、重複した動画を再取得してしまうため
     const baseTime = new Date(Archive.slice(-1)[0].snippet.publishedAt);
     const targetTime = new Date(baseTime.getTime() - 60 * 1000);
     return targetTime.toISOString();
