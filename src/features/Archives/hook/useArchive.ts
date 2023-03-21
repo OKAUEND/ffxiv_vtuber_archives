@@ -151,7 +151,7 @@ const archiveList = selectorFamily<ArchiveListState, string>({
     get:
         (channelId) =>
         ({ get }) => {
-            const beginTime = new Date().toISOString();
+            const beginTime = createLastArchiveTime();
             return get(
                 archiveListRecursion({
                     channelId,
