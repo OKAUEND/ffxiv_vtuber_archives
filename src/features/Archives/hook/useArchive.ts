@@ -25,6 +25,12 @@ type ArchiveListState = {
     mightHaveMore: boolean;
 };
 
+type Offset = {
+    channelId: string;
+    beginTime: string;
+    requestedItems: number;
+    offset: number;
+};
 type QueryInput = {
     channelId: string;
     latetime: string;
@@ -98,15 +104,7 @@ const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
         },
 });
 
-const archiveListRecursion = selectorFamily<
-    ArchiveListState,
-    {
-        channelId: string;
-        beginTime: string;
-        requestedItems: number;
-        offset: number;
-    }
->({
+const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
     key: 'data-flow/archiveListRecursion',
     get:
         ({ channelId, beginTime, requestedItems, offset }) =>
