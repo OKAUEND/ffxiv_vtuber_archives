@@ -110,6 +110,8 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
         ({ channelId, beginTime, requestedItems, offset }) =>
         ({ get }) => {
             const limit = Math.min(requestedItems - offset, pageSize);
+
+            //現在のチャンネルIDと取得開始時間を渡し、YoutubeAPIから過去のライブを取得する
             const youtubeArchive = get(
                 formattedVtuberArchiveQuery({
                     channelId,
@@ -117,6 +119,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 })
             );
 
+            //取得した配列の長さが、今回取得する上限数より小さかったら、すべて取得したと判断
             if (youtubeArchive.length < limit) {
                 return {
                     archives: youtubeArchive,
@@ -124,6 +127,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 };
             }
 
+            //今回の要求数と一致していたら、取得を終了
             if (requestedItems === offset + limit) {
                 return {
                     archives: youtubeArchive,
@@ -131,6 +135,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 };
             }
 
+            //条件を満たさなかった場合、更に取得する必要があるため、自身を呼び出し再帰ループに入る
             const rest = get(
                 noWait(
                     archiveListRecursion({
