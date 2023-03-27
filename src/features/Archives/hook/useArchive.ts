@@ -108,7 +108,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
     key: 'data-flow/archiveListRecursion',
     get:
         ({ channelId, beginTime, requestedItems, offset }) =>
-        ({ get }) => {
+        ({ get }): ArchiveListState => {
             const limit = Math.min(requestedItems - offset, pageSize);
 
             //現在のチャンネルIDと取得開始時間を渡し、YoutubeAPIから過去のライブを取得する
@@ -146,6 +146,29 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                     })
                 )
             );
+
+            //ReactのトランジクションはRecoilはまだ対応していないため、Lodableで対応する
+            switch (rest.state) {
+                case 'hasError': {
+                    throw rest.errorMaybe();
+                }
+                case 'loading': {
+                    return {
+                        archives: youtubeArchive,
+                        mightHaveMore: true,
+                    };
+                }
+                case 'hasValue': {
+                    return {
+                        //読み込みが完了した場合、配列をマージしリターンで戻っていく
+                        archives: [
+                            ...youtubeArchive,
+                            ...rest.contents.archives,
+                        ],
+                        mightHaveMore: rest.contents.mightHaveMore,
+                    };
+                }
+            }
         },
 });
 
