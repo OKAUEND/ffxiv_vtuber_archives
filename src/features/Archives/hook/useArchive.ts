@@ -31,9 +31,10 @@ type Offset = {
     requestedItems: number;
     offset: number;
 };
+
 type QueryInput = {
     channelId: string;
-    latetime: string;
+    beginTime: string;
 };
 
 //---------------------------------------------------------------------------
