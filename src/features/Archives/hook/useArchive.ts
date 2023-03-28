@@ -65,14 +65,14 @@ const converRawResultToArchives = (response: YoutubeResult): Archive[] => {
 /**
  * 1ページで読み込みを行う値
  */
-const pageSize = 25;
+export const pageSize = 25;
 
 //---------------------------------------------------------------------------
 
 /**
  * 配信者毎に現在読み込みを行った現在値
  */
-const totalItems = atomFamily({
+export const totalItems = atomFamily({
     key: 'data-flow/archiveList/totalItems',
     default: pageSize,
 });
