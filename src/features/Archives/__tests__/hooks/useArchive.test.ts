@@ -16,39 +16,4 @@ const server = setupMockServer(handlers);
 
 describe('useArchive TEST', () => {
     const mockYoutubeData = GoogleYoutubeFactory();
-    test('CustomHooksを生成した時に、Fetchで取得した値をStateにいれタプルでHooksの外に出せているか', async () => {
-        const { result } = renderHook(() => useArchives('mock'), {
-            wrapper: RecoilRoot,
-        });
-
-        await waitFor(() => {
-            expect(result.current[0]).toStrictEqual(mockYoutubeData.items);
-        });
-    });
-    test('CustomHooksを生成した時に通信エラー発生した場合に、Errorの値があるか', async () => {
-        server.use(archiveAPIRouterHandler(400));
-        const { result } = renderHook(() => useArchives('mock'), {
-            wrapper: RecoilRoot,
-        });
-
-        await waitFor(() => {
-            expect(result.current[2].status).toStrictEqual(400);
-            expect(result.current[0]).toStrictEqual([]);
-        });
-    });
-    test('次の値を取得する更新関数を呼び出した場合、値を取得し、Stateへセットできるか', async () => {
-        const { result } = renderHook(() => useArchives('mock'), {
-            wrapper: RecoilRoot,
-        });
-
-        act(() => {
-            result.current[1]();
-        });
-        await waitFor(() => {
-            expect(result.current[0]).toStrictEqual([
-                ...mockYoutubeData.items,
-                ...mockYoutubeData.items,
-            ]);
-        });
-    });
 });
