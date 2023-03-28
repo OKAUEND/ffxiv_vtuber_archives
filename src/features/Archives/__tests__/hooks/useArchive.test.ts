@@ -26,7 +26,7 @@ describe('useArchive TEST', () => {
             wrapper: RecoilRoot,
         });
         await waitFor(() => {
-            expect(result.current[0].archives).toStrictEqual(
+            expect(result.current.archives).toStrictEqual(
                 mockYoutubeData.items
             );
         });
