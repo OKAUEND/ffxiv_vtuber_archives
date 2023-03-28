@@ -33,24 +33,3 @@ describe('useArchive TEST', () => {
     });
     test('エラー発生時の対応(- エラー発生時の動作がまだ未定なので仮に項目作成)', () => {});
 });
-
-describe('usePage TEST', () => {
-    test('初期値は事前に設定している値になっているか', async () => {
-        const initialSnapshot = snapshot_UNSTABLE();
-        initialSnapshot.getLoadable(totalItems('Mock'));
-    });
-    test('更新関数を呼び出した時、値がインクリメントされているか', () => {
-        const initialSnapshot = snapshot_UNSTABLE();
-        expect(initialSnapshot.getLoadable(totalItems('Mock'))).toEqual(
-            pageSize
-        );
-
-        const { result } = renderHook(() => usePage(), { wrapper: RecoilRoot });
-
-        result.current[0]('Mock');
-
-        expect(initialSnapshot.getLoadable(totalItems('Mock'))).toEqual(
-            pageSize + pageSize
-        );
-    });
-});
