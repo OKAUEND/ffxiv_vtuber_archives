@@ -204,3 +204,14 @@ const archiveList = selectorFamily<ArchiveListState, string>({
 export const useArchives = (channelId: string) => {
     return useRecoilValue(archiveList(channelId));
 };
+
+/**
+ *
+ * @returns {Void} 現在の要求数をインクリメントする関数
+ */
+export const usePage = () => {
+    const loadNextList = useRecoilCallback(({ set }) => (channelId: string) => {
+        set(totalItems(channelId), (count) => count + pageSize);
+    });
+    return loadNextList;
+};
