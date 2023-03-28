@@ -196,7 +196,11 @@ const archiveList = selectorFamily<ArchiveListState, string>({
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-
+/**
+ *
+ * @param channelId 対象の配信者のYoutubeChannelID
+ * @returns {Array} 取得済みの過去配信(アーカイブ)
+ */
 export const useArchives = (channelId: string) => {
-    return [] as const;
+    return useRecoilValue(archiveList(channelId));
 };
