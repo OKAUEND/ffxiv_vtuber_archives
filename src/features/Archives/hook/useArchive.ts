@@ -36,7 +36,10 @@ type QueryInput = {
 
 //---------------------------------------------------------------------------
 
-export const createQuery = ({ channelId, latetime }: QueryInput): string => {
+export const createQuery = ({
+    channelId,
+    beginTime = new Date().toISOString(),
+}: QueryInput): string => {
     const part = 'snippet';
     const order = 'date';
     const query = 'FF14';
@@ -181,11 +184,9 @@ const archiveList = selectorFamily<ArchiveListState, string>({
     get:
         (channelId) =>
         ({ get }) => {
-            const beginTime = createLastArchiveTime();
             return get(
                 archiveListRecursion({
                     channelId,
-                    beginTime,
                     requestedItems: get(totalItems(channelId)),
                     offset: 0,
                 })
