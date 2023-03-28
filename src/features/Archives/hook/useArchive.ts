@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import {
-    atom,
     atomFamily,
-    DefaultValue,
     noWait,
-    selector,
     selectorFamily,
-    useRecoilState,
+    useRecoilCallback,
     useRecoilValue,
 } from 'recoil';
 import { Data } from '@/src/types/api';
