@@ -16,4 +16,6 @@ const server = setupMockServer(handlers);
 
 describe('useArchive TEST', () => {
     const mockYoutubeData = GoogleYoutubeFactory();
+    test('初期取得で値を取得できているか', () => {});
+    test('初期取得で値を取得できているか', () => {});
 });
