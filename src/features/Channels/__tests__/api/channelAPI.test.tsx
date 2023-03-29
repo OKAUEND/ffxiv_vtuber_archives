@@ -1,7 +1,7 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import { describe, expect, test } from 'vitest';
 
-import { channelPostHandler } from '@/src/features/Channels/mock';
+import { channelPostHandler, generateDate } from '@/src/features/Channels/mock';
 
 import { handler } from '@/src/features/Channels/api/channel';
 import { handlers } from '@/src/mock/handlers';
@@ -30,13 +30,7 @@ describe('Channel Get API TEST', () => {
                     const response = await fetch(requestInit);
                     const result = await response.json();
                     expect(result).toStrictEqual({
-                        item: [
-                            HikasenVtuberResourceFactory('Mock'),
-                            HikasenVtuberResourceFactory('Mock'),
-                            HikasenVtuberResourceFactory('Mock'),
-                            HikasenVtuberResourceFactory('Mock'),
-                            HikasenVtuberResourceFactory('Mock'),
-                        ],
+                        item: generateDate('Mock'),
                         status: 200,
                     });
                 },
