@@ -28,8 +28,15 @@ describe('Channel Get API TEST', () => {
                 ...params,
                 test: async ({ fetch }) => {
                     const response = await fetch(requestInit);
-                    await expect(response.json()).resolves.toStrictEqual({
-                        item: [HikasenVtuberResourceFactory('Mock')],
+                    const result = await response.json();
+                    expect(result).toStrictEqual({
+                        item: [
+                            HikasenVtuberResourceFactory('Mock'),
+                            HikasenVtuberResourceFactory('Mock'),
+                            HikasenVtuberResourceFactory('Mock'),
+                            HikasenVtuberResourceFactory('Mock'),
+                            HikasenVtuberResourceFactory('Mock'),
+                        ],
                         status: 200,
                     });
                 },
