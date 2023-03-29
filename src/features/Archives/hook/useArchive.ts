@@ -24,7 +24,7 @@ type ArchiveListState = {
 
 type Offset = {
     channelId: string;
-    beginTime: string;
+    beginTime?: string;
     requestedItems: number;
     offset: number;
 };
