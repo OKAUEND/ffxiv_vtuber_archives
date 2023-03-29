@@ -88,7 +88,6 @@ const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
                 const result = await axios.get<YoutubeResult>(
                     'vitest.live.com'
                 );
-                console.log({ result });
                 return result.data;
             } catch (error) {
                 if (axios.isAxiosError(error)) {
