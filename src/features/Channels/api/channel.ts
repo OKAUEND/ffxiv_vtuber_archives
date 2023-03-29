@@ -14,7 +14,6 @@ export const handler: NextApiHandler = async (request, response) => {
                 }
                 return response.status(200).json(date);
             } catch (e) {
-                console.error('Request error', e);
                 response.status(500).json({ error: 'Error fetchng posts' });
             }
             break;
