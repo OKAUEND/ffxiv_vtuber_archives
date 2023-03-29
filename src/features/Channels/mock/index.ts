@@ -12,7 +12,7 @@ type Data = Error & {
     item?: HikasenVtuber[];
 };
 
-const path = () => `vitest.api.com`;
+const path = () => `http://vitest.api.com/`;
 
 export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
@@ -26,6 +26,13 @@ export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
             server: 'test',
         },
     };
+};
+
+export const generateDate = (name: string): HikasenVtuber[] => {
+    const array = Array.from({ length: 5 }, (_, index) =>
+        HikasenVtuberResourceFactory(`${name}${index}`)
+    );
+    return array;
 };
 
 export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
@@ -49,13 +56,7 @@ export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
             return res(
                 ctx.status(status),
                 ctx.json({
-                    item: [
-                        HikasenVtuberResourceFactory('Mock'),
-                        HikasenVtuberResourceFactory('Mock'),
-                        HikasenVtuberResourceFactory('Mock'),
-                        HikasenVtuberResourceFactory('Mock'),
-                        HikasenVtuberResourceFactory('Mock'),
-                    ],
+                    item: generateDate('Mock'),
                     status: 200,
                 })
             );

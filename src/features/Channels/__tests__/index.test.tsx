@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { channelPostHandler } from '@/src/features/Channels/mock';
+import { channelPostHandler, generateDate } from '@/src/features/Channels/mock';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { GetServerSidePropsContext } from 'next';
 
@@ -35,13 +35,7 @@ describe('Channel - getServerSideProps', () => {
         const res = await getServerSideProps(mockCtx());
         assertHasProps(res);
         const channel = res.props['item'];
-        expect(channel).toStrictEqual([
-            HikasenVtuberResourceFactory('Mock'),
-            HikasenVtuberResourceFactory('Mock'),
-            HikasenVtuberResourceFactory('Mock'),
-            HikasenVtuberResourceFactory('Mock'),
-            HikasenVtuberResourceFactory('Mock'),
-        ]);
+        expect(channel).toStrictEqual(generateDate('Mock'));
     });
     test('400 - 失敗時', async () => {
         server.use(channelPostHandler(400));
