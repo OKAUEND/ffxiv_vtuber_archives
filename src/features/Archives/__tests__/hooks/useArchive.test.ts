@@ -3,12 +3,7 @@ import {} from 'msw';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 
-import {
-    useArchives,
-    usePage,
-    totalItems,
-    pageSize,
-} from '@/src/features/Archives/hook/useArchive';
+import { useArchives } from '@/src/features/Archives/hook/useArchive';
 import { setupMockServer } from '@/src/mock/test/setup';
 import { handlers } from '@/src/mock/handlers';
 
