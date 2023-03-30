@@ -21,8 +21,8 @@ export const ArchiveList = ({ Archives }: IProps) => {
                         </a>
                     </div>
                     <div className="flex-grow w-1/4">
-                        <div className="flex flex-col h-1/2">
-                            <p className="max-h-12 line-clamp-2 text-base">
+                        <div className="flex flex-col  h-1/2 justify-center">
+                            <p className="max-h-12 line-clamp-2 text-2xl text-left">
                                 {archive.snippet.title}
                             </p>
                         </div>
