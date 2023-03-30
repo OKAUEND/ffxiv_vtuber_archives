@@ -21,13 +21,13 @@ export const ArchiveList = ({ Archives }: IProps) => {
                         </a>
                     </div>
                     <div className="flex-grow w-1/4">
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col h-1/2">
                             <p className="max-h-12 line-clamp-2 text-base">
                                 {archive.snippet.title}
                             </p>
-                            <div className="text-sm">
-                                {archive.snippet.publishedAt}
-                            </div>
+                        </div>
+                        <div className="text-sm h-1/2">
+                            {archive.snippet.publishedAt}
                         </div>
                     </div>
                 </li>
