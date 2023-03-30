@@ -45,9 +45,9 @@ const generateDate = (name: string = 'Mock') => {
                     height: 99,
                 },
                 medium: {
-                    url: name,
-                    width: 99,
-                    height: 99,
+                    url: '/mock/image/hddefault.jpg',
+                    width: 336,
+                    height: 188,
                 },
             },
             channelTitle: name,
