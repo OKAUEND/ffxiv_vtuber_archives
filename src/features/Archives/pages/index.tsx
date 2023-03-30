@@ -39,7 +39,7 @@ export const ArchiveRouter = () => {
             <div>
                 {/* <button onClick={() => navigate(-1)}>戻る</button> */}
             </div>
-            <div>
+            <div className="w-full md:w-1/2">
                 <Suspense fallback={<p>Loading...</p>}>
                     <ArchiveList Archives={Archives} />
                 </Suspense>
