@@ -34,7 +34,7 @@ export const ArchiveRouter = () => {
     if (Archives.length === 0 && error)
         return <Error status={error.status} message={error.message} />;
     return (
-        <div>
+        <div className="bg-gray-800 flex justify-center content-center">
             {isError() && <div>Error</div>}
             <div>
                 {/* <button onClick={() => navigate(-1)}>戻る</button> */}
