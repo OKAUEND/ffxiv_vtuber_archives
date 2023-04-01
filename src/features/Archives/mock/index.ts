@@ -29,7 +29,7 @@ const generateDate = (name: string = 'Mock') => {
             playlistId: name,
         },
         snippet: {
-            publishedAt: name,
+            publishedAt: '1900/01/01',
             channelId: name,
             title: name,
             description: name,
@@ -56,7 +56,7 @@ const generateDate = (name: string = 'Mock') => {
 };
 
 export const YoutubeResourceFactory = (
-    name: string = 'Mock'
+    name: string = 'MockMockMockMockMockMockMockMockMockMockMockMockMockMock'
 ): GoogleApiYouTubeSearchResource[] => {
     const array = Array.from({ length: 25 }, () => generateDate(name));
     return array;
