@@ -24,7 +24,8 @@ export const ArchiveRouter = () => {
     //TypeGuardでundefinedを除外する
     // const targetChannelID = typeGuard(channelID);
 
-    const [Archives, fetch, error] = useArchives('channelId');
+    const Archives = useArchives('channelId');
+    const loadNextList = usePage();
 
     const isError = () => {
         if (!error) return false;
@@ -43,7 +44,7 @@ export const ArchiveRouter = () => {
                 <ArchiveList Archives={[...Archives.archives]} />
             </div>
             <div>
-                <button onClick={fetch}>Next</button>
+                <button onClick={() => loadNextList('channelId')}>Next</button>
             </div>
         </div>
     );
