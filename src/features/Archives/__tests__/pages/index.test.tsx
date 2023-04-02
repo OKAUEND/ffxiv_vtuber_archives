@@ -39,14 +39,12 @@ describe('Archives Component TEST', () => {
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか', async () => {
         render(
             <RecoilRoot>
-                <Suspense fallback={<p>Loading...</p>}>
-                    <ArchiveRouter />
-                </Suspense>
+                <ArchiveRouter />
             </RecoilRoot>
         );
         await flushPromisesAndTimers();
-        const element = screen.getAllByText('Mock');
-        expect(element[0]).toBeInTheDocument();
+        const element = screen.getAllByRole('listitem');
+        expect(element).toHaveLength(25);
     });
     test('初期インスタンス生成時に通信エラーが発生した時、子の要素は表示されずエラーコンポーネントが表示されるか', async () => {
         server.use(archiveAPIRouterHandler(400));
