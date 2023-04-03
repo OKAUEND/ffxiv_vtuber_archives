@@ -26,5 +26,18 @@ describe('useArchive TEST', () => {
             );
         });
     });
+    test('更新をした時件数が増えているか', async () => {
+        const archiveResult = renderHook(() => useArchives('Mock'), {
+            wrapper: RecoilRoot,
+        });
+
+        await act(() => {
+            archiveResult.result.current.loadNextList('Mock');
+        });
+
+        await waitFor(() => {
+            expect(archiveResult.result.current.archives.length).toEqual(50);
+        });
+    });
     test('エラー発生時の対応(- エラー発生時の動作がまだ未定なので仮に項目作成)', () => {});
 });

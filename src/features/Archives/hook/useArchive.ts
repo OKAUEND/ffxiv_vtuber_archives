@@ -198,7 +198,16 @@ const archiveList = selectorFamily<ArchiveListState, string>({
  * @returns {Array} 取得済みの過去配信(アーカイブ)
  */
 export const useArchives = (channelId: string) => {
-    return useRecoilValue(archiveList(channelId));
+    const archive = useRecoilValue(archiveList(channelId));
+
+    /**
+     * 取得件数を一定数インクリメントする
+     * @param channelId sting 現在の配信者チャンネルID
+     */
+    const loadNextList = useRecoilCallback(({ set }) => (channelId: string) => {
+        set(totalItems(channelId), (count) => count + pageSize);
+    });
+    return { ...archive, loadNextList };
 };
 
 /**
