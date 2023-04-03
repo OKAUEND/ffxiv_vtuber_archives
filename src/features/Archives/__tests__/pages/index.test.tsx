@@ -61,32 +61,29 @@ describe('Archives Component TEST', () => {
     });
 });
 
-describe('Archives Component Event TEST', () => {
-    test('次の取得が選ばれた時、APIより新しい値を取得し、要素へ反映できているか', async () => {
-        const mockFn = vi.fn();
-        //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
-        const spy = vi.spyOn(useArchiveMock, 'useArchives');
-        const error: Omit<Data<[]>, 'item'> = { status: 200 };
-        spy.mockImplementation(
-            () =>
-                [GoogleYoutubeFactory('MockSpy').items, mockFn, error] as const
-        );
-        const user = userEvent.setup();
+    describe('Archives Component Event TEST', () => {
+        test('次を取得ボタンをクリックした時、関数を呼び出せているか', async () => {
+            const mockFn = vi.fn();
+            //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
+            const spy = vi.spyOn(useArchiveMock, 'usePage');
+            spy.mockImplementation(() => mockFn);
+            const user = userEvent.setup({ delay: null });
 
-        render(
-            <RecoilRoot>
-                <Suspense fallback={<p>Loading...</p>}>
+            render(
+                <RecoilRoot>
                     <ArchiveRouter />
-                </Suspense>
-            </RecoilRoot>
-        );
+                </RecoilRoot>
+            );
 
-        expect(mockFn).toHaveBeenCalledTimes(0);
+            const buttonElement = screen.getByRole('button', { name: 'Next' });
+            expect(buttonElement).toBeInTheDocument();
 
-        await user.click(screen.getByRole('button', { name: 'Next' }));
+            expect(mockFn).toHaveBeenCalledTimes(0);
 
-        expect(mockFn).toHaveBeenCalledTimes(1);
-    });
+            await user.click(buttonElement);
+
+            expect(mockFn).toHaveBeenCalledTimes(1);
+        });
     test('次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか', async () => {
         const mockFn = vi.fn();
         //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
