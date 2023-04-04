@@ -30,7 +30,12 @@ describe('useArchive TEST', () => {
         const { result } = renderHook(() => useArchives('Mock'), {
             wrapper: RecoilRoot,
         });
-        await waitFor(() => {});
+        await waitFor(() => {
+            const reg = new RegExp(`/FF14|FFXIV/`);
+            result.current.archives.forEach((archive) => {
+                expect(reg.test(archive.snippet.title)).toEqual(true);
+            });
+        });
     });
     test('更新をした時件数が増えているか', async () => {
         const archiveResult = renderHook(() => useArchives('Mock'), {
