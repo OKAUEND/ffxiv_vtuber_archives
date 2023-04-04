@@ -26,6 +26,12 @@ describe('useArchive TEST', () => {
             );
         });
     });
+    test('放送タイトルがFF14に関係ないものだった場合、配列から除外できているか', async () => {
+        const { result } = renderHook(() => useArchives('Mock'), {
+            wrapper: RecoilRoot,
+        });
+        await waitFor(() => {});
+    });
     test('更新をした時件数が増えているか', async () => {
         const archiveResult = renderHook(() => useArchives('Mock'), {
             wrapper: RecoilRoot,
