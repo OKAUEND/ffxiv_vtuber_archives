@@ -31,7 +31,7 @@ describe('useArchive TEST', () => {
             wrapper: RecoilRoot,
         });
         await waitFor(() => {
-            const reg = new RegExp(`/FF14|FFXIV/`);
+            const reg = new RegExp(`FF14|FFXIV`);
             result.current.archives.forEach((archive) => {
                 expect(reg.test(archive.snippet.title)).toEqual(true);
             });

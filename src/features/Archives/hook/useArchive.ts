@@ -107,7 +107,7 @@ const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
             );
             //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
             //改めてここでFF14のみに絞り込む
-            const reg = new RegExp('/FF14|FFXIV/');
+            const reg = new RegExp('FF14|FFXIV');
             return archives.filter((archive) => {
                 reg.test(archive.snippet.title);
             });
