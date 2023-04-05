@@ -109,7 +109,7 @@ const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
             //改めてここでFF14のみに絞り込む
             const reg = new RegExp('FF14|FFXIV');
             return archives.filter((archive) => {
-                reg.test(archive.snippet.title);
+                return reg.test(archive.snippet.title);
             });
         },
 });
