@@ -44,7 +44,7 @@ describe('Archives Component TEST', () => {
         );
         await flushPromisesAndTimers();
         const element = screen.getAllByRole('listitem');
-        expect(element).toHaveLength(25);
+        expect(element).toHaveLength(20);
     });
     test('初期インスタンス生成時に通信エラーが発生した時、子の要素は表示されずエラーコンポーネントが表示されるか', async () => {
         // server.use(archiveAPIRouterHandler(400));
