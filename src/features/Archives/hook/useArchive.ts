@@ -44,7 +44,8 @@ export const createQuery = ({
     const order = 'date';
     const query = 'FF14';
 
-    return `channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
+    const DOMAIN = process.env.YOUTUBE_API_URL;
+    return `${DOMAIN}?channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
 };
 
 const createLastArchiveTime = (Archive?: Archive[]): string => {
@@ -85,9 +86,7 @@ const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
         async () => {
             try {
                 const query = createQuery({ channelId, beginTime });
-                const result = await axios.get<YoutubeResult>(
-                    'vitest.live.com'
-                );
+                const result = await axios.get<YoutubeResult>(query);
                 return result.data;
             } catch (error) {
                 if (axios.isAxiosError(error)) {
