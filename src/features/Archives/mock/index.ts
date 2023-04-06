@@ -71,7 +71,7 @@ export const YoutubeResourceFactory = (
     return [...reacts, ...ff14, ...ffxiv];
 };
 
-const path = () => 'vitest.live.com';
+const path = () => 'http://vitest.live.com';
 
 type Data = GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
 

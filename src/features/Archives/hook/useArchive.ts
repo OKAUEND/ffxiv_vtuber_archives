@@ -44,7 +44,7 @@ export const createQuery = ({
     const order = 'date';
     const query = 'FF14';
 
-    const DOMAIN = process.env.YOUTUBE_API_URL;
+    const DOMAIN = process.env.NEXT_PUBLIC_YOUTUBE_API_URL;
     return `${DOMAIN}?channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
 };
 
