@@ -33,6 +33,13 @@ type QueryInput = {
     channelId: string;
     beginTime: string;
 };
+//---------------------------------------------------------------------------
+
+/**
+ * 1ページで読み込みを行う値
+ */
+export const pageSize = 25;
+
 
 //---------------------------------------------------------------------------
 
@@ -59,13 +66,6 @@ const createLastArchiveTime = (Archive?: Archive[]): string => {
 const converRawResultToArchives = (response: YoutubeResult): Archive[] => {
     return response.items;
 };
-
-//---------------------------------------------------------------------------
-
-/**
- * 1ページで読み込みを行う値
- */
-export const pageSize = 25;
 
 //---------------------------------------------------------------------------
 
