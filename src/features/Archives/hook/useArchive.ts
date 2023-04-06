@@ -40,6 +40,10 @@ type QueryInput = {
  */
 export const pageSize = 25;
 
+/**
+ * 検索したいクエリワード
+ */
+const queryWorld = `FF14|FFXIV`;
 
 //---------------------------------------------------------------------------
 
@@ -49,10 +53,9 @@ export const createQuery = ({
 }: QueryInput): string => {
     const part = 'snippet';
     const order = 'date';
-    const query = 'FF14';
 
     const DOMAIN = process.env.NEXT_PUBLIC_YOUTUBE_API_URL;
-    return `${DOMAIN}?channelId=${channelId}&part=${part}&order=${order}&q=${query}&maxResults=${pageSize}`;
+    return `${DOMAIN}?channelId=${channelId}&publishedBefore=${beginTime}&part=${part}&order=${order}&q=${queryWorld}&maxResults=${pageSize}`;
 };
 
 const createLastArchiveTime = (Archive?: Archive[]): string => {
@@ -109,7 +112,7 @@ const formattedVtuberArchiveQuery = selectorFamily<
             );
             //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
             //改めてここでFF14のみに絞り込む
-            const reg = new RegExp('FF14|FFXIV');
+            const reg = new RegExp(queryWorld);
             const filteredArchive = archives.filter((archive) => {
                 return reg.test(archive.snippet.title);
             });
