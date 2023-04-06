@@ -155,12 +155,16 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 };
             }
 
+            const lastArchiveTime = createLastArchiveTime(
+                youtubeArchive.filteredArchive
+            );
+
             //条件を満たさなかった場合、更に取得する必要があるため、自身を呼び出し再帰ループに入る
             const rest = get(
                 noWait(
                     archiveListRecursion({
                         channelId,
-                        beginTime,
+                        beginTime: lastArchiveTime,
                         requestedItems,
                         offset: offset + limit,
                     })
