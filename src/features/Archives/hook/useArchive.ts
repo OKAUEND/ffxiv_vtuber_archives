@@ -97,7 +97,10 @@ const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
 });
 
 //
-const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
+const formattedVtuberArchiveQuery = selectorFamily<
+    { filteredArchive: Archive[]; originalLength: number },
+    QueryInput
+>({
     key: 'data-flow/archiveListQuery',
     get:
         (query) =>
@@ -108,9 +111,14 @@ const formattedVtuberArchiveQuery = selectorFamily<Archive[], QueryInput>({
             //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
             //改めてここでFF14のみに絞り込む
             const reg = new RegExp('FF14|FFXIV');
-            return archives.filter((archive) => {
+            const filteredArchive = archives.filter((archive) => {
                 return reg.test(archive.snippet.title);
             });
+
+            return {
+                filteredArchive: filteredArchive,
+                originalLength: archives.length,
+            };
         },
 });
 
@@ -130,9 +138,9 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
             );
 
             //取得した配列の長さが、今回取得する上限数より小さかったら、すべて取得したと判断
-            if (youtubeArchive.length < limit) {
+            if (youtubeArchive.originalLength < limit) {
                 return {
-                    archives: youtubeArchive,
+                    archives: youtubeArchive.filteredArchive,
                     mightHaveMore: false,
                 };
             }
@@ -140,7 +148,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
             //今回の要求数と一致していたら、取得を終了
             if (requestedItems === offset + limit) {
                 return {
-                    archives: youtubeArchive,
+                    archives: youtubeArchive.filteredArchive,
                     mightHaveMore: true,
                 };
             }
@@ -164,7 +172,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 }
                 case 'loading': {
                     return {
-                        archives: youtubeArchive,
+                        archives: youtubeArchive.filteredArchive,
                         mightHaveMore: true,
                     };
                 }
@@ -172,7 +180,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                     return {
                         //読み込みが完了した場合、配列をマージしリターンで戻っていく
                         archives: [
-                            ...youtubeArchive,
+                            ...youtubeArchive.filteredArchive,
                             ...rest.contents.archives,
                         ],
                         mightHaveMore: rest.contents.mightHaveMore,

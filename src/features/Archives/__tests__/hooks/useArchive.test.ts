@@ -45,7 +45,7 @@ describe('useArchive TEST', () => {
         });
 
         await waitFor(() => {
-            expect(archiveResult.result.current.archives.length).toEqual(50);
+            expect(archiveResult.result.current.archives.length).toEqual(40);
         });
     });
     test('エラー発生時の対応(- エラー発生時の動作がまだ未定なので仮に項目作成)', () => {});
