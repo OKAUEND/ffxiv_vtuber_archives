@@ -32,7 +32,7 @@ const generateDate = (
             playlistId: name,
         },
         snippet: {
-            publishedAt: '1900/01/01',
+            publishedAt: '2020-01-01T12:00:00Z',
             channelId: name,
             title: livetitle,
             description: name,
