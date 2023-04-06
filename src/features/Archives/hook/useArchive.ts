@@ -14,8 +14,13 @@ import axios, { AxiosError } from 'axios';
 
 type Archive = GoogleApiYouTubeSearchResource;
 
-type YoutubeResult =
+type YoutubeDate =
     GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
+
+type ApiResult = {
+    item: YoutubeDate;
+    status: number;
+};
 
 type ArchiveListState = {
     archives: readonly Archive[];
@@ -54,8 +59,8 @@ export const createQuery = ({
     const part = 'snippet';
     const order = 'date';
 
-    const DOMAIN = process.env.NEXT_PUBLIC_YOUTUBE_API_URL;
-    return `${DOMAIN}?channelId=${channelId}&publishedBefore=${beginTime}&part=${part}&order=${order}&q=${queryWorld}&maxResults=${pageSize}`;
+    const DOMAIN = process.env.NEXT_PUBLIC_HOST;
+    return `${DOMAIN}/api/archives?channelId=${channelId}&publishedBefore=${beginTime}&part=${part}&order=${order}&q=${queryWorld}&maxResults=${pageSize}`;
 };
 
 const createLastArchiveTime = (Archive?: Archive[]): string => {
@@ -66,7 +71,7 @@ const createLastArchiveTime = (Archive?: Archive[]): string => {
     return targetTime.toISOString();
 };
 
-const converRawResultToArchives = (response: YoutubeResult): Archive[] => {
+const converRawResultToArchives = (response: YoutubeDate): Archive[] => {
     return response.items;
 };
 
@@ -82,15 +87,15 @@ export const totalItems = atomFamily({
 
 //---------------------------------------------------------------------------
 
-const archiveListQuery = selectorFamily<YoutubeResult, QueryInput>({
+const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     key: 'data-flow/archiveListQuery',
     get:
         ({ channelId, beginTime }) =>
         async () => {
             try {
                 const query = createQuery({ channelId, beginTime });
-                const result = await axios.get<YoutubeResult>(query);
-                return result.data;
+                const result = await axios.get<ApiResult>(query);
+                return result.data.item;
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                 }

@@ -148,7 +148,7 @@ export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
             return res(
                 ctx.status(status),
                 ctx.json({
-                    item: GoogleYoutubeFactory(),
+                    item: GoogleYoutubeFactory('Mock'),
                     status: 200,
                     message: 'Success',
                 })
