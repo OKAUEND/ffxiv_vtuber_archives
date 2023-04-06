@@ -18,7 +18,10 @@ export const GoogleYoutubeFactory = (
     };
 };
 
-const generateDate = (name: string = 'Mock') => {
+const generateDate = (
+    name: string = 'Mock',
+    livetitle: string = 'React Coding Live'
+) => {
     return {
         kind: name,
         etag: name,
@@ -31,7 +34,7 @@ const generateDate = (name: string = 'Mock') => {
         snippet: {
             publishedAt: '1900/01/01',
             channelId: name,
-            title: name,
+            title: livetitle,
             description: name,
             thumbnails: {
                 default: {
@@ -58,8 +61,14 @@ const generateDate = (name: string = 'Mock') => {
 export const YoutubeResourceFactory = (
     name: string = 'MockMockMockMockMockMockMockMockMockMockMockMockMockMock'
 ): GoogleApiYouTubeSearchResource[] => {
-    const array = Array.from({ length: 25 }, () => generateDate(name));
-    return array;
+    const reacts = Array.from({ length: 5 }, () => generateDate(name));
+    const ff14 = Array.from({ length: 10 }, (_, index) =>
+        generateDate(name, `[FF14]Ultimate Mock ${index}Day`)
+    );
+    const ffxiv = Array.from({ length: 10 }, (_, index) =>
+        generateDate(name, `-FFXIV- StoryLive ${index}Day`)
+    );
+    return [...reacts, ...ff14, ...ffxiv];
 };
 
 const path = () => 'vitest.live.com';
