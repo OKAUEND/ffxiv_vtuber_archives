@@ -36,6 +36,17 @@ describe('Archives Component TEST', () => {
         vi.useRealTimers();
     });
 
+    vi.mock('next/router', () => ({
+        useRouter() {
+            return {
+                route: '/',
+                pathname: '',
+                query: 'Mock_Vitest',
+                asPath: '',
+            };
+        },
+    }));
+
     test('Hookから値から渡されたデータを子に渡し、要素が表示できているか', async () => {
         render(
             <RecoilRoot>
