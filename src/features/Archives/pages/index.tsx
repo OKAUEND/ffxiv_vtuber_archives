@@ -25,7 +25,7 @@ export const ArchiveRouter = () => {
         : router.query.channelId;
 
     const Archives = useArchives(query);
-    const loadNextList = usePage();
+    const [loadNextList] = usePage();
 
     const onHandler = () => {
         router.push({

@@ -234,7 +234,14 @@ export const useArchives = (channelId: string) => {
     const loadNextList = useRecoilCallback(({ set }) => (channelId: string) => {
         set(totalItems(channelId), (count) => count + pageSize);
     });
-    return { ...archive, loadNextList };
+
+    const decrementPageSize = useRecoilCallback(
+        ({ set }) =>
+            (channelId: string) => {
+                set(totalItems(channelId), (count) => count - pageSize);
+            }
+    );
+    return { ...archive, loadNextList, decrementPageSize };
 };
 
 /**
@@ -242,8 +249,22 @@ export const useArchives = (channelId: string) => {
  * @returns {Void} 現在の要求数をインクリメントする関数
  */
 export const usePage = () => {
+    /**
+     * 取得予定件数をインクリメントする
+     * @param channelId sting 現在の配信者チャンネルID
+     */
     const loadNextList = useRecoilCallback(({ set }) => (channelId: string) => {
         set(totalItems(channelId), (count) => count + pageSize);
     });
-    return loadNextList;
+    /**
+     * 取得予定件数をデクリメントする
+     * @param channelId sting 現在の配信者チャンネルID
+     */
+    const decrementPageSize = useRecoilCallback(
+        ({ set }) =>
+            (channelId: string) => {
+                set(totalItems(channelId), (count) => count - pageSize);
+            }
+    );
+    return [loadNextList, decrementPageSize];
 };

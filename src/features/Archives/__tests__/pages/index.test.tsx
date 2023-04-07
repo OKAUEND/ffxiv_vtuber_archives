@@ -74,7 +74,7 @@ describe('Archives Component TEST', () => {
         const mockFn = vi.fn();
         //タイマー関数を使わずにテストを行うために、関数をMockさせてテストする
         const spy = vi.spyOn(useArchiveMock, 'usePage');
-        spy.mockImplementation(() => mockFn);
+        spy.mockImplementation(() => [mockFn]);
         const user = userEvent.setup({ delay: null });
 
         render(
