@@ -21,10 +21,12 @@ export const ArchiveRouter = () => {
     // const { channelID } = useParams<'channelID'>();
     const router = useRouter();
 
-    //TypeGuardでundefinedを除外する
-    // const targetChannelID = typeGuard(channelID);
+    //String[] or Stringなので、配列を除外しStringに型を定める
+    const query = Array.isArray(router.query.channelId)
+        ? router.query.channelId[0]
+        : router.query.channelId;
 
-    const Archives = useArchives('channelId');
+    const Archives = useArchives(query);
     const loadNextList = usePage();
 
     const onHandler = () => {
@@ -45,7 +47,7 @@ export const ArchiveRouter = () => {
                 <ArchiveList Archives={[...Archives.archives]} />
             </div>
             <div>
-                <button onClick={() => loadNextList('channelId')}>Next</button>
+                <button onClick={() => loadNextList(query)}>Next</button>
             </div>
         </div>
     );
