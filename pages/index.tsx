@@ -64,11 +64,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
             return err;
         }
 
-        const success: Props = {
-            item: data,
+        return {
+            item: data.item,
             status: response.status,
         };
-        return data;
     });
     return {
         props: response,
