@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const response = await fetch(HOST, {
         method: 'POST',
     }).then(async (response) => {
-        const data = await response.json();
+        const data = (await response.json()) as Props;
         if (!response.ok) {
             const err: Props = {
                 message: data.message,
