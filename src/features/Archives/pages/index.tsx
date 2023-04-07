@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 import NextLoad from '../component/NextLoad';
 
 import { ArchiveList } from '../component/ArchiveList';
-import { useArchives } from '../hook/useArchive';
-import { useFirstLiveDayTime } from '../hook/useFirstLiveDayTime';
+import { useArchives, usePage } from '../hook/useArchive';
 
 import { Error } from '@/src/component/Error';
 
@@ -18,7 +17,6 @@ const typeGuard = (target: string | undefined) => {
 };
 
 export const ArchiveRouter = () => {
-    // const { channelID } = useParams<'channelID'>();
     const router = useRouter();
 
     //String[] or Stringなので、配列を除外しStringに型を定める
