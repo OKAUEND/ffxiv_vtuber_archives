@@ -9,13 +9,6 @@ import { useArchives, usePage } from '../hook/useArchive';
 
 import { Error } from '@/src/component/Error';
 
-const typeGuard = (target: string | undefined) => {
-    if (target === undefined) {
-        return 'error';
-    }
-    return target;
-};
-
 export const ArchiveRouter = () => {
     const router = useRouter();
 
