@@ -48,5 +48,26 @@ describe('useArchive TEST', () => {
             expect(archiveResult.result.current.archives.length).toEqual(40);
         });
     });
+    test('取得件数を減らす。減らした場合、取得件数がへっていることで確認', async () => {
+        const archiveResult = renderHook(() => useArchives('Mock'), {
+            wrapper: RecoilRoot,
+        });
+
+        await act(() => {
+            archiveResult.result.current.loadNextList('Mock');
+        });
+
+        await waitFor(() => {
+            expect(archiveResult.result.current.archives.length).toEqual(40);
+        });
+
+        await act(() => {
+            archiveResult.result.current.decrementPageSize('Mock');
+        });
+
+        await waitFor(() => {
+            expect(archiveResult.result.current.archives.length).toEqual(20);
+        });
+    });
     test('エラー発生時の対応(- エラー発生時の動作がまだ未定なので仮に項目作成)', () => {});
 });
