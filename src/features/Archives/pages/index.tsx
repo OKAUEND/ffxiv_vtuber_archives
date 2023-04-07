@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import link from 'next/link';
+import { useRouter } from 'next/router';
 
 import NextLoad from '../component/NextLoad';
 
@@ -19,7 +19,7 @@ const typeGuard = (target: string | undefined) => {
 
 export const ArchiveRouter = () => {
     // const { channelID } = useParams<'channelID'>();
-    // const navigate = useNavigate();
+    const router = useRouter();
 
     //TypeGuardでundefinedを除外する
     // const targetChannelID = typeGuard(channelID);
@@ -27,9 +27,10 @@ export const ArchiveRouter = () => {
     const Archives = useArchives('channelId');
     const loadNextList = usePage();
 
-    const isError = () => {
-        if (!error) return false;
-        return Archives.length > 0 && error.error;
+    const onHandler = () => {
+        router.push({
+            pathname: '/',
+        });
     };
 
     if (Archives.length === 0 && error)
@@ -38,7 +39,7 @@ export const ArchiveRouter = () => {
         <div className="bg-gray-800 flex justify-center content-center">
             {isError() && <div>Error</div>}
             <div>
-                {/* <button onClick={() => navigate(-1)}>戻る</button> */}
+                <button onClick={() => onHandler()}>戻る</button>
             </div>
             <div className="w-full md:w-1/2">
                 <ArchiveList Archives={[...Archives.archives]} />
