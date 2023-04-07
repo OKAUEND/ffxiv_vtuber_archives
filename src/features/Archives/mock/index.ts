@@ -14,7 +14,7 @@ export const GoogleYoutubeFactory = (
             totalResults: 0,
             resultsPerPage: 0,
         },
-        items: YoutubeResourceFactory(),
+        items: YoutubeResourceFactory(name),
     };
 };
 
@@ -59,14 +59,14 @@ const generateDate = (
 };
 
 export const YoutubeResourceFactory = (
-    name: string = 'MockMockMockMockMockMockMockMockMockMockMockMockMockMock'
+    name: string = 'Mock'
 ): GoogleApiYouTubeSearchResource[] => {
     const reacts = Array.from({ length: 5 }, () => generateDate(name));
     const ff14 = Array.from({ length: 10 }, (_, index) =>
-        generateDate(name, `[FF14]Ultimate Mock ${index}Day`)
+        generateDate(name, `[FF14]Ultimate ${name} ${index}Day`)
     );
     const ffxiv = Array.from({ length: 10 }, (_, index) =>
-        generateDate(name, `-FFXIV- StoryLive ${index}Day`)
+        generateDate(name, `-FFXIV- StoryLive ${name} ${index}Day`)
     );
     return [...reacts, ...ff14, ...ffxiv];
 };
@@ -128,6 +128,8 @@ export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
     return rest.get<Data, { id: string }, Data | Error>(
         'http://localhost:3000/api/archives',
         async (req, res, ctx) => {
+            const channelId = req.url.searchParams.get('channelId');
+            const beginTime = req.url.searchParams.get('publishedBefore');
             if (status === 400) {
                 return res(
                     ctx.status(400),
@@ -148,7 +150,7 @@ export const archiveAPIRouterHandler = (status: 200 | 400 | 500 = 200) => {
             return res(
                 ctx.status(status),
                 ctx.json({
-                    item: GoogleYoutubeFactory('Mock'),
+                    item: GoogleYoutubeFactory(channelId),
                     status: 200,
                     message: 'Success',
                 })
