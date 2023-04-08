@@ -14,9 +14,13 @@ type SetErrorData = {
     message: string;
 };
 
-const errorAtom = atom<Error>({
+const errorAtom = atom<ErrorState>({
     key: 'error-atom',
-    default: undefined,
+    default: {
+        hasError: false,
+        status: 200,
+        message: 'Not Message',
+    },
 });
 
 export const useError = () => {
