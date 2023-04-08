@@ -1,5 +1,4 @@
-import { Data } from '@/src/types/api';
-import { atom, useRecoilState, useResetRecoilState } from 'recoil';
+import { atom, useRecoilCallback, useRecoilValue } from 'recoil';
 
 //State Type
 type ErrorState = {
@@ -24,8 +23,14 @@ const errorAtom = atom<ErrorState>({
 });
 
 export const useError = () => {
-    const [error, setError] = useRecoilState(errorAtom);
-    const reset = useResetRecoilState(errorAtom);
+    const error = useRecoilValue(errorAtom);
+    const setError = useRecoilCallback(({ set }) => (error: SetErrorData) => {
+        set(errorAtom, error);
+    });
+
+    const reset = useRecoilCallback(({ reset }) => () => {
+        reset(errorAtom);
+    });
 
     return [error, setError, reset] as const;
 };
