@@ -1,7 +1,18 @@
 import { Data } from '@/src/types/api';
 import { atom, useRecoilState, useResetRecoilState } from 'recoil';
 
-type Error = Omit<Data<[]>, 'item'>;
+//State Type
+type ErrorState = {
+    hasError: boolean;
+    status: number;
+    message: string;
+};
+
+//Set Date Type
+type SetErrorData = {
+    status: number;
+    message: string;
+};
 
 const errorAtom = atom<Error>({
     key: 'error-atom',
