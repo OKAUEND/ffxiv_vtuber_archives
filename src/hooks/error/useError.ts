@@ -8,7 +8,7 @@ type ErrorState = {
 };
 
 //Set Date Type
-type SetErrorData = {
+export type SetErrorData = {
     status: number;
     message: string;
 };
