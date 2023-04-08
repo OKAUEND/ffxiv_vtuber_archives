@@ -13,13 +13,15 @@ type SetErrorData = {
     message: string;
 };
 
+export const errorState: ErrorState = {
+    hasError: false,
+    status: 200,
+    message: 'Not Message',
+};
+
 const errorAtom = atom<ErrorState>({
     key: 'error-atom',
-    default: {
-        hasError: false,
-        status: 200,
-        message: 'Not Message',
-    },
+    default: errorState,
 });
 
 export const useError = () => {
