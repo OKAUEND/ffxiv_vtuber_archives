@@ -1,10 +1,13 @@
-export const Error = ({
-    status,
-    message,
-}: {
-    status: number;
-    message: string;
-}) => {
+import { useError } from '@/src/hooks/error/useError';
+
+export const Error = () => {
+    const [error, _, reset] = useError();
+
+    //エラーが発生していない状態で表示しないようにしておく
+    if (!error.hasError) {
+        return;
+    }
+
     return (
         <div>
             <h1>{status}</h1>
