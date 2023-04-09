@@ -1,6 +1,6 @@
 import { useError } from '@/src/hooks/error/useError';
 
-export const Error = () => {
+export const ErrorNotification = () => {
     const [error, _, reset] = useError();
 
     //エラーが発生していない状態で表示しないようにしておく
