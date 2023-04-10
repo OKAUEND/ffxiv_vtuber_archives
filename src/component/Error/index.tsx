@@ -27,7 +27,8 @@ export const ErrorNotification = (handleReloadData: () => void) => {
             <div>
                 <p>{error.message}</p>
                 <p>
-                    エラーが発生しました。再度操作を最初からやり直してください。
+                    エラーが発生しました。以下のリロードを選択し再度処理をやり直すか、
+                    一つ前の画面へ戻るかを選択してください。
                 </p>
                 <button
                     onClick={() => {
