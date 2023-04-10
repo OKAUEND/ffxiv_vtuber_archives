@@ -134,9 +134,12 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
     get:
         ({ channelId, beginTime, requestedItems, offset }) =>
         ({ get }): ArchiveListState => {
+            //取得予定件数を、要求件数より今のオフセットよりひくことで、決定させる
             const limit = Math.min(requestedItems - offset, pageSize);
 
             //現在のチャンネルIDと取得開始時間を渡し、YoutubeAPIから過去のライブを取得する
+            //対象以外のアーカイブはこの時点で除外されていることに注意
+            //初回呼び出しだと、beginTimeはなにも指定されていないが、2回目のループからは日時を持っている
             const youtubeArchive = get(
                 formattedVtuberArchiveQuery({
                     channelId,
@@ -144,7 +147,8 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 })
             );
 
-            //取得した配列の長さが、今回取得する上限数より小さかったら、すべて取得したと判断
+            //除外した配列の数で判定をすると、予定件数より必ず短い値になるため、取得完了と判定されるから
+            //不足分を再取得するとその分APIのコール数が多くなるため、できるならば避けたいため、再取得はしない
             if (youtubeArchive.originalLength < limit) {
                 return {
                     archives: youtubeArchive.filteredArchive,
@@ -160,16 +164,14 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 };
             }
 
-            const lastArchiveTime = createLastArchiveTime(
-                youtubeArchive.filteredArchive
-            );
-
             //条件を満たさなかった場合、更に取得する必要があるため、自身を呼び出し再帰ループに入る
             const rest = get(
                 noWait(
                     archiveListRecursion({
                         channelId,
-                        beginTime: lastArchiveTime,
+                        beginTime: createLastArchiveTime(
+                            youtubeArchive.filteredArchive
+                        ),
                         requestedItems,
                         offset: offset + limit,
                     })
@@ -207,6 +209,8 @@ const archiveList = selectorFamily<ArchiveListState, string>({
         (channelId) =>
         ({ get }) => {
             return get(
+                //ここで検索開始日時を引数で渡さないのは、日時を生成すると時刻(秒単位でも)変わると、
+                //Selectorが別キャッシュとして判定し、無限に呼び出しを行うため
                 archiveListRecursion({
                     channelId,
                     requestedItems: get(totalItems(channelId)),
