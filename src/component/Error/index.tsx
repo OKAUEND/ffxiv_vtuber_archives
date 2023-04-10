@@ -7,7 +7,7 @@ export const ErrorNotification = (handleReloadData: () => void) => {
 
     //エラーが発生していない状態で表示しないようにしておく
     if (!error.hasError) {
-        return;
+        return <div></div>;
     }
 
     //ユーザーがリロードを選択した時は、エラー状態をリセットし、尚且つ親から渡された再度アクセスを行う関数を呼び出す。
