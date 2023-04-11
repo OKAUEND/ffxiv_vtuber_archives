@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useError } from '@/src/hooks/error/useError';
 
@@ -11,15 +12,15 @@ export const ErrorNotification = (handleReloadData: () => void) => {
     }
 
     //ユーザーがリロードを選択した時は、エラー状態をリセットし、尚且つ親から渡された再度アクセスを行う関数を呼び出す。
-    const handleResetError = () => {
+    const handleResetError = useCallback(() => {
         handleReloadData();
         reset();
-    };
+    }, []);
 
     //一つ前へ状態を維持しながら戻る実装が難しいため、問答無用でトップページへ戻るようにする
-    const handleClickReturnTop = () => {
+    const handleClickReturnTop = useCallback(() => {
         router.push('/');
-    };
+    }, []);
 
     return (
         <div>
