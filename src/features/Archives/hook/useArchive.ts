@@ -43,11 +43,15 @@ type QueryInput = {
 /**
  * 1ページで読み込みを行う値
  */
+//50件だと取得回数が多すぎる、25件未満だと除外されたアーカイブがあった場合、
+//1度に表示する件数が少なすぎるため、25件で固定する(※後ほど可変型にしてもいいかもしれない)
 export const pageSize = 25;
 
 /**
  * 検索したいクエリワード
  */
+//配信の概要欄にクエリワードがあると、Youtubeの性質上取得されてしまうので、
+//取得後にフィルタリングするために、抽出させたい単語をまとめておいた
 const queryWorld = `FF14|FFXIV`;
 
 //---------------------------------------------------------------------------
@@ -116,7 +120,7 @@ const formattedVtuberArchiveQuery = selectorFamily<
                 get(archiveListQuery(query))
             );
             //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
-            //改めてここでFF14のみに絞り込む
+            //改めて放送タイトル文にFF14関連の文言が該当するものをフィルタリングする
             const reg = new RegExp(queryWorld);
             const filteredArchive = archives.filter((archive) => {
                 return reg.test(archive.snippet.title);
