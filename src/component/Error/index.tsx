@@ -23,6 +23,7 @@ export const ErrorNotification = ({ handleReloadData }: IProps) => {
 
     //一つ前へ状態を維持しながら戻る実装が難しいため、問答無用でトップページへ戻るようにする
     const handleClickReturnTop = useCallback(() => {
+        reset();
         router.push('/');
     }, []);
 
