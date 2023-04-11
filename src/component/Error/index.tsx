@@ -2,7 +2,11 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useError } from '@/src/hooks/error/useError';
 
-export const ErrorNotification = (handleReloadData: () => void) => {
+interface IProps {
+    handleReloadData: () => void;
+}
+
+export const ErrorNotification = ({ handleReloadData }: IProps) => {
     const [error, _, reset] = useError();
     const router = useRouter();
 
