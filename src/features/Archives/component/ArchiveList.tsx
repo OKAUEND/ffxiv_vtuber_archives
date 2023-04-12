@@ -4,7 +4,16 @@ interface IProps {
     Archives: GoogleApiYouTubeSearchResource[];
 }
 
+const createHighQuality720URL = (videoId: string): string => {
+    return `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
+};
+
 export const ArchiveList = ({ Archives }: IProps) => {
+    const converDayTime = (time: string) => {
+        const date = new Date(time);
+        return `${date.getFullYear()}年 ${date.getMonth()}月${date.getDate()}日`;
+    };
+
     return (
         <ul className="list-none w-full">
             {Archives.map((archive, index) => (
