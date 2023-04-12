@@ -1,8 +1,6 @@
 import { rest } from 'msw';
 import { HikasenVtuber } from '../types';
 
-type Item = HikasenVtuber[];
-
 type Error = {
     message?: string;
     status: number;
