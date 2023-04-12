@@ -20,7 +20,7 @@ describe('Archives Component TEST', () => {
     function flushPromisesAndTimers(): Promise<void> {
         return act(
             () =>
-                new Promise((resolve) => {
+                new Promise<void>((resolve) => {
                     setTimeout(resolve, 100);
                     vi.useFakeTimers();
                     vi.runAllTimers();
