@@ -7,7 +7,7 @@ import {
     useRecoilValue,
 } from 'recoil';
 import { Data } from '@/src/types/api';
-import { useError } from '@/src/hooks/error';
+// import { useError } from '@/src/hooks/error';
 import axios, { AxiosError } from 'axios';
 
 //---------------------------------------------------------------------------

@@ -7,7 +7,7 @@ import NextLoad from '../component/NextLoad';
 import { ArchiveList } from '../component/ArchiveList';
 import { useArchives, usePage } from '../hook/useArchive';
 
-import { Error } from '@/src/component/Error';
+// import { Error } from '@/src/component/Error';
 
 export const ArchiveRouter = () => {
     const router = useRouter();
@@ -26,11 +26,11 @@ export const ArchiveRouter = () => {
         });
     };
 
-    if (Archives.length === 0 && error)
-        return <Error status={error.status} message={error.message} />;
+    // if (Archives.length === 0 && error)
+    //     return <Error status={error.status} message={error.message} />;
     return (
         <div className="bg-gray-800 flex justify-center content-center">
-            {isError() && <div>Error</div>}
+            {/* {isError() && <div>Error</div>} */}
             <div>
                 <button onClick={() => onHandler()}>戻る</button>
             </div>

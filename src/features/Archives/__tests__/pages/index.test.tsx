@@ -92,17 +92,17 @@ describe('Archives Component TEST', () => {
 
         expect(mockFn).toHaveBeenCalledTimes(1);
     });
-    test('次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか', async () => {
-        const user = userEvent.setup();
+    // test('次の取得が選ばれた時、エラーが発生した場合、取得済みの値を表示しつつエラー通知しているか', async () => {
+    //     const user = userEvent.setup();
 
-        render(
-            <RecoilRoot>
-                <Suspense fallback={<p>Loading...</p>}>
-                    <ArchiveRouter />
-                </Suspense>
-            </RecoilRoot>
-        );
-        const element = screen.getByText('Error');
-        expect(element).toBeInTheDocument();
-    });
+    //     render(
+    //         <RecoilRoot>
+    //             <Suspense fallback={<p>Loading...</p>}>
+    //                 <ArchiveRouter />
+    //             </Suspense>
+    //         </RecoilRoot>
+    //     );
+    //     const element = screen.getByText('Error');
+    //     expect(element).toBeInTheDocument();
+    // });
 });

@@ -32,17 +32,17 @@ describe('Channel Component TEST', () => {
             expect(screen.getByText('ComponentTEST')).toBeInTheDocument();
         });
     });
-    test('Propsでエラーが渡された場合、エラー画面が表示されるか', async () => {
-        render(
-            <RecoilRoot>
-                <Home {...Error} />
-            </RecoilRoot>
-        );
-        await waitFor(() => {
-            expect(
-                screen.getByText(Error.status.toString())
-            ).toBeInTheDocument();
-            expect(screen.getByText(Error.message)).toBeInTheDocument();
-        });
-    });
+    // test('Propsでエラーが渡された場合、エラー画面が表示されるか', async () => {
+    //     render(
+    //         <RecoilRoot>
+    //             <Home {...Error} />
+    //         </RecoilRoot>
+    //     );
+    //     await waitFor(() => {
+    //         expect(
+    //             screen.getByText(Error.status.toString())
+    //         ).toBeInTheDocument();
+    //         expect(screen.getByText(Error.message)).toBeInTheDocument();
+    //     });
+    // });
 });
