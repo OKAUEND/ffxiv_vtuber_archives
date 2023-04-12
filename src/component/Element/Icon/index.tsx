@@ -1,6 +1,21 @@
-import { LeftArrow } from './LeftArrow';
-import { Youtube } from './Youtube';
-import { Twitch } from './Twitch';
-import { Twitter } from './Twitter';
+import Image from 'next/image';
 
-export { LeftArrow, Youtube, Twitch, Twitter };
+type Props = {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+};
+
+export const Icon = ({
+    src,
+    alt,
+    width = 48,
+    height = 48,
+}: Props): JSX.Element => {
+    return (
+        <div className="rounded-full">
+            <Image src={src} alt={alt} width={width} height={height} />
+        </div>
+    );
+};

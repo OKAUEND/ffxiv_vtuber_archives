@@ -1,50 +1,54 @@
-import axios from 'axios';
-import React from 'react';
-import { vi } from 'vitest';
-import { RenderResult, renderHook, act } from '@testing-library/react-hooks';
-import { RecoilRoot } from 'recoil';
-import { useChannels } from '../../api/getChannels';
-import * as AxiosInstanceModule from '../../../../utility/axios/index';
-import { HikasenVtuber } from '../../types/index';
-import { AxiosStatusFactory } from '../../../../utility/test/AxiosResult';
-import { waitFor } from '@testing-library/react';
+import { testApiHandler } from 'next-test-api-route-handler';
+import { describe, expect, test } from 'vitest';
 
-const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
-    return {
-        channelID: name,
-        channelIconID: name,
-        name: name,
-        twitter: '',
-        twitch: '',
-        ffxiv: {
-            dataCenter: 'test',
-            server: 'test',
-        },
-    };
-};
+import { channelPostHandler, generateDate } from '@/src/features/Channels/mock';
+
+import { handler } from '@/src/features/Channels/api/channel';
+import { handlers } from '@/src/mock/handlers';
+import { HikasenVtuber } from '../../types/index';
+import { setupMockServer } from '@/src/mock/test/setup';
+import { HikasenVtuberResourceFactory } from '@/src/features/Channels/mock';
+
+const server = setupMockServer(handlers);
 
 describe('Channel Get API TEST', () => {
-    test('リロードの関数を使用したら、取得関数がコールされるか', async () => {
-        const mock = vi
-            .spyOn(AxiosInstanceModule, 'get')
-            .mockImplementationOnce(() => {
-                return Promise.resolve(
-                    AxiosStatusFactory(200, true, [
-                        HikasenVtuberResourceFactory('mockTEST'),
-                    ])
-                );
+    const params = {
+        handler,
+        url: '/api/channel',
+    };
+
+    const requestInit = {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+    };
+
+    describe('GET', () => {
+        test('200', async () => {
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    const result = await response.json();
+                    expect(result).toStrictEqual({
+                        item: generateDate('Mock'),
+                        status: 200,
+                    });
+                },
             });
-
-        const { result } = renderHook(() => useChannels(), {
-            wrapper: RecoilRoot,
         });
-
-        await waitFor(async () => {
-            const [channels, resultStatus, loadData] = result.current;
-
-            loadData();
-
-            expect(mock).toHaveBeenCalledTimes(2);
+        test('400', async () => {
+            server.use(channelPostHandler(400));
+            await testApiHandler({
+                ...params,
+                test: async ({ fetch }) => {
+                    const response = await fetch(requestInit);
+                    await expect(response.json()).resolves.toStrictEqual({
+                        message: 'Bad Request',
+                        status: 400,
+                        error: true,
+                    });
+                },
+            });
         });
     });
 });

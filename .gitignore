@@ -1,8 +1,10 @@
 node_modules
+.next
 .yarn
 .DS_Store
 dist
 dist-ssr
 *.local
 .env
-.env.*
+yarn.lock
+*env.local.*
