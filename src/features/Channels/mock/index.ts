@@ -16,6 +16,7 @@ export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
         channelID: name,
         channelIconID: '/mock/image/icon.png',
+        channelName:"",
         name: name,
         twitter: '',
         twitch: '',
