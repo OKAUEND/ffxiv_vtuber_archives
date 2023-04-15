@@ -33,7 +33,7 @@ export const useFetch = async <T>({
                 },
             };
         }
-        const data = (await res.json()) as T;
+        const data: T = await res.json();
 
         return { data: data, error: defaultError };
     });
