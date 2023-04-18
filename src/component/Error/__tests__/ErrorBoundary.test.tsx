@@ -1,12 +1,16 @@
 import React, { Suspense } from 'react';
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ErrorBoundary from '../ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 describe('ErrorBoundary Component Unit TEST', () => {
     const ChildComponent = () => <div>ChildComponent</div>;
     const ErrorComponent = () => {
-        throw new Error('Test Error');
+        throw { hasError: true, message: 'TEST ERROR', status: 404 };
+    };
+
+    const ErrorShowComponent = (status: number) => {
+        return <div>{status}</div>;
     };
 
     //オリジナルを一旦退避させる
@@ -23,7 +27,7 @@ describe('ErrorBoundary Component Unit TEST', () => {
 
     it('レンダーエラー', () => {
         const wrapper = render(
-            <ErrorBoundary>
+            <ErrorBoundary fallback={ErrorShowComponent}>
                 <Suspense>
                     <ChildComponent />
                 </Suspense>
@@ -35,13 +39,13 @@ describe('ErrorBoundary Component Unit TEST', () => {
 
     it('catches and displays error message', () => {
         render(
-            <ErrorBoundary>
+            <ErrorBoundary fallback={ErrorShowComponent}>
                 <Suspense>
                     <ErrorComponent />
                 </Suspense>
             </ErrorBoundary>
         );
 
-        expect(screen.getByText('Error Mode')).toBeInTheDocument();
+        expect(screen.getByText('404')).toBeInTheDocument();
     });
 });
