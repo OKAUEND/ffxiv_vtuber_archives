@@ -22,11 +22,8 @@ export const Archive = () => {
         });
     };
 
-    // if (Archives.length === 0 && error)
-    //     return <Error status={error.status} message={error.message} />;
     return (
         <div className="bg-gray-800 flex justify-center content-center">
-            {/* {isError() && <div>Error</div>} */}
             <div>
                 <button onClick={() => onHandler()}>戻る</button>
             </div>
