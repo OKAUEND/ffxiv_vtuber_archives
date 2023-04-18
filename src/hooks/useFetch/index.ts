@@ -1,16 +1,11 @@
-type Error = {
-    hasError: boolean;
-    status: number;
-    message: string;
-};
-
+import { Error } from '@/src/type';
 interface IUseFetch {
     url: string;
 }
 
 interface IResponse<T> {
-    data: T | {};
-    error: Error;
+    data?: T;
+    error?: Error;
 }
 
 const defaultError = {
@@ -22,21 +17,23 @@ const defaultError = {
 export const useFetch = async <T>({
     url,
 }: IUseFetch): Promise<IResponse<T>> => {
-    const response = await fetch(url).then(async (res) => {
-        if (!res.ok) {
-            return {
-                data: {},
-                error: {
-                    status: res.status,
-                    message: '',
-                    hasError: true,
-                },
-            };
-        }
-        const data: T = await res.json();
+    const response = await fetch(url);
+    if (!response.ok) {
+        return {
+            error: {
+                hasError: true,
+                status: response.status,
+                message: response.statusText,
+            },
+        };
+    }
+    const data: T = await response.json();
 
-        return { data: data, error: defaultError };
-    });
-
-    return response;
+    return {
+        error: {
+            hasError: true,
+            status: 404,
+            message: 'TEST Error',
+        },
+    };
 };
