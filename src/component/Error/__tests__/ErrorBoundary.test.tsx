@@ -9,7 +9,8 @@ describe('ErrorBoundary Component Unit TEST', () => {
         throw { hasError: true, message: 'TEST ERROR', status: 404 };
     };
 
-    const ErrorShowComponent = (status: number) => {
+    //エラー
+    const FallBackComponent = (status: number) => {
         return <div>{status}</div>;
     };
 
@@ -27,7 +28,7 @@ describe('ErrorBoundary Component Unit TEST', () => {
 
     it('レンダーエラー', () => {
         const wrapper = render(
-            <ErrorBoundary fallback={ErrorShowComponent}>
+            <ErrorBoundary fallback={FallBackComponent}>
                 <Suspense>
                     <ChildComponent />
                 </Suspense>
@@ -39,7 +40,7 @@ describe('ErrorBoundary Component Unit TEST', () => {
 
     it('catches and displays error message', () => {
         render(
-            <ErrorBoundary fallback={ErrorShowComponent}>
+            <ErrorBoundary fallback={FallBackComponent}>
                 <Suspense>
                     <ErrorComponent />
                 </Suspense>
