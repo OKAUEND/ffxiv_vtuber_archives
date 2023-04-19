@@ -5,12 +5,12 @@ import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Data } from '@/src/types/api';
-import { Error } from '@/src/component/Error';
+// import { Error } from '@/src/component/Error';
 
 type Props = Data<HikasenVtuber[]>;
 
 export default function Home({ status, message, item, error }: Props) {
-    if (error) return <Error status={status} message={message} />;
+    // if (error) return <Error status={status} message={message} />;
     return (
         <div className="min-h-screen grid grid-rows-footer">
             <Head>
@@ -51,9 +51,8 @@ export default function Home({ status, message, item, error }: Props) {
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const HOST = process.env.CHANNELLIST_URL;
-
     const response = await fetch(HOST, {
-        method: 'POST',
+        method: 'GET',
     }).then(async (response) => {
         const data = (await response.json()) as Props;
         if (!response.ok) {
@@ -63,9 +62,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
             };
             return err;
         }
-
         return {
-            item: data.item,
+            item: data,
             status: response.status,
         };
     });
