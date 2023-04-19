@@ -5,9 +5,9 @@ import { Archive } from '@/src/features/Archives/pages/Archive';
 
 export const ArchiveRouter = () => {
     return (
-        <div className="w-full md:w-1/2">
+        <div className="w-full">
             <ErrorBoundaryExtended>
-                <Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
                     <Archive />
                 </Suspense>
             </ErrorBoundaryExtended>

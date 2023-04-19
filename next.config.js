@@ -6,6 +6,14 @@ const nextConfig = {
     basePath: urlPrefix,
     trailingSlash: true,
     publicRuntimeConfig: { urlPrefix },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'yt3.ggpht.com',
+            },
+        ],
+    },
 };
 
 module.exports = nextConfig;

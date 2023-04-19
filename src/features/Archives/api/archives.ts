@@ -5,28 +5,28 @@ type Handler = (request: NextApiRequest, response: NextApiResponse) => void;
 
 export const handler: Handler = async (request, response) => {
     const { method, query } = request;
-    const APIKey = process.env.YOUTUBE_API;
+    const APIKey = process.env.API_KEY;
 
     type QueryParams = typeof query;
 
     const createYoutubeURL = (query: QueryParams): string => {
         const channelId =
             typeof query.channelId === 'string'
-                ? `?channelId=${query.channelId}`
+                ? `channelId=${query.channelId}`
                 : ``;
 
-        const nextPagetoken =
-            typeof query.nextPagetoken === 'string'
-                ? `&nextPagetoken=${query.nextPagetoken}`
+        const beginTime =
+            typeof query.nextPagetoken != 'string'
+                ? `&publishedBefore=${query.publishedBefore}`
                 : ``;
 
-        return `${process.env.YOUTUBE_API_URL}${channelId}${nextPagetoken}`;
+        return `${process.env.YOUTUBE_API_URL}?${channelId}&key=${APIKey}${beginTime}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
     };
 
     switch (method) {
         case 'GET':
             try {
-                if (!query.channelId) {
+                if (query.channelId === '') {
                     return response.status(400).json({
                         message: 'Method ChannelID Not Allowed',
                         status: 400,
@@ -42,9 +42,11 @@ export const handler: Handler = async (request, response) => {
                     .json({ item: res.data, status: res.status });
             } catch (err) {
                 if (axios.isAxiosError(err)) {
-                    return response
-                        .status(err.response.status)
-                        .json({ ...err.response.data, error: true });
+                    return response.status(err.response.status).json({
+                        ...err.response.data,
+                        error: true,
+                        channelId: query.channelId,
+                    });
                 }
                 return response.status(500).json({});
             }

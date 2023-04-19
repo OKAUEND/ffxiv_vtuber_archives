@@ -6,9 +6,7 @@ import {
     useRecoilCallback,
     useRecoilValue,
 } from 'recoil';
-import { Data } from '@/src/types/api';
-// import { useError } from '@/src/hooks/error';
-import axios, { AxiosError } from 'axios';
+import { useFetch } from '@/src/hooks/useFetch';
 
 //---------------------------------------------------------------------------
 
@@ -56,18 +54,16 @@ const queryWorld = `FF14|FFXIV`;
 
 //---------------------------------------------------------------------------
 
-export const createQuery = ({
-    channelId,
-    beginTime = new Date().toISOString(),
-}: QueryInput): string => {
+export const createQuery = ({ channelId, beginTime }: QueryInput): string => {
     const part = 'snippet';
-    const order = 'date';
+
+    const time = beginTime === '' ? new Date().toISOString() : beginTime;
 
     const DOMAIN = process.env.NEXT_PUBLIC_HOST;
-    return `${DOMAIN}/api/archives?channelId=${channelId}&publishedBefore=${beginTime}&part=${part}&order=${order}&q=${queryWorld}&maxResults=${pageSize}`;
+    return `/api/archives?channelId=${channelId}&publishedBefore=${time}&part=${part}&order=date&q=${queryWorld}&maxResults=${pageSize}`;
 };
 
-const createLastArchiveTime = (Archive?: Archive[]): string => {
+const createNextBeginTime = (Archive: Archive[]): string => {
     //配列最後列の動画の日時より1分前を設定する
     //1分前にしないと、重複した動画を再取得してしまうため
     const baseTime = new Date(Archive.slice(-1)[0].snippet.publishedAt);
@@ -96,14 +92,18 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     get:
         ({ channelId, beginTime }) =>
         async () => {
-            try {
-                const query = createQuery({ channelId, beginTime });
-                const result = await axios.get<ApiResult>(query);
-                return result.data.item;
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                }
+            const query = createQuery({ channelId, beginTime });
+            const result = await useFetch<ApiResult>({ url: query });
+
+            if (result.error) {
+                throw result.error;
             }
+
+            if (result.data === undefined) {
+                throw new Error('No Data');
+            }
+
+            return result.data.item;
         },
 });
 
@@ -147,7 +147,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
             const youtubeArchive = get(
                 formattedVtuberArchiveQuery({
                     channelId,
-                    beginTime,
+                    beginTime: beginTime ?? '',
                 })
             );
 
@@ -173,7 +173,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
                 noWait(
                     archiveListRecursion({
                         channelId,
-                        beginTime: createLastArchiveTime(
+                        beginTime: createNextBeginTime(
                             youtubeArchive.filteredArchive
                         ),
                         requestedItems,

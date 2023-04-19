@@ -6,9 +6,7 @@ type Error = {
     status: number;
 };
 
-type Data = Error & {
-    item?: HikasenVtuber[];
-};
+type Data = Error | HikasenVtuber[];
 
 const path = () => `http://vitest.api.com/`;
 
@@ -16,7 +14,7 @@ export const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
     return {
         channelID: name,
         channelIconID: '/mock/image/icon.png',
-        channelName:"",
+        channelName: '',
         name: name,
         twitter: '',
         twitch: '',
@@ -35,7 +33,7 @@ export const generateDate = (name: string): HikasenVtuber[] => {
 };
 
 export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
-    return rest.post<Data, { id: string }, Data>(
+    return rest.get<Data, { id: string }, Data>(
         path(),
         async (req, res, ctx) => {
             if (status === 400) {
@@ -52,13 +50,7 @@ export const channelPostHandler = (status: 200 | 400 | 500 = 200) => {
                 );
             }
 
-            return res(
-                ctx.status(status),
-                ctx.json({
-                    item: generateDate('Mock'),
-                    status: 200,
-                })
-            );
+            return res(ctx.status(status), ctx.json(generateDate('Mock')));
         }
     );
 };
