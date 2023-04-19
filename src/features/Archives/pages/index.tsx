@@ -7,7 +7,7 @@ export const ArchiveRouter = () => {
     return (
         <div className="w-full md:w-1/2">
             <ErrorBoundaryExtended>
-                <Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
                     <Archive />
                 </Suspense>
             </ErrorBoundaryExtended>
