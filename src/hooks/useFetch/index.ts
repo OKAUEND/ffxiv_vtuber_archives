@@ -29,11 +29,5 @@ export const useFetch = async <T>({
     }
     const data: T = await response.json();
 
-    return {
-        error: {
-            hasError: true,
-            status: 404,
-            message: 'TEST Error',
-        },
-    };
+    return { data: data };
 };
