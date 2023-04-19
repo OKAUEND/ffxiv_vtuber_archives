@@ -4,13 +4,16 @@ import Image from 'next/image';
 import { Channels, HikasenVtuber } from '@/src/features/Channels';
 import { Suspense, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import { Data } from '@/src/types/api';
-// import { Error } from '@/src/component/Error';
+
+interface Data<T> {
+    status: number;
+    message?: string;
+    item?: T;
+}
 
 type Props = Data<HikasenVtuber[]>;
 
-export default function Home({ status, message, item, error }: Props) {
-    // if (error) return <Error status={status} message={message} />;
+export default function Home({ status, message, item }: Props) {
     return (
         <div className="min-h-screen grid grid-rows-footer">
             <Head>
@@ -54,14 +57,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     const response = await fetch(HOST, {
         method: 'GET',
     }).then(async (response) => {
-        const data = (await response.json()) as Props;
+        const data: HikasenVtuber[] = await response.json();
         if (!response.ok) {
             const err: Props = {
-                message: data.message,
+                message: 'Error',
                 status: response.status,
             };
             return err;
         }
+
         return {
             item: data,
             status: response.status,
