@@ -1,6 +1,7 @@
 'use client';
 
 import { selector, useRecoilValue } from 'recoil';
+import { useRouter } from 'next/navigation';
 
 const PokemonQuery = selector({
   key: 'data-flow/pokemon',
@@ -13,6 +14,7 @@ const PokemonQuery = selector({
 });
 
 export const TestFe = () => {
+  const router = useRouter();
   const pokemon = useRecoilValue(PokemonQuery);
 
   console.log({ pokemon });
@@ -21,6 +23,12 @@ export const TestFe = () => {
     <div>
       <h2>テスト</h2>
       子コンポーネント
+      <button
+        onClick={() => {
+          router.push('/');
+        }}>
+        Back To Top
+      </button>
     </div>
   );
 };
