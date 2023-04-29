@@ -6,7 +6,9 @@ export default function Article({ params }: { params: { slug: string } }) {
     <div>
       <h1>テスト</h1>
       <p>パスID: {params.slug}</p>
-      <TestFe />
+      <Suspense>
+        <TestFe />
+      </Suspense>
     </div>
   );
 }
