@@ -3234,9 +3234,9 @@ __metadata:
     node-mocks-http: ^1.12.1
     postcss: ^8.4.19
     prettier: ^2.7.1
-    react: 18.2.0
+    react: ^18.2.0
     react-dom: 18.2.0
-    recoil: ^0.7.6
+    recoil: ^0.7.7
     tailwindcss: ^3.2.1
     typescript: ^5.0.4
     vite: ^4.2.1
@@ -5738,7 +5738,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0":
+"react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -5791,7 +5791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recoil@npm:^0.7.6":
+"recoil@npm:^0.7.7":
   version: 0.7.7
   resolution: "recoil@npm:0.7.7"
   dependencies:
