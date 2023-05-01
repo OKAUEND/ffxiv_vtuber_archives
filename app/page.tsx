@@ -2,6 +2,9 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
 
+import { Channels } from '@/src/features/Channels';
+import { Suspense } from 'react';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -53,6 +56,10 @@ export default function Home() {
       <div>
         <Link href={'/archives/ffixv'}>TEST Mock</Link>
       </div>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <Channels />
+      </Suspense>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
