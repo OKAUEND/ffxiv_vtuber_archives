@@ -50,10 +50,11 @@ export default function Home() {
         <Link href={'/archives/mock'}>TEST Mock</Link>
       </div>
 
-      {/* <div>
-        <Link href={'/archives/mock2'}>TEST Mock</Link>
+      <div>
+        <Link href={'/pokemon/25'}>TEST Pokemon!!</Link>
       </div>
 
+      {/* 
       <div>
         <Link href={'/archives/ffixv'}>TEST Mock</Link>
       </div> */}

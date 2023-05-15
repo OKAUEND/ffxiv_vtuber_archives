@@ -13,21 +13,21 @@ const PokemonQuery = selector({
   },
 });
 
-export const TestFe = () => {
+export const TestFe = async () => {
   const router = useRouter();
-  const pokemon = useRecoilValue(PokemonQuery);
-
-  console.log({ pokemon });
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon/25');
+  const data = await response.json();
 
   return (
     <div>
-      <h2>テスト</h2>
+      <h2>TEST {data.name}</h2>
       子コンポーネント
       <button
         onClick={() => {
           router.push('/');
-        }}>
-        Back To Top
+        }}
+      >
+        Back To Top by {data.name}
       </button>
     </div>
   );
