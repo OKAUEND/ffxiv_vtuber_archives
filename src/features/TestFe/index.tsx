@@ -15,8 +15,7 @@ const PokemonQuery = selector({
 
 export const TestFe = async () => {
   const router = useRouter();
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon/25');
-  const data = await response.json();
+  const data = useRecoilValue(PokemonQuery);
 
   return (
     <div>
