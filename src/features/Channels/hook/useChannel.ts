@@ -42,7 +42,5 @@ const channelsList = selector<HikasenVtuber[]>({
 //--------------------------------------------//
 
 export const useChannels = () => {
-  const channels = useRecoilValue<HikasenVtuber[]>(channelsList);
-
-  return channels;
+  return useRecoilValue<HikasenVtuber[]>(channelsQuery);
 };
