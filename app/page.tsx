@@ -59,9 +59,10 @@ export default function Home() {
         <Link href={'/archives/ffixv'}>TEST Mock</Link>
       </div> */}
 
-      {/* <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-expect-error Async Server Component */}
         <Channels />
-      </Suspense> */}
+      </Suspense>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a

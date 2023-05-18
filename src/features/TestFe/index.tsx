@@ -1,12 +1,18 @@
 'use client';
 
-import { selector, useRecoilValue } from 'recoil';
+import { atom, selector, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/navigation';
+
+const pokemonID = atom({
+  key: 'state/pokemon-id',
+  default: 1,
+});
 
 const PokemonQuery = selector({
   key: 'data-flow/pokemon',
-  get: async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/ditto');
+  get: async ({ get }) => {
+    const id = get(pokemonID);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const data = await response.json();
 
     return data;
@@ -15,8 +21,7 @@ const PokemonQuery = selector({
 
 export const TestFe = async () => {
   const router = useRouter();
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon/25');
-  const data = await response.json();
+  const data = useRecoilValue(PokemonQuery);
 
   return (
     <div>
