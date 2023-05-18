@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { atom, DefaultValue, selector, useRecoilStateLoadable } from 'recoil';
+import { atom, DefaultValue, selector, useRecoilValue } from 'recoil';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 //--------------------------------------------//
@@ -9,48 +9,40 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 //--------------------------------------------//
 
 const fetchChannels = async (): Promise<HikasenVtuber[]> => {
-    return await fetch(`${HOST}/api/channel`).then(async (response) => {
-        return (await response.json()) as HikasenVtuber[];
-    });
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto');
+  const date = await res.json();
+  return date;
 };
 
 //--------------------------------------------//
 
 const ChannelsAtom = atom<HikasenVtuber[]>({
-    key: 'Channels-atom',
-    default: [],
+  key: 'Channels-atom',
+  default: [],
 });
 
-const ChannelsSelector = selector<HikasenVtuber[]>({
-    key: 'channels.selector',
-    get: async ({ get }) => {
-        return get(ChannelsAtom);
-    },
-    set: ({ set }, newChannels) => {
-        if (newChannels instanceof DefaultValue) {
-            return newChannels;
-        } else {
-            set(ChannelsAtom, newChannels);
-        }
-    },
+const channelsQuery = selector<HikasenVtuber[]>({
+  key: 'query/channels',
+  get: async () => {
+    const res = await fetch(
+      'https://script.google.com/macros/s/AKfycbwEdmW8xsUb0O1RxyCbDVeCxUcKGPsU-V60FHplZslE6eYllYwHikTcHfIAFAUnIGtJBg/exec'
+    );
+    const date = await res.json();
+    return date;
+  },
+});
+
+const channelsList = selector<HikasenVtuber[]>({
+  key: 'date-flow/channels',
+  get: async ({ get }) => {
+    return get(channelsQuery);
+  },
 });
 
 //--------------------------------------------//
 
-export const useChannels = (firstPage: HikasenVtuber[]) => {
-    const [channels, setChannels] =
-        useRecoilStateLoadable<HikasenVtuber[]>(ChannelsSelector);
-    // const [resultStatus, setresultStatus] = useRecoilState(
-    //     ResponseResultSelector
-    // );
+export const useChannels = () => {
+  const channels = useRecoilValue<HikasenVtuber[]>(channelsList);
 
-    useEffect(() => {
-        setChannels(firstPage);
-    }, []);
-
-    // const reload = async (): Promise<void> => {
-    //     store([]);
-    // };
-
-    return [channels.getValue()] as const;
+  return channels;
 };

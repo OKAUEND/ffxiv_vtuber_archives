@@ -1,32 +1,25 @@
+'use client';
+
 import React from 'react';
-import { RecoilRoot } from 'recoil';
 import { ChannelPanel } from '../component/ChannelPanel';
 
 import { useChannels } from '../hook/useChannel';
 import { HikasenVtuber } from '../types';
 
-import { useRouter } from 'next/router';
-
 type Props = {
-    ChannelsFirstPagenation: HikasenVtuber[];
+  ChannelsFirstPagenation: HikasenVtuber[];
 };
 
-export const Channels = ({ ChannelsFirstPagenation }: Props) => {
-    // const [channels, resultStatus, reload] = useChannels();
-    const [channels] = useChannels(ChannelsFirstPagenation);
-    const router = useRouter();
+export const Channels = () => {
+  // const [channels, resultStatus, reload] = useChannels();
+  const channels = useChannels();
 
-    const onhandler = (selectedId: string = '') => {
-        if (selectedId === '') return;
-        router.push({
-            pathname: '/Archives/[channelId]',
-            query: { channelId: selectedId },
-        });
-    };
+  console.log({ channels });
 
-    return (
-        <div className="grid grid-cols-main">
-            <ChannelPanel channels={channels} onhandler={onhandler} />
-        </div>
-    );
+  return (
+    <div className="grid grid-cols-main">
+      <ChannelPanel channels={channels} />
+      テスト
+    </div>
+  );
 };
