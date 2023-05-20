@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 interface Props {
-  totalCount: number;
+  // totalCount: number;
   currentPageNumber: number;
 }
 
