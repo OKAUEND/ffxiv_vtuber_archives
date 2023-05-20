@@ -1,11 +1,14 @@
+import { cookies, headers } from 'next/headers';
+
 import { Channel } from '@/app/channels/_components/route';
 import { Suspense } from 'react';
 // import Error from './error';
 export default async function Article({
   params,
 }: {
-  params: { slug: string };
+  params: { pages: string };
 }) {
+  console.log(params.pages);
   return (
     <div>
       TEST?
