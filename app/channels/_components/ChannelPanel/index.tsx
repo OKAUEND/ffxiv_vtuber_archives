@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { Icon } from '@/src/component/Element/Icon';
@@ -15,10 +13,11 @@ export const ChannelPanel = ({ channels }: Props) => {
       {channels.map((channel) => (
         <li
           key={channel.channelID}
-          className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md">
+          className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md"
+        >
           <div className="grid grid-row-3 grid-flow-col gap-4">
             <div className="row-span-3">
-              <button onClick={() => {}}>
+              <button>
                 <Icon
                   src={channel.channelIconID}
                   alt={`${channel.name}のチャンネルアイコン`}
@@ -26,7 +25,7 @@ export const ChannelPanel = ({ channels }: Props) => {
               </button>
             </div>
             <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
-              <button onClick={() => {}}>
+              <button>
                 <div className="flex flex-col">
                   <span className="text-gray-100 font-sans text-lg">
                     {channel.name}
