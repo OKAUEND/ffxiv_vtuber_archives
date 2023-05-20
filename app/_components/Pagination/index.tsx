@@ -4,10 +4,11 @@ import Link from 'next/link';
 
 interface Props {
   // totalCount: number;
+  basePath: string;
   currentPageNumber: number;
 }
 
-export const Pagination = ({ currentPageNumber = 1 }: Props) => {
+export const Pagination = ({ basePath, currentPageNumber = 1 }: Props) => {
   const PER_PAGE = 5;
   const offsetPageNumber =
     currentPageNumber > PER_PAGE - 1 ? currentPageNumber - 2 : 1;
@@ -19,7 +20,7 @@ export const Pagination = ({ currentPageNumber = 1 }: Props) => {
     <ul>
       {paginationList().map((number, index) => (
         <li key={index}>
-          <Link href={`${number}`}>{number}</Link>
+          <Link href={`${basePath}/${number}`}>{number}</Link>
         </li>
       ))}
     </ul>

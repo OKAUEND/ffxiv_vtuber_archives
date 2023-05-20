@@ -29,7 +29,7 @@ export default async function Home() {
         <Link href={'/channels/2'}>TEST Channel!!</Link>
       </div>
 
-      <Pagination currentPageNumber={1} />
+      <Pagination basePath="channels" currentPageNumber={1} />
     </main>
   );
 }
