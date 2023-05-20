@@ -8,10 +8,8 @@ export default async function Article({
 }: {
   params: { pages: string };
 }) {
-  console.log(params.pages);
   return (
     <div>
-      TEST?
       <Suspense fallback={<div> Loading...</div>}>
         {/* @ts-expect-error Async Server Component */}
         <Channel />
