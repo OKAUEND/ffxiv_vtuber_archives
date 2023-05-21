@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from 'next/link';
+
 import { Icon } from '@/app/_components/Elements/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
@@ -17,15 +19,15 @@ export const ChannelPanel = ({ channels }: Props) => {
         >
           <div className="grid grid-row-3 grid-flow-col gap-4">
             <div className="row-span-3">
-              <button>
+              <Link href={`/archives/${channel.channelID}`}>
                 <Icon
                   src={channel.channelIconID}
                   alt={`${channel.name}のチャンネルアイコン`}
                 />
-              </button>
+              </Link>
             </div>
             <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
-              <button>
+              <Link href={`/archives/${channel.channelID}`}>
                 <div className="flex flex-col">
                   <span className="text-gray-100 font-sans text-lg">
                     {channel.name}
@@ -34,7 +36,7 @@ export const ChannelPanel = ({ channels }: Props) => {
                     Channel Name
                   </span>
                 </div>
-              </button>
+              </Link>
               <span className="text-gray-400 font-sans text-xs">
                 Since 2013/8/24
               </span>
