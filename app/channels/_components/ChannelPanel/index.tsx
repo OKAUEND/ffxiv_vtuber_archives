@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from '@/src/component/Element/Icon';
+import { Icon } from '@/app/_components/Elements/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 type Props = {
