@@ -7,13 +7,7 @@ const nextConfig = {
   trailingSlash: true,
   publicRuntimeConfig: { urlPrefix },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'yt3.ggpht.com',
-        port: '',
-      },
-    ],
+    domains: ['yt3.ggpht.com'],
   },
 };
 

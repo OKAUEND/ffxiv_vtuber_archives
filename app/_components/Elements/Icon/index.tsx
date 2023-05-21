@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 type Props = {
@@ -15,11 +13,11 @@ export const Icon = ({
   width = 48,
   height = 48,
 }: Props): JSX.Element => {
-  const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL;
+  const youtubeIconURL = process.env.YOUTUBE_CHANNEL_ICON_URL;
   return (
     <div className="rounded-full">
       <Image
-        src={`https://yt3.ggpht.com/ytc/${src}`}
+        src={`${youtubeIconURL}${src}`}
         alt={alt}
         width={width}
         height={height}
