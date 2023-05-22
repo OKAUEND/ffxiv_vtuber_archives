@@ -6,7 +6,7 @@ import {
   useRecoilCallback,
   useRecoilValue,
 } from 'recoil';
-import { useFetch } from '@/src/hooks/useFetch';
+import { fetchCacheExtend } from '@/app/_utile/fetch';
 
 //---------------------------------------------------------------------------
 
@@ -93,7 +93,7 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
-      const result = await useFetch<ApiResult>({ url: query });
+      const result = await fetchCacheExtend<ApiResult>({ url: query });
 
       if (result.error) {
         throw result.error;
