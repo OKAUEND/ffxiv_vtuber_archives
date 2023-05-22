@@ -32,3 +32,21 @@ export const fetchCacheExtend = cache(
     return { data: data };
   }
 );
+
+export const fetchExtend = async <T>({
+  url,
+}: IUseFetch): Promise<IResponse<T>> => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return {
+      error: {
+        hasError: true,
+        status: response.status,
+        message: response.statusText,
+      },
+    };
+  }
+  const data: T = await response.json();
+
+  return { data: data };
+};
