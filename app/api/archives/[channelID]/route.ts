@@ -15,8 +15,8 @@ export async function GET(
 
   const url = `${process.env.YOUTUBE_API_URL}?channelId=${slug}&key=${APIKey}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
 
-  if (slug === '' || slug === null) {
-    return new Response(JSON.stringify('TEST'), {
+  if (slug === '' || slug === undefined) {
+    return new Response(JSON.stringify('Not REQUEST'), {
       status: 400,
     });
   }
