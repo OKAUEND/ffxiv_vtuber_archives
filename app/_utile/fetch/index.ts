@@ -1,12 +1,18 @@
 import { cache } from 'react';
-import { Error } from '@/src/types';
+
+export type FetchError = {
+  hasError: boolean;
+  status: number;
+  message: string;
+};
+
 interface IUseFetch {
   url: string;
 }
 
 interface IResponse<T> {
   data?: T;
-  error?: Error;
+  error?: FetchError;
 }
 
 const defaultError = {
@@ -16,26 +22,12 @@ const defaultError = {
 };
 
 export const fetchCacheExtend = cache(
-  async <T>({ url }: IUseFetch): Promise<IResponse<T>> => {
-    const response = await fetch(url);
-    if (!response.ok) {
-      return {
-        error: {
-          hasError: true,
-          status: response.status,
-          message: response.statusText,
-        },
-      };
-    }
-    const data: T = await response.json();
-
-    return { data: data };
+  async <T>({ url }: IUseFetch): Promise<T> => {
+    return await fetchExtend({ url });
   }
 );
 
-export const fetchExtend = async <T>({
-  url,
-}: IUseFetch): Promise<IResponse<T>> => {
+export const fetchExtend = async <T>({ url }: IUseFetch): Promise<T> => {
   const res = await fetch(url, {
     method: 'GET',
   });
@@ -43,14 +35,11 @@ export const fetchExtend = async <T>({
     throw new Error(`${res.status}`);
   }
 
-  const data: IResponse<T> = await res.json();
+  const data: T = await res.json();
 
   if (typeof data === 'number') {
     throw new Error(`${data}`);
   }
-  if (data.error) {
-    throw new Error(`429 Many Request`);
-  }
 
-  return data.data;
+  return data;
 };

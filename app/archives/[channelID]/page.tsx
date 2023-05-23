@@ -14,7 +14,7 @@ export default async function Article({
 }: {
   params: { channelID: string };
 }) {
-  getAPI(params.channelID);
+  const { archives } = useArchives(params.channelID);
   return (
     <div>
       <h1>テスト</h1>

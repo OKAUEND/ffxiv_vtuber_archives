@@ -61,7 +61,7 @@ export const createQuery = ({ channelId, beginTime }: QueryInput): string => {
 
   const DOMAIN = process.env.NEXT_PUBLIC_HOST;
   // return `/api/archives?channelId=${channelId}&publishedBefore=${time}&part=${part}&order=date&q=${queryWorld}&maxResults=${pageSize}`;
-  return '/api/archives/MOCKMOCK?mock=supermock';
+  return `/api/archives/${channelId}?mock=supermock`;
 };
 
 const createNextBeginTime = (Archive: Archive[]): string => {
@@ -72,7 +72,7 @@ const createNextBeginTime = (Archive: Archive[]): string => {
   return targetTime.toISOString();
 };
 
-const converRawResultToArchives = (response: YoutubeDate): Archive[] => {
+const convertRawResultToArchives = (response: YoutubeDate): Archive[] => {
   return response.items;
 };
 
@@ -94,17 +94,9 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
-      const result = await fetchCacheExtend<ApiResult>({ url: query });
+      const archives = await fetchCacheExtend<YoutubeDate>({ url: query });
 
-      if (result.error) {
-        throw result.error;
-      }
-
-      if (result.data === undefined) {
-        throw new Error('No Data');
-      }
-
-      return result.data.item;
+      return archives;
     },
 });
 
@@ -117,7 +109,7 @@ const formattedVtuberArchiveQuery = selectorFamily<
   get:
     (query) =>
     ({ get }) => {
-      const archives = converRawResultToArchives(get(archiveListQuery(query)));
+      const archives = convertRawResultToArchives(get(archiveListQuery(query)));
       //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
       //改めて放送タイトル文にFF14関連の文言が該当するものをフィルタリングする
       const reg = new RegExp(queryWorld);

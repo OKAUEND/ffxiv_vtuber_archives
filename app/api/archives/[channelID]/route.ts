@@ -6,21 +6,22 @@ export async function GET(
   {
     params,
   }: {
-    params: { slug: string };
+    params: { channelID: string };
   }
 ) {
   const APIKey = process.env.API_KEY;
   const query = request.nextUrl.searchParams.get('mock');
-  const slug = params.slug;
+  const slug = params.channelID;
 
   const url = `${process.env.YOUTUBE_API_URL}?channelId=${slug}&key=${APIKey}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
 
-  if (slug === '' || slug === null) {
-    return new Response(JSON.stringify('TEST'), {
+  if (slug === '' || slug === undefined) {
+    return new Response(JSON.stringify('Not REQUEST'), {
       status: 400,
     });
   }
   const res = await fetchExtend<
     GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-  >({ url: url });
+  >({ url });
+  return new Response(JSON.stringify(res));
 }
