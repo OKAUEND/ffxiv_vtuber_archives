@@ -94,17 +94,9 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
-      const result = await fetchCacheExtend<ApiResult>({ url: query });
+      const archives = await fetchCacheExtend<YoutubeDate>({ url: query });
 
-      if (result.error) {
-        throw result.error;
-      }
-
-      if (result.data === undefined) {
-        throw new Error('No Data');
-      }
-
-      return result.data.item;
+      return archives;
     },
 });
 
