@@ -61,7 +61,7 @@ export const createQuery = ({ channelId, beginTime }: QueryInput): string => {
 
   const DOMAIN = process.env.NEXT_PUBLIC_HOST;
   // return `/api/archives?channelId=${channelId}&publishedBefore=${time}&part=${part}&order=date&q=${queryWorld}&maxResults=${pageSize}`;
-  return '/api/archives/MOCKMOCK?mock=supermock';
+  return `/api/archives/${channelId}?mock=supermock`;
 };
 
 const createNextBeginTime = (Archive: Archive[]): string => {
