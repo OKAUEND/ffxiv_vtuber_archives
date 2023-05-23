@@ -6,12 +6,12 @@ export async function GET(
   {
     params,
   }: {
-    params: { slug: string };
+    params: { channelID: string };
   }
 ) {
   const APIKey = process.env.API_KEY;
   const query = request.nextUrl.searchParams.get('mock');
-  const slug = params.slug;
+  const slug = params.channelID;
 
   const url = `${process.env.YOUTUBE_API_URL}?channelId=${slug}&key=${APIKey}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
 
