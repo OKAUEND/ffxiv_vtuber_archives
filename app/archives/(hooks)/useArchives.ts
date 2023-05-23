@@ -72,7 +72,7 @@ const createNextBeginTime = (Archive: Archive[]): string => {
   return targetTime.toISOString();
 };
 
-const converRawResultToArchives = (response: YoutubeDate): Archive[] => {
+const convertRawResultToArchives = (response: YoutubeDate): Archive[] => {
   return response.items;
 };
 
@@ -109,7 +109,7 @@ const formattedVtuberArchiveQuery = selectorFamily<
   get:
     (query) =>
     ({ get }) => {
-      const archives = converRawResultToArchives(get(archiveListQuery(query)));
+      const archives = convertRawResultToArchives(get(archiveListQuery(query)));
       //概要欄にFF14関連の記載がある場合、Queryで絞っていても該当するため、
       //改めて放送タイトル文にFF14関連の文言が該当するものをフィルタリングする
       const reg = new RegExp(queryWorld);
