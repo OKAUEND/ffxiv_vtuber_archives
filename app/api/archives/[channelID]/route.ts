@@ -23,4 +23,6 @@ export async function GET(
   const res = await fetchExtend<
     GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
   >({ url: url });
+
+  return new Response(JSON.stringify(res.data));
 }
