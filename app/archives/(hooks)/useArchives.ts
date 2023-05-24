@@ -222,7 +222,13 @@ const archiveList = selectorFamily<ArchiveListState, string>({
  * @returns {Array} 取得済みの過去配信(アーカイブ)
  */
 export const useArchives = (channelId: string) => {
-  const archive = useRecoilValue(archiveList(channelId));
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+
+  const getKey = (pageIndex: number, query: string) => {
+    return `/api/archives/${channelId}?mock=supermock`;
+  };
+
+  const { data } = useSWInfinite(getKey, fetcher);
 
   /**
    * 取得件数を一定数インクリメントする
