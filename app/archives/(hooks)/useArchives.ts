@@ -7,6 +7,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 import { fetchCacheExtend } from '@/app/_utile/fetch';
+import useSWInfinite from 'swr/infinite';
 
 //---------------------------------------------------------------------------
 
@@ -228,8 +229,12 @@ export const useArchives = (channelId: string) => {
     return `/api/archives/${channelId}?mock=supermock`;
   };
 
-  const { data } = useSWInfinite(getKey, fetcher);
-
+  const { data } = useSWInfinite<YoutubeDate>(getKey, fetcher, {
+    suspense: true,
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
   /**
    * 取得件数を一定数インクリメントする
    * @param channelId sting 現在の配信者チャンネルID
@@ -244,7 +249,7 @@ export const useArchives = (channelId: string) => {
         set(totalItems(channelId), (count) => count - pageSize);
       }
   );
-  return { ...archive, loadNextList, decrementPageSize };
+  return { data, loadNextList, decrementPageSize };
 };
 
 /**
