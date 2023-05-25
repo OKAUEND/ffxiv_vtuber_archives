@@ -1,24 +1,17 @@
 'use client';
-import { use, cache } from 'react';
+
+import { Archives } from '@/app/archives/_components/Archives/route';
 import { Suspense } from 'react';
-import Loading from './loading';
-// import Error from './error';
-
-const getAPI = cache(async (channelID: string) => {
-  const res = await fetch(`/api/archives/${channelID}?mock=supermock`);
-  const data = await res.json();
-});
-
 export default async function Article({
   params,
 }: {
   params: { channelID: string };
 }) {
-  const { archives } = useArchives(params.channelID);
   return (
     <div>
-      <h1>テスト</h1>
-      <p>パスID: {params.channelID}</p>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Archives channelID={params.channelID} />
+      </Suspense>
     </div>
   );
 }
