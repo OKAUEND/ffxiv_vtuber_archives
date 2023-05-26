@@ -25,7 +25,8 @@ const channelsQuery = selector<HikasenVtuber[]>({
   key: 'query/channels',
   get: async () => {
     const res = await fetch(
-      'https://script.google.com/macros/s/AKfycbwEdmW8xsUb0O1RxyCbDVeCxUcKGPsU-V60FHplZslE6eYllYwHikTcHfIAFAUnIGtJBg/exec'
+      'https://script.google.com/macros/s/AKfycbwEdmW8xsUb0O1RxyCbDVeCxUcKGPsU-V60FHplZslE6eYllYwHikTcHfIAFAUnIGtJBg/exec',
+      { cache: 'no-store' }
     );
     const date = await res.json();
     return date;
