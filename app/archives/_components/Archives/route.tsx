@@ -6,7 +6,9 @@ interface Props {
   channelID: string;
 }
 
-export const Archives = ({ channelID }: Props) => {
+const Archives = ({ channelID }: Props) => {
   const channels = useArchives(channelID);
   return <div>TEST</div>;
 };
+
+export default Archives;

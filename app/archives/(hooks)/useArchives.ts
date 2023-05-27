@@ -223,18 +223,7 @@ const archiveList = selectorFamily<ArchiveListState, string>({
  * @returns {Array} 取得済みの過去配信(アーカイブ)
  */
 export const useArchives = (channelId: string) => {
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-
-  const getKey = (pageIndex: number, query: string) => {
-    return `/api/archives/${channelId}?mock=supermock`;
-  };
-
-  const { data } = useSWInfinite<YoutubeDate>(getKey, fetcher, {
-    suspense: true,
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const archives = useRecoilValue(archiveList(channelId));
   /**
    * 取得件数を一定数インクリメントする
    * @param channelId sting 現在の配信者チャンネルID
@@ -249,7 +238,7 @@ export const useArchives = (channelId: string) => {
         set(totalItems(channelId), (count) => count - pageSize);
       }
   );
-  return { data, loadNextList, decrementPageSize };
+  return { archives, loadNextList, decrementPageSize };
 };
 
 /**

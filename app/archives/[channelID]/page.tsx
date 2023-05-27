@@ -1,7 +1,10 @@
-'use client';
+import dynamic from 'next/dynamic';
 
-import { Archives } from '@/app/archives/_components/Archives/route';
-import { Suspense } from 'react';
+const DynamicArchiveClientComponent = dynamic(
+  () => import('@/app/archives/_components/Archives/route'),
+  { ssr: false }
+);
+
 export default async function Article({
   params,
 }: {
@@ -9,9 +12,7 @@ export default async function Article({
 }) {
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Archives channelID={params.channelID} />
-      </Suspense>
+      <DynamicArchiveClientComponent channelID={params.channelID} />
     </div>
   );
 }
