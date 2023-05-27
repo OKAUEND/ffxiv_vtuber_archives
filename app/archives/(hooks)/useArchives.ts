@@ -7,6 +7,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 import { fetchCacheExtend } from '@/app/_utile/fetch';
+import useSWInfinite from 'swr/infinite';
 
 //---------------------------------------------------------------------------
 
@@ -222,8 +223,7 @@ const archiveList = selectorFamily<ArchiveListState, string>({
  * @returns {Array} 取得済みの過去配信(アーカイブ)
  */
 export const useArchives = (channelId: string) => {
-  const archive = useRecoilValue(archiveList(channelId));
-
+  const archives = useRecoilValue(archiveList(channelId));
   /**
    * 取得件数を一定数インクリメントする
    * @param channelId sting 現在の配信者チャンネルID
@@ -238,7 +238,7 @@ export const useArchives = (channelId: string) => {
         set(totalItems(channelId), (count) => count - pageSize);
       }
   );
-  return { ...archive, loadNextList, decrementPageSize };
+  return { archives, loadNextList, decrementPageSize };
 };
 
 /**

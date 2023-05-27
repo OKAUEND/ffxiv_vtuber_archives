@@ -1,24 +1,18 @@
-'use client';
-import { use, cache } from 'react';
-import { Suspense } from 'react';
-import Loading from './loading';
-// import Error from './error';
+import dynamic from 'next/dynamic';
 
-const getAPI = cache(async (channelID: string) => {
-  const res = await fetch(`/api/archives/${channelID}?mock=supermock`);
-  const data = await res.json();
-});
+const DynamicArchiveClientComponent = dynamic(
+  () => import('@/app/archives/_components/Archives/route'),
+  { ssr: false, loading: () => <div>Loading...</div> }
+);
 
 export default async function Article({
   params,
 }: {
   params: { channelID: string };
 }) {
-  const { archives } = useArchives(params.channelID);
   return (
     <div>
-      <h1>テスト</h1>
-      <p>パスID: {params.channelID}</p>
+      <DynamicArchiveClientComponent channelID={params.channelID} />
     </div>
   );
 }
