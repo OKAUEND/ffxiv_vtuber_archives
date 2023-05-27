@@ -7,7 +7,6 @@ import {
   useRecoilValue,
 } from 'recoil';
 import { fetchCacheExtend } from '@/app/_utile/fetch';
-import useSWInfinite from 'swr/infinite';
 
 //---------------------------------------------------------------------------
 
