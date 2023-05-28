@@ -8,10 +8,11 @@ interface Props {
 }
 
 const Archives = ({ channelID }: Props) => {
-  const { archives } = useArchives(channelID);
+  const { archives, loadNextList } = useArchives(channelID);
   return (
     <div>
       <ArchiveList Archives={[...archives.archives]} />
+      <button onClick={() => loadNextList(channelID)}>次を</button>
     </div>
   );
 };
