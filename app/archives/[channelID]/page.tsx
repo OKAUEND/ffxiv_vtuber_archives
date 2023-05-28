@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const DynamicArchiveClientComponent = dynamic(
-  () => import('@/app/archives/_components/Archives/route'),
+  () => import('@/app/archives/_components'),
   { ssr: false, loading: () => <div>Loading...</div> }
 );
 

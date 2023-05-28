@@ -10,10 +10,10 @@ export async function GET(
   }
 ) {
   const APIKey = process.env.API_KEY;
-  const query = request.nextUrl.searchParams.get('mock');
+  const beginTime = request.nextUrl.searchParams.get('begin');
   const slug = params.channelID;
 
-  const url = `${process.env.YOUTUBE_API_URL}?channelId=${slug}&key=${APIKey}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
+  const url = `${process.env.YOUTUBE_API_URL}?channelId=${slug}&key=${APIKey}&publishedBefore=${beginTime}&part=snippet&type=video&order=date&q=FF14|FFXIV&maxResults=25`;
 
   if (slug === '' || slug === undefined) {
     return new Response(JSON.stringify('Not REQUEST'), {
