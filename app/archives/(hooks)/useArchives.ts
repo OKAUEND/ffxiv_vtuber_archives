@@ -23,6 +23,7 @@ type ApiResult = {
 type ArchiveListState = {
   archives: readonly Archive[];
   mightHaveMore: boolean;
+  loading: boolean;
 };
 
 type Offset = {
@@ -144,6 +145,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
         return {
           archives: youtubeArchive.filteredArchive,
           mightHaveMore: false,
+          loading: false,
         };
       }
 
@@ -152,6 +154,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
         return {
           archives: youtubeArchive.filteredArchive,
           mightHaveMore: true,
+          loading: false,
         };
       }
 
@@ -176,6 +179,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
           return {
             archives: youtubeArchive.filteredArchive,
             mightHaveMore: true,
+            loading: true,
           };
         }
         case 'hasValue': {
@@ -186,6 +190,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
               ...rest.contents.archives,
             ],
             mightHaveMore: rest.contents.mightHaveMore,
+            loading: true,
           };
         }
       }
