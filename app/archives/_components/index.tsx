@@ -1,20 +1,20 @@
 'use client';
 
-import { useArchives } from '@/app/archives/(hooks)/useArchives';
-import { ArchiveList } from '@/app/archives/_components/Archives';
+import { Suspense } from 'react';
+import { Archives } from './router';
 
-interface Props {
+interface IProps {
   channelID: string;
 }
 
-const Archives = ({ channelID }: Props) => {
-  const { archives, loadNextList } = useArchives(channelID);
+const ArchivesRoute = ({ channelID }: IProps) => {
   return (
     <div>
-      <ArchiveList Archives={[...archives.archives]} />
-      <button onClick={() => loadNextList(channelID)}>次を</button>
+      <Suspense fallback={<div>Route Loading...</div>}>
+        <Archives channelID={channelID} />
+      </Suspense>
     </div>
   );
 };
 
-export default Archives;
+export default ArchivesRoute;
