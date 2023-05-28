@@ -55,11 +55,8 @@ const queryWorld = `FF14|FFXIV`;
 //---------------------------------------------------------------------------
 
 export const createQuery = ({ channelId, beginTime }: QueryInput): string => {
-  const part = 'snippet';
-
   const time = beginTime === '' ? new Date().toISOString() : beginTime;
 
-  // return `/api/archives?channelId=${channelId}&publishedBefore=${time}&part=${part}&order=date&q=${queryWorld}&maxResults=${pageSize}`;
   return `/api/archives/${channelId}?begin=${time}`;
 };
 
