@@ -1,12 +1,7 @@
-import { Suspense } from 'react';
-export default function RootLayout({
+export default function ArchiveRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div>{children}</div>
-    </Suspense>
-  );
+  return <div>{children}</div>;
 }
