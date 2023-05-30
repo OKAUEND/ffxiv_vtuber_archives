@@ -1,3 +1,5 @@
+'use client';
+
 import { useErrorState } from './hook/useErrorState';
 import { CallBackProps } from './type/ErrorMessage';
 
