@@ -2,12 +2,12 @@
 
 import { Component, ReactNode } from 'react';
 
-import { CallBackProps } from './type/ErrorMessage';
+import { CallBackProps, FallBackProps } from './type/ErrorMessage';
 import { ErrorBoundaryFallBack } from './ErrorMessage';
 
 interface Props {
   children: ReactNode;
-  fallback: ({ status }: CallBackProps) => ReactNode;
+  fallback: ({ message }: FallBackProps) => ReactNode;
 }
 
 interface State {
@@ -50,7 +50,7 @@ export class ErrorBoundary extends Component<Props, State> {
   render(): React.ReactNode {
     if (this.state.hasError) {
       //エラーステータスをフォールバックのコンポーネントへ渡すようにし、コンポーネントの拡張性を持たせる
-      return this.props.fallback({ status: this.state.status });
+      return this.props.fallback({ message: this.state.status.toString() });
     }
 
     return this.props.children;

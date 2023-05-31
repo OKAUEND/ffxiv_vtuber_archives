@@ -1,20 +1,20 @@
 'use client';
 
 import { useErrorState } from './hook/useErrorState';
-import { CallBackProps } from './type/ErrorMessage';
+import { FallBackProps, CallBackProps } from './type/ErrorMessage';
 
 /**
  * エラーコードによってメッセージを表示させる
  * @param status
  * @returns
  */
-const ErrorMessage = ({ status }: CallBackProps) => {
-  const message = useErrorState(status);
+const ErrorMessage = ({ message }: FallBackProps) => {
+  const show = useErrorState(message);
   return (
     <section>
       <h1>{status}</h1>
-      <span>{message.message}</span>
-      <span>{message.subMessage}</span>
+      <span>{show.message}</span>
+      <span>{show.subMessage}</span>
     </section>
   );
 };
@@ -24,10 +24,10 @@ const ErrorMessage = ({ status }: CallBackProps) => {
  * @param status
  * @returns
  */
-export const ErrorBoundaryFallBack = ({ status }: CallBackProps) => {
+export const ErrorBoundaryFallBack = ({ message }: FallBackProps) => {
   return (
     <>
-      <ErrorMessage status={status} />
+      <ErrorMessage message={status} />
     </>
   );
 };
