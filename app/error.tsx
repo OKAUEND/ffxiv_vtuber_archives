@@ -1,5 +1,17 @@
 'use client';
 
-export default function Error({ children }: { children: React.ReactNode }) {
-  return <div>Error</div>;
+import { ErrorBoundaryFallBack } from '@/app/_components/ErrorBoundary';
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  return (
+    <>
+      <ErrorBoundaryFallBack message={error.message}></ErrorBoundaryFallBack>
+    </>
+  );
 }
