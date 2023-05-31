@@ -6,3 +6,7 @@ export interface ErrorMessage {
 export interface CallBackProps {
   status: number;
 }
+
+export interface FallBackProps {
+  message: string;
+}

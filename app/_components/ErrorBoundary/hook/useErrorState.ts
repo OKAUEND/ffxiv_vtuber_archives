@@ -1,6 +1,6 @@
 import { selectorFamily, useRecoilValue } from 'recoil';
 
-import { ErrorMessage } from '@/src/base/Parts/Error/type/ErrorMessage';
+import { ErrorMessage } from '../type/ErrorMessage';
 
 const createErrorMessage = (
   message: string,
@@ -9,11 +9,13 @@ const createErrorMessage = (
   return { message: message, subMessage: subMessage };
 };
 
-const errorMessage = selectorFamily<ErrorMessage, number>({
+const errorMessage = selectorFamily<ErrorMessage, string>({
   key: 'data/error-message',
-  get: (code: number) => () => {
+  get: (message: string) => () => {
+    const status = parseInt(message.substring(0, 3), 10);
+
     //それぞれのステータスで文面を変えたいので、ステータスをスイッチで判別させる
-    switch (code) {
+    switch (status) {
       case 400:
         return createErrorMessage(
           'データ取得時に不具合が発生しました。',
@@ -43,6 +45,6 @@ const errorMessage = selectorFamily<ErrorMessage, number>({
   },
 });
 
-export const useErrorState = (code: number) => {
-  return useRecoilValue(errorMessage(code));
+export const useErrorState = (message: string) => {
+  return useRecoilValue(errorMessage(message));
 };
