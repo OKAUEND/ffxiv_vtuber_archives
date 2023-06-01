@@ -15,7 +15,7 @@ export const ChannelPanel = ({ channels }: Props) => {
       {channels.map((channel) => (
         <li
           key={channel.channelID}
-          className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md"
+          className="flex flex-col w-full md:w-96 p-4 m-2 bg-gray-700 rounded-md"
         >
           <div className="grid grid-row-3 grid-flow-col gap-4">
             <div className="row-span-3">
