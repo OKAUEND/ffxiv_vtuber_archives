@@ -11,7 +11,7 @@ type Props = {
 
 export const ChannelPanel = ({ channels }: Props) => {
   return (
-    <ul className="flex justify-center flex-wrap ml-10 mr-10 col-start-2 col-end-3 after:w-96 after:p-4 after:m-2">
+    <ul className="flex justify-center flex-wrap after:w-96 after:p-4 after:m-2">
       {channels.map((channel) => (
         <li
           key={channel.channelID}
