@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default async function Home() {
   const channels = await getChannel('1');
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between h-screen w-full">
       <ErrorBoundaryExtended>
         <ChannelPanel channels={channels} />
 
