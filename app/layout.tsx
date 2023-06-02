@@ -1,6 +1,6 @@
-import './globals.css';
 import { Inter } from 'next/font/google';
 
+import styles from '@/app/_styles/rootLayout.module.scss';
 import RecoilProvider from '@/app/_utile/recoil';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-600 md:grid md:grid-cols-5 w-full">
+      <body className={styles.rootLayout}>
         <section className="ml-5 mr-5 md:ml-0 md:mr-0 md:col-start-2 md:col-end-5">
           <RecoilProvider>{children}</RecoilProvider>
         </section>
