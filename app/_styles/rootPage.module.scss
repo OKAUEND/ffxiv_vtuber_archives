@@ -1,0 +1,18 @@
+@use '@/_styles/variables/variables.scss';
+
+.rootPage {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  @include variables.mq(lg) {
+    grid-area: 1 / 2 / 3 / 3;
+  }
+}
+
+.content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -2,9 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": ".",
+    "baseUrl": "./app",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@variable": ["_styles/variables.scss"]
     },
     "allowJs": true,
     "skipLibCheck": true,

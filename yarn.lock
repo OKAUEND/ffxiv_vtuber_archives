@@ -1294,6 +1294,7 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     recoil: ^0.7.7
+    sanitize.css: ^13.0.0
     sass: ^1.62.1
     typescript: ^5.0.4
     vite: ^4.2.1
@@ -5829,6 +5830,13 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
+  languageName: node
+  linkType: hard
+
+"sanitize.css@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "sanitize.css@npm:13.0.0"
+  checksum: a99ca77c4d135800a4a93c3555e5aa4a2eb040a833df716dbe9132e1f2086fbf9acdb8021a579f40dcf77166d2d50f3358b4b6121a247d26fed5a0e6f5af3bb7
   languageName: node
   linkType: hard
 
