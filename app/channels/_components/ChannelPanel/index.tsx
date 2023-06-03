@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from 'next/link';
 
 import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
@@ -12,13 +10,10 @@ type Props = {
 
 export const ChannelPanel = ({ channels }: Props) => {
   return (
-    <ul className="flex justify-center flex-wrap after:w-96 after:p-4 after:m-2">
+    <ul className={styles.container}>
       {channels.map((channel) => (
-        <li
-          key={channel.channelID}
-          className="flex flex-col w-full md:w-96 p-4 m-2 bg-gray-700 rounded-md"
-        >
-          <div className="grid grid-row-3 grid-flow-col gap-4">
+        <li key={channel.channelID} className={styles.channel_list}>
+          <div className={styles.channel_content}>
             <div className="row-span-3">
               <Link href={`/archives/${channel.channelID}`}>
                 <Icon
