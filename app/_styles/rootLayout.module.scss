@@ -1,11 +1,11 @@
-@import 'variables';
+@use './variables/variables.scss';
 
 .rootLayout {
   background-color: #4a5568;
   width: 100%;
   height: 100vh;
 
-  @include mq(lg) {
+  @include variables.mq(lg) {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: repeat(2, 1fr);

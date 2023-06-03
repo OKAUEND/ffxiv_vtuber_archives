@@ -1,10 +1,10 @@
-@import 'variables';
+@use '@/_styles/variables/variables.scss';
 
 .rootPage {
   margin-left: 10px;
   margin-right: 10px;
 
-  @include mq(lg) {
+  @include variables.mq(lg) {
     grid-area: 1 / 2 / 3 / 3;
   }
 }
