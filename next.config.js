@@ -11,9 +11,6 @@ const nextConfig = {
   images: {
     domains: ['yt3.ggpht.com'],
   },
-  sassOptions: {
-    includePaths: [path.join(__dirname, '_styles')],
-  },
 };
 
 module.exports = nextConfig;

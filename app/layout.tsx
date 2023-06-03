@@ -1,8 +1,8 @@
 import { Inter } from 'next/font/google';
 import 'sanitize.css';
 
-import styles from '@/app/_styles/rootLayout.module.scss';
-import RecoilProvider from '@/app/_utile/recoil';
+import styles from '@/_styles/rootLayout.module.scss';
+import RecoilProvider from '@/_utile/recoil';
 
 const inter = Inter({ subsets: ['latin'] });
 

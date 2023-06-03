@@ -2,7 +2,8 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { Icon } from '@/app/_components/Elements/Icon';
+import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
+import { Icon } from '@/_components/Elements/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 type Props = {
