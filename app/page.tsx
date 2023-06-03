@@ -15,11 +15,13 @@ export default async function Home() {
   const channels = await getChannel('1');
   return (
     <main className={styles.rootPage}>
-      <ErrorBoundaryExtended>
-        <ChannelPanel channels={channels} />
+      <section className={styles.content}>
+        <ErrorBoundaryExtended>
+          <ChannelPanel channels={channels} />
 
-        <Pagination basePath="channels" currentPageNumber={1} />
-      </ErrorBoundaryExtended>
+          <Pagination basePath="channels" currentPageNumber={1} />
+        </ErrorBoundaryExtended>
+      </section>
     </main>
   );
 }
