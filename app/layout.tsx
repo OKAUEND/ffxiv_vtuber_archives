@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import 'sanitize.css';
 
 import styles from '@/app/_styles/rootLayout.module.scss';
 import RecoilProvider from '@/app/_utile/recoil';
