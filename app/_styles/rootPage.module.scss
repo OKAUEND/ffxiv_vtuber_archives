@@ -1,0 +1,10 @@
+@import 'variables';
+
+.rootPage {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  @include mq(lg) {
+    grid-area: 1 / 2 / 3 / 3;
+  }
+}

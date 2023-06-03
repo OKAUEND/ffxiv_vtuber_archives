@@ -19,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="jp">
       <body className={styles.rootLayout}>
-        <section className="ml-5 mr-5 md:ml-0 md:mr-0 md:col-start-2 md:col-end-5">
-          <RecoilProvider>{children}</RecoilProvider>
-        </section>
+        <RecoilProvider>{children}</RecoilProvider>
       </body>
     </html>
   );
