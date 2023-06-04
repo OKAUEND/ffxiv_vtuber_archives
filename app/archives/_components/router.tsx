@@ -12,13 +12,13 @@ interface Props {
 export const Archives = ({ channelID }: Props) => {
   const { archives } = useArchives(channelID);
   return (
-    <div>
+    <>
       <ArchiveList Archives={[...archives.archives]} />
       {archives.loading ? (
         <LoadingBasicAnimation />
       ) : (
         <NextLoad channelID={channelID} />
       )}
-    </div>
+    </>
   );
 };

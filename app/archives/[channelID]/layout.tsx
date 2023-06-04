@@ -10,7 +10,7 @@ export default function PageChannelLayout({
 }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div>{children}</div>
+      <section>{children}</section>
     </Suspense>
   );
 }
