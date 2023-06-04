@@ -16,6 +16,13 @@
   grid-row-gap: 0px;
   margin-top: 5px;
 
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  --tw-bg-opacity: 1;
+  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+  border-radius: 3px;
+
   @include variables.mq(lg) {
     grid-template-columns: 1.5fr 2fr;
     grid-template-rows: 1fr;
