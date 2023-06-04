@@ -10,8 +10,8 @@ type Props = {
 export const Icon = ({
   src,
   alt,
-  width = 48,
-  height = 48,
+  width = 96,
+  height = 96,
 }: Props): JSX.Element => {
   const youtubeIconURL = process.env.YOUTUBE_CHANNEL_ICON_URL;
   return (
