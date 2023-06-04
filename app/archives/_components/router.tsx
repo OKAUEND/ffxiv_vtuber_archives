@@ -1,9 +1,9 @@
 'use client';
 
-import { useArchives } from '@/app/archives/(hooks)/useArchives';
-import { ArchiveList } from '@/app/archives/_components/Archives';
-import { NextLoad } from '@/app/archives/_components/NextLoad';
-import { LoadingBasicAnimation } from '@/app/_components/Loading';
+import { useArchives } from '@/archives/(hooks)/useArchives';
+import { ArchiveList } from '@/archives/_components/Archives';
+import { NextLoad } from '@/archives/_components/NextLoad';
+import { LoadingBasicAnimation } from '@/_components/Loading';
 
 interface Props {
   channelID: string;

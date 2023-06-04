@@ -6,7 +6,7 @@ import {
   useRecoilCallback,
   useRecoilValue,
 } from 'recoil';
-import { fetchCacheExtend } from '@/app/_utile/fetch';
+import { fetchCacheExtend } from '@/_utile/fetch';
 
 //---------------------------------------------------------------------------
 

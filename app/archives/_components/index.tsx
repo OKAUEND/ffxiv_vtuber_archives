@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { ErrorBoundaryExtended } from '@/app/_components/ErrorBoundary';
+import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
 import { Archives } from './router';
 
 interface IProps {

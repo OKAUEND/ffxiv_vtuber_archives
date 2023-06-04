@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { fetchExtend } from '@/app/_utile/fetch';
+import { fetchExtend } from '@/_utile/fetch';
 
 export async function GET(
   request: NextRequest,
