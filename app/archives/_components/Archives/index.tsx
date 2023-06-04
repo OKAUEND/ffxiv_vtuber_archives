@@ -9,7 +9,9 @@ interface IProps {
 export const ArchiveList = ({ Archives }: IProps) => {
   const convertDayTime = (time: string) => {
     const date = new Date(time);
-    return `${date.getFullYear()}年 ${date.getMonth()}月${date.getDate()}日`;
+    return `${date.getFullYear()}年 ${
+      date.getMonth() + 1
+    }月${date.getDate()}日`;
   };
 
   return (
