@@ -19,9 +19,8 @@
   max-width: 24rem;
   padding: 4px;
   margin: 2px;
-  --tw-bg-opacity: 1;
-  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
-  border-radius: 0.25rem;
+
+  @include variables.panel_color_style();
 
   .channel_content {
     display: grid;

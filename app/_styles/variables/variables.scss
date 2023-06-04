@@ -14,3 +14,9 @@ $medium-width: 750px;
     @content;
   }
 }
+
+@mixin panel_color_style() {
+  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+  --tw-bg-opacity: 1;
+  border-radius: 0.25rem;
+}

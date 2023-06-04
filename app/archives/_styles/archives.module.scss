@@ -19,15 +19,13 @@
   padding-top: 10px;
   padding-bottom: 10px;
 
-  --tw-bg-opacity: 1;
-  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
-  border-radius: 3px;
-
   @include variables.mq(lg) {
     grid-template-columns: 1.5fr 2fr;
     grid-template-rows: 1fr;
     width: 800px;
   }
+
+  @include variables.panel_color_style();
 }
 
 .thumbnail {
