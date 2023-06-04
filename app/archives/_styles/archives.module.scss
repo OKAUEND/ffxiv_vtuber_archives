@@ -62,3 +62,8 @@
   /* ブラウザがサポートしていない場合のフェールセーフ */
   max-height: 50px;
 }
+
+.live_daytime {
+  font-size: 13px;
+  color: variables.$since_text_color;
+}

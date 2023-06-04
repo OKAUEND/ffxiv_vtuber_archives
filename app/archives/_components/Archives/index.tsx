@@ -27,7 +27,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
           </div>
           <div className={styles.info}>
             <p className={styles.archive_title}>{archive.snippet.title}</p>
-            <div className="text-sm h-1/2 text-gray-400">
+            <div className={styles.live_daytime}>
               {convertDayTime(archive.snippet.publishedAt)}
             </div>
           </div>
