@@ -39,3 +39,18 @@
     grid-area: 1 / 2 / 2 / 3;
   }
 }
+
+.archive_title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+
+  //長すぎるタイトル名の場合のためにline-clampを実装
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* ブラウザがサポートしていない場合のフェールセーフ */
+  max-height: 50px;
+}
