@@ -14,14 +14,12 @@ const inter = Inter({ subsets: ['latin'] });
 export default async function Home() {
   const channels = await getChannel('1');
   return (
-    <main className={styles.rootPage}>
-      <section className={styles.content}>
-        <ErrorBoundaryExtended>
-          <ChannelPanel channels={channels} />
+    <section className={styles.content}>
+      <ErrorBoundaryExtended>
+        <ChannelPanel channels={channels} />
 
-          <Pagination basePath="channels" currentPageNumber={1} />
-        </ErrorBoundaryExtended>
-      </section>
-    </main>
+        <Pagination basePath="channels" currentPageNumber={1} />
+      </ErrorBoundaryExtended>
+    </section>
   );
 }
