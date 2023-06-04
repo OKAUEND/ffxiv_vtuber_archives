@@ -190,7 +190,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
               ...rest.contents.archives,
             ],
             mightHaveMore: rest.contents.mightHaveMore,
-            loading: true,
+            loading: false,
           };
         }
       }
