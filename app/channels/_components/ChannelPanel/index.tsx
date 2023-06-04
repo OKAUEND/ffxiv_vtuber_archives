@@ -14,7 +14,7 @@ export const ChannelPanel = ({ channels }: Props) => {
       {channels.map((channel) => (
         <li key={channel.channelID} className={styles.channel_list}>
           <div className={styles.channel_content}>
-            <div className="row-span-3">
+            <div className={styles.channel_icon}>
               <Link href={`/archives/${channel.channelID}`}>
                 <Icon
                   src={channel.channelIconID}
@@ -22,22 +22,16 @@ export const ChannelPanel = ({ channels }: Props) => {
                 />
               </Link>
             </div>
-            <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
+            <div className={styles.channel_info}>
               <Link href={`/archives/${channel.channelID}`}>
-                <div className="flex flex-col">
-                  <span className="text-gray-100 font-sans text-lg">
-                    {channel.name}
-                  </span>
-                  <span className="text-gray-400 font-sans text-sm">
-                    Channel Name
-                  </span>
+                <div className={styles.info_title}>
+                  <span className={styles.info_text}>{channel.name}</span>
+                  <span className={styles.info_channelName}>Channel Name</span>
                 </div>
               </Link>
-              <span className="text-gray-400 font-sans text-xs">
-                Since 2013/8/24
-              </span>
+              <span className={styles.channel_since}>Since 2013/8/24</span>
             </div>
-            <div className="row-span-2 col-span-2">TAGTAGTAGTAGATGA</div>
+            <div className={styles.channel_tag}>TAGTAGTAGTAGATGA</div>
           </div>
         </li>
       ))}
