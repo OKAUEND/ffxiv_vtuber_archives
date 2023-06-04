@@ -9,6 +9,10 @@ $breakpoints: (
 
 $medium-width: 750px;
 
+$title_color: #f8fafc;
+
+$text_color: #cbd5e0;
+
 @mixin mq($breakpoint: md) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
