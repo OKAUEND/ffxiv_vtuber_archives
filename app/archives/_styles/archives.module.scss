@@ -12,6 +12,7 @@
   grid-template-rows: 180px 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  margin-top: 5px;
 
   @include variables.mq(lg) {
     grid-template-columns: 1.5fr 2fr;
