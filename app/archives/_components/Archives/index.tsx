@@ -26,16 +26,11 @@ export const ArchiveList = ({ Archives }: IProps) => {
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src={archive.snippet.thumbnails.medium.url}
-                className="object-cover md:w-160 md:h-90"
-              />
+              <img src={archive.snippet.thumbnails.medium.url} />
             </a>
           </div>
-          <div className="flex-grow w-1/4 ml-2 text-gray-50">
-            <p className="max-h-12 line-clamp-2 text-base md:text-2xl text-left truncate w-full">
-              {archive.snippet.title}
-            </p>
+          <div className={styles.info}>
+            <p className={styles.archive_title}>{archive.snippet.title}</p>
             <div className="text-sm h-1/2 text-gray-400">
               {archive.snippet.publishedAt}
             </div>

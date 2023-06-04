@@ -22,9 +22,20 @@
 }
 
 .thumbnail {
-  width: 50%;
-  height: 50%;
+  grid-area: 1 / 1 / 2 / 2;
+  display: grid;
+  place-content: center;
 
   @include variables.mq(lg) {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+}
+
+.info {
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  place-content: center;
+  @include variables.mq(lg) {
+    grid-area: 1 / 2 / 2 / 3;
   }
 }
