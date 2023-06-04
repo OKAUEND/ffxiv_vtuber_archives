@@ -1,6 +1,8 @@
 @use '@/_styles/variables/variables.scss';
 
 .container {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
