@@ -43,6 +43,9 @@
   display: grid;
   place-content: center;
   color: variables.$text_color;
+  margin-left: 10px;
+  margin-right: 5px;
+
   @include variables.mq(lg) {
     grid-area: 1 / 2 / 2 / 3;
   }
