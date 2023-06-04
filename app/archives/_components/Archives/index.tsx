@@ -20,7 +20,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
     <ul className={styles.container}>
       {Archives.map((archive, index) => (
         <li key={index} className={styles.panel}>
-          <div className="w-1/2 h-1/2 md:w-160 md:h-90 flex-shrink-0">
+          <div className={styles.thumbnail}>
             <a
               href={`https://www.youtube.com/watch?v=${archive.id.videoId}`}
               target="_blank"

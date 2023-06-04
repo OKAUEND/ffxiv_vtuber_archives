@@ -3,16 +3,27 @@
 .container {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .panel {
   display: grid;
-  grid-template-columns: 1.5fr 2fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 180px 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 
   @include variables.mq(lg) {
+    grid-template-columns: 1.5fr 2fr;
+    grid-template-rows: 1fr;
     width: 800px;
+  }
+}
+
+.thumbnail {
+  width: 50%;
+  height: 50%;
+
+  @include variables.mq(lg) {
   }
 }
