@@ -19,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="jp">
       <body className={styles.rootLayout}>
-        <RecoilProvider>{children}</RecoilProvider>
+        <main className={styles.container}>
+          <RecoilProvider>{children}</RecoilProvider>
+        </main>
       </body>
     </html>
   );
