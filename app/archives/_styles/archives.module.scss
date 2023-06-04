@@ -19,6 +19,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
 
+  list-style: none;
+
   @include variables.mq(lg) {
     grid-template-columns: 1.5fr 2fr;
     grid-template-rows: 1fr;
