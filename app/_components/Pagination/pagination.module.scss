@@ -1,0 +1,40 @@
+@use '@/_styles/variables/variables.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 0;
+
+  @include variables.mq(lg) {
+    width: 50%;
+  }
+}
+
+.pagination {
+  list-style: none;
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-content: center;
+
+  border-radius: 10px;
+  background-color: rgb(151, 151, 151);
+  opacity: 0.5;
+}
+
+.curreant {
+  list-style: none;
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-content: center;
+
+  border-radius: 10px;
+  border: 5px solid rgb(189, 104, 104);
+  background-color: rgb(151, 151, 151);
+  opacity: 0.5;
+}
