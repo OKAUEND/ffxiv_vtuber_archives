@@ -6,12 +6,8 @@ interface IProps {
   Archives: GoogleApiYouTubeSearchResource[];
 }
 
-const createHighQuality720URL = (videoId: string): string => {
-  return `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
-};
-
 export const ArchiveList = ({ Archives }: IProps) => {
-  const converDayTime = (time: string) => {
+  const convertDayTime = (time: string) => {
     const date = new Date(time);
     return `${date.getFullYear()}年 ${date.getMonth()}月${date.getDate()}日`;
   };
@@ -32,7 +28,7 @@ export const ArchiveList = ({ Archives }: IProps) => {
           <div className={styles.info}>
             <p className={styles.archive_title}>{archive.snippet.title}</p>
             <div className="text-sm h-1/2 text-gray-400">
-              {archive.snippet.publishedAt}
+              {convertDayTime(archive.snippet.publishedAt)}
             </div>
           </div>
         </li>
