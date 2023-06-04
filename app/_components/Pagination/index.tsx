@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 
+import styles from './pagination.module.scss';
+
 interface Props {
   // totalCount: number;
   basePath: string;
@@ -16,10 +18,20 @@ export const Pagination = ({ basePath, currentPageNumber = 1 }: Props) => {
   const paginationList = () =>
     [...Array(PER_PAGE)].map((_, index) => offsetPageNumber + index);
 
+  const toggleCurrantNumberStyle = (
+    currantNumber: number,
+    pageNumber: number
+  ) => {
+    return currantNumber === pageNumber ? styles.curreant : styles.pagination;
+  };
+
   return (
-    <ul>
+    <ul className={styles.container}>
       {paginationList().map((number, index) => (
-        <li key={index}>
+        <li
+          className={toggleCurrantNumberStyle(currentPageNumber, number)}
+          key={index}
+        >
           <Link href={`${basePath}/${number}`}>{number}</Link>
         </li>
       ))}
