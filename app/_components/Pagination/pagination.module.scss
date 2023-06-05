@@ -1,5 +1,20 @@
 @use '@/_styles/variables/variables.scss';
 
+@mixin pagination_style() {
+  list-style: none;
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-content: center;
+
+  font-weight: bold;
+  font-size: 18px;
+
+  border-radius: 10px;
+  background-color: rgb(151, 151, 151);
+  opacity: 0.5;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -15,25 +30,11 @@
 }
 
 .pagination {
-  list-style: none;
-  height: 40px;
-  width: 40px;
-  display: grid;
-  place-content: center;
-
-  border-radius: 10px;
-  background-color: rgb(151, 151, 151);
-  opacity: 0.5;
+  @include pagination_style();
 }
 
 .current {
-  list-style: none;
-  height: 40px;
-  width: 40px;
-  display: grid;
-  place-content: center;
-
-  border-radius: 10px;
+  @include pagination_style();
   border: 5px solid rgb(189, 104, 104);
   background-color: rgb(151, 151, 151);
   opacity: 0.5;
