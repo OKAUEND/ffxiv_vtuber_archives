@@ -32,7 +32,11 @@ export const Pagination = ({ basePath, currentPageNumber = 1 }: Props) => {
           className={toggleCurrantNumberStyle(currentPageNumber, number)}
           key={index}
         >
-          <Link href={`${basePath}/${number}`}>{number}</Link>
+          {currentPageNumber === number ? (
+            <div>{number}</div>
+          ) : (
+            <Link href={`${basePath}/${number}`}>{number}</Link>
+          )}
         </li>
       ))}
     </ul>
