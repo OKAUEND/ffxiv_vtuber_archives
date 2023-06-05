@@ -8,8 +8,6 @@
   font-weight: bold;
   font-size: 18px;
 
-  border-radius: 10px;
-  background-color: rgb(151, 151, 151);
   opacity: 0.5;
 }
 
@@ -39,11 +37,15 @@ $forcus_color: #687792;
   @include pagination_style();
   display: grid;
   place-content: center;
+  color: variables.$text_color;
+  border-radius: 10px;
+  background-color: $back_color;
   border: 5px solid rgb(189, 104, 104);
 }
 
 .link {
-  color: rgb(43, 43, 43);
+  color: variables.$text_color;
+  background-color: $back_color;
   display: flex;
   justify-content: center;
   align-items: center;
