@@ -36,6 +36,8 @@
 .current {
   @include pagination_style();
   border: 5px solid rgb(189, 104, 104);
-  background-color: rgb(151, 151, 151);
-  opacity: 0.5;
+}
+
+.link {
+  color: rgb(43, 43, 43);
 }

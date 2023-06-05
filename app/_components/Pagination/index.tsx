@@ -35,7 +35,9 @@ export const Pagination = ({ basePath, currentPageNumber = 1 }: Props) => {
           {currentPageNumber === number ? (
             <div>{number}</div>
           ) : (
-            <Link href={`${basePath}/${number}`}>{number}</Link>
+            <Link href={`${basePath}/${number}`} className={styles.link}>
+              {number}
+            </Link>
           )}
         </li>
       ))}
