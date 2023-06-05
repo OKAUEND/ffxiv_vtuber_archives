@@ -22,7 +22,7 @@ export const Pagination = ({ basePath, currentPageNumber = 1 }: Props) => {
     currantNumber: number,
     pageNumber: number
   ) => {
-    return currantNumber === pageNumber ? styles.curreant : styles.pagination;
+    return currantNumber === pageNumber ? styles.current : styles.pagination;
   };
 
   return (
