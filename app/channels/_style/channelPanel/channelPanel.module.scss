@@ -1,6 +1,8 @@
 @use '@/_styles/variables/variables.scss';
 
 .container {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -19,9 +21,8 @@
   max-width: 24rem;
   padding: 4px;
   margin: 2px;
-  --tw-bg-opacity: 1;
-  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
-  border-radius: 0.25rem;
+
+  @include variables.panel_color_style();
 
   .channel_content {
     display: grid;
@@ -51,19 +52,19 @@
   }
 
   .info_text {
-    color: #f8fafc;
+    color: variables.$title_color;
     font-family: sans-serif;
     font-size: 1.125rem;
   }
 
   .info_channelName {
-    color: #cbd5e0;
+    color: variables.$text_color;
     font-family: sans-serif;
     font-size: 0.875rem;
   }
 
   .channel_since {
-    color: #cbd5e0;
+    color: variables.$since_text_color;
     font-family: sans-serif;
     font-size: 0.75rem;
   }

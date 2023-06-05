@@ -9,8 +9,20 @@ $breakpoints: (
 
 $medium-width: 750px;
 
+$title_color: #f8fafc;
+
+$text_color: #cbd5e0;
+
+$since_text_color: #a6a9ac;
+
 @mixin mq($breakpoint: md) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
   }
+}
+
+@mixin panel_color_style() {
+  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+  --tw-bg-opacity: 1;
+  border-radius: 0.25rem;
 }
