@@ -31,7 +31,7 @@ export const ChannelPanel = ({ channels }: Props) => {
               </Link>
               <span className={styles.channel_since}>Since 2013/8/24</span>
             </div>
-            <div className={styles.channel_tag}>TAGTAGTAGTAGATGA</div>
+            <div className={styles.channel_tag}></div>
           </div>
         </li>
       ))}
