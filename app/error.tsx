@@ -1,6 +1,6 @@
 'use client';
 
-import { ErrorBoundaryFallBack } from '@/app/_components/ErrorBoundary';
+import { ErrorBoundaryFallBack } from '@/_components/ErrorBoundary';
 
 export default function Error({
   error,
