@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
 import { Icon } from '@/_components/Elements/Icon';
-import { HikasenVtuber } from '@/src/features/Channels/types';
+import { HikasenVtuber } from '@/(types)';
 
 type Props = {
   channels: HikasenVtuber[];
