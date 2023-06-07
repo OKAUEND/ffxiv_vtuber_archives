@@ -1,4 +1,4 @@
-import { HikasenVtuber } from '@/src/types';
+import { HikasenVtuber } from '@/(types)/';
 
 export const getChannel = async (offset: string): Promise<HikasenVtuber[]> => {
   const BASE_QUERY_COUNT = 20;
