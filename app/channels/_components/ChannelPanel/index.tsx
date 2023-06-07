@@ -26,12 +26,14 @@ export const ChannelPanel = ({ channels }: Props) => {
               <Link href={`/archives/${channel.channelID}`}>
                 <div className={styles.info_title}>
                   <span className={styles.info_text}>{channel.name}</span>
-                  <span className={styles.info_channelName}>Channel Name</span>
+                  <span className={styles.info_channelName}>
+                    {channel.channelName}
+                  </span>
                 </div>
               </Link>
               <span className={styles.channel_since}>Since 2013/8/24</span>
             </div>
-            <div className={styles.channel_tag}>TAGTAGTAGTAGATGA</div>
+            <div className={styles.channel_tag}></div>
           </div>
         </li>
       ))}
