@@ -10,4 +10,12 @@
   font-size: 25px;
   font-weight: 600;
   @include variables.panel_color_style();
+
+  &:focus {
+    border: 5px solid rgb(189, 104, 104);
+  }
+
+  &:hover {
+    border: 5px solid rgb(189, 104, 104);
+  }
 }
