@@ -1,0 +1,22 @@
+@use './variables/variables.scss';
+
+.rootLayout {
+  background-color: #4a5568;
+  width: 100%;
+  height: 100vh;
+
+  @include variables.mq(lg) {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+.container {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  @include variables.mq(lg) {
+    grid-area: 1 / 2 / 3 / 3;
+  }
+}

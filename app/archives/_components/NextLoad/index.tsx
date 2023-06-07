@@ -1,6 +1,6 @@
 'use client';
 
-import { usePage } from '@/app/archives/(hooks)/useArchives';
+import { usePage } from '@/archives/(hooks)/useArchives';
 
 interface IProps {
   channelID: string;

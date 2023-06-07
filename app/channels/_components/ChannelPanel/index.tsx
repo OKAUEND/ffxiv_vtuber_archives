@@ -1,8 +1,7 @@
-import React from 'react';
-
 import Link from 'next/link';
 
-import { Icon } from '@/app/_components/Elements/Icon';
+import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
+import { Icon } from '@/_components/Elements/Icon';
 import { HikasenVtuber } from '@/src/features/Channels/types';
 
 type Props = {
@@ -11,14 +10,11 @@ type Props = {
 
 export const ChannelPanel = ({ channels }: Props) => {
   return (
-    <ul className="flex justify-center flex-wrap ml-10 mr-10 col-start-2 col-end-3 after:w-96 after:p-4 after:m-2">
+    <ul className={styles.container}>
       {channels.map((channel) => (
-        <li
-          key={channel.channelID}
-          className="flex flex-col w-96 p-4 m-2 bg-gray-700 rounded-md"
-        >
-          <div className="grid grid-row-3 grid-flow-col gap-4">
-            <div className="row-span-3">
+        <li key={channel.channelID} className={styles.channel_list}>
+          <div className={styles.channel_content}>
+            <div className={styles.channel_icon}>
               <Link href={`/archives/${channel.channelID}`}>
                 <Icon
                   src={channel.channelIconID}
@@ -26,22 +22,16 @@ export const ChannelPanel = ({ channels }: Props) => {
                 />
               </Link>
             </div>
-            <div className="row-span-1 col-span-2 mt-4 flex flex-col inline-block justify-center items-center \">
+            <div className={styles.channel_info}>
               <Link href={`/archives/${channel.channelID}`}>
-                <div className="flex flex-col">
-                  <span className="text-gray-100 font-sans text-lg">
-                    {channel.name}
-                  </span>
-                  <span className="text-gray-400 font-sans text-sm">
-                    Channel Name
-                  </span>
+                <div className={styles.info_title}>
+                  <span className={styles.info_text}>{channel.name}</span>
+                  <span className={styles.info_channelName}>Channel Name</span>
                 </div>
               </Link>
-              <span className="text-gray-400 font-sans text-xs">
-                Since 2013/8/24
-              </span>
+              <span className={styles.channel_since}>Since 2013/8/24</span>
             </div>
-            <div className="row-span-2 col-span-2">TAGTAGTAGTAGATGA</div>
+            <div className={styles.channel_tag}>TAGTAGTAGTAGATGA</div>
           </div>
         </li>
       ))}

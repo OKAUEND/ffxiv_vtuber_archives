@@ -6,7 +6,7 @@ import {
   useRecoilCallback,
   useRecoilValue,
 } from 'recoil';
-import { fetchCacheExtend } from '@/app/_utile/fetch';
+import { fetchCacheExtend } from '@/_utile/fetch';
 
 //---------------------------------------------------------------------------
 
@@ -190,7 +190,7 @@ const archiveListRecursion = selectorFamily<ArchiveListState, Offset>({
               ...rest.contents.archives,
             ],
             mightHaveMore: rest.contents.mightHaveMore,
-            loading: true,
+            loading: false,
           };
         }
       }
