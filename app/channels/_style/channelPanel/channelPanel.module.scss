@@ -8,19 +8,28 @@
   flex-wrap: wrap;
 
   &::after {
-    width: 96px;
+    content: '';
+    width: 350px;
     padding: 4px;
     margin: 2px;
+
+    @include variables.mq(sm) {
+      width: 380px;
+    }
   }
 }
 
 .channel_list {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 350px;
   max-width: 24rem;
   padding: 4px;
   margin: 2px;
+
+  @include variables.mq(sm) {
+    width: 380px;
+  }
 
   @include variables.panel_color_style();
 
