@@ -2,6 +2,7 @@
 
 import { Suspense } from 'react';
 import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
+import { LoadingBasicAnimation } from '@/_components/Loading';
 import { Archives } from './router';
 
 interface IProps {
@@ -12,7 +13,7 @@ const ArchivesRoute = ({ channelID }: IProps) => {
   return (
     <>
       <ErrorBoundaryExtended>
-        <Suspense fallback={<div>Route Loading...</div>}>
+        <Suspense fallback={<LoadingBasicAnimation />}>
           <Archives channelID={channelID} />
         </Suspense>
       </ErrorBoundaryExtended>
