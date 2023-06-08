@@ -9,7 +9,7 @@
 
   &::after {
     content: '';
-    width: 96px;
+    width: 380px;
     padding: 4px;
     margin: 2px;
   }
@@ -18,7 +18,7 @@
 .channel_list {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 380px;
   max-width: 24rem;
   padding: 4px;
   margin: 2px;
