@@ -4,6 +4,8 @@ import 'sanitize.css';
 import styles from '@/_styles/rootLayout.module.scss';
 import RecoilProvider from '@/_utile/recoil';
 
+import { BasicHeader } from '@/_components/Header';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -19,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="jp">
       <body className={styles.rootLayout}>
-        <main className={styles.container}>
+        <header className={styles.header}>
+          <BasicHeader></BasicHeader>
+        </header>
+        <main className={styles.main_container}>
           <RecoilProvider>{children}</RecoilProvider>
         </main>
       </body>

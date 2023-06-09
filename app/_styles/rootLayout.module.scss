@@ -7,16 +7,22 @@
 
   @include variables.mq(lg) {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 0.5fr 3fr 0.5fr;
+    grid-template-rows: 50px 1fr;
   }
 }
 
-.container {
+.header {
+  @include variables.mq(lg) {
+    grid-area: 1 / 1 / 2 / 4;
+  }
+}
+
+.main_container {
   margin-left: 10px;
   margin-right: 10px;
 
   @include variables.mq(lg) {
-    grid-area: 1 / 2 / 3 / 3;
+    grid-area: 2 / 2 / 3 / 3;
   }
 }
