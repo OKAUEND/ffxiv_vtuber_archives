@@ -1,5 +1,15 @@
 import styles from './header.module.scss';
+import { useHeader } from './hook';
 
 export const BasicHeader = () => {
-  return <article className={styles.container}></article>;
+  const items = useHeader();
+  return (
+    <nav className={styles.container}>
+      <ul className={styles.header_list}>
+        {items.map((item) => (
+          <li className={styles.header_links}>{item}</li>
+        ))}
+      </ul>
+    </nav>
+  );
 };
