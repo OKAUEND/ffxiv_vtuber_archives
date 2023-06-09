@@ -5,14 +5,17 @@
   width: 100%;
   height: 100vh;
 
-  @include variables.mq(lg) {
+  @include variables.mq(md) {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 50px 1fr;
   }
 }
 
 .header {
+  @include variables.mq(lg) {
+    grid-area: 1 / 1 / 2 / 4;
+  }
 }
 
 .main_container {
@@ -20,6 +23,6 @@
   margin-right: 10px;
 
   @include variables.mq(lg) {
-    grid-area: 1 / 2 / 3 / 3;
+    grid-area: 2 / 2 / 3 / 3;
   }
 }
