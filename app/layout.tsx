@@ -21,10 +21,10 @@ export default function RootLayout({
   return (
     <html lang="jp">
       <body className={styles.rootLayout}>
-        <header className={}>
+        <header className={styles.header}>
           <BasicHeader></BasicHeader>
         </header>
-        <main className={styles.container}>
+        <main className={styles.main_container}>
           <RecoilProvider>{children}</RecoilProvider>
         </main>
       </body>
