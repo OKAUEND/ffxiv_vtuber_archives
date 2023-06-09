@@ -5,9 +5,9 @@
   width: 100%;
   height: 100vh;
 
-  @include variables.mq(md) {
+  @include variables.mq(lg) {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 0.5fr 3fr 0.5fr;
     grid-template-rows: 50px 1fr;
   }
 }
