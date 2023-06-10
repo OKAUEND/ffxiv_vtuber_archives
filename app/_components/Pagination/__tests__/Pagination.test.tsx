@@ -10,7 +10,7 @@ describe('Pagination Component TEST', () => {
   };
 
   test('現在ページが1だった場合', () => {
-    render(<Pagination totalCount={20} currentPageNumber={1} />);
+    render(<Pagination basePath="./" currentPageNumber={1} />);
 
     const paginationItems = screen.getAllByRole('listitem');
     expect(paginationItems).toHaveLength(5);
@@ -20,7 +20,7 @@ describe('Pagination Component TEST', () => {
     expect(pageNumbers).toEqual(['1', '2', '3', '4', '5']);
   });
   test('現在ページが4だった場合', () => {
-    render(<Pagination totalCount={20} currentPageNumber={4} />);
+    render(<Pagination basePath="./" currentPageNumber={4} />);
 
     const paginationItems = screen.getAllByRole('listitem');
     expect(paginationItems).toHaveLength(5);
@@ -33,7 +33,7 @@ describe('Pagination Component TEST', () => {
     });
   });
   test('現在ページが5だった場合', () => {
-    render(<Pagination totalCount={20} currentPageNumber={5} />);
+    render(<Pagination basePath="./" currentPageNumber={5} />);
 
     const paginationItems = screen.getAllByRole('listitem');
     expect(paginationItems).toHaveLength(5);
@@ -46,7 +46,7 @@ describe('Pagination Component TEST', () => {
     });
   });
   test('現在ページが10だった場合', () => {
-    render(<Pagination totalCount={20} currentPageNumber={10} />);
+    render(<Pagination basePath="./" currentPageNumber={10} />);
 
     const paginationItems = screen.getAllByRole('listitem');
     expect(paginationItems).toHaveLength(5);

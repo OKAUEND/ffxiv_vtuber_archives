@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ErrorBoundary, ErrorBoundaryExtended } from '../ErrorBoundary';
-import { CallBackProps } from '../type/ErrorMessage';
+import { FallBackProps } from '../type/ErrorMessage';
 
 describe('ErrorBoundary Component Unit TEST', () => {
   const ChildComponent = () => <div>ChildComponent</div>;
@@ -12,8 +12,8 @@ describe('ErrorBoundary Component Unit TEST', () => {
   };
 
   //エラー
-  const FallBackComponent = ({ status }: CallBackProps) => {
-    return <div>{status}</div>;
+  const FallBackComponent = ({ message }: FallBackProps) => {
+    return <div>{message}</div>;
   };
 
   //オリジナルを一旦退避させる

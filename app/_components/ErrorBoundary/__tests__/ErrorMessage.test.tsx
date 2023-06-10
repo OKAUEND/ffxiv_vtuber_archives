@@ -6,10 +6,10 @@ import { ErrorBoundaryFallBack } from '../ErrorMessage';
 
 describe('ErrorBoundaryFallBack', () => {
   test('画面にメッセージが表示できているか', () => {
-    const status = 400;
+    const status = '400';
     render(
       <RecoilRoot>
-        <ErrorBoundaryFallBack status={status} />
+        <ErrorBoundaryFallBack message={status} />
       </RecoilRoot>
     );
 
@@ -19,13 +19,13 @@ describe('ErrorBoundaryFallBack', () => {
   });
 
   test('画面にエラーステータスが表示できているか', () => {
-    const status = 403;
+    const status = '403 TEST Forbidden';
     render(
       <RecoilRoot>
-        <ErrorBoundaryFallBack status={status} />
+        <ErrorBoundaryFallBack message={status} />
       </RecoilRoot>
     );
 
-    expect(screen.getByText('403')).toBeInTheDocument();
+    expect(screen.getByText(status)).toBeInTheDocument();
   });
 });
