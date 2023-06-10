@@ -11,9 +11,5 @@ export default async function Article({
 }: {
   params: { channelID: string };
 }) {
-  return (
-    <>
-      <DynamicArchiveClientComponent channelID={params.channelID} />
-    </>
-  );
+  return <DynamicArchiveClientComponent channelID={params.channelID} />;
 }

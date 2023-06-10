@@ -10,11 +10,9 @@ export default async function Article({
   params: { pages: string };
 }) {
   return (
-    <div>
-      <Suspense fallback={<LoadingBasicAnimation />}>
-        {/* @ts-expect-error Async Server Component */}
-        <Channel />
-      </Suspense>
-    </div>
+    <Suspense fallback={<LoadingBasicAnimation />}>
+      {/* @ts-expect-error Async Server Component */}
+      <Channel />
+    </Suspense>
   );
 }

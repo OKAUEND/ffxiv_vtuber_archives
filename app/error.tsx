@@ -10,8 +10,6 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <>
-      <ErrorBoundaryFallBack message={error.message}></ErrorBoundaryFallBack>
-    </>
+    <ErrorBoundaryFallBack message={error.message}></ErrorBoundaryFallBack>
   );
 }
