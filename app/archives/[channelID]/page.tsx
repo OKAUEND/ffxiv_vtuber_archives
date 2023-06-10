@@ -1,9 +1,8 @@
 import dynamic from 'next/dynamic';
-import { LoadingBasicAnimation } from '@/_components/Loading';
 
 const DynamicArchiveClientComponent = dynamic(
   () => import('@/archives/_components'),
-  { ssr: false, loading: () => <LoadingBasicAnimation /> }
+  { ssr: false }
 );
 
 export default async function Article({
