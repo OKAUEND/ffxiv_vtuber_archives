@@ -232,13 +232,7 @@ export const useArchives = (channelId: string) => {
     set(totalItems(channelId), (count) => count + pageSize);
   });
 
-  const decrementPageSize = useRecoilCallback(
-    ({ set }) =>
-      (channelId: string) => {
-        set(totalItems(channelId), (count) => count - pageSize);
-      }
-  );
-  return { archives, loadNextList, decrementPageSize };
+  return { archives, loadNextList };
 };
 
 /**
