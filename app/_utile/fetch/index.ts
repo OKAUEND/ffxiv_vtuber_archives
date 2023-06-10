@@ -1,5 +1,3 @@
-import { cache } from 'react';
-
 export type FetchError = {
   hasError: boolean;
   status: number;
@@ -20,12 +18,6 @@ const defaultError = {
   status: 200,
   message: 'Not Message',
 };
-
-export const fetchCacheExtend = cache(
-  async <T>({ url }: IUseFetch): Promise<T> => {
-    return await fetchExtend({ url });
-  }
-);
 
 export const fetchExtend = async <T>({ url }: IUseFetch): Promise<T> => {
   const res = await fetch(url, {
