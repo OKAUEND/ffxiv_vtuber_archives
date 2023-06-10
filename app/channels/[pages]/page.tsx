@@ -1,18 +1,10 @@
-import { cookies, headers } from 'next/headers';
-
 import { Channel } from '@/channels/_components/route';
-import { LoadingBasicAnimation } from '@/_components/Loading';
-import { Suspense } from 'react';
-// import Error from './error';
-export default async function Article({
-  params,
-}: {
-  params: { pages: string };
-}) {
+
+export default async function Article() {
   return (
-    <Suspense fallback={<LoadingBasicAnimation />}>
+    <>
       {/* @ts-expect-error Async Server Component */}
       <Channel />
-    </Suspense>
+    </>
   );
 }
