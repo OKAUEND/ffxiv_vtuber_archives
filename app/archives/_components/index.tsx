@@ -11,13 +11,11 @@ interface IProps {
 
 const ArchivesRoute = ({ channelID }: IProps) => {
   return (
-    <>
-      <ErrorBoundaryExtended>
-        <Suspense fallback={<LoadingBasicAnimation />}>
-          <Archives channelID={channelID} />
-        </Suspense>
-      </ErrorBoundaryExtended>
-    </>
+    <ErrorBoundaryExtended>
+      <Suspense fallback={<LoadingBasicAnimation />}>
+        <Archives channelID={channelID} />
+      </Suspense>
+    </ErrorBoundaryExtended>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   useRecoilCallback,
   useRecoilValue,
 } from 'recoil';
-import { fetchCacheExtend } from '@/_utile/fetch';
+import { fetchExtend } from '@/_utile/fetch';
 
 //---------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
-      const archives = await fetchCacheExtend<YoutubeDate>({ url: query });
+      const archives = await fetchExtend<YoutubeDate>({ url: query });
 
       return archives;
     },
@@ -232,13 +232,7 @@ export const useArchives = (channelId: string) => {
     set(totalItems(channelId), (count) => count + pageSize);
   });
 
-  const decrementPageSize = useRecoilCallback(
-    ({ set }) =>
-      (channelId: string) => {
-        set(totalItems(channelId), (count) => count - pageSize);
-      }
-  );
-  return { archives, loadNextList, decrementPageSize };
+  return { archives, loadNextList };
 };
 
 /**
