@@ -10,7 +10,7 @@ describe('FetchをMockするテスト', () => {
     createFetchMock({ success: true, status: 200, data: mockData });
     const { result } = renderHook(() => useTESTHook());
     const data = await result.current;
-    console.log({ data });
+    expect(data).toEqual({ hoge: 'ほげ' });
   });
 
   test('失敗系のテスト', async () => {
