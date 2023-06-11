@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import {} from 'msw';
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
+import { RecoilRoot } from 'recoil';
 
 import { useArchives } from '@/archives/(hooks)/useArchives';
 import { createFetchMock, initMock } from '@/_mock/fetch';
