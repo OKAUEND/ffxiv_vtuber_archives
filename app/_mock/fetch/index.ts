@@ -18,7 +18,7 @@ export const createFetchMock = <T>({ success, status, data }: IResponse<T>) => {
       resolve({
         ok: success,
         status: status,
-        json: async () => ({ data: { data } }),
+        json: async () => ({ ...data }),
       });
     });
   global.fetch = vi.fn().mockImplementation(dataMock);
