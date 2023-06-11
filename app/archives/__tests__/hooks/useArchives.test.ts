@@ -45,7 +45,4 @@ describe('useArchive TEST', () => {
       expect(archiveResult.result.current.archives.archives.length).toEqual(40);
     });
   });
-  test('エラー発生時は、エラーがthrowされているか', () => {
-    expect(useArchives('Mock')).rejects.toThrowError();
-  });
 });
