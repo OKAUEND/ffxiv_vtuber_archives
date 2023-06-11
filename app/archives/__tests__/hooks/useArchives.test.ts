@@ -4,11 +4,11 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import { RecoilRoot, snapshot_UNSTABLE } from 'recoil';
 
 import { useArchives } from '@/archives/(hooks)/useArchives';
-import { createFetchMock } from '@/_mock/fetch';
-import { YoutubeResourceFactory } from '@/archives/__tests__/hooks/mock';
+import { createFetchMock, initMock } from '@/_mock/fetch';
+import { GoogleYoutubeFactory } from '@/archives/__tests__/hooks/mock';
 
 describe('useArchive TEST', () => {
-  const mockYoutubeData = YoutubeResourceFactory();
+  initMock();
   test('初期取得で値を取得できているか', async () => {
     const { result } = renderHook(() => useArchives('Mock'), {
       wrapper: RecoilRoot,
