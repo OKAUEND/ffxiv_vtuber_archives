@@ -1,4 +1,4 @@
-import { vi, beforeAll, afterAll } from 'vitest';
+import { vi, afterAll } from 'vitest';
 
 interface IResponse<T> {
   success: boolean;
