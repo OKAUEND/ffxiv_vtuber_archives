@@ -12,7 +12,7 @@ const ErrorMessage = ({ message }: FallBackProps) => {
   const show = useErrorState(message);
   return (
     <section>
-      <h1>{status}</h1>
+      <h1>{message}</h1>
       <span>{show.message}</span>
       <span>{show.subMessage}</span>
     </section>
@@ -27,7 +27,7 @@ const ErrorMessage = ({ message }: FallBackProps) => {
 export const ErrorBoundaryFallBack = ({ message }: FallBackProps) => {
   return (
     <>
-      <ErrorMessage message={status} />
+      <ErrorMessage message={message} />
     </>
   );
 };
