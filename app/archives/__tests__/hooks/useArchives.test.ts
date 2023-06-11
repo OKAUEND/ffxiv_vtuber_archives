@@ -20,6 +20,7 @@ describe('useArchive TEST', () => {
     });
   });
   test('放送タイトルがFF14に関係ないものだった場合、配列から除外できているか', async () => {
+    createFetchMock({ success: true, status: 200, data: mockYoutubeData });
     const { result } = renderHook(() => useArchives('Mock'), {
       wrapper: RecoilRoot,
     });
@@ -31,6 +32,7 @@ describe('useArchive TEST', () => {
     });
   });
   test('更新をした時件数が増えているか', async () => {
+    createFetchMock({ success: true, status: 200, data: mockYoutubeData });
     const archiveResult = renderHook(() => useArchives('Mock'), {
       wrapper: RecoilRoot,
     });
