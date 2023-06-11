@@ -9,8 +9,8 @@ import { GoogleYoutubeFactory } from '@/archives/__tests__/hooks/mock';
 
 describe('useArchive TEST', () => {
   initMock();
+  const mockYoutubeData = GoogleYoutubeFactory();
   test('初期取得で値を取得できているか', async () => {
-    const mockYoutubeData = GoogleYoutubeFactory();
     createFetchMock({ success: true, status: 200, data: mockYoutubeData });
     const { result } = renderHook(() => useArchives('Mock'), {
       wrapper: RecoilRoot,
