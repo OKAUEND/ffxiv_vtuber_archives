@@ -9,6 +9,6 @@ export interface HikasenVtuber {
 }
 
 interface FFXIV {
-  datacenter: string;
+  dataCenter: string;
   server: string;
 }
