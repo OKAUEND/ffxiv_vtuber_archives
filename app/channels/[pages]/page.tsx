@@ -1,4 +1,4 @@
-import { Channel } from '@/channels/_components/route';
+import { Channel } from '@/channels/_components/router';
 
 export default async function Article() {
   return (
