@@ -1,4 +1,4 @@
-import { LoadingBasicAnimation } from '@/src/component/Loading';
+import { LoadingBasicAnimation } from '@/_components/Loading';
 
 export default function Loading() {
   return <LoadingBasicAnimation />;
