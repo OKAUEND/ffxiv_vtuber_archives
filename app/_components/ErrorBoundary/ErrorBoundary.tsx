@@ -2,7 +2,7 @@
 
 import { Component, ReactNode } from 'react';
 
-import { CallBackProps, FallBackProps } from './type/ErrorMessage';
+import { FallBackProps } from './type/ErrorMessage';
 import { ErrorBoundaryFallBack } from './ErrorMessage';
 
 interface Props {

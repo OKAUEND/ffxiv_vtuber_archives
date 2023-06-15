@@ -1,3 +1,4 @@
+import { fetchExtend } from '@/_utile/fetch';
 import { HikasenVtuber } from '@/(types)/';
 
 export const getChannel = async (offset: string): Promise<HikasenVtuber[]> => {
@@ -7,11 +8,8 @@ export const getChannel = async (offset: string): Promise<HikasenVtuber[]> => {
       ? ''
       : `?offset=${BASE_QUERY_COUNT * (Number(offset) - 1)}&limit=20`;
 
-  const URL = process.env.NEXT_PUBLIC_CHANNELLIST_URL;
-  const res = await fetch(URL);
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
+  const URL = `${process.env.CHANNELLIST_URL}${query}`;
+  const data = await fetchExtend<HikasenVtuber[]>({ url: URL });
 
-  return res.json();
+  return data;
 };

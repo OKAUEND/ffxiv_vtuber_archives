@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server';
 import { fetchExtend } from '@/_utile/fetch';
 
+type Youtube = GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
+
 export async function GET(
   request: NextRequest,
   {
@@ -20,8 +22,6 @@ export async function GET(
       status: 400,
     });
   }
-  const res = await fetchExtend<
-    GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>
-  >({ url });
+  const res = await fetchExtend<Youtube>({ url });
   return new Response(JSON.stringify(res));
 }

@@ -5,7 +5,7 @@ import { useErrorState } from '../hook/useErrorState';
 
 describe('useErrorState', () => {
   test('エラーコード400', () => {
-    const { result } = renderHook(() => useErrorState(400), {
+    const { result } = renderHook(() => useErrorState('400'), {
       wrapper: RecoilRoot,
     });
 
@@ -16,7 +16,7 @@ describe('useErrorState', () => {
   });
 
   test('エラーコード403', () => {
-    const { result } = renderHook(() => useErrorState(403), {
+    const { result } = renderHook(() => useErrorState('403'), {
       wrapper: RecoilRoot,
     });
 
@@ -27,7 +27,7 @@ describe('useErrorState', () => {
   });
 
   test('エラーコード404', () => {
-    const { result } = renderHook(() => useErrorState(404), {
+    const { result } = renderHook(() => useErrorState('404'), {
       wrapper: RecoilRoot,
     });
 
@@ -38,7 +38,7 @@ describe('useErrorState', () => {
   });
 
   test('エラーコード429', () => {
-    const { result } = renderHook(() => useErrorState(429), {
+    const { result } = renderHook(() => useErrorState('429'), {
       wrapper: RecoilRoot,
     });
 
@@ -50,7 +50,7 @@ describe('useErrorState', () => {
   });
 
   test('エラーコード500', () => {
-    const { result } = renderHook(() => useErrorState(500), {
+    const { result } = renderHook(() => useErrorState('500'), {
       wrapper: RecoilRoot,
     });
 
@@ -61,7 +61,7 @@ describe('useErrorState', () => {
   });
 
   test('不明なエラー', () => {
-    const { result } = renderHook(() => useErrorState(999), {
+    const { result } = renderHook(() => useErrorState('999'), {
       wrapper: RecoilRoot,
     });
 
