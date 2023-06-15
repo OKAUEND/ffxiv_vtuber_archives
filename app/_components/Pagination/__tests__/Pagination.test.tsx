@@ -1,4 +1,4 @@
-import { vi, describe, test } from 'vitest';
+import { describe, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import { Pagination } from '..';

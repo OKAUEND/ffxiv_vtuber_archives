@@ -6,23 +6,18 @@ export type FetchError = {
 
 interface IUseFetch {
   url: string;
+  store?: boolean;
 }
 
-interface IResponse<T> {
-  data?: T;
-  error?: FetchError;
-}
+export const fetchExtend = async <T>({
+  url,
+  store = true,
+}: IUseFetch): Promise<T> => {
+  const storeFlag: RequestInit = store
+    ? { cache: 'force-cache', method: 'GET' }
+    : { cache: 'no-store', method: 'GET' };
 
-const defaultError = {
-  hasError: false,
-  status: 200,
-  message: 'Not Message',
-};
-
-export const fetchExtend = async <T>({ url }: IUseFetch): Promise<T> => {
-  const res = await fetch(url, {
-    method: 'GET',
-  });
+  const res = await fetch(url, storeFlag);
   if (!res.ok) {
     throw new Error(`${res.status}`);
   }

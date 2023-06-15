@@ -1,6 +1,7 @@
 {
   "env": {
     "browser": true,
+    "node": true,
     "es2020": true
   },
   "extends": [
@@ -8,8 +9,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "prettier",
-    "plugin:storybook/recommended"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,20 +19,16 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "react",
-    "react-refresh",
-    "import",
-    "unused-imports"
-  ],
+  "plugins": ["react", "react-refresh", "import", "unused-imports"],
   "settings": {
     "react": {
       "version": "detect"
     }
   },
-  "ignorePatterns": [
-    "coverage"
-  ],
+  "globals": {
+    "JSX": "readonly"
+  },
+  "ignorePatterns": ["coverage"],
   "rules": {
     "react-refresh/only-export-components": "warn",
     "no-console": "error",
