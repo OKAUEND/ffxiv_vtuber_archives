@@ -1,12 +1,16 @@
 import Link from 'next/link';
 
+import styles from '@/about/about.module.scss';
 export const About = () => {
   return (
-    <section>
-      <h1>当サイトについて</h1>
+    <section className={styles.container}>
+      <h1 className={styles.title_text}>当サイトについて</h1>
       <p>
         当サイトは、
-        <Link href={'https://jp.finalfantasyxiv.com/'}>
+        <Link
+          className={styles.about_link}
+          href={'https://jp.finalfantasyxiv.com/'}
+        >
           ファイナルファンタジーXIV
         </Link>
         (以下、FFXIV)で配信されているVtuberの方を応援するファンサイトです。
@@ -14,8 +18,8 @@ export const About = () => {
       <p>
         FFXIV運営会社のスクエア・エニックス様及びその関係者、Vtuberが所属している会社及びグループと関係者、その他関係者とは一切関係がございません。
       </p>
-      <section>
-        <h2>免責事項</h2>
+      <section className={styles.content}>
+        <h2 className={styles.subtitle}>免責事項</h2>
         <p>
           当サイトで掲載されている画像及び動画、また肖像権については各権利者に帰属します。
         </p>
@@ -25,7 +29,7 @@ export const About = () => {
         <p>
           また、Vtuberの一覧への登録については、以下の条件を見て登録させていただいております事をご了承ください。
         </p>
-        <ul>
+        <ul className={styles.warning}>
           <li>FFXIVのパッケージを購入されている方</li>
           <li>蒼天のイシュガルドのメインストーリーに入られている方</li>
         </ul>
