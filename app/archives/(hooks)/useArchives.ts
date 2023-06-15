@@ -14,11 +14,6 @@ type Archive = GoogleApiYouTubeSearchResource;
 type YoutubeDate =
   GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource>;
 
-type ApiResult = {
-  item: YoutubeDate;
-  status: number;
-};
-
 type ArchiveListState = {
   archives: readonly Archive[];
   mightHaveMore: boolean;
