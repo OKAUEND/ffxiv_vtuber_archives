@@ -1,12 +1,9 @@
-import { Inter } from 'next/font/google';
+import React from 'react';
 import 'sanitize.css';
 
 import styles from '@/_styles/rootLayout.module.scss';
 import RecoilProvider from '@/_utile/recoil';
-
 import { BasicHeader } from '@/_components/Header';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'FFXIV HIKASEN Vtuber Archives',

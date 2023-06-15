@@ -1,4 +1,4 @@
-import { describe, test, vi } from 'vitest';
+import { describe, test } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useTESTHook } from './mockHook';
 import { createFetchMock, initMock } from '@/_mock/fetch';

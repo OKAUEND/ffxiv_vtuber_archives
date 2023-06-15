@@ -1,7 +1,7 @@
 'use client';
 
 import { useErrorState } from './hook/useErrorState';
-import { FallBackProps, CallBackProps } from './type/ErrorMessage';
+import { FallBackProps } from './type/ErrorMessage';
 
 /**
  * エラーコードによってメッセージを表示させる
