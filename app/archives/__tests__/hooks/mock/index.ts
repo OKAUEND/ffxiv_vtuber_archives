@@ -1,6 +1,6 @@
 export const GoogleYoutubeFactory = (
-  name: string = 'Mock',
-  token: string = 'FirstToken'
+  name = 'Mock',
+  token = 'FirstToken'
 ): GoogleApiYouTubePaginationInfo<GoogleApiYouTubeSearchResource> => {
   return {
     kind: name,
@@ -16,10 +16,7 @@ export const GoogleYoutubeFactory = (
   };
 };
 
-const generateDate = (
-  name: string = 'Mock',
-  livetitle: string = 'React Coding Live'
-) => {
+const generateDate = (name = 'Mock', livetitle = 'React Coding Live') => {
   return {
     kind: name,
     etag: name,
@@ -57,7 +54,7 @@ const generateDate = (
 };
 
 export const YoutubeResourceFactory = (
-  name: string = 'Mock'
+  name = 'Mock'
 ): GoogleApiYouTubeSearchResource[] => {
   const reacts = Array.from({ length: 5 }, () => generateDate(name));
   const ff14 = Array.from({ length: 10 }, (_, index) =>
