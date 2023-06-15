@@ -6,8 +6,10 @@ export const BasicHeader = () => {
   return (
     <nav className={styles.container}>
       <ul className={styles.header_list}>
-        {items.map((item) => (
-          <li className={styles.header_links}>{item}</li>
+        {items.map((item, index) => (
+          <li className={styles.header_links} key={index}>
+            {item}
+          </li>
         ))}
       </ul>
     </nav>
