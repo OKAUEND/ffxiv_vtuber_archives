@@ -13,28 +13,27 @@ export const ChannelPanel = ({ channels }: Props) => {
     <ul className={styles.container}>
       {channels.map((channel) => (
         <li key={channel.channelID} className={styles.channel_list}>
-          <div className={styles.channel_content}>
-            <div className={styles.channel_icon}>
-              <Link href={`/archives/${channel.channelID}`}>
+          <Link href={`/archives/${channel.channelID}`}>
+            <div className={styles.channel_content}>
+              <div className={styles.channel_icon}>
                 <Icon
                   src={channel.channelIconID}
                   alt={`${channel.name}のチャンネルアイコン`}
                 />
-              </Link>
-            </div>
-            <div className={styles.channel_info}>
-              <Link href={`/archives/${channel.channelID}`}>
+              </div>
+              <div className={styles.channel_info}>
                 <div className={styles.info_title}>
                   <span className={styles.info_text}>{channel.name}</span>
                   <span className={styles.info_channelName}>
                     {channel.channelName}
                   </span>
                 </div>
-              </Link>
-              <span className={styles.channel_since}>Since 2013/8/24</span>
+
+                <span className={styles.channel_since}>Since 2013/8/24</span>
+              </div>
+              <div className={styles.channel_tag}></div>
             </div>
-            <div className={styles.channel_tag}></div>
-          </div>
+          </Link>
         </li>
       ))}
     </ul>
