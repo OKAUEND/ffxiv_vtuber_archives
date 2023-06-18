@@ -1,3 +1,5 @@
+import { ChannelList } from '@/control/_components/channelList';
+
 export default async function Article() {
-  return <div>Main</div>;
+  return <ChannelList />;
 }
