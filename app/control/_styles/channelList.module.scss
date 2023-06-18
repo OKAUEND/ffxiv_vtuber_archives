@@ -21,6 +21,8 @@
 
 .channel_info {
   grid-area: 1 / 3 / 2 / 5;
+  display: flex;
+  flex-direction: column;
 }
 
 .channel_tag {
