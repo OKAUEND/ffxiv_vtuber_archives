@@ -12,7 +12,7 @@ export const ChannelList = () => {
             <Icon src="" alt="仮実装" />
           </div>
           <div className={styles.channel_info}>
-            <span>配信者名</span>
+            <h3 className={styles.title}>配信者名</h3>
             <span>チャンネル名</span>
             <span>配信開始日</span>
           </div>
