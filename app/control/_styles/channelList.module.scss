@@ -1,3 +1,5 @@
+@use '@/_styles/variables/variables.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,10 +7,20 @@
 
 .channels {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 50px 100px 2fr 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+
+  border-top: 1px variables.$title_color solid;
+  margin-top: 1em;
+  padding-top: 1em;
+
+  &:first-child {
+    border-top: 0px;
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 .channel_sever {
