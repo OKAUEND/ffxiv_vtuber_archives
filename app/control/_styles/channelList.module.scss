@@ -12,6 +12,7 @@
   grid-template-rows: 1fr 0.5fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  gap: 0 15px;
 
   border-top: 1px variables.$title_color solid;
   margin-top: 1em;
@@ -28,6 +29,15 @@
   grid-area: 1 / 1 / 3 / 2;
   display: grid;
   place-items: center;
+
+  font-size: 45px;
+
+  color: variables.$title_color;
+
+  &.channel_hasServer {
+    color: rgb(224, 0, 0);
+    font-weight: 1000;
+  }
 }
 
 .channel_icon {
@@ -37,7 +47,7 @@
 }
 
 .channel_info {
-  grid-area: 1 / 3 / 2 / 5;
+  grid-area: 1 / 3 / 2 / 4;
   display: flex;
   flex-direction: column;
   color: variables.$text_color;
@@ -50,4 +60,8 @@
 
 .channel_tag {
   grid-area: 2 / 3 / 3 / 5;
+}
+
+.channel_action {
+  grid-area: 1 / 4 / 3 / 5;
 }
