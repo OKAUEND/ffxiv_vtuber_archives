@@ -10,7 +10,11 @@ export const ChannelList = () => {
     <ul>
       {channels.map((channel, index) => (
         <li className={styles.channels} key={index}>
-          <div className={styles.channel_sever}>◯</div>
+          <div
+            className={`${styles.channel_sever} ${styles.channel_hasServer}`}
+          >
+            ◯
+          </div>
           <div className={styles.channel_icon}>
             <Icon src={channel.channelIconID} alt="仮実装" />
           </div>
