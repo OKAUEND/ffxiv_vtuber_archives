@@ -9,6 +9,7 @@ type Props = {
 };
 
 export const ChannelPanel = ({ channels }: Props) => {
+  const youtubeIconURL = process.env.YOUTUBE_CHANNEL_ICON_URL;
   return (
     <ul className={styles.container}>
       {channels.map((channel) => (
@@ -17,7 +18,7 @@ export const ChannelPanel = ({ channels }: Props) => {
             <div className={styles.channel_content}>
               <div className={styles.channel_icon}>
                 <Icon
-                  src={channel.channelIconID}
+                  src={`${youtubeIconURL}${channel.channelIconID}`}
                   alt={`${channel.name}のチャンネルアイコン`}
                 />
               </div>

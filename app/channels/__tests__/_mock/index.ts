@@ -3,7 +3,7 @@ import { HikasenVtuber } from '@/(types)';
 const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
   return {
     channelID: name,
-    channelIconID: '/mock/image/icon.png',
+    channelIconID: '/public/mock/image/icon.png',
     channelName: `${name} Channel`,
     name: name,
     twitter: '',
