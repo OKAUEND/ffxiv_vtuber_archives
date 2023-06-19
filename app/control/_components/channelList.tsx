@@ -23,6 +23,7 @@ export const ChannelList = () => {
             <span>{channel.channelName}</span>
             <span>2013/8.13</span>
           </div>
+          <div className={styles.channel_action}></div>
         </li>
       ))}
     </ul>
