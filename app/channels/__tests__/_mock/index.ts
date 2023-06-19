@@ -4,7 +4,7 @@ const HikasenVtuberResourceFactory = (name: string): HikasenVtuber => {
   return {
     channelID: name,
     channelIconID: '/mock/image/icon.png',
-    channelName: '',
+    channelName: `${name} Channel`,
     name: name,
     twitter: '',
     twitch: '',
