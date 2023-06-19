@@ -1,7 +1,7 @@
 import { Icon } from '@/_components/Elements/Icon';
 import styles from '@/control/_styles/channelList.module.scss';
 
-export const ChannelList = () => {
+export const ChannelControl = () => {
   return (
     <section className={styles.container}>
       <h2>配信者一覧</h2>
