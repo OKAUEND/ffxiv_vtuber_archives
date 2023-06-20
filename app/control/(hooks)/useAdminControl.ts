@@ -1,8 +1,20 @@
-import { createHikasenVtuberData } from '@/channels/__tests__/_mock';
+import { selector, useRecoilValue } from 'recoil';
+
+import { fetchExtend } from '@/_utile/fetch';
+import { HikasenVtuber } from '@/(types)';
+
+const channelList = selector({
+  key: 'data-flow/channels',
+  get: async () => {
+    const data = await fetchExtend<HikasenVtuber[]>({
+      url: '/api/control/',
+      store: false,
+    });
+    return data;
+  },
+});
 
 export const useAdminControl = () => {
-  //現在のタスクでは仮置きでMockデータを使う
-  const data = createHikasenVtuberData('Mock');
-
-  return data;
+  const channels = useRecoilValue(channelList);
+  return channels;
 };

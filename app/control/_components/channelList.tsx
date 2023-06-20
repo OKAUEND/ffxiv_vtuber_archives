@@ -6,6 +6,9 @@ import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 
 export const ChannelList = () => {
   const channels = useAdminControl();
+  const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
+    ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
+    : '';
   return (
     <ul>
       {channels.map((channel, index) => (
@@ -16,7 +19,10 @@ export const ChannelList = () => {
             ◯
           </div>
           <div className={styles.channel_icon}>
-            <Icon src={channel.channelIconID} alt="仮実装" />
+            <Icon
+              src={`${youtubeIconURL}${channel.channelIconID}`}
+              alt={`${channel.name}のチャンネルアイコン`}
+            />
           </div>
           <div className={styles.channel_info}>
             <h3 className={styles.title}>{channel.name}</h3>
