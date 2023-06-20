@@ -6,7 +6,9 @@ import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 
 export const ChannelList = () => {
   const channels = useAdminControl();
-  const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL;
+  const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
+    ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
+    : '';
   return (
     <ul>
       {channels.map((channel, index) => (
