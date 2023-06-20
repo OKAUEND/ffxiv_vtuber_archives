@@ -1,5 +1,10 @@
-import { ChannelControl } from '@/control/_components/channelControl';
+import dynamic from 'next/dynamic';
+
+const DynamicControlClientComponent = dynamic(
+  () => import('@/control/_components/channelControl'),
+  { ssr: false }
+);
 
 export default async function Article() {
-  return <ChannelControl />;
+  return <DynamicControlClientComponent />;
 }
