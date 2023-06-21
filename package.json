@@ -47,6 +47,7 @@
     "node-mocks-http": "^1.12.1",
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
+    "prisma": "^4.15.0",
     "sass": "^1.62.1",
     "vite": "^4.2.1",
     "vitest": "^0.24.5",
