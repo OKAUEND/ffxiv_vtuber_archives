@@ -41,12 +41,13 @@ export async function DELETE(request: Request) {
 export async function PUT(request: Request) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get('name');
+  const time = new Date('2013-08-13T12:00:00Z').toISOString();
   const test = await prisma.user.update({
     where: {
       email: `Hiroshi@HQ`,
     },
     data: {
-      name: 'HiroshiSuperHQ',
+      create_at: time,
     },
   });
 }
