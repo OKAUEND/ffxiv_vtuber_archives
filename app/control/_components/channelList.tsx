@@ -9,14 +9,18 @@ export const ChannelList = () => {
   const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     : '';
+
+  const changeStyles = (isAllMatched: boolean): string => {
+    if (isAllMatched)
+      return `${styles.channel_sever} ${styles.channel_hasServer}`;
+    return `${styles.channel_sever}`;
+  };
   return (
     <ul>
       {channels.map((channel, index) => (
         <li className={styles.channels} key={index}>
-          <div
-            className={`${styles.channel_sever} ${styles.channel_hasServer}`}
-          >
-            ◯
+          <div className={changeStyles(channel.isAllMatched)}>
+            {channel.isAllMatched ? <>◯</> : <>✕</>}
           </div>
           <div className={styles.channel_icon}>
             <Icon
