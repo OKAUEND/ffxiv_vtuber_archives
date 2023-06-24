@@ -28,11 +28,12 @@ model User {
 }
 
 model Channel {
-  id             Int    @id @default(autoincrement())
-  channelID      String @unique
+  id             Int     @id @default(autoincrement())
+  channelID      String  @unique
   name           String
   channelName    String
   channelIconURL String
+  isOfficial     Boolean @default(false)
   dataCenter     String
   server         String
   Twitter        String
