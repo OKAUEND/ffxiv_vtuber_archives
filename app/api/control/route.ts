@@ -10,9 +10,10 @@ const prisma = new PrismaClient({
 export async function GET() {
   const url = `${process.env.CHANNELLIST_URL}`;
 
-  const channels = await fetchExtend<HikasenVtuber[]>({ url });
-  const test = await prisma.user.findMany();
-  return new Response(JSON.stringify(channels));
+  const gas = await fetchExtend<HikasenVtuber[]>({ url });
+  const db = await prisma.channel.findMany();
+  const response = { gas: gas, db: db };
+  return new Response(JSON.stringify(response));
 }
 
 export async function POST(request: Request) {
