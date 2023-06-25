@@ -7,9 +7,9 @@ import { channel } from 'diagnostics_channel';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
 
-const selectedChannel = atom<HikasenVtuber[]>({
+const selectedChannel = atom<Map<string, HikasenVtuber>>({
   key: 'store/selected-channel',
-  default: [],
+  default: new Map([]),
 });
 
 const channelQuery = selector({
@@ -20,6 +20,15 @@ const channelQuery = selector({
       store: false,
     });
     return data;
+  },
+});
+
+export const channelMapToArray = selector<HikasenVtuber[]>({
+  key: 'convert/selected-channel',
+  get: ({ get }) => {
+    const mapChannels = get(selectedChannel);
+    console.log(mapChannels);
+    return [...mapChannels.values()];
   },
 });
 
@@ -50,6 +59,7 @@ const channelList = selector<ControlChannel[]>({
 
 export const useAdminControl = () => {
   const channels = useRecoilValue(channelList);
+  const selectedChannels = useRecoilValue(channelMapToArray);
 
   const cacheChannel = useRecoilCallback(
     ({ set }) =>
@@ -63,8 +73,16 @@ export const useAdminControl = () => {
           twitch: channel.twitch,
           ffxiv: channel.ffxiv,
         };
-        set(selectedChannel, (prev) => [...prev, tmpChannel]);
+        set(selectedChannel, (prev) => {
+          //元のに変更を加えたくないので、クローンを作る
+          const clone = new Map(prev);
+          //お試しなので、キーと内容を同じにする
+          clone.set(channel.channelID, channel);
+          //setter関数へ返す
+          return clone;
+        });
       }
   );
-  return [channels, cacheChannel] as const;
+
+  return [channels, selectedChannels, cacheChannel] as const;
 };
