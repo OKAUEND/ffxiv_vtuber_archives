@@ -1,10 +1,16 @@
-import { selector, useRecoilValue } from 'recoil';
+import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 
 import { fetchExtend } from '@/_utile/fetch';
 import { Channels } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
+import { channel } from 'diagnostics_channel';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
+
+const selectedChannel = atom<HikasenVtuber[]>({
+  key: 'store/selected-channel',
+  default: [],
+});
 
 const channelQuery = selector({
   key: 'data-flow/channels-query',
@@ -17,7 +23,7 @@ const channelQuery = selector({
   },
 });
 
-const channelList = selector({
+const channelList = selector<ControlChannel[]>({
   key: 'data-flow/channels-list',
   get: async ({ get }) => {
     const data = get(channelQuery);
@@ -44,5 +50,21 @@ const channelList = selector({
 
 export const useAdminControl = () => {
   const channels = useRecoilValue(channelList);
-  return channels;
+
+  const cacheChannel = useRecoilCallback(
+    ({ set }) =>
+      (channel: ControlChannel) => {
+        const tmpChannel: HikasenVtuber = {
+          channelID: channel.channelID,
+          channelIconID: channel.channelIconID,
+          channelName: channel.channelName,
+          name: channel.name,
+          twitter: channel.twitter,
+          twitch: channel.twitch,
+          ffxiv: channel.ffxiv,
+        };
+        set(selectedChannel, (prev) => [...prev, tmpChannel]);
+      }
+  );
+  return [channels, cacheChannel] as const;
 };

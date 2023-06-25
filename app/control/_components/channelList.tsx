@@ -5,7 +5,7 @@ import styles from '@/control/_styles/channelList.module.scss';
 import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 
 export const ChannelList = () => {
-  const channels = useAdminControl();
+  const [channels, selectedChannel] = useAdminControl();
   const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     : '';
