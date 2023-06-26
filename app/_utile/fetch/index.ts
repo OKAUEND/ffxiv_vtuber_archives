@@ -4,20 +4,31 @@ export type FetchError = {
   message: string;
 };
 
-interface IUseFetch {
+interface IUseFetch<> {
+  method?: string;
   url: string;
   store?: boolean;
+  body?: object | [];
 }
 
 export const fetchExtend = async <T>({
+  method = 'GET',
   url,
   store = true,
+  body,
 }: IUseFetch): Promise<T> => {
-  const storeFlag: RequestInit = store
-    ? { cache: 'force-cache', method: 'GET' }
-    : { cache: 'no-store', method: 'GET' };
+  const optionInit = (store: boolean, body: object) => {
+    const storeMode: RequestInit = store
+      ? { cache: 'force-cache' }
+      : { cache: 'no-store' };
+    const bodyData: RequestInit =
+      method === 'POST' ? { body: JSON.stringify(body) } : {};
 
-  const res = await fetch(url, storeFlag);
+    return { ...storeMode, ...bodyData };
+  };
+
+  const res = await fetch(url, { method: method, ...optionInit(store, body) });
+
   if (!res.ok) {
     throw new Error(`${res.status}`);
   }
