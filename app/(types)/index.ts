@@ -2,14 +2,11 @@ export interface HikasenVtuber {
   channelID: string;
   name: string;
   channelName: string;
-  channelIconID: string;
+  channelIconURL: string;
   isOfficial: boolean;
-  twitter: string;
-  twitch: string;
-  ffxiv: FFXIV;
-}
-
-interface FFXIV {
+  Twitter: string;
+  Twitch: string;
   dataCenter: string;
   server: string;
+  beginTime: string;
 }
