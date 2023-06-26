@@ -5,7 +5,8 @@ import styles from '@/control/_styles/channelList.module.scss';
 import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 
 export const ChannelList = () => {
-  const [channels, selectedChannels, selectedChannel] = useAdminControl();
+  const [channels, selectedChannels, selectedChannel, updateDataBase] =
+    useAdminControl();
   const youtubeIconURL = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     : '';
@@ -18,6 +19,7 @@ export const ChannelList = () => {
   return (
     <>
       {selectedChannels.length}件のチャンネルを更新予定
+      <button onClick={() => updateDataBase()}>DBを更新する</button>
       <ul>
         {channels.map((channel, index) => (
           <li className={styles.channels} key={index}>

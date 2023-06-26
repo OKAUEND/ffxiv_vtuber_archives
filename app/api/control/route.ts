@@ -17,14 +17,14 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const name = searchParams.get('name');
-  const test = await prisma.user.create({
-    data: {
-      email: `Hiroshi@${name}`,
-      name: `Hiroshi${name}`,
-    },
-  });
+  const data = await request.json();
+  // const test = await prisma.user.create({
+  //   data: {
+  //     email: `Hiroshi@${name}`,
+  //     name: `Hiroshi${name}`,
+  //   },
+  // });
+  return new Response(JSON.stringify('Success'));
 }
 
 export async function DELETE(request: Request) {

@@ -3,8 +3,18 @@ import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 import { fetchExtend } from '@/_utile/fetch';
 import { Channels } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
+import { useCallback } from 'react';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
+
+const updateChannel = async (channels: HikasenVtuber[]) => {
+  const res = await fetchExtend({
+    method: 'POST',
+    url: '/api/control/',
+    store: false,
+    body: channels,
+  });
+};
 
 const selectedChannel = atom<Map<string, HikasenVtuber>>({
   key: 'store/selected-channel',
@@ -83,5 +93,9 @@ export const useAdminControl = () => {
       }
   );
 
-  return [channels, selectedChannels, cacheChannel] as const;
+  const updateDataBase = useCallback(() => {
+    updateChannel(selectedChannels);
+  }, [selectedChannels]);
+
+  return [channels, selectedChannels, cacheChannel, updateDataBase] as const;
 };
