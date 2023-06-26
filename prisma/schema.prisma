@@ -28,14 +28,15 @@ model User {
 }
 
 model Channel {
-  id             Int     @id @default(autoincrement())
-  channelID      String  @unique
+  id             Int      @id @default(autoincrement())
+  channelID      String   @unique
   name           String
   channelName    String
   channelIconURL String
-  isOfficial     Boolean @default(false)
+  isOfficial     Boolean  @default(false)
   dataCenter     String
   server         String
   Twitter        String
   Twitch         String
+  beginTime      DateTime @default(now()) @db.Timestamptz(3)
 }
