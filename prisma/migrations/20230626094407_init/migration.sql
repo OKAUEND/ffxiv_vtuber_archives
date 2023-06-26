@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Channel" ALTER COLUMN "beginTime" SET DATA TYPE TIMESTAMPTZ(3);
