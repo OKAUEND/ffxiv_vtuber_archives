@@ -28,7 +28,7 @@ export const ChannelList = () => {
             </div>
             <div className={styles.channel_icon}>
               <Icon
-                src={`${youtubeIconURL}${channel.channelIconID}`}
+                src={`${youtubeIconURL}${channel.channelIconURL}`}
                 alt={`${channel.name}のチャンネルアイコン`}
               />
             </div>

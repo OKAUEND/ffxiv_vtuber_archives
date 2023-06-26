@@ -18,7 +18,7 @@ export const ChannelPanel = ({ channels }: Props) => {
             <div className={styles.channel_content}>
               <div className={styles.channel_icon}>
                 <Icon
-                  src={`${youtubeIconURL}${channel.channelIconID}`}
+                  src={`${youtubeIconURL}${channel.channelIconURL}`}
                   alt={`${channel.name}のチャンネルアイコン`}
                 />
               </div>
