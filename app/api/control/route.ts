@@ -36,13 +36,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const data = await request.json();
-  // const test = await prisma.user.create({
-  //   data: {
-  //     email: `Hiroshi@${name}`,
-  //     name: `Hiroshi${name}`,
-  //   },
-  // });
+  const channel: HikasenVtuber[] = await request.json();
+  await prisma.channel.createMany({
+    data: channel,
+    skipDuplicates: true,
+  });
   return new Response(JSON.stringify('Success'));
 }
 

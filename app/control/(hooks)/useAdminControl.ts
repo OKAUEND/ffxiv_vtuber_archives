@@ -83,13 +83,15 @@ export const useAdminControl = () => {
       (channel: ControlChannel) => {
         const tmpChannel: HikasenVtuber = {
           channelID: channel.channelID,
-          channelIconID: channel.channelIconID,
+          channelIconURL: channel.channelIconURL,
           channelName: channel.channelName,
           isOfficial: channel.isOfficial,
           name: channel.name,
-          twitter: channel.twitter,
-          twitch: channel.twitch,
-          ffxiv: channel.ffxiv,
+          Twitter: channel.Twitter,
+          Twitch: channel.Twitch,
+          dataCenter: channel.dataCenter,
+          server: channel.server,
+          beginTime: channel.beginTime,
         };
         set(selectedChannel, (prev) => {
           //元のに変更を加えたくないので、クローンを作る
