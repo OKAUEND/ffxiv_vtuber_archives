@@ -1,11 +1,7 @@
 import { fetchExtend } from '@/_utile/fetch';
 import { HikasenVtuber } from '@/(types)/';
 
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient({
-  log: ['query', 'error', 'info', 'warn'],
-});
+import prisma from '@/_utile/prisma';
 
 export async function GET() {
   const url = `${process.env.CHANNELLIST_URL}`;
