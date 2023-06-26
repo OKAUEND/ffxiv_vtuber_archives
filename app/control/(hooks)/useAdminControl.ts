@@ -1,10 +1,15 @@
-import { selector, useRecoilValue } from 'recoil';
+import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 
 import { fetchExtend } from '@/_utile/fetch';
 import { Channels } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
+
+const selectedChannel = atom<Map<string, HikasenVtuber>>({
+  key: 'store/selected-channel',
+  default: new Map([]),
+});
 
 const channelQuery = selector({
   key: 'data-flow/channels-query',
@@ -17,7 +22,16 @@ const channelQuery = selector({
   },
 });
 
-const channelList = selector({
+export const channelMapToArray = selector<HikasenVtuber[]>({
+  key: 'convert/selected-channel',
+  get: ({ get }) => {
+    const mapChannels = get(selectedChannel);
+    console.log(mapChannels);
+    return [...mapChannels.values()];
+  },
+});
+
+const channelList = selector<ControlChannel[]>({
   key: 'data-flow/channels-list',
   get: async ({ get }) => {
     const data = get(channelQuery);
@@ -44,5 +58,30 @@ const channelList = selector({
 
 export const useAdminControl = () => {
   const channels = useRecoilValue(channelList);
-  return channels;
+  const selectedChannels = useRecoilValue(channelMapToArray);
+
+  const cacheChannel = useRecoilCallback(
+    ({ set }) =>
+      (channel: ControlChannel) => {
+        const tmpChannel: HikasenVtuber = {
+          channelID: channel.channelID,
+          channelIconID: channel.channelIconID,
+          channelName: channel.channelName,
+          name: channel.name,
+          twitter: channel.twitter,
+          twitch: channel.twitch,
+          ffxiv: channel.ffxiv,
+        };
+        set(selectedChannel, (prev) => {
+          //元のに変更を加えたくないので、クローンを作る
+          const clone = new Map(prev);
+          //新しいMapをセットし、値を更新する
+          clone.set(channel.channelID, tmpChannel);
+          //setter関数へ返す
+          return clone;
+        });
+      }
+  );
+
+  return [channels, selectedChannels, cacheChannel] as const;
 };
