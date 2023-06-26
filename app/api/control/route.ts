@@ -11,20 +11,37 @@ export async function GET() {
   const url = `${process.env.CHANNELLIST_URL}`;
 
   const gas = await fetchExtend<HikasenVtuber[]>({ url });
+  const convertChannels: HikasenVtuber[] = gas.map((channel) => {
+    //スプレッドシートからの取得ではJTCではなくUTCになっているため、9時間をたしてJTCにする
+    const time = new Date(channel.beginTime);
+    time.setHours(time.getHours() + 9);
+    const convertTime = time.toISOString();
+
+    return {
+      channelID: channel.channelID,
+      channelIconURL: channel.channelIconURL,
+      channelName: channel.channelName,
+      isOfficial: channel.isOfficial,
+      name: channel.name,
+      Twitter: channel.Twitter,
+      Twitch: channel.Twitch,
+      dataCenter: channel.dataCenter,
+      server: channel.server,
+      beginTime: convertTime,
+    };
+  });
   const db = await prisma.channel.findMany();
-  const response = { gas: gas, db: db };
+  const response = { gas: convertChannels, db: db };
   return new Response(JSON.stringify(response));
 }
 
 export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const name = searchParams.get('name');
-  const test = await prisma.user.create({
-    data: {
-      email: `Hiroshi@${name}`,
-      name: `Hiroshi${name}`,
-    },
+  const channel: HikasenVtuber[] = await request.json();
+  await prisma.channel.createMany({
+    data: channel,
+    skipDuplicates: true,
   });
+  return new Response(JSON.stringify('Success'));
 }
 
 export async function DELETE(request: Request) {
