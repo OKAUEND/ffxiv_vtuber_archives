@@ -75,8 +75,8 @@ export const useAdminControl = () => {
         set(selectedChannel, (prev) => {
           //元のに変更を加えたくないので、クローンを作る
           const clone = new Map(prev);
-          //お試しなので、キーと内容を同じにする
-          clone.set(channel.channelID, channel);
+          //新しいMapをセットし、値を更新する
+          clone.set(channel.channelID, tmpChannel);
           //setter関数へ返す
           return clone;
         });
