@@ -36,7 +36,6 @@ export const channelMapToArray = selector<HikasenVtuber[]>({
   key: 'convert/selected-channel',
   get: ({ get }) => {
     const mapChannels = get(selectedChannel);
-    console.log(mapChannels);
     return [...mapChannels.values()];
   },
 });
