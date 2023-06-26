@@ -77,6 +77,7 @@ export const useAdminControl = () => {
           channelID: channel.channelID,
           channelIconID: channel.channelIconID,
           channelName: channel.channelName,
+          isOfficial: channel.isOfficial,
           name: channel.name,
           twitter: channel.twitter,
           twitch: channel.twitch,
