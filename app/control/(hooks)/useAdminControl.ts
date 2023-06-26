@@ -3,7 +3,6 @@ import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 import { fetchExtend } from '@/_utile/fetch';
 import { Channels } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
-import { channel } from 'diagnostics_channel';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
 
