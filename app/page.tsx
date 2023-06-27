@@ -5,16 +5,10 @@ import { Pagination } from './_components/Pagination';
 import { ChannelPanel } from '@/channels/_components/ChannelPanel';
 import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
 import { HikasenVtuber } from './(types)';
-import prisma from './_utile/prisma';
+import prisma, { getChannelOffset } from './_utile/prisma';
 
 const getChannel = async (offset: string): Promise<HikasenVtuber[]> => {
-  const res = await prisma.channel.findMany({
-    orderBy: {
-      isOfficial: 'desc',
-    },
-  });
-
-  return res;
+  return getChannelOffset();
 };
 
 export default async function Home() {
