@@ -6,7 +6,7 @@ import prisma from '@/_utile/prisma';
 export async function GET() {
   const url = `${process.env.CHANNELLIST_URL}`;
 
-  const gas = await fetchExtend<HikasenVtuber[]>({ url });
+  const gas = await fetchExtend<HikasenVtuber[]>({ url, store: false });
   const convertChannels: HikasenVtuber[] = gas.map((channel) => {
     //スプレッドシートからの取得ではJTCではなくUTCになっているため、9時間をたしてJTCにする
     const time = new Date(channel.beginTime);
