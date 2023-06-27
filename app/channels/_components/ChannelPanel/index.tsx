@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
 import { Icon } from '@/_components/Elements/Icon';
 import { HikasenVtuber } from '@/(types)';
+import DayTime from '@/_utile/convert/DayTime';
 
 type Props = {
   channels: HikasenVtuber[];
@@ -30,7 +31,9 @@ export const ChannelPanel = ({ channels }: Props) => {
                   </span>
                 </div>
 
-                <span className={styles.channel_since}>Since 2013/8/24</span>
+                <span className={styles.channel_since}>
+                  {DayTime(channel.beginTime)}
+                </span>
               </div>
               <div className={styles.channel_tag}></div>
             </div>

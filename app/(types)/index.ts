@@ -8,5 +8,5 @@ export interface HikasenVtuber {
   Twitch: string;
   dataCenter: string;
   server: string;
-  beginTime: string;
+  beginTime: string | Date;
 }
