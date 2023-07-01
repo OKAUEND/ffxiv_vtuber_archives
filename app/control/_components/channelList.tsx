@@ -3,6 +3,7 @@
 import { Icon } from '@/_components/Elements/Icon';
 import styles from '@/control/_styles/channelList.module.scss';
 import { useAdminControl } from '@/control/(hooks)/useAdminControl';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export const ChannelList = () => {
   const [channels, selectedChannels, selectedChannel, updateDataBase] =
@@ -11,15 +12,22 @@ export const ChannelList = () => {
     ? process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ICON_URL
     : '';
 
+  const supabase = createClientComponentClient();
+
   const changeStyles = (isAllMatched: boolean): string => {
     if (isAllMatched)
       return `${styles.channel_sever} ${styles.channel_hasServer}`;
     return `${styles.channel_sever}`;
   };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
   return (
     <>
       {selectedChannels.length}件のチャンネルを更新予定
       <button onClick={() => updateDataBase()}>DBを更新する</button>
+      <button onClick={() => signOut()}>ログアウト</button>
       <ul>
         {channels.map((channel, index) => (
           <li className={styles.channels} key={index}>
