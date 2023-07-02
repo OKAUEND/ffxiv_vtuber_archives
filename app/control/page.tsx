@@ -9,10 +9,25 @@ const DynamicControlClientComponent = dynamic(
   { ssr: false }
 );
 
-export default async function Index() {
+/**
+ * ユーザー認証をサーバー側で行う
+ * @param cookies
+ * @returns user , boolean
+ */
+const getUserSession = async (cookies) => {
   const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user || null;
 
-  const { data } = await supabase.auth.getUser();
+  const isAdmin = session?.user.id === process.env.ADMIN_ID;
+
+  return [user, isAdmin] as const;
+};
+
+export default async function Index() {
+  const [user, isAdmin] = await getUserSession(cookies);
 
   return (
     <div>
