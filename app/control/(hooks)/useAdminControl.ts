@@ -64,11 +64,8 @@ const channelList = selector<ControlChannel[]>({
           isMatched = false;
         }
       });
-      if (isMatched) {
-        return { ...channel, isAllMatched: true };
-      } else {
-        return { ...channel, isAllMatched: false };
-      }
+
+      return { ...channel, isAllMatched: isMatched };
     });
     return channels;
   },
