@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
+
+import ControlSignIn from '@/control/_components/controlSignIn';
 
 const DynamicControlClientComponent = dynamic(
   () => import('@/control/_components/channelControl'),
@@ -15,16 +16,19 @@ export default async function Index() {
 
   return (
     <div>
-      {data.user ? (
-        <DynamicControlClientComponent />
-      ) : (
-        <>
-          <div>
-            ログイン認証が必要なページです。ログイン認証を行ってください
-          </div>
-          <Link href={`/control/auth`}>認証ページへ</Link>
-        </>
-      )}
+      <div>
+        {/* ログインされていない場合は、ログイン画面への遷移を促す */}
+        {user ? (
+          <DynamicControlClientComponent isAdmin={isAdmin} />
+        ) : (
+          <>
+            <div>
+              ログイン認証が必要なページです。ログイン認証を行ってください
+            </div>
+            <ControlSignIn />
+          </>
+        )}
+      </div>
     </div>
   );
 }
