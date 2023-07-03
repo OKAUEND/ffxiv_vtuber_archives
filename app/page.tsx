@@ -5,10 +5,13 @@ import { Pagination } from './_components/Pagination';
 import { ChannelPanel } from '@/channels/_components/ChannelPanel';
 import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
 import { HikasenVtuber } from './(types)';
-import { getChannelOffset } from './_utile/prisma';
+import { getChannelOffset, getChannelCount } from './_utile/prisma';
 
-const getChannel = async (): Promise<HikasenVtuber[]> => {
-  return getChannelOffset(0);
+const getChannel = async (): Promise<readonly [HikasenVtuber[], number]> => {
+  const channels = await getChannelOffset(0);
+  const count = await getChannelCount();
+
+  return [channels, count] as const;
 };
 
 export default async function Home() {

@@ -22,4 +22,9 @@ export const getChannelOffset = async (
   return res;
 };
 
+export const getChannelCount = async () => {
+  const res = await prisma.channel.count();
+  return res;
+};
+
 export default prisma;
