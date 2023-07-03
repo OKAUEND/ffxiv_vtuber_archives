@@ -9,9 +9,7 @@ export const getChannel = async (offset: string): Promise<HikasenVtuber[]> => {
 
   //ページ番号よりOffsetでずらす件数を作成し、+1することで、同じ要素の重複取得を防ぐ
   const skip =
-    offsetNumber > 1
-      ? offsetNumber
-      : BASE_QUERY_COUNT * (Number(offset) - 1) + 1;
+    offsetNumber === 1 ? 0 : BASE_QUERY_COUNT * (offsetNumber - 1) + 1;
 
   const res = getChannelOffset(skip);
 
