@@ -15,13 +15,17 @@ const getChannel = async (): Promise<readonly [HikasenVtuber[], number]> => {
 };
 
 export default async function Home() {
-  const channels = await getChannel();
+  const [channels, totalCount] = await getChannel();
   return (
     <section className={styles.content}>
       <ErrorBoundaryExtended>
         <ChannelPanel channels={channels} />
 
-        <Pagination basePath="channels" currentPageNumber={1} />
+        <Pagination
+          basePath="channels"
+          currentPageNumber={1}
+          totalCount={totalCount}
+        />
       </ErrorBoundaryExtended>
     </section>
   );
