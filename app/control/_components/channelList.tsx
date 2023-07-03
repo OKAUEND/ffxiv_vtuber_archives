@@ -4,6 +4,7 @@ import { Icon } from '@/_components/Elements/Icon';
 import styles from '@/control/_styles/channelList.module.scss';
 import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import DayTime from '@/_utile/convert/DayTime';
 
 export const ChannelList = () => {
   const [channels, selectedChannels, selectedChannel, updateDataBase] =
@@ -43,7 +44,7 @@ export const ChannelList = () => {
             <div className={styles.channel_info}>
               <h3 className={styles.title}>{channel.name}</h3>
               <span>{channel.channelName}</span>
-              <span>2013/8.13</span>
+              <span>{DayTime(channel.beginTime)}</span>
             </div>
             <div className={styles.channel_action}>
               <button onClick={() => selectedChannel(channel)}>追加する</button>
