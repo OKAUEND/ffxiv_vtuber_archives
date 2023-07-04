@@ -53,9 +53,9 @@ export const channelMapToArray = selector<HikasenVtuber[]>({
   },
 });
 
-const channelList = selector<ControlChannel[]>({
-  key: 'data-flow/channels-list',
-  get: async ({ get }) => {
+const channelFormatted = selector<ControlChannel[]>({
+  key: 'format/channel-register',
+  get: ({ get }) => {
     const data = get(channelQuery);
     const channels = data.gas.map((channel) => {
       //ここで、chennelと同じIDを持つのをdata.dbから取り出し、対象が存在するかを判定する
@@ -81,6 +81,22 @@ const channelList = selector<ControlChannel[]>({
       return { ...channel, isAllMatched: isMatched };
     });
     return channels;
+  },
+});
+
+const channelList = selector<ControlChannel[]>({
+  key: 'data-flow/channels-list',
+  get: async ({ get }) => {
+    const formattedChannel = get(channelFormatted);
+    const option = get(filterOption);
+    //管理画面で、配信者のDBへの登録状態毎にフィルタリングをし、一括確認を可能にする
+    const filterChannel = formattedChannel.filter((channel) => {
+      if (option === 'Match' && channel.isAllMatched) return channel;
+      if (option === 'UnRegister' && !channel.isAllMatched) return channel;
+      return channel;
+    });
+
+    return filterChannel;
   },
 });
 
