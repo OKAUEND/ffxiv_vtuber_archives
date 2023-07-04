@@ -7,6 +7,11 @@ import { useCallback } from 'react';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
 
+/**
+ * フィルタリング対象の状態
+ */
+type FilterOption = 'all' | 'Match' | 'UnRegister';
+
 const updateChannel = async (channels: HikasenVtuber[]) => {
   const res = await fetchExtend({
     method: 'POST',
@@ -19,6 +24,14 @@ const updateChannel = async (channels: HikasenVtuber[]) => {
 const selectedChannel = atom<Map<string, HikasenVtuber>>({
   key: 'store/selected-channel',
   default: new Map([]),
+});
+
+/**
+ * DBの情報とのマッチ状態でフィルタリングをする対象を管理する
+ */
+const filterOption = atom<FilterOption>({
+  key: 'state/filer-option',
+  default: 'all',
 });
 
 const channelQuery = selector({
@@ -106,4 +119,19 @@ export const useAdminControl = () => {
   }, [selectedChannels]);
 
   return [channels, selectedChannels, cacheChannel, updateDataBase] as const;
+};
+
+/**
+ * このHookは登録状況によって表示内容を絞るための状態を管理するために使用します。
+ * @returns
+ */
+export const useFilterOption = () => {
+  const option = useRecoilValue(filterOption);
+  const changeFilterOption = useRecoilCallback(
+    ({ set }) =>
+      (option: FilterOption) => {
+        set(filterOption, option);
+      }
+  );
+  return [option, changeFilterOption] as const;
 };
