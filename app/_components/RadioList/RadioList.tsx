@@ -18,11 +18,15 @@ export const RadioList = ({
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     changeHandler(event.target.value);
   };
+
+  const checkedStyle = (target: string) => {
+    return selected === target ? styles.checked : '';
+  };
   return (
-    <ul className={styles.radio_container}>
+    <ul className={styles.container}>
       {categories.map((category, index) => (
-        <li key={index} className={styles.radio_list}>
-          <label className={styles.radio_group}>
+        <li key={index} className={styles.list}>
+          <label className={`${styles.radio_group} ${checkedStyle(category)}`}>
             <input
               className={styles.radio}
               type="radio"
@@ -31,7 +35,7 @@ export const RadioList = ({
               checked={selected === category}
               onChange={onChange}
             />
-            <span className={styles.radio_text}> {category}</span>
+            <span> {category}</span>
           </label>
         </li>
       ))}
