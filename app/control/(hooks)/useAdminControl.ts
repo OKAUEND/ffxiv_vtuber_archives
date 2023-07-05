@@ -86,9 +86,18 @@ const channelList = selector<ControlChannel[]>({
     const option = get(filterOption);
     //管理画面で、配信者のDBへの登録状態毎にフィルタリングをし、一括確認を可能にする
     const filterChannel = formattedChannel.filter((channel) => {
-      if (option === 'Match' && channel.isAllMatched) return channel;
-      if (option === 'UnRegister' && !channel.isAllMatched) return channel;
-      return channel;
+      switch (option) {
+        case 'all':
+          return channel;
+        case 'Match':
+          if (channel.isAllMatched) return channel;
+          break;
+        case 'UnRegister':
+          if (!channel.isAllMatched) return channel;
+          break;
+        default:
+          break;
+      }
     });
 
     return filterChannel;
