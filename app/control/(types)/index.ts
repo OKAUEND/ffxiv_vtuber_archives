@@ -4,3 +4,8 @@ export interface Channels {
   gas: HikasenVtuber[];
   db: HikasenVtuber[];
 }
+
+/**
+ * フィルタリング対象の状態
+ */
+export type FilterOption = 'all' | 'Match' | 'UnRegister';

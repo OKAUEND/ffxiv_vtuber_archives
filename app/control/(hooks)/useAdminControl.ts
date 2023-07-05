@@ -1,7 +1,7 @@
 import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 
 import { fetchExtend } from '@/_utile/fetch';
-import { Channels } from '@/control/(types)';
+import { Channels, FilterOption } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
 import { useCallback } from 'react';
 
@@ -19,6 +19,14 @@ const updateChannel = async (channels: HikasenVtuber[]) => {
 const selectedChannel = atom<Map<string, HikasenVtuber>>({
   key: 'store/selected-channel',
   default: new Map([]),
+});
+
+/**
+ * DBの情報とのマッチ状態でフィルタリングをする対象を管理する
+ */
+const filterOption = atom<FilterOption>({
+  key: 'state/filer-option',
+  default: 'all',
 });
 
 const channelQuery = selector({
@@ -40,9 +48,9 @@ export const channelMapToArray = selector<HikasenVtuber[]>({
   },
 });
 
-const channelList = selector<ControlChannel[]>({
-  key: 'data-flow/channels-list',
-  get: async ({ get }) => {
+const channelFormatted = selector<ControlChannel[]>({
+  key: 'format/channel-register',
+  get: ({ get }) => {
     const data = get(channelQuery);
     const channels = data.gas.map((channel) => {
       //ここで、chennelと同じIDを持つのをdata.dbから取り出し、対象が存在するかを判定する
@@ -68,6 +76,31 @@ const channelList = selector<ControlChannel[]>({
       return { ...channel, isAllMatched: isMatched };
     });
     return channels;
+  },
+});
+
+const channelList = selector<ControlChannel[]>({
+  key: 'data-flow/channels-list',
+  get: async ({ get }) => {
+    const formattedChannel = get(channelFormatted);
+    const option = get(filterOption);
+    //管理画面で、配信者のDBへの登録状態毎にフィルタリングをし、一括確認を可能にする
+    const filterChannel = formattedChannel.filter((channel) => {
+      switch (option) {
+        case 'all':
+          return channel;
+        case 'Match':
+          if (channel.isAllMatched) return channel;
+          break;
+        case 'UnRegister':
+          if (!channel.isAllMatched) return channel;
+          break;
+        default:
+          break;
+      }
+    });
+
+    return filterChannel;
   },
 });
 
@@ -106,4 +139,19 @@ export const useAdminControl = () => {
   }, [selectedChannels]);
 
   return [channels, selectedChannels, cacheChannel, updateDataBase] as const;
+};
+
+/**
+ * このHookは登録状況によって表示内容を絞るための状態を管理するために使用します。
+ * @returns
+ */
+export const useFilterOption = () => {
+  const option = useRecoilValue(filterOption);
+  const changeFilterOption = useRecoilCallback(
+    ({ set }) =>
+      (option: FilterOption) => {
+        set(filterOption, option);
+      }
+  );
+  return [option, changeFilterOption] as const;
 };
