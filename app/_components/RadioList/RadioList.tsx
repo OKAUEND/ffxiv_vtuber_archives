@@ -35,7 +35,7 @@ export const RadioList = ({
               checked={selected === category}
               onChange={onChange}
             />
-            <span> {category}</span>
+            <span>{category}</span>
           </label>
         </li>
       ))}
