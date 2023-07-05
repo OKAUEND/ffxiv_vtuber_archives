@@ -6,6 +6,8 @@ import { useAdminControl } from '@/control/(hooks)/useAdminControl';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import DayTime from '@/_utile/convert/DayTime';
 
+import { MatchFilter } from '@/control/_components/channels/MatchFilter';
+
 export const ChannelList = () => {
   const [channels, selectedChannels, selectedChannel, updateDataBase] =
     useAdminControl();
@@ -29,6 +31,7 @@ export const ChannelList = () => {
       {selectedChannels.length}件のチャンネルを更新予定
       <button onClick={() => updateDataBase()}>DBを更新する</button>
       <button onClick={() => signOut()}>ログアウト</button>
+      <MatchFilter />
       <ul>
         {channels.map((channel, index) => (
           <li className={styles.channels} key={index}>
