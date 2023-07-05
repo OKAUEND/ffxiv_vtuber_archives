@@ -1,16 +1,11 @@
 import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
 
 import { fetchExtend } from '@/_utile/fetch';
-import { Channels } from '@/control/(types)';
+import { Channels, FilterOption } from '@/control/(types)';
 import { HikasenVtuber } from '@/(types)';
 import { useCallback } from 'react';
 
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
-
-/**
- * フィルタリング対象の状態
- */
-type FilterOption = 'all' | 'Match' | 'UnRegister';
 
 const updateChannel = async (channels: HikasenVtuber[]) => {
   const res = await fetchExtend({
