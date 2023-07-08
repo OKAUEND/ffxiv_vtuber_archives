@@ -13,6 +13,7 @@ export const SearchOption = () => {
     <section>
       <h2>絞り込み</h2>
       <article>
+        <span>並び</span>
         <RadioList
           categories={sortOptions}
           selected={selectedOption.key}
