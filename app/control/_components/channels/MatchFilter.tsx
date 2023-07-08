@@ -3,7 +3,16 @@ import { useFilterOption } from '@/control/(hooks)/useAdminControl';
 
 import { FilterOption } from '@/control/(types)';
 
-const option: FilterOption[] = ['all', 'Match', 'UnRegister'];
+interface Option {
+  key: FilterOption;
+  name: string;
+}
+
+const option: Option[] = [
+  { key: 'All', name: '全て' },
+  { key: 'Match', name: '登録済み' },
+  { key: 'UnRegister', name: '未登録' },
+];
 
 export const MatchFilter = () => {
   const [matchLevel, changeFilterOption] = useFilterOption();
