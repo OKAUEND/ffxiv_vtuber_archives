@@ -1,4 +1,4 @@
-import { atom, useRecoilValue } from 'recoil';
+import { atom, useRecoilCallback, useRecoilValue } from 'recoil';
 
 export const sortOptions = [
   { key: 'Desc', name: '新しい順' },
@@ -12,5 +12,9 @@ const sortOption = atom({
 
 export const useChannelSearchOption = () => {
   const option = useRecoilValue(sortOption);
-  return [option] as const;
+
+  const changeOption = useRecoilCallback(({ set }) => (option) => {
+    set(sortOption, option);
+  });
+  return [option, changeOption] as const;
 };

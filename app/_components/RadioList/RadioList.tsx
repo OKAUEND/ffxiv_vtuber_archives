@@ -11,7 +11,7 @@ interface Props {
   categories: Categories[];
   selected: string;
   group: string;
-  changeHandler: (selected: string) => void;
+  changeHandler: (selected: Categories) => void;
 }
 
 export const RadioList = ({
@@ -20,8 +20,8 @@ export const RadioList = ({
   group,
   changeHandler,
 }: Props) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    changeHandler(event.target.value);
+  const onChange = (category: Categories) => {
+    changeHandler(category);
   };
 
   const checkedStyle = (target: string) => {
@@ -40,7 +40,7 @@ export const RadioList = ({
               value={category.key}
               name={group}
               checked={selected === category.key}
-              onChange={onChange}
+              onChange={() => onChange(category)}
             />
             <span>{category.name}</span>
           </label>

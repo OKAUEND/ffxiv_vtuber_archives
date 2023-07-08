@@ -8,7 +8,7 @@ import {
 } from '@/channels/(hooks)/Search/useChannelSearchOption';
 
 export const SearchOption = () => {
-  const [selectedOption] = useChannelSearchOption();
+  const [selectedOption, changeOption] = useChannelSearchOption();
   return (
     <section>
       <h2>絞り込み</h2>
@@ -17,9 +17,7 @@ export const SearchOption = () => {
           categories={sortOptions}
           selected={selectedOption.key}
           group="Sort"
-          changeHandler={() => {
-            return;
-          }}
+          changeHandler={changeOption}
         />
       </article>
     </section>
