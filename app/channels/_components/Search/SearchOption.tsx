@@ -8,14 +8,14 @@ import {
 } from '@/channels/(hooks)/Search/useChannelSearchOption';
 
 export const SearchOption = () => {
-  const [] = useChannelSearchOption();
+  const [selectedOption] = useChannelSearchOption();
   return (
     <section>
       <h2>絞り込み</h2>
       <article>
         <RadioList
           categories={sortOptions}
-          selected="Desc"
+          selected={selectedOption.key}
           group="Sort"
           changeHandler={() => {
             return;
