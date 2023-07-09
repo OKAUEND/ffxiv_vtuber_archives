@@ -1,5 +1,9 @@
 'use client';
 
 export const SearchCategories = () => {
-  return <div></div>;
+  return (
+    <section>
+      <h2>カテゴリー検索</h2>
+    </section>
+  );
 };
