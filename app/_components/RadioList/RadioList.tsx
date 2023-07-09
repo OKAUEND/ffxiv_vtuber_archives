@@ -2,11 +2,16 @@
 
 import styles from './radios.module.scss';
 
+export interface Categories {
+  key: string;
+  name: string;
+}
+
 interface Props {
-  categories: string[];
+  categories: Categories[];
   selected: string;
   group: string;
-  changeHandler: (selected: string) => void;
+  changeHandler: (selected: Categories) => void;
 }
 
 export const RadioList = ({
@@ -15,8 +20,8 @@ export const RadioList = ({
   group,
   changeHandler,
 }: Props) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    changeHandler(event.target.value);
+  const onChange = (category: Categories) => {
+    changeHandler(category);
   };
 
   const checkedStyle = (target: string) => {
@@ -26,16 +31,18 @@ export const RadioList = ({
     <ul className={styles.container}>
       {categories.map((category, index) => (
         <li key={index} className={styles.list}>
-          <label className={`${styles.radio_group} ${checkedStyle(category)}`}>
+          <label
+            className={`${styles.radio_group} ${checkedStyle(category.key)}`}
+          >
             <input
               className={styles.radio}
               type="radio"
-              value={category}
+              value={category.key}
               name={group}
-              checked={selected === category}
-              onChange={onChange}
+              checked={selected === category.key}
+              onChange={() => onChange(category)}
             />
-            <span>{category}</span>
+            <span>{category.name}</span>
           </label>
         </li>
       ))}

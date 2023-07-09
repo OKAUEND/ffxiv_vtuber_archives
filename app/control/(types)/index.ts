@@ -8,4 +8,4 @@ export interface Channels {
 /**
  * フィルタリング対象の状態
  */
-export type FilterOption = 'all' | 'Match' | 'UnRegister';
+export type FilterOption = 'All' | 'Match' | 'UnRegister';
