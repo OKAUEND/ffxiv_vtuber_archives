@@ -1,7 +1,7 @@
 export default async function ChannelResultIndex({
-  params,
+  searchParams,
 }: {
-  params: { query: string };
+  searchParams;
 }) {
   return <></>;
 }
