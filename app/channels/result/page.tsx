@@ -1,7 +1,12 @@
+interface SearchParams {
+  orderBy: string;
+  year: string;
+}
+
 export default async function ChannelResultIndex({
-  params,
+  searchParams,
 }: {
-  params: { query: string };
+  searchParams: SearchParams;
 }) {
   return <></>;
 }

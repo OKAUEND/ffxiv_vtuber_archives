@@ -18,7 +18,9 @@ export const SearchCategories = () => {
         <ul>
           {beginLiveYears.map((year) => (
             <li key={year.key}>
-              <Link href={'/channels/result'}>{year.name}</Link>
+              <Link href={`/channels/result?year=${year.key}`}>
+                {year.name}
+              </Link>
             </li>
           ))}
         </ul>
