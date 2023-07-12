@@ -1,5 +1,6 @@
 import React from 'react';
 import 'sanitize.css';
+import '@/_styles/reset.scss';
 
 import styles from '@/_styles/rootLayout.module.scss';
 import RecoilProvider from '@/_utile/recoil';
