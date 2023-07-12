@@ -20,6 +20,7 @@ export const ChannelResult = async ({ page, params }: IProps) => {
 
         <Pagination<ChannelSearchParams>
           basePath="channels/result/"
+          query={params}
           currentPageNumber={Number(page)}
           totalCount={count}
         />
