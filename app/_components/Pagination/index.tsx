@@ -20,6 +20,7 @@ const MAX_PAGE = 5;
  * @returns
  */
 const createPageNumber = (totalCount: number) => {
+  if (20 > totalCount) return 0;
   const totalPageNumber = Math.ceil(totalCount / 20);
   if (totalPageNumber > MAX_PAGE) return MAX_PAGE;
 
