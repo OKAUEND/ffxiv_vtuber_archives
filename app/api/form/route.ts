@@ -14,5 +14,7 @@ export async function GET(request: NextRequest) {
     return `${acc}&${current[0]}=${current[1]}`;
   }, '');
 
+  //作成したパスで結果画面へアクセスする。
+  //値の取得自体は結果画面で行うため、ここではクエリの作成だけをする
   redirect(`/channels/result${newParam}`);
 }
