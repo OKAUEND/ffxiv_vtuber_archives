@@ -1,30 +1,40 @@
 'use client';
 
-import Link from 'next/link';
+import { RadioList } from '@/_components/RadioList';
 
-const beginLiveYears = [
-  { key: '2018', name: '2018年' },
-  { key: '2019', name: '2019年' },
-  { key: '2020', name: '2020年' },
-  { key: '2021', name: '2021年' },
-];
+import {
+  useChannelSearchOption,
+  useChannelSearchBeginYear,
+} from '@/channels/(hooks)/Search/useChannelSearchCategories';
+
+import styles from '@/channels/_style/search/search.module.scss';
 
 export const SearchCategories = () => {
+  const [selectedOption, sortData, changeOption] = useChannelSearchOption();
+  const [selectedYear, years, changeYear] = useChannelSearchBeginYear();
   return (
-    <section>
-      <h2>カテゴリー検索</h2>
+    <form action="/api/form" method="GET" className={styles.container}>
       <article>
-        <span>配信開始年</span>
-        <ul>
-          {beginLiveYears.map((year) => (
-            <li key={year.key}>
-              <Link href={`/channels/result?year=${year.key}`}>
-                {year.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <h2>絞り込み</h2>
+        <span>並び</span>
+        <RadioList
+          categories={sortData}
+          selected={selectedOption.key}
+          group="sort"
+          changeHandler={changeOption}
+        />
       </article>
-    </section>
+      <article>
+        <h2>カテゴリー検索</h2>
+        <span>配信開始年</span>
+        <RadioList
+          categories={years}
+          selected={selectedYear.key}
+          group="year"
+          changeHandler={changeYear}
+        />
+      </article>
+      <button>検索する</button>
+    </form>
   );
 };
