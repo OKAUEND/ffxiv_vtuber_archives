@@ -4,9 +4,10 @@ import Link from 'next/link';
 
 import styles from './pagination.module.scss';
 
-interface Props {
+interface Props<T> {
   // totalCount: number;
   basePath: string;
+  query?: T;
   currentPageNumber: number;
   totalCount: number;
 }
@@ -38,13 +39,33 @@ const createOffsetNumber = (pageNumber: number, currantNumber: number) => {
   return currantNumber > pageNumber - 1 ? currantNumber - 2 : 1;
 };
 
-export const Pagination = ({
+/**
+ * クエリパラメータがあるページへの遷移が必要な場合、動的に文字列のクエリパラメータを作成する
+ * @param query
+ * @returns
+ */
+export const createQueryParameter = <T,>(query: T): string => {
+  if (!query || query === '') return '';
+
+  if (typeof query === 'object') {
+    const keys = Object.entries(query);
+    return keys.reduce((acc, currentValue, index) => {
+      if (index === 0) return `/?${currentValue[0]}=${currentValue[1]}`;
+
+      return `${acc}&${currentValue[0]}=${currentValue[1]}`;
+    }, '');
+  }
+};
+
+export const Pagination = <T,>({
   basePath,
+  query,
   currentPageNumber = 1,
   totalCount,
-}: Props) => {
+}: Props<T>) => {
   const maxPage = createPageNumber(totalCount);
   const offsetPageNumber = createOffsetNumber(maxPage, currentPageNumber);
+  const queryParameter = createQueryParameter<T>(query);
 
   const paginationList = () =>
     [...Array(maxPage)].map((_, index) => offsetPageNumber + index);
@@ -66,7 +87,10 @@ export const Pagination = ({
           {currentPageNumber === number ? (
             <div>{number}</div>
           ) : (
-            <Link href={`${basePath}/${number}`} className={styles.link}>
+            <Link
+              href={`${basePath}${number}${queryParameter}`}
+              className={styles.link}
+            >
               {number}
             </Link>
           )}
