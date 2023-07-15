@@ -1,4 +1,3 @@
-import '@/_styles/reset.scss';
 import styles from '@/_styles/rootPage.module.scss';
 
 import { Pagination } from './_components/Pagination';
