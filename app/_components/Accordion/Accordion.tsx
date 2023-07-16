@@ -1,6 +1,6 @@
 'use client';
 
-import {} from './(hook)/useAccordion';
+import { useAccordion } from './(hook)/useAccordion';
 import styles from './accordion.module.scss';
 
 interface IProps {
@@ -9,10 +9,11 @@ interface IProps {
 }
 
 export const Accordion = ({ title, children }: IProps) => {
+  const [accordionStyle, changeVisible] = useAccordion();
   return (
     <>
-      <button>{title}</button>
-      <div>{children}</div>
+      <button onClick={changeVisible}>{title}</button>
+      <div className={`${accordionStyle}`}>{children}</div>
     </>
   );
 };
