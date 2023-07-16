@@ -10,6 +10,8 @@ const beginLiveYears = [
   { key: '2019', name: '2019年' },
   { key: '2020', name: '2020年' },
   { key: '2021', name: '2021年' },
+  { key: '2022', name: '2022年' },
+  { key: '2023', name: '2023年' },
 ];
 
 const sortOption = atom({
@@ -27,15 +29,15 @@ export const useChannelSearchOption = () => {
 };
 
 const beginLiveYear = atom({
-  key: 'state/sort-year',
+  key: 'state/year',
   default: beginLiveYears[0],
 });
 
 export const useChannelSearchBeginYear = () => {
-  const yaer = useRecoilValue(beginLiveYear);
+  const year = useRecoilValue(beginLiveYear);
 
   const changeYear = useRecoilCallback(({ set }) => (year) => {
     set(beginLiveYear, year);
   });
-  return [yaer, beginLiveYears, changeYear] as const;
+  return [year, beginLiveYears, changeYear] as const;
 };
