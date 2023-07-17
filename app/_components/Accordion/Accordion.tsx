@@ -11,9 +11,14 @@ interface IProps {
 export const Accordion = ({ title, children }: IProps) => {
   const [accordionStyle, changeVisible] = useAccordion();
   return (
-    <>
-      <button onClick={changeVisible}>{title}</button>
-      <div className={`${accordionStyle}`}>{children}</div>
-    </>
+    <div className={styles.container}>
+      <button
+        className={`${styles.accordion_event} ${accordionStyle}`}
+        onClick={changeVisible}
+      >
+        {title}
+      </button>
+      <div className={`${styles.body} ${accordionStyle}`}>{children}</div>
+    </div>
   );
 };
