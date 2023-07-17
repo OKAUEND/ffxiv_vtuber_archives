@@ -47,7 +47,9 @@ export const SearchCategories = ({ params }: IProps) => {
           changeHandler={changeYear}
         />
       </article>
-      <button>検索する</button>
+      <div>
+        <button className={styles.search_event}>検索する</button>
+      </div>
     </form>
   );
 };
