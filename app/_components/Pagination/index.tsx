@@ -89,7 +89,7 @@ export const Pagination = <T,>({
             <div>{number}</div>
           ) : (
             <Link
-              href={`${basePath}${number}${queryParameter}`}
+              href={`${basePath}/${number}${queryParameter}`}
               className={styles.link}
             >
               {number}
