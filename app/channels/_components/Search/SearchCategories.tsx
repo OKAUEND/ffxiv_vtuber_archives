@@ -1,17 +1,30 @@
 'use client';
+import { useEffect } from 'react';
 
 import { RadioList } from '@/_components/RadioList';
 
 import {
   useChannelSearchOption,
   useChannelSearchBeginYear,
+  useInitChannelSearch,
 } from '@/channels/(hooks)/Search/useChannelSearchCategories';
+import { ChannelSearchParams } from '@/channels/(types)';
 
 import styles from '@/channels/_style/search/search.module.scss';
 
-export const SearchCategories = () => {
+interface IProps {
+  params?: ChannelSearchParams;
+}
+
+export const SearchCategories = ({ params }: IProps) => {
+  const [initCategories] = useInitChannelSearch();
   const [selectedOption, sortData, changeOption] = useChannelSearchOption();
   const [selectedYear, years, changeYear] = useChannelSearchBeginYear();
+
+  useEffect(() => {
+    initCategories(params);
+  }, []);
+
   return (
     <form action="/api/form" method="GET" className={styles.container}>
       <article>
