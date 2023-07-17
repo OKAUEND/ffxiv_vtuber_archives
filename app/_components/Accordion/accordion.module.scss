@@ -37,10 +37,15 @@
 }
 
 .body {
+  width: 100%;
 
   &.open {
+    border-bottom: 2px rgb(59, 59, 59) solid;
+    padding-bottom: 15px;
   }
 
   &.hidden {
+    display: none;
+    transition: all 0.2s;
   }
 }
