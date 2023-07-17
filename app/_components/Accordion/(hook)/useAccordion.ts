@@ -1,4 +1,5 @@
 import { atom, selector, useRecoilValue, useRecoilCallback } from 'recoil';
+import styles from '../accordion.module.scss';
 
 const accordionHidden = atom<boolean>({
   key: 'state/accordion-visible',
@@ -9,7 +10,7 @@ const createAccordionStyles = selector<string>({
   key: 'create/accordion-style',
   get: ({ get }) => {
     const isHidden = get(accordionHidden);
-    return isHidden ? '--open' : '--hidden';
+    return isHidden ? `${styles.hidden}` : `${styles.open}`;
   },
 });
 
