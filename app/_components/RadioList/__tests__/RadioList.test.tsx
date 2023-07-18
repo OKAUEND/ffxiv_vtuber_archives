@@ -4,7 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { RadioList } from '../RadioList';
 
 describe('RadioList', () => {
-  const categories = ['Category 1', 'Category 2', 'Category 3'];
+  const categories = [
+    { key: 'Category1', name: 'Category 1' },
+    { key: 'Category2', name: 'Category 2' },
+    { key: 'Category3', name: 'Category 3' },
+  ];
   const selected = 'Category 1';
   const group = 'category';
   const changeHandler = vi.fn();
@@ -23,7 +27,8 @@ describe('RadioList', () => {
     expect(radioButtons.length).toBe(categories.length);
 
     const labels = radioButtons.map((item) => item.textContent);
-    expect(labels).toEqual(categories);
+    const CategoryNames = categories.map((item) => item.name);
+    expect(labels).toEqual(CategoryNames);
   });
 
   test('ラジオボタンがクリックされた時、引数として渡された変更関数が呼び出されているか', async () => {
@@ -40,7 +45,7 @@ describe('RadioList', () => {
 
     const targetValue = categories[1]; // Select the second category
 
-    const targetRadio = screen.getByLabelText(targetValue);
+    const targetRadio = screen.getByLabelText(targetValue.name);
 
     expect(changeHandler).toHaveBeenCalledTimes(0);
 
