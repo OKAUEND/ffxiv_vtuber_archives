@@ -26,7 +26,7 @@ const selectedChannel = atom<Map<string, HikasenVtuber>>({
  */
 const filterOption = atom<FilterOption>({
   key: 'state/filer-option',
-  default: 'all',
+  default: 'All',
 });
 
 const channelQuery = selector({
@@ -87,7 +87,7 @@ const channelList = selector<ControlChannel[]>({
     //管理画面で、配信者のDBへの登録状態毎にフィルタリングをし、一括確認を可能にする
     const filterChannel = formattedChannel.filter((channel) => {
       switch (option) {
-        case 'all':
+        case 'All':
           return channel;
         case 'Match':
           if (channel.isAllMatched) return channel;
