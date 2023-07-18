@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export const Accordion = ({ title, children }: IProps) => {
-  const [accordionStyle, changeVisible] = useAccordion();
+  const [isHidden, accordionStyle, changeVisible] = useAccordion();
   return (
     <div className={styles.container}>
       <button
@@ -18,7 +18,7 @@ export const Accordion = ({ title, children }: IProps) => {
       >
         {title}
       </button>
-      <div className={`${styles.body} ${accordionStyle}`}>{children}</div>
+      <div className={`${styles.body}`}>{isHidden ? <></> : children}</div>
     </div>
   );
 };
