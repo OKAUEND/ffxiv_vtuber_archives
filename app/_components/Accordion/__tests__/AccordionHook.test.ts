@@ -11,21 +11,27 @@ describe('Accordion Hook TEST', () => {
       wrapper: RecoilRoot,
     });
 
-    expect(result.current[0]).toMatch(/hidden/);
+    expect(result.current[0]).toEqual(true);
+    expect(result.current[1]).toMatch(/hidden/);
   });
 
   test('Changeイベントを呼び出したら、値の文字列がオープンの状態を示しているか', () => {
-    const { result } = renderHook(() => useAccordion(), {
+    const { result, rerender } = renderHook(() => useAccordion(), {
       wrapper: RecoilRoot,
     });
 
-    expect(result.current[0]).toMatch(/hidden/);
+    rerender();
+
+    expect(result.current[0]).toEqual(true);
+    expect(result.current[1]).toMatch(/hidden/);
 
     act(() => {
-      result.current[1]();
+      result.current[2]();
     });
 
-    expect(result.current[0]).not.toMatch(/hidden/);
-    expect(result.current[0]).toMatch(/open/);
+    expect(result.current[0]).not.toEqual(true);
+    expect(result.current[1]).not.toMatch(/hidden/);
+    expect(result.current[0]).toEqual(false);
+    expect(result.current[1]).toMatch(/open/);
   });
 });
