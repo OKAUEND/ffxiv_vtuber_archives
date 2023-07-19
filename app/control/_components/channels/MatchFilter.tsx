@@ -22,7 +22,7 @@ export const MatchFilter = () => {
       categories={option}
       selected={matchLevel}
       group="match"
-      changeHandler={changeFilterOption}
+      changeHandler={() => changeFilterOption}
     />
   );
 };

@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 type ControlChannel = HikasenVtuber & { isAllMatched: boolean };
 
 const updateChannel = async (channels: HikasenVtuber[]) => {
-  const res = await fetchExtend({
+  await fetchExtend({
     method: 'POST',
     url: '/api/control/',
     store: false,

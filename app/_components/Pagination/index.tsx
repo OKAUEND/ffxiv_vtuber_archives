@@ -45,7 +45,7 @@ const createOffsetNumber = (pageNumber: number, currantNumber: number) => {
  * @param query
  * @returns
  */
-export const createQueryParameter = <T,>(query: T): string => {
+const createQueryParameter = <T,>(query: T): string => {
   if (!query || query === '') return '';
 
   if (typeof query === 'object') {

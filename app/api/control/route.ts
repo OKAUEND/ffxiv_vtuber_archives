@@ -40,28 +40,28 @@ export async function POST(request: Request) {
   return new Response(JSON.stringify('Success'));
 }
 
-export async function DELETE(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const name = searchParams.get('name');
-  const test = await prisma.user.deleteMany({
-    where: {
-      email: {
-        contains: `Hiroshi@${name}`,
-      },
-    },
-  });
-}
+// export async function DELETE(request: Request) {
+//   const { searchParams } = new URL(request.url);
+//   const name = searchParams.get('name');
+//   const test = await prisma.user.deleteMany({
+//     where: {
+//       email: {
+//         contains: `Hiroshi@${name}`,
+//       },
+//     },
+//   });
+// }
 
-export async function PUT(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const name = searchParams.get('name');
-  const time = new Date('2013-08-13T12:00:00Z').toISOString();
-  const test = await prisma.user.update({
-    where: {
-      email: `Hiroshi@HQ`,
-    },
-    data: {
-      create_at: time,
-    },
-  });
-}
+// export async function PUT(request: Request) {
+//   const { searchParams } = new URL(request.url);
+//   const name = searchParams.get('name');
+//   const time = new Date('2013-08-13T12:00:00Z').toISOString();
+//   const test = await prisma.user.update({
+//     where: {
+//       email: `Hiroshi@HQ`,
+//     },
+//     data: {
+//       create_at: time,
+//     },
+//   });
+// }

@@ -1,8 +1,8 @@
-import { describe, test, expect } from 'vitest';
+import { describe } from 'vitest';
 
-import { getChannel } from '@/channels/_lib/api/getChannel';
-import { createFetchMock } from '@/_mock/fetch';
-import { createHikasenVtuberData } from '@/channels/__tests__/_mock';
+// import { getChannel } from '@/channels/_lib/api/getChannel';
+// import { createFetchMock } from '@/_mock/fetch';
+// import { createHikasenVtuberData } from '@/channels/__tests__/_mock';
 
 //ここでfetchExtendをMockで定義する
 
