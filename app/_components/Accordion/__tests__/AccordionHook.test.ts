@@ -1,6 +1,5 @@
-import { describe, test, vi } from 'vitest';
-import { render, screen, renderHook, act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { describe, test } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 
 import { useAccordion } from '../(hook)/useAccordion';
 import { RecoilRoot } from 'recoil';

@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 
 import * as fecthUtile from '@/_utile/fetch';
@@ -61,5 +61,5 @@ describe('useAdminControl Unit TEST', () => {
       });
     });
   });
-  test('DB側に値があった場合は、一部要素が違っていればフラグが偽になっているか', () => {});
+  // test('DB側に値があった場合は、一部要素が違っていればフラグが偽になっているか', () => {});
 });

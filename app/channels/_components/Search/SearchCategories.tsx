@@ -23,6 +23,7 @@ export const SearchCategories = ({ params }: IProps) => {
 
   useEffect(() => {
     initCategories(params);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
