@@ -15,11 +15,12 @@ const createAccordionStyles = selector<string>({
 });
 
 export const useAccordion = () => {
-  const accordionStyle = useRecoilValue(createAccordionStyles);
+  const isHidden = useRecoilValue(accordionHidden);
+  const styles = useRecoilValue(createAccordionStyles);
 
   const changeHidden = useRecoilCallback(({ set }) => () => {
     set(accordionHidden, (prev) => !prev);
   });
 
-  return [accordionStyle, changeHidden] as const;
+  return [isHidden, styles, changeHidden] as const;
 };
