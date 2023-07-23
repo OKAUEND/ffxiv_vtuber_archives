@@ -28,26 +28,30 @@ export const SearchCategories = ({ params }: IProps) => {
 
   return (
     <form action="/api/form" method="GET" className={styles.container}>
-      <article>
+      <div>
         <h2>絞り込み</h2>
-        <span>並び</span>
-        <RadioList
-          categories={sortData}
-          selected={selectedOption.key}
-          group="sort"
-          changeHandler={changeOption}
-        />
-      </article>
-      <article>
+        <fieldset>
+          <legend>並び</legend>
+          <RadioList
+            categories={sortData}
+            selected={selectedOption.key}
+            group="sort"
+            changeHandler={changeOption}
+          />
+        </fieldset>
+      </div>
+      <div>
         <h2>カテゴリー検索</h2>
-        <span>配信開始年</span>
-        <RadioList
-          categories={years}
-          selected={selectedYear.key}
-          group="year"
-          changeHandler={changeYear}
-        />
-      </article>
+        <fieldset>
+          <legend>配信開始年</legend>
+          <RadioList
+            categories={years}
+            selected={selectedYear.key}
+            group="year"
+            changeHandler={changeYear}
+          />
+        </fieldset>
+      </div>
       <div className={styles.search_event}>
         <button className={styles.search}>検索する</button>
       </div>
