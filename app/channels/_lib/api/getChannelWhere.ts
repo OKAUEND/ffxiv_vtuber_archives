@@ -22,33 +22,40 @@ export const getChannelWhere = async (
   return [res, count] as const;
 };
 
-const createWhereQuery = (
-  params: ChannelSearchParams
-): Prisma.ChannelWhereInput => {
-  const keys = Object.entries(params);
+const createWhereQuery = (params: ChannelSearchParams) => {
+  const keys: [string, string][] = Object.entries(params);
 
-  const query = keys.reduce((acc, currentKey) => {
-    //ページ数をParameterで
-    if (currentKey[0] === 'orderBy') return acc;
+  //クエリパラメータをループで処理し、queryオブジェクトにマージしていくことで、1つの検索条件オブジェクトとする
+  let query: Prisma.ChannelWhereInput = {};
+  keys.forEach((value) => {
+    switch (value[0]) {
+      case 'sort':
+        break;
+      case 'year': {
+        const time = new Date(value[1]);
 
-    //まずは配信時間のWhere文だけを作成する
-    //後にタグ検索とかを行いたいので、改修はしようね
-    const beginDayTime = new Date(currentKey[1]);
-    const endDayTime = new Date(currentKey[1]);
-    endDayTime.setMonth(12);
-    endDayTime.setSeconds(-1);
+        //まずは配信時間のWhere文だけを作成する
+        //後にタグ検索とかを行いたいので、改修はしようね
+        const beginDayTime = new Date(time);
+        const endDayTime = new Date(time);
+        endDayTime.setMonth(12);
+        endDayTime.setSeconds(-1);
 
-    const where: Prisma.ChannelWhereInput = {
-      beginTime: {
-        //開始日時
-        gte: beginDayTime,
-        //終了日時
-        lt: endDayTime,
-      },
-    };
-
-    return where;
-  }, {});
+        const where: Prisma.ChannelWhereInput = {
+          beginTime: {
+            //開始日時
+            gte: beginDayTime.toISOString(),
+            //終了日時
+            lt: endDayTime.toISOString(),
+          },
+        };
+        query = { ...query, ...where };
+        break;
+      }
+      default:
+        break;
+    }
+  });
 
   return query;
 };
