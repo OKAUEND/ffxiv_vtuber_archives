@@ -46,7 +46,7 @@ export const pageSize = 25;
  */
 //配信の概要欄にクエリワードがあると、Youtubeの性質上取得されてしまうので、
 //取得後にフィルタリングするために、抽出させたい単語をまとめておいた
-const queryWorld = `FF14|FFXIV|ff14|新生|蒼天|紅蓮|漆黒|暁月`;
+const queryWorld = `FF14|FFXIV|ff14|新生|蒼天|紅蓮|漆黒|暁月|FINAL FANTASY XIV`;
 
 //---------------------------------------------------------------------------
 
@@ -86,6 +86,7 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
+      console.log({ query });
       const archives = await fetchExtend<YoutubeDate>({ url: query });
 
       return archives;
