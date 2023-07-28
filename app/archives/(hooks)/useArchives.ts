@@ -86,7 +86,6 @@ const archiveListQuery = selectorFamily<YoutubeDate, QueryInput>({
     ({ channelId, beginTime }) =>
     async () => {
       const query = createQuery({ channelId, beginTime });
-      console.log({ query });
       const archives = await fetchExtend<YoutubeDate>({ url: query });
 
       return archives;
