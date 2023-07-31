@@ -40,10 +40,30 @@ export const ChannelPanel = ({ channels }: Props) => {
               </span>
             </div>
             <div className={styles.channel_tag}>
-              <div className={styles.playstyle}></div>
-              <div className={styles.user_join}></div>
-              <div className={styles.play_timezone}></div>
-              <div className={styles.datacenter}></div>
+              <div className={styles.playstyle}>
+                <div className={styles.tag}>メインストーリー</div>
+                <div className={styles.tag}>極</div>
+                <div className={styles.tag}>零式</div>
+                <div className={styles.tag}>ハウジング</div>
+                <div className={styles.tag}>地図</div>
+                <div className={styles.tag}>世界設定</div>
+                <div className={styles.tag}>PvP</div>
+              </div>
+              <div className={styles.playstyle}>
+                <div className={styles.tag}>参加型</div>
+                <div className={styles.tag}>ソロ</div>
+                <div className={styles.tag}>NPC芸</div>
+              </div>
+              <div className={styles.playstyle}>
+                <div className={styles.tag}>早朝</div>
+                <div className={styles.tag}>朝</div>
+                <div className={styles.tag}>昼</div>
+                <div className={styles.tag}>夕方</div>
+                <div className={styles.tag}>夜</div>
+                <div className={styles.tag}>深夜</div>
+              </div>
+              <div className={styles.playstyle}>Mana Chocobo</div>
+              <div className={styles.info_link}>詳しくみる→</div>
             </div>
           </div>
         </li>
