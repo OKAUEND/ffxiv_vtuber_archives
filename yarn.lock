@@ -885,10 +885,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:4.16.1":
-  version: 4.16.1
-  resolution: "@prisma/engines@npm:4.16.1"
-  checksum: 7b8c1a9e20434edaa919fb24585ebff573c4ace787ea5a135dfefde3571ae31d3f0b0347397774c38be6d2e3fc0087d4e21a2720fe9f7a66ffd870e34377040f
+"@prisma/engines@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@prisma/engines@npm:5.0.0"
+  checksum: 31271d85c29709059f91051d4cef7acf874014ba0128b674ca2f842e5fac61d3011e9db246dfa67ba4803081d36dbc9e31492716bab677128588343c92117b2b
   languageName: node
   linkType: hard
 
@@ -1560,7 +1560,7 @@ __metadata:
     node-mocks-http: ^1.12.1
     postcss: ^8.4.19
     prettier: ^2.7.1
-    prisma: ^4.16.1
+    prisma: latest
     react: 18.2.0
     react-dom: 18.2.0
     recoil: ^0.7.7
@@ -5870,15 +5870,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^4.16.1":
-  version: 4.16.1
-  resolution: "prisma@npm:4.16.1"
+"prisma@npm:latest":
+  version: 5.0.0
+  resolution: "prisma@npm:5.0.0"
   dependencies:
-    "@prisma/engines": 4.16.1
+    "@prisma/engines": 5.0.0
   bin:
     prisma: build/index.js
-    prisma2: build/index.js
-  checksum: eb0f43970464fbaa6ba190a714f23d00acd39dcc14fd8a7183dffc51a548cc32040cc5360415787578749862af7501a7bedcf9f2a0e64a3f82e3af402e9439d7
+  checksum: fdc62377853d25b4db664c736fd0b08d2b0c6db5752e6f6c6ec3bda77634cfb79e6f49d52d4b8f54ddb8ec9c28fc3fb0c13f95caf61085447d0929e258af9284
   languageName: node
   linkType: hard
 
