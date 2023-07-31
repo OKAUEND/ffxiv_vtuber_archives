@@ -40,3 +40,21 @@ model Channel {
   Twitch         String
   beginTime      DateTime @default(now()) @db.Timestamptz(3)
 }
+
+model PlayStyles {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String
+  type      String
+  isActive  Boolean  @default(true)
+  create_at DateTime @default(now()) @map("create_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Tagging {
+  id         Int      @id @default(autoincrement())
+  channel_id Int
+  tag_id     Int
+  create_at  DateTime @default(now()) @map("create_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+}
