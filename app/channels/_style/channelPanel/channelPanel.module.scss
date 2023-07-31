@@ -82,4 +82,18 @@
 
 .channel_tag {
   grid-area: 2 / 2 / 3 / 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  & .playstyle {
+  }
+  & .user_join {
+  }
+  & .play_timezone {
+  }
+  & .datacenter {
+  }
 }

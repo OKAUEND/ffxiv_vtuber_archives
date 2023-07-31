@@ -39,7 +39,12 @@ export const ChannelPanel = ({ channels }: Props) => {
                 {DayTime(channel.beginTime)}
               </span>
             </div>
-            <div className={styles.channel_tag}></div>
+            <div className={styles.channel_tag}>
+              <div className={styles.playstyle}></div>
+              <div className={styles.user_join}></div>
+              <div className={styles.play_timezone}></div>
+              <div className={styles.datacenter}></div>
+            </div>
           </div>
         </li>
       ))}
