@@ -22,6 +22,14 @@ export const getChannelOffset = async (
       },
       { beginTime: 'desc' },
     ],
+    include: {
+      tags: {
+        include: {
+          tags: true,
+        },
+      },
+    },
+
   });
 
   return res;
