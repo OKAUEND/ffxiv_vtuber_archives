@@ -21,7 +21,7 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "@prisma/client": "latest",
+    "@prisma/client": "^5.0.0",
     "@testing-library/dom": "^8.20.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -50,7 +50,7 @@
     "node-mocks-http": "^1.12.1",
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
-    "prisma": "^4.16.1",
+    "prisma": "latest",
     "sass": "^1.62.1",
     "vite": "^4.2.1",
     "vitest": "^0.24.5",
