@@ -41,7 +41,7 @@ model Channel {
   beginTime      DateTime @default(now()) @db.Timestamptz(3)
 }
 
-model PlayStyles {
+model Tags {
   id        Int      @id @default(autoincrement())
   name      String
   code      String
