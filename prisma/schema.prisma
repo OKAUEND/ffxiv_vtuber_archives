@@ -58,5 +58,5 @@ model Tagging {
   create_at  DateTime @default(now()) @map("create_at")
   updated_at DateTime @updatedAt @map("updated_at")
 
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  @@index([channel_id, tag_id])
 }
