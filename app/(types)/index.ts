@@ -9,4 +9,11 @@ export interface HikasenVtuber {
   dataCenter: string;
   server: string;
   beginTime: string | Date;
+  tags: { content: Tag[]; party: Tag[]; timezone: Tag[] };
+}
+
+export interface Tag {
+  id: number;
+  name: string;
+  code: string;
 }
