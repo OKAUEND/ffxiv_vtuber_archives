@@ -56,9 +56,8 @@ export const ChannelPanel = ({ channels }: Props) => {
                 ))}
               </ul>
               <div className={styles.playstyle}>
-                
+                {`${channel.dataCenter} ${channel.server}`}
               </div>
-              <div className={styles.playstyle}>Mana Chocobo</div>
               <div className={styles.info_link}>詳しくみる→</div>
             </div>
           </div>
