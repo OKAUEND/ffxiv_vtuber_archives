@@ -89,18 +89,7 @@ export const getChannelOffset = async (
     },
   });
 
-  const result = channels.map((channel) => {
-    return {
-      ...channel,
-      tags: channel.tags.map((tag) => {
-        return {
-          name: tag.tags.name,
-          code: tag.tags.code,
-          type: tag.tags.type,
-        };
-      }),
-    };
-  });
+  const result = convertTags(channels);
 
   return result;
 };
@@ -126,7 +115,7 @@ export const getChannelWhereOffset = async (
   query: Prisma.ChannelWhereInput,
   orderBy: Prisma.SortOrder
 ): Promise<HikasenVtuber[]> => {
-  const res = await prisma.channel.findMany({
+  const channels = await prisma.channel.findMany({
     take: 20,
     skip: offset,
     where: {
@@ -134,9 +123,18 @@ export const getChannelWhereOffset = async (
       ...query,
     },
     orderBy: [{ beginTime: orderBy }],
+    include: {
+      tags: {
+        include: {
+          tags: true,
+        },
+      },
+    },
   });
 
-  return res;
+  const result = convertTags(channels);
+
+  return result;
 };
 
 /**
