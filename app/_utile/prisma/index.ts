@@ -13,7 +13,7 @@ const prisma = new PrismaClient({
 export const getChannelOffset = async (
   offset = 0
 ): Promise<HikasenVtuber[]> => {
-  const res = await prisma.channel.findMany({
+  const channels = await prisma.channel.findMany({
     take: 20,
     skip: offset,
     orderBy: [
@@ -22,9 +22,29 @@ export const getChannelOffset = async (
       },
       { beginTime: 'desc' },
     ],
+    include: {
+      tags: {
+        include: {
+          tags: true,
+        },
+      },
+    },
   });
 
-  return res;
+  const result = channels.map((channel) => {
+    return {
+      ...channel,
+      tags: channel.tags.map((tag) => {
+        return {
+          name: tag.tags.name,
+          code: tag.tags.code,
+          type: tag.tags.type,
+        };
+      }),
+    };
+  });
+
+  return result;
 };
 
 /**
