@@ -48,8 +48,8 @@
   display: block;
   font-weight: 550;
   font-size: 1rem;
-  @include mq(xs) {
-    font-weight: 550;
-    font-size: 1.2rem;
-  }
+  // @include mq(xs) {
+  //   font-weight: 550;
+  //   font-size: 1.2rem;
+  // }
 }

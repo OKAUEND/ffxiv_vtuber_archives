@@ -1,12 +1,13 @@
 import { CheckBox } from '@/_components/Elements/CheckBox';
 import { SelectedCheckbox } from '@/_components/Elements/CheckBox';
 
-import styles from '@/src/base/Parts/CheckBoxList/checkboxes.module.scss';
+import styles from './checkboxes.module.scss';
 
 interface CheckBoxValue {
   id: number;
   name: string;
   code: string;
+  type: string;
 }
 
 interface Props<T> {
@@ -22,6 +23,7 @@ export const CheckBoxList = <T,>({ values, changeHandler }: Props<T>) => {
           <CheckBox
             label={value.name}
             value={value.code}
+            category={value.type}
             changeHandler={changeHandler}
           />
         </li>

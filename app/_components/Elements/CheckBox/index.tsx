@@ -9,10 +9,11 @@ export interface SelectedCheckbox {
 interface Props {
   label: string;
   value: string | number;
+  category: string;
   changeHandler: ({ checked, value, name }: SelectedCheckbox) => void;
 }
 
-export const CheckBox = ({ label, value, changeHandler }: Props) => {
+export const CheckBox = ({ label, value, category, changeHandler }: Props) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selected: SelectedCheckbox = {
       checked: event.target.checked,
@@ -28,6 +29,7 @@ export const CheckBox = ({ label, value, changeHandler }: Props) => {
         className={styles.checkbox}
         type="checkbox"
         value={value}
+        name={category}
         onChange={onChange}
       />
       <span className={styles.checkbox_text}> {label}</span>
