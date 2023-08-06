@@ -23,7 +23,7 @@ export const getChannelWhere = async (
 };
 
 const createWhereQuery = (params: ChannelSearchParams) => {
-  const keys: [string, string][] = Object.entries(params);
+  const keys: [string, string | string[]][] = Object.entries(params);
 
   //クエリパラメータをループで処理し、queryオブジェクトにマージしていくことで、1つの検索条件オブジェクトとする
   let query: Prisma.ChannelWhereInput = {};
