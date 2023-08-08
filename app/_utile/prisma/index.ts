@@ -58,7 +58,9 @@ export const getChannelWhereOffset = async (
   offset = 0,
   query: Prisma.ChannelWhereInput,
   orderBy: Prisma.SortOrder
-): Promise<HikasenVtuber[]> => {
+): Promise<HikasenVtuber<Tags>[]> => {
+  const tagging_channels = await prisma.tagging.findMany({});
+
   const channels = await prisma.channel.findMany({
     take: 20,
     skip: offset,
