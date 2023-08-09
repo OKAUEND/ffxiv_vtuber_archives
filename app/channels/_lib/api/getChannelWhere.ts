@@ -60,6 +60,11 @@ const createWhereQuery = (params: ChannelSearchParams) => {
         query = { ...query, ...where };
         break;
       }
+      case 'content':
+      case 'play':
+      case 'timezone': {
+        break;
+      }
       default:
         break;
     }
