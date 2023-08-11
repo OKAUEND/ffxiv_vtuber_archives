@@ -109,5 +109,13 @@ export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
     }
   });
 
-  return query;
+  return {
+    query: {
+      content: contentQuery,
+      play: playQuery,
+      timeZone: timezoneQuery,
+    },
+    year: year,
+    orderBy: orderBy,
+  };
 };
