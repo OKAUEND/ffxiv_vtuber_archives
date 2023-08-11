@@ -70,8 +70,15 @@ export const getChannelWhereOffset = async (
     orderBy: { beginTime: query.orderBy },
     include: {
       tags: {
-        include: {
-          tags: true,
+        select: {
+          tags: {
+            select: {
+              id: true,
+              name: true,
+              code: true,
+              type: true,
+            },
+          },
         },
       },
     },
