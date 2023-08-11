@@ -141,3 +141,7 @@ export const tags: Tag[] = [
     type: 'timezone',
   },
 ];
+
+export const getTags = () => {
+  return tags;
+};
