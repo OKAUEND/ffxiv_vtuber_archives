@@ -96,10 +96,14 @@ export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
         break;
       }
       case 'content':
-      case 'play':
-      case 'timezone': {
+        contentQuery = createWhereQueryJoinTagging(convertTags(value[1]));
         break;
-      }
+      case 'play':
+        playQuery = createWhereQueryJoinTagging(convertTags(value[1]));
+        break;
+      case 'timezone':
+        timezoneQuery = createWhereQueryJoinTagging(convertTags(value[1]));
+        break;
       default:
         break;
     }
