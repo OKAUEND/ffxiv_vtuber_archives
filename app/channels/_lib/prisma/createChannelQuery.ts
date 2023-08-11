@@ -9,6 +9,15 @@ import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
  */
 const convertTags = (params: string | string[]): number[] => {};
 
+/**
+ * TagIDが交差テーブルTaggingテーブルに存在するかを検索するために、
+ * TaggingテーブルをLeftJoinをしたWere文を作成する。
+ * @param tagIds
+ * @returns
+ */
+export const createWhereQueryJoinTagging = <T>(
+  tagIds: T[]
+): Prisma.ChannelWhereInput => {};
 
 export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
   const keys: [string, string | string[]][] = Object.entries(params);
