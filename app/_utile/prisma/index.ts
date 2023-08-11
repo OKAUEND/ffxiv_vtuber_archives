@@ -1,4 +1,4 @@
-import { HikasenVtuber, Tags, Tag } from '@/(types)';
+import { HikasenVtuber, Tags } from '@/(types)';
 import { PrismaClient, Prisma } from '@prisma/client';
 
 import { convertTaggingToTags } from '@/_utile/convert';
