@@ -2,6 +2,14 @@ import { Prisma } from '@prisma/client';
 import { tags } from '../api/getTags';
 import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
 
+/**
+ * クエリパラメータの文字列(Code)の配列を、該当するTag情報のIDの配列へ変換をする
+ * @param params
+ * @returns
+ */
+const convertTags = (params: string | string[]): number[] => {};
+
+
 export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
   const keys: [string, string | string[]][] = Object.entries(params);
 
