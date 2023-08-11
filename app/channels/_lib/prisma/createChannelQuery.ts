@@ -7,7 +7,29 @@ import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
  * @param params
  * @returns
  */
-const convertTags = (params: string | string[]): number[] => {};
+const convertTags = (params: string | string[]): number[] => {
+  //交差テーブルにはIDで紐付けられているので、codeをIDに変更をするため、データを操作し対象を探しIDを取り出す
+  const targetIDs: number[] = [];
+
+  //複数条件のクエリパラメータの場合、パラメータが配列になるが、単体だと文字列である。
+  //複数条件だった場合、全てIDが存在しているかを確認する必要があり、ループでチェックをしている。
+  //単体の文字列も、インデックスが1の配列にすることで、同じロジックでチェック出来るようにする
+  const targetParams = Array.isArray(params) ? params : [params];
+
+  /**
+   * Tag一覧に、クエリパラメータのコードが存在するかを確認し、IDを返す事で存在していないコードを除外する
+   */
+  targetParams.forEach((contentCode) => {
+    const target = tags.find((tag) => tag.code === contentCode);
+
+    //存在しない場合は不正入力の可能性があるため、追加しない
+    if (typeof target === 'undefined') return;
+
+    targetIDs.push(target.id);
+  });
+
+  return targetIDs;
+};
 
 /**
  * TagIDが交差テーブルTaggingテーブルに存在するかを検索するために、
