@@ -92,7 +92,7 @@ export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
             lt: endDayTime.toISOString(),
           },
         };
-        query = { ...query, ...where };
+        year = { ...where };
         break;
       }
       case 'content':
