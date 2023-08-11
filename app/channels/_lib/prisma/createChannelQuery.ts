@@ -39,14 +39,30 @@ const convertTags = (params: string | string[]): number[] => {
  */
 export const createWhereQueryJoinTagging = <T>(
   tagIds: T[]
-): Prisma.ChannelWhereInput => {};
+): Prisma.ChannelWhereInput => {
+  //検索対象が存在しない場合は、Where文のORで作成すると対象レコード無しのOR文が作成され、
+  //対象無しの場合は全件対象にしたいのにそれができないため、空のオブジェクトを返す
+  if (tagIds.length === 0) return {};
+
+  const ids: Prisma.TaggingWhereInput[] = tagIds.map((id) => {
+    return {
+      tag_id: id,
+    };
+  });
+
+  return { tags: { some: { OR: [...ids] } } };
+};
 
 export const createWhereQuery = (params: ChannelSearchParams): PrismaQuery => {
   const keys: [string, string | string[]][] = Object.entries(params);
 
   //クエリパラメータをループで処理し、queryオブジェクトにマージしていくことで、1つの検索条件オブジェクトとする
-  let query: Prisma.ChannelWhereInput = {};
+  let year: Prisma.ChannelWhereInput = {};
   let orderBy: Prisma.SortOrder = 'desc';
+  let contentQuery: Prisma.ChannelWhereInput = {};
+  let playQuery: Prisma.ChannelWhereInput = {};
+  let timezoneQuery: Prisma.ChannelWhereInput = {};
+
   keys.forEach((value) => {
     switch (value[0]) {
       case 'sort':
