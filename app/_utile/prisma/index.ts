@@ -92,9 +92,7 @@ export const getChannelWhereOffset = async (
     },
   });
 
-  const result = convertTaggingToTags(channels);
-
-  return result;
+  return convertTaggingToTags(channels);
 };
 
 /**
