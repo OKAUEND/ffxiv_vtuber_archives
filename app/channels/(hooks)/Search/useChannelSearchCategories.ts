@@ -1,4 +1,5 @@
 import { ChannelSearchParams } from '@/channels/(types)';
+import { Tags } from '@/(types)';
 
 import { atom, useRecoilCallback, useRecoilValue } from 'recoil';
 
@@ -85,4 +86,8 @@ export const useInitChannelSearch = () => {
   };
 
   return [initCategories] as const;
+};
+
+export const useTags = () => {
+  return tags;
 };

@@ -23,7 +23,7 @@ export const getChannelWhere = async (
 };
 
 const createWhereQuery = (params: ChannelSearchParams) => {
-  const keys: [string, string][] = Object.entries(params);
+  const keys: [string, string | string[]][] = Object.entries(params);
 
   //クエリパラメータをループで処理し、queryオブジェクトにマージしていくことで、1つの検索条件オブジェクトとする
   let query: Prisma.ChannelWhereInput = {};
@@ -32,6 +32,8 @@ const createWhereQuery = (params: ChannelSearchParams) => {
       case 'sort':
         break;
       case 'year': {
+        if (Array.isArray(value[1])) return;
+
         const time = new Date(value[1]);
 
         //まずは配信時間のWhere文だけを作成する
