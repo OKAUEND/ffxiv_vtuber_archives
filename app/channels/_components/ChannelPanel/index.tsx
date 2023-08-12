@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 import styles from '@/channels/_style/channelPanel/channelPanel.module.scss';
 import { Icon } from '@/_components/Elements/Icon';
-import { HikasenVtuber } from '@/(types)';
+import { HikasenVtuber, Tags } from '@/(types)';
 import DayTime from '@/_utile/convert/DayTime';
 
 type Props = {
-  channels: HikasenVtuber[];
+  channels: HikasenVtuber<Tags>[];
 };
 
 export const ChannelPanel = ({ channels }: Props) => {
