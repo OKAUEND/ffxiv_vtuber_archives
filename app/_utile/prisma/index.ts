@@ -1,4 +1,4 @@
-import { HikasenVtuber, Tags, Tag } from '@/(types)';
+import { HikasenVtuber, Tags } from '@/(types)';
 import { PrismaClient, Prisma } from '@prisma/client';
 
 import { convertTaggingToTags } from '@/_utile/convert';
@@ -92,14 +92,16 @@ export const getChannelWhereOffset = async (
  * @param query 検索条件 - PrismaのWhereの型を利用しオブジェクトを作成し渡す
  * @returns
  */
-export const getChannelWhereCount = async (query: Prisma.ChannelWhereInput) => {
-  const res = await prisma.channel.count({
+export const getChannelWhereCount = async (offset = 0, query: PrismaQuery) => {
+  return await prisma.channel.count({
+    take: 20,
+    skip: offset,
     where: {
+      AND: [query.query.content, query.query.play, query.query.timeZone],
       isOfficial: false,
-      ...query,
+      ...query.year,
     },
   });
-  return res;
 };
 
 export default prisma;
