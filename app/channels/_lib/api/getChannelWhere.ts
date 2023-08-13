@@ -17,7 +17,7 @@ export const getChannelWhere = async (
     offsetNumber === 1 ? 0 : BASE_QUERY_COUNT * (offsetNumber - 1) + 1;
 
   const res = await getChannelWhereOffset(skip, query);
-  const count = await getChannelWhereCount(query);
+  const count = await getChannelWhereCount(skip, query);
 
   return [res, count] as const;
 };
