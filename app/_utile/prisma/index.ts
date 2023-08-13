@@ -2,6 +2,7 @@ import { HikasenVtuber, Tags, Tag } from '@/(types)';
 import { PrismaClient, Prisma } from '@prisma/client';
 
 import { convertTaggingToTags } from '@/_utile/convert';
+import { PrismaQuery } from '@/channels/(types)';
 
 export const prisma = new PrismaClient({
   log: ['query', 'error', 'info', 'warn'],
@@ -56,37 +57,28 @@ export const getChannelCount = async () => {
  */
 export const getChannelWhereOffset = async (
   offset = 0,
-  query: Prisma.ChannelWhereInput,
-  orderBy: Prisma.SortOrder
+  query: PrismaQuery
 ): Promise<HikasenVtuber<Tags>[]> => {
-  const tagging_channels = await prisma.tagging.findMany({
-    distinct: ['channel_id'],
-    where: {
-      OR: [{ tag_id: 13 }, { tag_id: 23 }, { tag_id: 3 }],
-      channel: {
-        isOfficial: false,
-      },
-    },
-    orderBy: [{ channel: { beginTime: 'desc' } }],
-    select: {
-      channel: {
-        include: {},
-      },
-    },
-  });
-
   const channels = await prisma.channel.findMany({
     take: 20,
     skip: offset,
     where: {
+      AND: [query.query.content, query.query.play, query.query.timeZone],
       isOfficial: false,
-      ...query,
+      ...query.year,
     },
-    orderBy: [{ beginTime: orderBy }],
+    orderBy: { beginTime: query.orderBy },
     include: {
       tags: {
-        include: {
-          tags: true,
+        select: {
+          tags: {
+            select: {
+              id: true,
+              name: true,
+              code: true,
+              type: true,
+            },
+          },
         },
       },
     },
