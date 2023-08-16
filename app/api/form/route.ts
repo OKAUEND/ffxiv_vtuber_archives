@@ -11,14 +11,12 @@ export async function GET(request: NextRequest) {
   let content = '';
   let play = '';
   let timezone = '';
-  [...queries].forEach((query, index) => {
+  [...queries].forEach((query) => {
     if (query[1] === 'none' || query[1] === '0000') return;
-
-    if (index === 0) return (param = `?${query[0]}=${query[1]}`);
 
     switch (query[0]) {
       case 'sort':
-        return (param = `?sort=${query[1]}`);
+        return (param = `/?sort=${query[1]}`);
       case 'year':
         return (year = `${year}&year=${query[1]}`);
       case 'content':
