@@ -1,5 +1,11 @@
 import { HikasenVtuber, Tags } from '@/(types)/';
 import { getChannelCount, getChannelOffset } from '@/_utile/prisma';
+import { ChannelSearchParams } from '@/channels/(types)';
+
+type GetChannel = (
+  offset: string,
+  params?: ChannelSearchParams
+) => Promise<readonly [HikasenVtuber<Tags>[], number]>;
 
 export const getChannel = async (
   offset: string
