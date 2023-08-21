@@ -7,8 +7,15 @@ type GetChannel = (
   params?: ChannelSearchParams
 ) => Promise<readonly [HikasenVtuber<Tags>[], number]>;
 
-export const getChannel = async (
-  offset: string
+/**
+ * 配信者の一覧を取得する。クエリパラメータを渡すことで、配信者に対する検索も行うことができる。
+ * @param offset ページの現在番号
+ * @param params クエリパラメータ。型の形式は文字列ではなく、Next.jsのsearchParamsの型を元に、文字列の配列である。
+ * @returns
+ */
+export const getChannel: GetChannel = async (
+  offset,
+  params
 ): Promise<readonly [HikasenVtuber<Tags>[], number]> => {
   //モバイルでのみやすさも考慮し、20件ほどに絞る。10件だけはPCやタブレットで見るには少なすぎる
   const BASE_QUERY_COUNT = 20;
