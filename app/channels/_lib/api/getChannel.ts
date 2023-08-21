@@ -1,5 +1,5 @@
 import { HikasenVtuber, Tags } from '@/(types)/';
-import { getChannelCount, getChannelOffset } from '@/_utile/prisma';
+import { getChannelResult, getChannelResultCount } from '@/_utile/prisma';
 import { ChannelSearchParams } from '@/channels/(types)';
 
 type GetChannel = (
@@ -26,8 +26,8 @@ export const getChannel: GetChannel = async (
   const skip =
     offsetNumber === 1 ? 0 : BASE_QUERY_COUNT * (offsetNumber - 1) + 1;
 
-  const channels = await getChannelOffset(skip);
-  const count = await getChannelCount();
+  const result = await getChannelResult(skip, params);
+  const count = await getChannelResultCount(params);
 
-  return [channels, count] as const;
+  return [result, count] as const;
 };
