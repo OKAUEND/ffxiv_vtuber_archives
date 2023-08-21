@@ -1,4 +1,4 @@
-import { getChannelWhere } from '@/channels/_lib/api/getChannelWhere';
+import { getChannel } from '@/channels/_lib/api/getChannel';
 import { ChannelPanel } from '@/channels/_components/ChannelPanel';
 import { ChannelSearchParams } from '@/channels/(types)';
 import { Pagination } from '@/_components/Pagination';
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export const ChannelResult = async ({ page, params }: IProps) => {
-  const [channels, count] = await getChannelWhere(params, page);
+  const [channels, count] = await getChannel(page, params);
 
   return (
     <section className={styles.content}>
