@@ -1,8 +1,5 @@
 import { getChannel } from '@/channels/_lib/api/getChannel';
-import { ChannelPanel } from '@/channels/_components/ChannelPanel';
 import { ChannelSearchParams } from '@/channels/(types)';
-import { Pagination } from '@/_components/Pagination';
-import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
 import { Accordion } from '@/_components/Accordion';
 
 import { SearchCategories } from '@/channels/_components/Search/SearchCategories';
