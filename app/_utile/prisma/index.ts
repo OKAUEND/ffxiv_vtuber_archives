@@ -1,8 +1,9 @@
 import { HikasenVtuber, Tags } from '@/(types)';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 import { convertTaggingToTags } from '@/_utile/convert';
-import { PrismaQuery } from '@/channels/(types)';
+import { ChannelSearchParams } from '@/channels/(types)';
+import { createWhereQuery } from '@/channels/_lib/prisma/createChannelQuery';
 
 export const prisma = new PrismaClient({
   log: ['query', 'error', 'info', 'warn'],
@@ -17,8 +18,11 @@ export const prisma = new PrismaClient({
  */
 export const getChannelResult = async (
   offset = 0,
-  query: PrismaQuery
+  params?: ChannelSearchParams
 ): Promise<HikasenVtuber<Tags>[]> => {
+  //Next.jsのクエリパラメータから、PrismaのWhere文の要素を作成する
+  const query = createWhereQuery(params);
+
   const channels = await prisma.channel.findMany({
     take: 20,
     skip: offset,
@@ -52,7 +56,10 @@ export const getChannelResult = async (
  * @param query 検索条件 - PrismaのWhereの型を利用しオブジェクトを作成し渡す
  * @returns
  */
-export const getChannelResultCount = async (query: PrismaQuery) => {
+export const getChannelResultCount = async (params?: ChannelSearchParams) => {
+  //Next.jsのクエリパラメータから、PrismaのWhere文の要素を作成する
+  const query = createWhereQuery(params);
+
   return await prisma.channel.count({
     where: {
       AND: [query.query.content, query.query.play, query.query.timeZone],

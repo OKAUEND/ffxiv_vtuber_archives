@@ -1,7 +1,6 @@
 import { HikasenVtuber, Tags } from '@/(types)/';
 import { getChannelCount, getChannelOffset } from '@/_utile/prisma';
 import { ChannelSearchParams } from '@/channels/(types)';
-import { createWhereQuery } from '../prisma/createChannelQuery';
 
 type GetChannel = (
   offset: string,
@@ -18,9 +17,6 @@ export const getChannel: GetChannel = async (
   offset,
   params
 ): Promise<readonly [HikasenVtuber<Tags>[], number]> => {
-  //
-  const query = createWhereQuery(params);
-
   //モバイルでのみやすさも考慮し、20件ほどに絞る。10件だけはPCやタブレットで見るには少なすぎる
   const BASE_QUERY_COUNT = 20;
   //何も指定がないときのためのガード構文
