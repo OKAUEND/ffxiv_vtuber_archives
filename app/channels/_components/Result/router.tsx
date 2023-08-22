@@ -1,8 +1,5 @@
-import { getChannelWhere } from '@/channels/_lib/api/getChannelWhere';
-import { ChannelPanel } from '@/channels/_components/ChannelPanel';
+import { getChannel } from '@/channels/_lib/api/getChannel';
 import { ChannelSearchParams } from '@/channels/(types)';
-import { Pagination } from '@/_components/Pagination';
-import { ErrorBoundaryExtended } from '@/_components/ErrorBoundary';
 import { Accordion } from '@/_components/Accordion';
 
 import { SearchCategories } from '@/channels/_components/Search/SearchCategories';
@@ -17,7 +14,7 @@ interface IProps {
 }
 
 export const ChannelResult = async ({ page, params }: IProps) => {
-  const [channels, count] = await getChannelWhere(params, page);
+  const [channels, count] = await getChannel(page, params);
 
   return (
     <section className={styles.content}>

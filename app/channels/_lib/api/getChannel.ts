@@ -1,8 +1,21 @@
 import { HikasenVtuber, Tags } from '@/(types)/';
-import { getChannelCount, getChannelOffset } from '@/_utile/prisma';
+import { getChannelResult, getChannelResultCount } from '@/_utile/prisma';
+import { ChannelSearchParams } from '@/channels/(types)';
 
-export const getChannel = async (
-  offset: string
+type GetChannel = (
+  offset: string,
+  params?: ChannelSearchParams
+) => Promise<readonly [HikasenVtuber<Tags>[], number]>;
+
+/**
+ * 配信者の一覧を取得する。クエリパラメータを渡すことで、配信者に対する検索も行うことができる。
+ * @param offset ページの現在番号
+ * @param params クエリパラメータ。型の形式は文字列ではなく、Next.jsのsearchParamsの型を元に、文字列の配列である。
+ * @returns
+ */
+export const getChannel: GetChannel = async (
+  offset,
+  params
 ): Promise<readonly [HikasenVtuber<Tags>[], number]> => {
   //モバイルでのみやすさも考慮し、20件ほどに絞る。10件だけはPCやタブレットで見るには少なすぎる
   const BASE_QUERY_COUNT = 20;
@@ -13,8 +26,8 @@ export const getChannel = async (
   const skip =
     offsetNumber === 1 ? 0 : BASE_QUERY_COUNT * (offsetNumber - 1) + 1;
 
-  const channels = await getChannelOffset(skip);
-  const count = await getChannelCount();
+  const result = await getChannelResult(skip, params);
+  const count = await getChannelResultCount(params);
 
-  return [channels, count] as const;
+  return [result, count] as const;
 };
