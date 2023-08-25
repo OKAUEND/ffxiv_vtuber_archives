@@ -30,9 +30,9 @@ export default function RootLayout({
         <header className={styles.header}>
           <BasicHeader></BasicHeader>
         </header>
-        <main className={styles.main_container}>
+        <div className={styles.main_container}>
           <RecoilProvider>{children}</RecoilProvider>
-        </main>
+        </div>
       </body>
     </html>
   );
