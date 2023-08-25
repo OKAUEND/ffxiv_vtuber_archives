@@ -53,7 +53,25 @@ describe('createChannelQuery Unit TEST', () => {
 
     expect(query).toEqual(date);
   });
-  test('ソート順を指定するクエリパラメータがある時、指定通りにソートのプロパティが設定されているか', () => {});
+  test('ソート順を指定するクエリパラメータがある時、指定通りにソートのプロパティが設定されているか', () => {
+    //sort=desc
+    const desc = createQueryFactory({ orderBy: 'desc' });
+
+    const descQuery = createWhereQuery(desc);
+
+    const descSort: Prisma.SortOrder = 'desc';
+
+    expect(descQuery.orderBy).toEqual(descSort);
+
+    //sort=desc
+    const asc = createQueryFactory({ orderBy: 'asc' });
+
+    const ascQuery = createWhereQuery(asc);
+
+    const ascSort: Prisma.SortOrder = 'asc';
+
+    expect(ascQuery.orderBy).toEqual(ascSort);
+  });
   test('指定年のクエリパラメータがある時、指定年の開始日が1月1日で終了日が12月31日になっているか', () => {});
   test('プレイスタイル:contentのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
   test('プレイスタイル:playのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});

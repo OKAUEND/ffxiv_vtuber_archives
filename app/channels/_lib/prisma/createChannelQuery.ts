@@ -69,17 +69,17 @@ export const createWhereQuery = (params?: ChannelSearchParams): PrismaQuery => {
 
   //クエリパラメータをループで処理し、queryオブジェクトにマージしていくことで、1つの検索条件オブジェクトとする
   let year: Prisma.ChannelWhereInput = {};
-  let orderBy: Prisma.SortOrder = 'desc';
+  let orderBy: Prisma.SortOrder;
   let contentQuery: Prisma.ChannelWhereInput = {};
   let playQuery: Prisma.ChannelWhereInput = {};
   let timezoneQuery: Prisma.ChannelWhereInput = {};
 
   keys.forEach((value) => {
     switch (value[0]) {
-      case 'sort':
+      case 'orderBy':
         if (Array.isArray(value[1])) return;
 
-        if (value[1] === 'asc') return (orderBy = 'desc');
+        if (value[1] === 'desc') return (orderBy = 'desc');
 
         orderBy = 'asc';
         break;
