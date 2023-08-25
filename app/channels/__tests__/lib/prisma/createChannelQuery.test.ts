@@ -92,7 +92,40 @@ describe('createChannelQuery Unit TEST', () => {
 
     expect(yearQuery.year).toEqual(beginTimeQuery);
   });
-  test('プレイスタイル:contentのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
-  test('プレイスタイル:playのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
-  test('プレイスタイル:timezoneのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
+  test('プレイスタイル:contentのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {
+    //["content",["raid","story","housing"]]
+    const content = createQueryFactory({
+      content: ['raid', 'story', 'housing'],
+    });
+
+    const contentQuery = createWhereQuery(content);
+
+    expect(contentQuery.query.content).toEqual({
+      tags: { some: { OR: [{ tag_id: 3 }, { tag_id: 1 }, { tag_id: 4 }] } },
+    });
+  });
+  test('プレイスタイル:playのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {
+    //play:["party","solo","farm"]
+    const content = createQueryFactory({
+      play: ['party', 'solo', 'farm'],
+    });
+
+    const playQuery = createWhereQuery(content);
+
+    expect(playQuery.query.play).toEqual({
+      tags: { some: { OR: [{ tag_id: 13 }, { tag_id: 14 }, { tag_id: 17 }] } },
+    });
+  });
+  test('プレイスタイル:timezoneのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {
+    //timezone:["morning","night","midnight"]
+    const content = createQueryFactory({
+      timezone: ['morning', 'night', 'midnight'],
+    });
+
+    const timezoneQuery = createWhereQuery(content);
+
+    expect(timezoneQuery.query.timeZone).toEqual({
+      tags: { some: { OR: [{ tag_id: 19 }, { tag_id: 22 }, { tag_id: 23 }] } },
+    });
+  });
 });
