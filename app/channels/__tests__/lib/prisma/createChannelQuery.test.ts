@@ -1,4 +1,5 @@
 import { describe, test, expect } from 'vitest';
+import { Prisma } from '@prisma/client';
 import {
   createWhereQuery,
   createWhereQueryJoinTagging,
@@ -125,6 +126,42 @@ describe('createChannelQuery Unit TEST', () => {
     const timezoneQuery = createWhereQuery(content);
 
     expect(timezoneQuery.query.timeZone).toEqual({
+      tags: { some: { OR: [{ tag_id: 19 }, { tag_id: 22 }, { tag_id: 23 }] } },
+    });
+  });
+  test('全てのクエリパラメータが設定されていた時、全てのPrismaWhere文を作成できているか', () => {
+    //timezone:["morning","night","midnight"]
+    const item = createQueryFactory({
+      orderBy: 'desc',
+      year: '2023',
+      content: ['raid', 'story', 'housing'],
+      play: ['party', 'solo', 'farm'],
+      timezone: ['morning', 'night', 'midnight'],
+    });
+
+    const query = createWhereQuery(item);
+
+    const descSort: Prisma.SortOrder = 'desc';
+    const beginDayTime = new Date('2018');
+    const endDayTime = new Date('2018');
+    endDayTime.setMonth(12);
+    endDayTime.setSeconds(-1);
+    const beginTimeQuery: Prisma.ChannelWhereInput = {
+      beginTime: {
+        gte: beginDayTime.toISOString(),
+        lt: endDayTime.toISOString(),
+      },
+    };
+
+    expect(query.orderBy).toEqual(descSort);
+    expect(query.year).toEqual(beginTimeQuery);
+    expect(query.query.content).toEqual({
+      tags: { some: { OR: [{ tag_id: 3 }, { tag_id: 1 }, { tag_id: 4 }] } },
+    });
+    expect(query.query.play).toEqual({
+      tags: { some: { OR: [{ tag_id: 13 }, { tag_id: 14 }, { tag_id: 17 }] } },
+    });
+    expect(query.query.timeZone).toEqual({
       tags: { some: { OR: [{ tag_id: 19 }, { tag_id: 22 }, { tag_id: 23 }] } },
     });
   });
