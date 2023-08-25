@@ -24,6 +24,6 @@
   height: 100%;
 
   @include variables.mq(lg) {
-    grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2 / 1 / 3 / 4;
   }
 }
