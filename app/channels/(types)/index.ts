@@ -5,7 +5,7 @@ export interface ChannelSearchParams {
   year: string;
   content: string[];
   play: string[];
-  timezone: [];
+  timezone: string[];
 }
 
 export interface PrismaQuery {
