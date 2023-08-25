@@ -17,13 +17,15 @@ const getChannel = async (): Promise<
 export default async function Home() {
   const [channels, totalCount] = await getChannel();
   return (
-    <section className={styles.content}>
-      <div className={styles.search_container}>
-        <Link className={styles.link} href={'/channels/search'}>
-          配信者を探す→
-        </Link>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.search_content}>
+          <Link className={styles.link} href={'/channels/search'}>
+            配信者を探す→
+          </Link>
+        </div>
+        <ChannelIndex totalCount={totalCount} channels={channels} page="1" />
       </div>
-      <ChannelIndex totalCount={totalCount} channels={channels} page="1" />
-    </section>
+    </div>
   );
 }
