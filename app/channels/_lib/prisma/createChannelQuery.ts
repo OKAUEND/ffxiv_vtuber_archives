@@ -86,6 +86,8 @@ export const createWhereQuery = (params?: ChannelSearchParams): PrismaQuery => {
       case 'year': {
         if (Array.isArray(value[1])) return;
 
+        if (value[1] === '') return;
+
         const time = new Date(value[1]);
 
         //まずは配信時間のWhere文だけを作成する

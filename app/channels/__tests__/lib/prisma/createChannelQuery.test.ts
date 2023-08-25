@@ -72,7 +72,26 @@ describe('createChannelQuery Unit TEST', () => {
 
     expect(ascQuery.orderBy).toEqual(ascSort);
   });
-  test('指定年のクエリパラメータがある時、指定年の開始日が1月1日で終了日が12月31日になっているか', () => {});
+  test('指定年のクエリパラメータがある時、指定年の開始日が1月1日で終了日が12月31日になっているか', () => {
+    //year=2018
+    const year = createQueryFactory({ year: '2018' });
+
+    const yearQuery = createWhereQuery(year);
+
+    const beginDayTime = new Date('2018');
+    const endDayTime = new Date('2018');
+    endDayTime.setMonth(12);
+    endDayTime.setSeconds(-1);
+
+    const beginTimeQuery: Prisma.ChannelWhereInput = {
+      beginTime: {
+        gte: beginDayTime.toISOString(),
+        lt: endDayTime.toISOString(),
+      },
+    };
+
+    expect(yearQuery.year).toEqual(beginTimeQuery);
+  });
   test('プレイスタイル:contentのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
   test('プレイスタイル:playのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
   test('プレイスタイル:timezoneのクエリパラメータがある時、PrismaでINNER JOINをし、OR文になっているか', () => {});
