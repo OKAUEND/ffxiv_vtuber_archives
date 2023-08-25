@@ -3,6 +3,39 @@ import {
   createWhereQuery,
   createWhereQueryJoinTagging,
 } from '@/channels/_lib/prisma/createChannelQuery';
+import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
+
+interface TestParams {
+  orderBy?: Prisma.SortOrder;
+  year?: string;
+  content?: string[];
+  play?: string[];
+  timezone?: string[];
+}
+
+type createQueryFactory = ({
+  orderBy,
+  year,
+  content,
+  play,
+  timezone,
+}: TestParams) => ChannelSearchParams;
+
+const createQueryFactory: createQueryFactory = ({
+  orderBy = 'desc',
+  year = '',
+  content = [],
+  play = [],
+  timezone = [],
+}) => {
+  return {
+    orderBy: orderBy,
+    year: year,
+    content: content,
+    play: play,
+    timezone: timezone,
+  };
+};
 
 describe('createChannelQuery Unit TEST', () => {
   test('クエリパラメータが何も指定されていない時は、プロパティに空のオブジェクトが入ったQueryオブジェクトになる', () => {});
