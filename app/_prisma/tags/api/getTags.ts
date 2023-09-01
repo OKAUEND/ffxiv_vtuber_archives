@@ -1,5 +1,4 @@
 import { Tag } from '@/(types)';
-import { convertTagsToCategoryTags } from '@/_utile/convert/tags';
 
 export const tags: Tag[] = [
   {
