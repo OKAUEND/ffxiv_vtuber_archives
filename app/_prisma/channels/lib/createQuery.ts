@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { tags } from '../api/getTags';
+import { getTags } from '@/_prisma';
 import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
 
 /**
@@ -10,6 +10,7 @@ import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
 const convertTags = (params: string | string[]): number[] => {
   //交差テーブルにはIDで紐付けられているので、codeをIDに変更をするため、データを操作し対象を探しIDを取り出す
   const targetIDs: number[] = [];
+  const tags = getTags();
 
   //複数条件のクエリパラメータの場合、パラメータが配列になるが、単体だと文字列である。
   //複数条件だった場合、全てIDが存在しているかを確認する必要があり、ループでチェックをしている。
