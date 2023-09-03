@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { getTags } from '@/_prisma';
-import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
+import { PrismaQuery } from '@/_prisma/(types)';
 
 /**
  * クエリパラメータの文字列(Code)の配列を、該当するTag情報のIDの配列へ変換をする
@@ -54,7 +54,7 @@ export const createWhereQueryJoinTagging = <T>(
   return { tags: { some: { OR: [...ids] } } };
 };
 
-export const createWhereQuery = (params?: ChannelSearchParams): PrismaQuery => {
+export const createWhereQuery = <T>(params?: T): PrismaQuery => {
   if (typeof params === 'undefined')
     return {
       query: {
