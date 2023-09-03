@@ -10,7 +10,9 @@ import { convertTaggingToTags } from '@/_utile/convert';
  * @param orderBy 昇順降順の指定
  * @returns
  */
+export const getChannels = async <T>(
   offset = 0,
+  params?: T
 ): Promise<HikasenVtuber<Tags>[]> => {
   //Next.jsのクエリパラメータから、PrismaのWhere文の要素を作成する
   const query = createWhereQuery(params);
@@ -48,6 +50,7 @@ import { convertTaggingToTags } from '@/_utile/convert';
  * @param query 検索条件 - PrismaのWhereの型を利用しオブジェクトを作成し渡す
  * @returns
  */
+export const getChannelsCount = async <T>(params?: T) => {
   //Next.jsのクエリパラメータから、PrismaのWhere文の要素を作成する
   const query = createWhereQuery(params);
 
