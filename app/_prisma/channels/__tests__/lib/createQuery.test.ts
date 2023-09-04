@@ -1,10 +1,8 @@
 import { describe, test, expect } from 'vitest';
 import { Prisma } from '@prisma/client';
-import {
-  createWhereQuery,
-  createWhereQueryJoinTagging,
-} from '@/channels/_lib/prisma/createChannelQuery';
-import { ChannelSearchParams, PrismaQuery } from '@/channels/(types)';
+import { createWhereQuery } from '@/_prisma/channels/lib/createQuery';
+import { ChannelSearchParams } from '@/channels/(types)';
+import { PrismaQuery } from '@/_prisma/(types)';
 
 interface TestParams {
   orderBy?: Prisma.SortOrder;
