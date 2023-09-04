@@ -1,6 +1,4 @@
-import { convertTagsToCategoryTags } from '@/_utile/convert';
 import { ChannelSearchParams } from '@/channels/(types)';
-import { getTags } from '@/channels/_lib/api/getTags';
 
 import { atom, useRecoilCallback, useRecoilValue } from 'recoil';
 
@@ -87,8 +85,4 @@ export const useInitChannelSearch = () => {
   };
 
   return [initCategories] as const;
-};
-
-export const useTags = () => {
-  return convertTagsToCategoryTags(getTags());
 };
