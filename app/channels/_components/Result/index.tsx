@@ -1,4 +1,4 @@
-import { getChannel } from '@/channels/_lib/api/getChannel';
+import { getChannel } from '@/_prisma';
 import { ChannelSearchParams } from '@/channels/(types)';
 import { Accordion } from '@/_components/Accordion';
 
