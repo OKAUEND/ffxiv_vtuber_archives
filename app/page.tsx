@@ -1,18 +1,8 @@
 import styles from '@/_styles/rootPage.module.scss';
 
 import { ChannelIndex } from '@/channels/_components/ChannelIndex';
-import { HikasenVtuber, Tags } from './(types)';
-import { getChannelResult, getChannelResultCount } from './_utile/prisma';
+import { getChannel } from '@/_prisma';
 import Link from 'next/link';
-
-const getChannel = async (): Promise<
-  readonly [HikasenVtuber<Tags>[], number]
-> => {
-  const result = await getChannelResult(0);
-  const count = await getChannelResultCount();
-
-  return [result, count] as const;
-};
 
 export default async function Home() {
   const [channels, totalCount] = await getChannel();

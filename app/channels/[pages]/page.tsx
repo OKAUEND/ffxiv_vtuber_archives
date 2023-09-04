@@ -1,6 +1,6 @@
 import styles from '@/_styles/rootPage.module.scss';
 
-import { getChannel } from '@/channels/_lib/api/getChannel';
+import { getChannel } from '@/_prisma';
 import { ChannelIndex } from '@/channels/_components/ChannelIndex';
 import Link from 'next/link';
 
