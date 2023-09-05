@@ -131,7 +131,7 @@ describe('createChannelQuery Unit TEST', () => {
     //timezone:["morning","night","midnight"]
     const item = createQueryFactory({
       orderBy: 'desc',
-      year: '2023',
+      year: '2018',
       content: ['raid', 'story', 'housing'],
       play: ['party', 'solo', 'farm'],
       timezone: ['morning', 'night', 'midnight'],
