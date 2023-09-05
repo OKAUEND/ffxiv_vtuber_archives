@@ -8,21 +8,21 @@ import {
   useChannelSearchOption,
   useChannelSearchBeginYear,
   useInitChannelSearch,
-  useTags,
 } from '@/channels/(hooks)/Search/useChannelSearchCategories';
 import { ChannelSearchParams } from '@/channels/(types)';
 
 import styles from '@/channels/_style/search/search.module.scss';
+import { Tags } from '@/(types)';
 
 interface IProps {
   params?: ChannelSearchParams;
+  tags: Tags;
 }
 
-export const SearchCategories = ({ params }: IProps) => {
+export const SearchCategories = ({ params, tags }: IProps) => {
   const [initCategories] = useInitChannelSearch();
   const [selectedOption, sortData, changeOption] = useChannelSearchOption();
   const [selectedYear, years, changeYear] = useChannelSearchBeginYear();
-  const tags = useTags();
 
   useEffect(() => {
     initCategories(params);

@@ -1,5 +1,5 @@
 import { ChannelSearchParams } from '@/channels/(types)';
-import { ChannelResult } from '@/channels/_components/Result/router';
+import { ChannelResult } from '@/channels/_components/Result';
 
 export default async function ChannelResultIndex({
   params,
