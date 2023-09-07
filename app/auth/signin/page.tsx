@@ -4,7 +4,7 @@ import { SignIn } from '@/_components/Sign';
 export default function AuthSignIn() {
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <main className={styles.main}>
         <main>
           <div className={styles.message}>
             <span>お持ちのアカウントを使いログインをします</span>
@@ -14,8 +14,8 @@ export default function AuthSignIn() {
             <span className={styles.signin_text}>Googleでログイン</span>
           </SignIn>
         </main>
-        <aside>暁月</aside>
-      </div>
+      </main>
+      <aside className={styles.side}>暁月</aside>
     </div>
   );
 }

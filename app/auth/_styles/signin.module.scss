@@ -1,12 +1,31 @@
+@use '@/_styles/variables/variables.scss';
+
 .container {
-  height: 80%;
   display: grid;
   place-items: center;
+  width: 100%;
+  height: 100%;
+
+  @include variables.mq(lg) {
+    display: flex;
+  }
 }
 
-.content {
+.main {
+  box-sizing: border-box;
+  height: 100%;
+
+  flex-grow: 1;
+  border-right-width: 1px;
   display: grid;
   place-items: center;
+
+}
+
+.side {
+  flex-basis: 25%;
+  height: 100%;
+  flex-grow: 3;
 }
 
 .message {
