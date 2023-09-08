@@ -20,6 +20,11 @@
   display: grid;
   place-items: center;
 
+  & .content {
+    max-width: 400px;
+    height: 100%;
+    padding: 30px;
+  }
 }
 
 .side {
