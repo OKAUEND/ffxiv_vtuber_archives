@@ -15,7 +15,9 @@ export default function AuthSignIn() {
           </SignIn>
         </div>
       </main>
-      <aside className={styles.side}>暁月</aside>
+      <aside className={styles.side}>
+        <div>暁月</div>
+      </aside>
     </div>
   );
 }

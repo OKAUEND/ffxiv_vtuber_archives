@@ -31,7 +31,8 @@
   display: none;
 
   @include variables.mq(md) {
-    display: inline-block;
+    display: grid;
+    place-items: center;
     flex-basis: 25%;
     height: 100%;
     flex-grow: 3;
