@@ -19,7 +19,7 @@
 }
 
 .main_container {
-  height: 100%;
+  height: calc(100% - 50px);
 
   @include variables.mq(lg) {
     grid-area: 2 / 1 / 3 / 4;
