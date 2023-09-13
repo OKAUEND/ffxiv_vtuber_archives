@@ -20,6 +20,10 @@
   display: grid;
   place-items: center;
 
+  @include variables.mq(md) {
+    border-right: 1px solid #8b8b8b;
+  }
+
   & .content {
     max-width: 400px;
     height: 100%;
