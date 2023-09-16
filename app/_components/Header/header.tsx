@@ -10,8 +10,8 @@ export const BasicHeader = () => {
       <ul className={styles.header_list}>
         {items.map((item, index) => (
           <li className={styles.header_links} key={index}>
-            <Link className={styles.href} href={item.path}>
-              {item.text}
+            <Link href={item.path}>
+              <button>{item.text}</button>
             </Link>
           </li>
         ))}
