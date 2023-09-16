@@ -20,7 +20,23 @@
   margin-right: 10px;
 
   .href {
+    font-size: 14px;
+    background-color: transparent;
     color: variables.$text-color;
     text-decoration: none;
+
+    &.border {
+      border: 1px solid variables.$text-color;
+      border-radius: 5px;
+      padding: 5px;
+
+      &:hover {
+        background-color: #535353;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

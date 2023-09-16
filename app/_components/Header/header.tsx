@@ -11,7 +11,11 @@ export const BasicHeader = () => {
         {items.map((item, index) => (
           <li className={styles.header_links} key={index}>
             <Link href={item.path}>
-              <button>{item.text}</button>
+              <button
+                className={`${styles.href} ${item.border ? styles.border : ''}`}
+              >
+                {item.text}
+              </button>
             </Link>
           </li>
         ))}
