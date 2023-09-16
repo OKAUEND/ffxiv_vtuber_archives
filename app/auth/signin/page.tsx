@@ -4,15 +4,20 @@ import { SignIn } from '@/_components/Sign';
 export default function AuthSignIn() {
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.message}>
-          <span>お持ちのアカウントを使いログインをします</span>
-          <span>※現在ログイン機能は停止中です</span>
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.message}>
+            <h1>ログイン</h1>
+            <span>お持ちのアカウントでログインできます</span>
+          </div>
+          <SignIn provider="github">
+            <span className={styles.signin_text}>Googleでログイン</span>
+          </SignIn>
         </div>
-        <SignIn provider="github">
-          <span className={styles.signin_text}>Googleでログイン</span>
-        </SignIn>
-      </div>
+      </main>
+      <aside className={styles.side}>
+        <div>暁月</div>
+      </aside>
     </div>
   );
 }

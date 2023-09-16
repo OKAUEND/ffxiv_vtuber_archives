@@ -1,19 +1,57 @@
+@use '@/_styles/variables/variables.scss';
+
 .container {
-  height: 80%;
   display: grid;
   place-items: center;
+  width: 100%;
+  height: 100%;
+
+  @include variables.mq(md) {
+    display: flex;
+  }
 }
 
-.content {
+.main {
+  box-sizing: border-box;
+  height: 100%;
+
+  flex-grow: 1;
+  border-right-width: 1px;
   display: grid;
   place-items: center;
+
+  @include variables.mq(md) {
+    border-right: 1px solid #8b8b8b;
+  }
+
+  & .content {
+    max-width: 400px;
+    height: 100%;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 20px;
+  }
+}
+
+.side {
+  display: none;
+
+  @include variables.mq(md) {
+    display: grid;
+    place-items: center;
+    flex-basis: 25%;
+    height: 100%;
+    flex-grow: 3;
+  }
 }
 
 .message {
   margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: left;
 }
 
 .signin_text {

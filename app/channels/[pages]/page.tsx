@@ -12,7 +12,7 @@ export default async function Article({
   const [channels, count] = await getChannel(params.pages);
   return (
     <div className={styles.content}>
-      <div className={styles.search_container}>
+      <div className={styles.search_content}>
         <Link className={styles.link} href={'/channels/search'}>
           配信者を探す→
         </Link>

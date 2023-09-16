@@ -2,15 +2,22 @@
 
 $forcus_color: #687792;
 
+.container {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr 0.5fr;
+}
+
 .content {
   display: flex;
   min-height: 100%;
   flex-direction: column;
   align-items: center;
   // justify-content: space-between;
+
+  grid-area: 2 / 2 / 3 / 3;
 }
 
-.search_container {
+.search_content {
   width: 100%;
   display: flex;
   align-items: center;
