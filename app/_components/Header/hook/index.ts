@@ -1,6 +1,7 @@
 export const useHeader = () => {
   return [
-    { text: 'トップ', path: '/' },
-    { text: 'このサイトについて', path: '/about' },
+    { text: 'トップ', path: '/', border: false },
+    { text: 'サイトについて', path: '/about', border: false },
+    { text: 'Sign in', path: '/auth/singin', border: true },
   ];
 };
